@@ -12,7 +12,7 @@ CC = gcc
 
 #	Sources		#
 SRC_DIR = src/
-SRC = main.c
+SRC = main.c init_struct.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 

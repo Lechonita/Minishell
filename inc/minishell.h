@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/05/24 10:28:50 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:10:44 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,27 @@
 # include <stdint.h>
 # include <limits.h> 	// INT_MIN (-2147483648) INT_MAX (2147483647)
 
-typedef struct  s_bigshell
+typedef struct s_env
 {
-  char      *history[50];
-  char      **argvs;
-  t_env		*env;
-}	t_bigshell;
-
-typedef struct	s_env
-{
-	char		*name;
-	char		*value;
+	char			*name;
+	char			*value;
 	struct s_env	*next;
 }				t_env;
+
+typedef struct s_bigshell
+{
+	char			*history[50];
+	char			**argv;
+	t_env			*env;
+}	t_bigshell;
+
+/* INIT STRUCT */
+char	*strncpy(char *dest, const char *src, size_t n);
+char	*get_value(char *env);
+int		find_equal(char *env);
+char	*get_name(char	*env);
+void	init_env(t_bigshell *data, char **env);
+// void	init_argv(t_bigshell *data, int ac, char *av[]);
+void	init_struct(t_bigshell *data, int ac, char *av[], char **env);
 
 #endif
