@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/06 18:12:34 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/06 20:14:56 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,6 @@ char	*get_name(char	*env);
 
 // void	init_argv(t_bigshell *data, int ac, char *av[]);
 
+/* PROMPT */
+void    get_line(t_bigshell *data, int i);
 #endif
