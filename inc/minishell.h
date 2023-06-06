@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/06 17:37:42 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/06 18:12:34 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # include <stdint.h>
 # include <limits.h> 	// INT_MIN (-2147483648) INT_MAX (2147483647)
 
+#define TYPE_DELIMITOR 1;
+#define TYPE_CMD 2;
+#define TYPE_OPERATOR 3;
+
 typedef struct s_env
 {
 	char			*name;
@@ -33,10 +37,17 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
+typedef struct s_argv
+{
+	int				type;
+	char			*value;
+	struct s_argv	*next;
+}				t_argv;
+
 typedef struct s_bigshell
 {
 	char			*history[50];
-	char			**argv;
+	t_argv			*argv;
 	t_env			*env;
 }	t_bigshell;
 
