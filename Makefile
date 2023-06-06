@@ -3,7 +3,7 @@
 #	 Project	#
 #				#
 #################
-NAME = MiniShell
+NAME = minishell
 
 
 FLAG = -Wall -Wextra -Werror 
@@ -12,7 +12,7 @@ CC = gcc
 
 #	Sources		#
 SRC_DIR = src/
-SRC = main.c init_struct.c
+SRC = main.c init_env.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
