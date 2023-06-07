@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/06 20:11:33 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/07 18:02:16 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,14 @@
 int	main(int ac, char *av[], char **env)
 {
 	t_bigshell		*data;
-	int				i;
 
 	data = ft_calloc(1, sizeof(t_bigshell));
 	if (!data)
 		return (0);
-	// init_argv(data, ac, av);
 	init_env(data, env);
-	i = -1;
-	while (++i <= 50)
-	{
-		get_line(data, i);
-		if (i == 50)
-			i = -1;
-	}
+	ft_prompt(data);
 	if (ac == 2)
 		ft_printf("%s\n", av[1]);
+	ft_free_all(data);
 	return (0);
 }

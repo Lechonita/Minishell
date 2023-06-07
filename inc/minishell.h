@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/07 11:35:48 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/07 17:05:10 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ typedef struct s_bigshell
 	t_env			*env;
 }	t_bigshell;
 
+/***********************************************************/
+/*                       ENVIRONMENT                       */
+/***********************************************************/
+
 /*  ENV INIT */
 t_env	*env_last(t_env *new);
 void	env_addback(t_env *new, t_env *env);
@@ -65,13 +69,22 @@ char	*get_value(char *env);
 int		find_equal(char *env);
 char	*get_name(char	*env);
 
-/* ENV FREE */
-void	ft_free_env_names(t_bigshell *data);
-void	ft_free_env_values(t_bigshell *data);
+/***********************************************************/
+/*                           FREE                          */
+/***********************************************************/
+
+/* FREE STRUCT*/
 void	ft_free_env(t_bigshell *data);
+void	ft_free_argv(t_bigshell *data);
+void    ft_free_history(t_bigshell *data);
+void	ft_free_all(t_bigshell *data);
+
+/***********************************************************/
+/*                       PROMPT LINE                       */
+/***********************************************************/
 
 /* PROMPT */
-void    get_line(t_bigshell *data, int i);
+// void    get_line(t_bigshell *data, int i);
 
 // void	init_argv(t_bigshell *data, int ac, char *av[]);
 
