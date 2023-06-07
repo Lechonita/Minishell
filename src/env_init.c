@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/06 17:37:20 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:18:22 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,9 @@ void	init_env(t_bigshell *data, char **env)
 		else
 			env_addback(data->env, env_new(env[i]));
 	}
-	// display_env_struct(data);
 }
 
 // void	display_env_struct(t_bigshell *data)
-// {
-// 	while (data->env)
-// 	{
-// 		printf("%s=%s\n", data->env->name, data->env->value);
-// 		data->env = data->env->next;
-// 	}
-// }void	display_env_struct(t_bigshell *data)
 // {
 // 	while (data->env)
 // 	{

@@ -12,7 +12,8 @@ CC = gcc
 
 #	Sources		#
 SRC_DIR = src/
-SRC = main.c env_init.c env_find_values.c
+SRC = main.c env_init.c env_find_values.c env_free.c \
+		prompt.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 

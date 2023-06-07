@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/06 20:14:56 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:35:48 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_env
 
 typedef struct s_argv
 {
+	int				index;
 	int				type;
 	char			*value;
 	struct s_argv	*next;
@@ -64,8 +65,14 @@ char	*get_value(char *env);
 int		find_equal(char *env);
 char	*get_name(char	*env);
 
-// void	init_argv(t_bigshell *data, int ac, char *av[]);
+/* ENV FREE */
+void	ft_free_env_names(t_bigshell *data);
+void	ft_free_env_values(t_bigshell *data);
+void	ft_free_env(t_bigshell *data);
 
 /* PROMPT */
 void    get_line(t_bigshell *data, int i);
+
+// void	init_argv(t_bigshell *data, int ac, char *av[]);
+
 #endif
