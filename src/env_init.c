@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/07 17:53:15 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/08 17:37:26 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ t_env	*env_new(char *env)
 	new = malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
-	new->name = get_name(env);
-	new->value = get_value(env);
+	new->name = get_env_name(env);
+	new->value = get_env_value(env);
 	new->next = NULL;
 	return (new);
 }

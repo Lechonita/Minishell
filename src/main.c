@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/07 18:02:16 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/08 16:11:31 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char *av[], char **env)
 	if (!data)
 		return (0);
 	init_env(data, env);
-	ft_prompt(data);
+	ft_read_line(data);
 	if (ac == 2)
 		ft_printf("%s\n", av[1]);
 	ft_free_all(data);
