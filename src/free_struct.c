@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/12 15:31:45 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/12 17:07:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_free_argv(t_bigshell *data)
 	}
 }
 
-void    ft_free_history(t_bigshell *data)
+void	ft_free_history(t_bigshell *data)
 {
 	int		i;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/08 17:37:26 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:07:08 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 t_env	*env_last(t_env *env)
 {
-	while(env && env->next)
+	while (env && env->next)
 		env = env->next;
 	return (env);
 }
@@ -65,7 +65,7 @@ void	init_env(t_bigshell *data, char **env)
 	i = -1;
 	while (env[++i])
 	{
-		if ( i == 0)
+		if (i == 0)
 			data->env = env_new(env[i]);
 		else
 			env_addback(data->env, env_new(env[i]));

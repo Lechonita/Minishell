@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:39:00 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/09 14:55:04 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:06:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		ft_count_token(char *line)
 			i++;
 		}
 		while (line[i] && ((line[i] != ' ' || line[i] == '\t')
-			&& !is_separator(line[i])))
+				&& !is_separator(line[i])))
 			i++;
 	}
 	return (count);
