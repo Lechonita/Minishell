@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/06 17:37:25 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/08 17:37:26 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strndup(const char *src, size_t n)
     return (copy);
 }
 
-char	*get_value(char *env)
+char	*get_env_value(char *env)
 {
 	char	*value;
 	int		i;
@@ -50,7 +50,7 @@ int	find_equal(char *env)
 	return (i);
 }
 
-char	*get_name(char	*env)
+char	*get_env_name(char	*env)
 {
 	char	*name;
 	int		i;
