@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/06 17:28:49 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:37:31 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ int	main(int ac, char *av[], char **env)
 {
 	t_bigshell		*data;
 
+	(void)env;
 	data = ft_calloc(1, sizeof(t_bigshell));
 	if (!data)
 		return (0);
-	// init_argv(ac, av);
-	init_env(data, env);
+	// init_env(data, env);
+	ft_read_line(data);
 	if (ac == 2)
 		ft_printf("%s\n", av[1]);
+	ft_free_all(data);
 	return (0);
 }
