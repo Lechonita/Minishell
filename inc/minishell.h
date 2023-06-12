@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/09 14:17:41 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:30:05 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ typedef struct s_argv
 
 typedef struct s_bigshell
 {
-	char			*history[50];
+	char			**history;
 	t_argv			*argv;
 	t_env			*env;
-	t_exec			*exec;
+	// t_exec			*exec;
 }	t_bigshell;
 
 /***********************************************************/

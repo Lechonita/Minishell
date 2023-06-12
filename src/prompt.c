@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/09 14:42:20 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:39:38 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,22 @@ void	ft_read_line(t_bigshell *data)
 
 	i = 0;
 	line = NULL;
+	printf("line\n");
 	while (1)
 	{
 		write(1, "bigshell42> ", 12);
 		line = get_next_line(0);
+		printf("line = %s\n", line);
 		if (!ft_strncmp(line, "exit", 4) && ft_strlen(line) - 1 == 4)
 			break ;
 		if (line)
 		{
-			data->history[i++] = remove_new_line(line);
-			init_argv(data, data->history[i - 1]);
+			data->history[i] = remove_new_line(line);
+			// init_argv(data, data->history[i - 1]);
 			// display_argv_struct(data); // A retirer
+
+			printf("history = %s\n", data->history[i]);
+			i++;
 		}
 		if (i == 50)
 			i = 0;
