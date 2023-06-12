@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:11:05 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/08 19:33:53 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/09 14:41:55 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,22 @@
 	
 }*/
 
-void	ft_determine_token(t_argv new, char *line)
-{
-	if (line[0] == 39) // single quotes
-		ft_single_quotes(new, line);
-	else if (line[0] == 34) // double quotes
-		ft_double_quotes(new, line);
-	else if (line[0] == '$') // env var (check si espace derriere ou pas)
-		ft_dollar_sign(new, line);
-	else if (line[0] == '>' || line[0] == '<') // redirections
-		ft_redirections(new, line);
-	else if (line[0] == '|') // pipe
-		ft_pipe(new, line);
-	else
-		ft_word(new, line);
-}
+// int	ft_determine_token(t_argv *new, char *line, int i)
+// {
+// 	if (line[0] == 39) // single quotes
+// 		i = ft_quotes(new, line, 39, i);
+// 	else if (line[0] == 34) // double quotes
+// 		i = ft_quotes(new, line, 34, i);
+// 	// else if (line[0] == '$') // env var (check si espace derriere ou pas)
+// 	// 	ft_dollar_sign(new, line);
+// 	// else if (line[0] == '>' || line[0] == '<') // redirections
+// 	// 	ft_redirections(new, line);
+// 	// else if (line[0] == '|') // pipe
+// 	// 	ft_pipe(new, line);
+// 	// else
+// 	// 	ft_generic(new, line);
+// 	return (i);
+// }
 
 /* Fonction qui determine la valeur du token pour le maillon en question.
 	Ex: si la line = "echo hello" alors la valeur du premier maillon
@@ -68,25 +69,16 @@ void	ft_determine_token(t_argv new, char *line)
 // 	return (value);
 // }
 
-void    get_argv_value_type(t_argv new, char *line, int tkn_nb)
-{
-	int		count;
-	int		i;
+// void    get_argv_value_type(t_argv *new, char *line, int tkn_nb)
+// {
+// 	static int		i;
 
-	count = 0;
-	i = 0;
-	while (line[i])
-	{
-		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-			i++;
-		if (line[i] && (line[i] != ' ' || line[i] == '\t'))
-			count++;
-		if (count == tkn_nb + 1)
-		{
-			ft_determine_token(new, line + i);
-			break ;
-		}
-		while (line[i] && (line[i] != ' ' || line[i] == '\t'))
-			i++;
-	}
-}
+// 	i = 0;
+// 	while (line[i])
+// 	{
+// 		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+// 			i++;
+// 		if (line[i] && (line[i] != ' ' || line[i] == '\t'))
+// 			i = ft_determine_token(new, line + i, i);
+// 	}
+// }

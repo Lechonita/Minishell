@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/08 19:15:06 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/09 14:17:41 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@
 
 #define BUFFER_SIZE BUFSIZ
 
-#define TYPE_GENERIC_CMD 1;
-#define TYPE_GENERIC_WORD 2;
-#define TYPE_OPERATOR 3;
-#define TYPE_REDIRECTION 4;
-#define TYPE_SINGLE_QUOTE 5;
-#define TYPE_DOUBLE_QUOTE 6;
-#define TYPE_BUILTIN 7;
-// #define TYPE_DELIMITOR 8;
+#define TYPE_GENERIC 1;
+#define TYPE_OPERATOR 2;
+#define TYPE_REDIRECTION 3;
+#define TYPE_SINGLE_QUOTES 4;
+#define TYPE_DOUBLE_QUOTES 5;
+#define TYPE_BUILTIN 6;
+// #define TYPE_DELIMITOR 7;
 
 typedef struct s_exec
 {
@@ -117,7 +116,14 @@ void	init_argv(t_bigshell *data, char *line);
 
 /* ARGV FIND VALUES */
 // int		get_argv_type(char *token);
-char	*get_argv_value(char *line, int nb, int i, int j);
+// char	*get_argv_value(char *line, int nb, int i, int j);
+void    get_argv_value_type(t_argv *new, char *line, int tkn_nb);
+int		ft_determine_token(t_argv *new, char *line, int i);
+
+/* ARGV ASSIGN */
+int    ft_quotes(t_argv *new, char *line, char limiter, int i);
+
+void	display_argv_struct(t_bigshell *data);
 
 /***********************************************************/
 /*                           FREE                          */

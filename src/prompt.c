@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/08 17:24:04 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/09 14:42:20 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_read_line(t_bigshell *data)
 		{
 			data->history[i++] = remove_new_line(line);
 			init_argv(data, data->history[i - 1]);
+			// display_argv_struct(data); // A retirer
 		}
 		if (i == 50)
 			i = 0;
