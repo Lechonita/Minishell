@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:48:27 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/06 16:55:21 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:56:19 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int			ft_strlen(const char *s);
 /*This function returns a pointer to a null-term byte string, which is a 
 duplicate of the string pointed to by s*/
 char		*ft_strdup(const char *s);
+char		*ft_strndup(const char *src, size_t n);
 
 /*locates the first occurrence of the null-term string little in the string big,
 where not more than len characters are searched*/

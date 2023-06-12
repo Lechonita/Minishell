@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:39:00 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/12 17:06:32 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/12 17:47:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 // 	return (new);
 // }
 
-int		is_separator(char c)
+int	is_separator(char c)
 {
 	if (c == '<' || c == '>' || c == 34 || c == 39 || c == '|')
 		return (1);
@@ -64,7 +64,7 @@ int		is_separator(char c)
 /* Fonction qui compte le nombre de tokens pour savoir combien
 	de maillons creer dans la liste chainee t_argv. */
 
-int		ft_count_token(char *line)
+int	ft_count_token(char *line)
 {
 	int		i;
 	int		count;
