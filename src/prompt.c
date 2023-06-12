@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/12 15:39:38 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/12 17:07:46 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*remove_new_line(char *line)
 {
 	int		i;
-	
+
 	i = 0;
 	while (line[i])
 		i++;
@@ -41,10 +41,8 @@ void	ft_read_line(t_bigshell *data)
 		if (line)
 		{
 			data->history[i] = remove_new_line(line);
-			// init_argv(data, data->history[i - 1]);
+			init_argv(data, data->history[i - 1]);
 			// display_argv_struct(data); // A retirer
-
-			printf("history = %s\n", data->history[i]);
 			i++;
 		}
 		if (i == 50)
