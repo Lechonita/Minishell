@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:39:00 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/09 14:55:04 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:47:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 // 	return (new);
 // }
 
-int		is_separator(char c)
+int	is_separator(char c)
 {
 	if (c == '<' || c == '>' || c == 34 || c == 39 || c == '|')
 		return (1);
@@ -64,7 +64,7 @@ int		is_separator(char c)
 /* Fonction qui compte le nombre de tokens pour savoir combien
 	de maillons creer dans la liste chainee t_argv. */
 
-int		ft_count_token(char *line)
+int	ft_count_token(char *line)
 {
 	int		i;
 	int		count;
@@ -82,7 +82,7 @@ int		ft_count_token(char *line)
 			i++;
 		}
 		while (line[i] && ((line[i] != ' ' || line[i] == '\t')
-			&& !is_separator(line[i])))
+				&& !is_separator(line[i])))
 			i++;
 	}
 	return (count);

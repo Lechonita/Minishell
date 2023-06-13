@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/08 19:29:14 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:07:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_free_argv(t_bigshell *data)
 	}
 }
 
-void    ft_free_history(t_bigshell *data)
+void	ft_free_history(t_bigshell *data)
 {
 	int		i;
 
@@ -57,9 +57,13 @@ void    ft_free_history(t_bigshell *data)
 	if (data->history)
 	{
 		i = -1;
-		while(data->history[++i])
+		while (data->history[++i])
+		{
 			free(data->history[i]);
+			data->history[i] = NULL;
+		}
 		free(data->history);
+		data->history = NULL;
 	}
 	else
 		return ;

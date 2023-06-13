@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_find_values.c                                  :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/12 17:55:32 by bebigel          ###   ########.fr       */
+/*   Created: 2023/06/12 17:52:27 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/12 17:53:26 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-char	*get_env_value(char *env)
+char	*ft_strndup(const char *src, size_t n)
 {
-	char	*value;
-	int		i;
-
-	i = find_equal(env);
-	value = ft_strndup(env + i + 1, ft_strlen(env) - i);
-	return (value);
-}
-
-int	find_equal(char *env)
-{
-	int		i;
+	size_t		i;
+	char		*copy;
 
 	i = 0;
-	while (env[i] != '=')
+	copy = malloc(sizeof(char) * (n + 1));
+	if (!copy)
+		return (NULL);
+	while (i < n && src[i])
+	{
+		copy[i] = src[i];
 		i++;
-	return (i);
-}
-
-char	*get_env_name(char	*env)
-{
-	char	*name;
-	int		i;
-
-	i = find_equal(env);
-	name = ft_strndup(env, i);
-	return (name);
+	}
+	copy[i] = '\0';
+	return (copy);
 }

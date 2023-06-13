@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/09 14:17:41 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:51:44 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@
 # include <signal.h>	// signal
 # include <sys/stat.h>	// TBD
 
-#define BUFFER_SIZE BUFSIZ
+# define BUFFER_SIZE BUFSIZ
 
-#define TYPE_GENERIC 1;
-#define TYPE_OPERATOR 2;
-#define TYPE_REDIRECTION 3;
-#define TYPE_SINGLE_QUOTES 4;
-#define TYPE_DOUBLE_QUOTES 5;
-#define TYPE_BUILTIN 6;
+# define TYPE_GENERIC 1
+# define TYPE_OPERATOR 2
+# define TYPE_REDIRECTION 3
+# define TYPE_SINGLE_QUOTES 4
+# define TYPE_DOUBLE_QUOTES 5
+# define TYPE_BUILTIN 6
 // #define TYPE_DELIMITOR 7;
 
 typedef struct s_exec
@@ -64,7 +64,7 @@ typedef struct s_argv
 
 typedef struct s_bigshell
 {
-	char			*history[50];
+	char			**history;
 	t_argv			*argv;
 	t_env			*env;
 	t_exec			*exec;
@@ -87,14 +87,13 @@ char	*get_env_value(char *env);
 int		find_equal(char *env);
 char	*get_env_name(char	*env);
 
-
 /***********************************************************/
 /*                       PROMPT LINE                       */
 /***********************************************************/
 
 /* PROMPT */
 char	*remove_new_line(char *line);
-void    ft_read_line(t_bigshell *data);
+void	ft_read_line(t_bigshell *data);
 
 /* GNL */
 char	*ft_freejoin(char *s1, char *s2);
@@ -117,11 +116,11 @@ void	init_argv(t_bigshell *data, char *line);
 /* ARGV FIND VALUES */
 // int		get_argv_type(char *token);
 // char	*get_argv_value(char *line, int nb, int i, int j);
-void    get_argv_value_type(t_argv *new, char *line, int tkn_nb);
+void	get_argv_value_type(t_argv *new, char *line, int tkn_nb);
 int		ft_determine_token(t_argv *new, char *line, int i);
 
 /* ARGV ASSIGN */
-int    ft_quotes(t_argv *new, char *line, char limiter, int i);
+int		ft_quotes(t_argv *new, char *line, char limiter, int i);
 
 void	display_argv_struct(t_bigshell *data);
 
@@ -132,7 +131,7 @@ void	display_argv_struct(t_bigshell *data);
 /* FREE STRUCT*/
 void	ft_free_env(t_bigshell *data);
 void	ft_free_argv(t_bigshell *data);
-void    ft_free_history(t_bigshell *data);
+void	ft_free_history(t_bigshell *data);
 void	ft_free_all(t_bigshell *data);
 
 #endif

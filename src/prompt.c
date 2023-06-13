@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/09 14:42:20 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:50:30 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*remove_new_line(char *line)
 {
 	int		i;
-	
+
 	i = 0;
 	while (line[i])
 		i++;
@@ -38,9 +38,10 @@ void	ft_read_line(t_bigshell *data)
 			break ;
 		if (line)
 		{
-			data->history[i++] = remove_new_line(line);
+			data->history[i] = remove_new_line(line);
 			init_argv(data, data->history[i - 1]);
 			// display_argv_struct(data); // A retirer
+			i++;
 		}
 		if (i == 50)
 			i = 0;
@@ -48,7 +49,6 @@ void	ft_read_line(t_bigshell *data)
 	}
 	free(line);
 }
-
 
 /* delimiteurs =
 > 

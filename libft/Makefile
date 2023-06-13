@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lechon <lechon@student.42.fr>              +#+  +:+       +#+         #
+#    By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/11 12:22:06 by bebigel           #+#    #+#              #
-#    Updated: 2023/06/06 16:55:34 by lechon           ###   ########.fr        #
+#    Updated: 2023/06/12 17:54:46 by bebigel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC = ft_atoi.c \
 	ft_memset.c \
 	ft_strchr.c \
 	ft_strdup.c \
+	ft_strndup.c \
 	ft_strlcat.c \
 	ft_strlcpy.c \
 	ft_strlen.c \
