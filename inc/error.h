@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/12 17:51:12 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/13 17:19:20 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define ERROR_H
 
 # include "minishell.h"
+
+# define W_NO_ENV "\t No environment\n"
 
 #endif

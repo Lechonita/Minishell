@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/13 11:43:31 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:21:46 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ void	init_env(t_bigshell *data, char **env)
 	while (env[++i])
 	{
 		if (i == 0)
+		{
 			data->env = env_new(env[i]);
+			if (!data->env)
+				ft_exit(EXIT_FAILURE, W_NO_ENV);
+		}
 		else
 			env_addback(data->env, env_new(env[i]));
 	}

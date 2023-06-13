@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 15:12:07 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/13 15:13:44 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:26:55 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	init_history(t_bigshell *data)
 {
-	
+	print_strs(data->history);
 }

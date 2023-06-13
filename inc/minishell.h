@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/13 15:36:13 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:27:57 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft.h"
+# include "error.h"
 
 # include <stdio.h>
 # include <stdlib.h> 	//exit
@@ -84,7 +85,7 @@ void	init_env(t_bigshell *data, char **env);
 // void	display_env_struct(t_bigshell *data);
 
 /* ENV FIND VALUES */
-char	*ft_strndup(const char *src, size_t n);
+// char	*ft_strndup(const char *src, size_t n);
 char	*get_env_value(char *env);
 int		find_equal(char *env);
 char	*get_env_name(char	*env);
@@ -95,7 +96,6 @@ char	*get_env_name(char	*env);
 
 /* PROMPT */
 void	ft_save_history(t_bigshell *data, char *line, int i);
-char	*remove_new_line(char *line);
 void	ft_read_line(t_bigshell *data);
 
 /* GNL */
@@ -104,6 +104,11 @@ char	*get_line(char *str, char *tmp);
 char	*get_line_store(char *str);
 char	*get_str(int fd, char *str);
 char	*get_next_line(int fd);
+
+/***********************************************************/
+/*                       HISTORY                           */
+/***********************************************************/
+void	init_history(t_bigshell *data);
 
 /***********************************************************/
 /*                        ARGUMENTS                        */
@@ -136,5 +141,13 @@ void	ft_free_env(t_bigshell *data);
 void	ft_free_argv(t_bigshell *data);
 void	ft_free_history(t_bigshell *data);
 void	ft_free_all(t_bigshell *data);
+
+/***********************************************************/
+/*                           ERROR                         */
+/***********************************************************/
+
+/* error */
+void	ft_exit(int err_no, char *msg);
+void	print_strs(char **strs);
 
 #endif
