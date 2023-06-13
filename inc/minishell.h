@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/12 17:51:44 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:41:13 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <limits.h> 	// INT_MIN (-2147483648) INT_MAX (2147483647)
 # include <signal.h>	// signal
 # include <sys/stat.h>	// TBD
+# include <assert.h>
+# include <sys/prctl.h>
 
 # define BUFFER_SIZE BUFSIZ
 
