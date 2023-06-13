@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/12 17:07:08 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:43:31 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	init_env(t_bigshell *data, char **env)
 }
 
 /* fonction qui permet d'afficher t_env
-	(equivalent de la commande "env" dans le terminal) */
+	(equivalent de la commande "env" ou "printenv" dans le terminal) */
 
 // void	display_env_struct(t_bigshell *data)
 // {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/13 11:41:13 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/13 15:36:13 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char	*get_env_name(char	*env);
 /***********************************************************/
 
 /* PROMPT */
+void	ft_save_history(t_bigshell *data, char *line, int i);
 char	*remove_new_line(char *line);
 void	ft_read_line(t_bigshell *data);
 

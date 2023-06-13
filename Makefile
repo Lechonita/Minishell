@@ -14,7 +14,8 @@ CC = gcc
 SRC_DIR = src/
 SRC = main.c env_init.c env_find_values.c \
 		prompt.c get_next_line.c free_struct.c \
-		argv_init.c argv_find_values.c argv_assign.c
+		argv_init.c argv_find_values.c argv_assign.c \
+		# history_init.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
