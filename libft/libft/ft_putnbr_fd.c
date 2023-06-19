@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_init.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 15:12:07 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/19 10:50:31 by bebigel          ###   ########.fr       */
+/*   Created: 2022/11/17 12:03:57 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/19 13:11:50 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/libft.h"
 
-// void	init_history(t_bigshell *data)
-// {
-// 	print_strs(data->history);
-// }
+void	ft_putnbr_fd(int n, int fd)
+{
+	long long	nb;
+
+	nb = (long long)n;
+	if (nb == 0)
+	{
+		ft_putchar_fd('0', fd);
+		return ;
+	}
+	if (nb < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nb *= -1;
+	}
+	if (nb / 10)
+		ft_putnbr_fd(nb / 10, fd);
+	ft_putchar_fd(nb % 10 + '0', fd);
+}

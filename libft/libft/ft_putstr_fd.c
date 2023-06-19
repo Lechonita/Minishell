@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_init.c                                     :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 15:12:07 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/19 10:50:31 by bebigel          ###   ########.fr       */
+/*   Created: 2022/11/17 11:51:50 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/19 13:11:54 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/libft.h"
 
-// void	init_history(t_bigshell *data)
-// {
-// 	print_strs(data->history);
-// }
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s || !fd)
+		return ;
+	while (s[i])
+		ft_putchar_fd(s[i++], fd);
+}

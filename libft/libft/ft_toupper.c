@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_init.c                                     :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 15:12:07 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/19 10:50:31 by bebigel          ###   ########.fr       */
+/*   Created: 2022/11/09 13:28:08 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/19 13:12:58 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/libft.h"
 
-// void	init_history(t_bigshell *data)
-// {
-// 	print_strs(data->history);
-// }
+int	ft_toupper(int c)
+{
+	int	let;
+
+	if (c >= 'a' && c <= 'z')
+		let = c - 32;
+	else
+		let = c;
+	return (let);
+}

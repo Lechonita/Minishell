@@ -6,14 +6,16 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/13 17:27:57 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:31:22 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
+# include "../inc/libft.h"
+# include "../inc/get_next_line.h"
+# include "../inc/ft_printf.h"
 # include "error.h"
 
 # include <stdio.h>
@@ -30,10 +32,14 @@
 # include <sys/stat.h>	// TBD
 # include <assert.h>
 # include <sys/prctl.h>
+# include <readline/readline.h>	//readline
+# include <readline/history.h>	//readline
 
-# define BUFFER_SIZE BUFSIZ
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE BUFSIZ
+# endif
 
-# define TYPE_GENERIC 1
+# define TYPE_GENERIC 1 
 # define TYPE_OPERATOR 2
 # define TYPE_REDIRECTION 3
 # define TYPE_SINGLE_QUOTES 4

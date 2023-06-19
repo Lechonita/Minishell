@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_init.c                                     :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 15:12:07 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/19 10:50:31 by bebigel          ###   ########.fr       */
+/*   Created: 2022/11/18 17:14:42 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/19 13:11:09 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/libft.h"
 
-// void	init_history(t_bigshell *data)
-// {
-// 	print_strs(data->history);
-// }
+t_list	*ft_lstlast(t_list *lst)
+{
+	t_list	*last;
+
+	last = lst;
+	while (last != NULL && last -> next != NULL)
+		last = last -> next;
+	return (last);
+}

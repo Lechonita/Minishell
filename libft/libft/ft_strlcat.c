@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_init.c                                     :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 15:12:07 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/19 10:50:31 by bebigel          ###   ########.fr       */
+/*   Created: 2022/11/08 15:03:14 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/19 13:12:14 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/libft.h"
 
-// void	init_history(t_bigshell *data)
-// {
-// 	print_strs(data->history);
-// }
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	ld;
+	size_t	ls;
+
+	i = 0;
+	if ((!dest || !src) && !size)
+		return (0);
+	ld = ft_strlen(dest);
+	ls = ft_strlen((char *)src);
+	if (size == 0 || size <= ld)
+		return (ls + size);
+	while (src[i] && i + ld < size - 1)
+	{
+		dest[i + ld] = (char)src[i];
+		i++;
+	}
+	dest[i + ld] = '\0';
+	return (ld + ls);
+}

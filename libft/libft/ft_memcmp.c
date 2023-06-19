@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_init.c                                     :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 15:12:07 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/19 10:50:31 by bebigel          ###   ########.fr       */
+/*   Created: 2022/11/10 15:17:21 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/19 13:11:28 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/libft.h"
 
-// void	init_history(t_bigshell *data)
-// {
-// 	print_strs(data->history);
-// }
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*sun;
+	unsigned char	*sdeux;
+
+	sun = (unsigned char *)s1;
+	sdeux = (unsigned char *)s2;
+	while (n--)
+	{
+		if (*sun > *sdeux)
+			return (1);
+		else if (*sun < *sdeux)
+			return (-1);
+		sun++;
+		sdeux++;
+	}
+	return (0);
+}

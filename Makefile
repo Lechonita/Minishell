@@ -5,10 +5,21 @@
 #################
 NAME = minishell
 
-
 FLAG = -Wall -Wextra -Werror
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
 CC = gcc
+
+#	libft		#
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
+LDFLAGS += -L $(LIBFT_DIR) -lft
+
+#	Includes	#
+INC_DIR = ./inc
+INCLUDES += -I $(INC_DIR)
+INCLUDES += -I $(LIBFT_DIR)/inc
+
+HDR = inc/minishell.h
 
 #	Sources		#
 SRC_DIR = src/
@@ -23,15 +34,6 @@ SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-#	libft		#
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
-
-#	Includes	#
-INC = -I ./inc/ \
-	-I ./libft/
-
-HDR = inc/minishell.h
 
 # PROGRESS BAR
 NB_OBJ = ${words ${OBJ}}
@@ -65,7 +67,7 @@ art:
 	@echo "$(RED)                                                         $(END)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HDR)
-	@$(CC) $(FLAGS) -c $< -o $@ $(INC)
+	@$(CC) $(FLAGS) -c $< -o $@ $(INCLUDES)
 	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
 
 $(OBJ_DIR):
@@ -73,12 +75,12 @@ $(OBJ_DIR):
 
 #		LIBFT		#
 $(LIBFT):
-	@make -sC $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR) # --no-print-directory all
 	@echo "\n	⤳$(GREEN) Created $(LIBFT_DIR) 🎇\n$(DEF_COLOR)"
 
 #		Rules		#
 $(NAME): $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(INC) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline
 	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
 
 bonus: all
@@ -88,13 +90,13 @@ norm:
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"
-	@make clean -sC $(LIBFT_DIR)
-	@echo "$(HGREY)Removing libft...$(END)"
+	@make --no-print-directory clean -C $(LIBFT_DIR)
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@echo "$(HGREY)Removing Pipex...$(END)"
-	@make fclean -sC $(LIBFT_DIR)
+	@echo "$(HGREY)Removing libft...$(END)"
+	@rm -f $(LIBFT)
+	@echo "$(HGREY)Removing MiniShell...$(END)"
 	@rm -f $(NAME)
 	@echo "	⤳$(GREY) All cleaned 🌊\n$(END)"
 

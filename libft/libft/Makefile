@@ -1,19 +1,6 @@
 NAME = libft.a
 
-INC_DIR = ./inc
-INCLUDES += -I $(INC_DIR)
-
-HEADERS = ft_printf.h \
-		get_next_line.h \
-		libft.h 
-
-vpath %.h $(INC_DIR)
-
-PATH_LIBFT = ./libft
-PATH_GNL = ./get_next_line
-PATH_PRINTF = ./ft_printf
-
-SRCS = ft_atoi.c \
+SRC = ft_atoi.c \
 	ft_bzero.c \
 	ft_calloc.c \
 	ft_isalnum.c \
@@ -56,27 +43,13 @@ SRCS = ft_atoi.c \
 	ft_lstdelone.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
-	ft_lstmap.c \
-	ft_printf.c \
-	ft_write.c \
-	ft_countone.c \
-	ft_countbis.c \
-	ft_conv.c \
-	get_next_line.c \
-	get_next_line_utils.c
+	ft_lstmap.c
 
+FLAG = -Wall -Werror -Wextra
 
-vpath %.c $(PATH_LIBFT)
-vpath %.c $(PATH_GNL)
-vpath %.c $(PATH_PRINTF)
+HEADER = inc/libft.h
 
-OBJS_DIR = ./objs
-OBJS = $(patsubst %.c, $(OBJS_DIR)/%.o, $(SRCS))
-
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-
-RM = rm -rf
+OBJ=$(SRC:.c=.o)
 
 # PROGRESS BAR
 NB_OBJ = ${words ${OBJ}}
@@ -97,25 +70,21 @@ define PROGRESS_BAR
 	$(eval COUNTER=$(shell echo $$(($(COUNTER) + 1))))
 endef
 
-#		LIBFT		#
-all: $(OBJS_DIR) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS) 
-	@ar rcs $@ $^
+$(NAME): $(OBJ)
+	@gcc $(FLAG) -c $(SRC)
+	@ar rcs $(NAME) $(OBJ)
 
-$(OBJS): $(OBJS_DIR)/%.o: %.c
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-#	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
-
-$(OBJS_DIR):
-	@mkdir $@
+.c.o: 
+	@gcc $(FLAG) -c $< -o $@
+	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
 
 clean:
-	@$(RM) $(OBJS)
-	@$(RM) $(OBJS_DIR)
+	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	@$(RM) $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all
 
