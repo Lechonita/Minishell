@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/12 15:30:05 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/19 16:16:10 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ char	*get_next_line(int fd);
 /***********************************************************/
 
 /* ARGV INIT */
-t_argv	*argv_last(t_argv	*argv);
-void	argv_addback(t_argv *argv, t_argv *new);
-t_argv	*argv_new(char *line, int i);
-int		ft_count_token(char *line);
+// t_argv	*argv_last(t_argv	*argv);
+// void	argv_addback(t_argv *argv, t_argv *new);
+// t_argv	*argv_new(char *line, int i);
+// int		ft_count_token(char *line);
 void	init_argv(t_bigshell *data, char *line);
 
 /* ARGV FIND VALUES */
