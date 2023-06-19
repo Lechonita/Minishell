@@ -1,9 +1,11 @@
 NAME = gnl.a
 
-SRCS = get_next_line.c \
-	get_next_line_utils.c \
+SRCS += get_next_line.c
+SRCS += get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
+
+HEADER = get_next_line.h \
 
 LIBFT_PATH = ../libft
 
@@ -14,7 +16,7 @@ RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
 
 # PROGRESS BAR
-NB_OBJ = ${words ${OBJ}}
+NB_OBJ = ${words ${SRCS}}
 COUNTER = 1
 PROGRESS = 0
 DONE = 100

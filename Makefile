@@ -5,38 +5,62 @@
 #################
 NAME = minishell
 
-FLAG = -Wall -Wextra -Werror
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
+############################### Compiler #######################################
+
+FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
 CC = gcc
+
+############################### Libraries ######################################
 
 #	libft		#
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LDFLAGS += -L $(LIBFT_DIR) -lft
+LDFLAGS += -L $(LIBFT_DIR) #-lft 
 
-#	Includes	#
+############################### Includes #######################################
+
 INC_DIR = ./inc
 INCLUDES += -I $(INC_DIR)
 INCLUDES += -I $(LIBFT_DIR)/inc
 
-HDR = inc/minishell.h
+############################### Headers ########################################
 
-#	Sources		#
-SRC_DIR = src/
-SRC = main.c env_init.c env_find_values.c \
-		prompt.c get_next_line.c free_struct.c \
-		argv_init.c argv_find_values.c argv_assign.c \
-		print_error.c history_init.c
+HEADER += inc/minishell.h
+HEADER += inc/error.h
+# HEADER += ../libft/inc/libft.h
+# HEADER += ../libft/inc/get_next_line.h
+# HEADER += ../libft/inc/ft_printf.h
 
-SRCS = $(addprefix $(SRC_DIR), $(SRC))
+vpath %.h $(INC_DIR)
 
-#	Objects		#
-OBJ_DIR = obj/
-OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
+############################### Path Sources ###################################
 
+SRC_DIR = ./src
 
-# PROGRESS BAR
-NB_OBJ = ${words ${OBJ}}
+############################### Sources ########################################
+
+SRC += main.c 
+SRC += env_init.c
+SRC += env_find_values.c
+SRC += prompt.c
+SRC += free_struct.c
+SRC += argv_init.c
+SRC += argv_find_values.c
+SRC += argv_assign.c
+SRC += print_error.c
+SRC += history_init.c
+SRC += get_next_line.c
+
+vpath %.c $(SRC_DIR)
+
+############################### Objects ########################################
+
+OBJ_DIR = ./obj
+OBJ = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
+
+############################### Progress Ber ###################################
+
+NB_OBJ = ${words ${SRC}}
 COUNTER = 1
 PROGRESS = 0
 DONE = 100
@@ -54,39 +78,36 @@ define PROGRESS_BAR
 	$(eval COUNTER=$(shell echo $$(($(COUNTER) + 1))))
 endef
 
-#		MiniShell		#
-all: art $(OBJ_DIR) $(LIBFT) $(NAME)
+############################### Rules ##########################################
+all: $(NAME)
 
-art:
-	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"
-	@echo "$(RED) |  \/  | (_)         (_)  / ____| | |            | | | |$(END)"
-	@echo "$(RED) | \  / |  _   _ __    _  | (___   | |__     ___  | | | |$(END)"
-	@echo "$(RED) | |\/| | | | | '_ \  | |  \___ \  | '_ \   / _ \ | | | |$(END)"
-	@echo "$(RED) | |  | | | | | | | | | |  ____) | | | | | |  __/ | | | |$(END)"
-	@echo "$(RED) |_|  |_| |_| |_| |_| |_| |_____/  |_| |_|  \___| |_| |_|$(END)"
-	@echo "$(RED)                                                         $(END)"
+$(NAME): $(LIBFT) $(OBJ)
+	@$(CC) $(FLAGS) $^ $(LDFLAGS) $(INCLUDES) -o $@ -lreadline
+	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HDR)
-	@$(CC) $(FLAGS) -c $< -o $@ $(INCLUDES)
+$(OBJ) : $(OBJ_DIR)/%.o: %.c | $(LIBFT) $(OBJ_DIR)
+	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
+
+$(LIBFT):
+	@make --no-print-directory all -C $(LIBFT_DIR)
+	@echo "\n	⤳$(GREEN) Created libft 🎇\n$(DEF_COLOR)"
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
-#		LIBFT		#
-$(LIBFT):
-	@make -C $(LIBFT_DIR) # --no-print-directory all
-	@echo "\n	⤳$(GREEN) Created $(LIBFT_DIR) 🎇\n$(DEF_COLOR)"
-
-#		Rules		#
-$(NAME): $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline
-	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
-
-bonus: all
+# art:
+# 	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"
+# 	@echo "$(RED) |  \/  | (_)         (_)  / ____| | |            | | | |$(END)"
+# 	@echo "$(RED) | \  / |  _   _ __    _  | (___   | |__     ___  | | | |$(END)"
+# 	@echo "$(RED) | |\/| | | | | '_ \  | |  \___ \  | '_ \   / _ \ | | | |$(END)"
+# 	@echo "$(RED) | |  | | | | | | | | | |  ____) | | | | | |  __/ | | | |$(END)"
+# 	@echo "$(RED) |_|  |_| |_| |_| |_| |_| |_____/  |_| |_|  \___| |_| |_|$(END)"
+# 	@echo "$(RED)                                                         $(END)"
 
 norm:
-	@norminette $(SRCS) $(HDR)
+	@norminette $(HEADER) 
+	@norminette $(SRC_DIR)
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"
@@ -102,7 +123,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 
 ######################### Color #########################
 END=\033[0m

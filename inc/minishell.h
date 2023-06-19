@@ -6,16 +6,16 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 13:31:22 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/19 16:58:39 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../inc/libft.h"
-# include "../inc/get_next_line.h"
-# include "../inc/ft_printf.h"
+# include "../libft/inc/libft.h"
+# include "../libft/inc/get_next_line.h"
+# include "../libft/inc/ft_printf.h"
 # include "error.h"
 
 # include <stdio.h>

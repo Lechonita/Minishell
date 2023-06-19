@@ -1,10 +1,10 @@
 NAME = libftprintf.a
 
-SRCS =	ft_printf.c \
-	ft_conv.c \
-	ft_countone.c \
-	ft_countbis.c \
-	ft_write.c
+SRCS +=	ft_printf.c
+SRCS +=	ft_conv.c
+SRCS +=	ft_countone.c
+SRCS +=	ft_countbis.c
+SRCS +=	ft_write.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -17,7 +17,7 @@ GCC = gcc -Wall -Werror -Wextra
 RM = rm -rf
 
 # PROGRESS BAR
-NB_OBJ = ${words ${OBJ}}
+NB_OBJ = ${words ${SRCS}}
 COUNTER = 1
 PROGRESS = 0
 DONE = 100

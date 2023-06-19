@@ -3,9 +3,9 @@ NAME = libft.a
 INC_DIR = ./inc
 INCLUDES += -I $(INC_DIR)
 
-HEADERS = ft_printf.h \
-		get_next_line.h \
-		libft.h 
+HEADERS += ft_printf.h
+HEADERS += get_next_line.h
+HEADERS += libft.h 
 
 vpath %.h $(INC_DIR)
 
@@ -65,7 +65,6 @@ SRCS = ft_atoi.c \
 	get_next_line.c \
 	get_next_line_utils.c
 
-
 vpath %.c $(PATH_LIBFT)
 vpath %.c $(PATH_GNL)
 vpath %.c $(PATH_PRINTF)
@@ -79,7 +78,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 # PROGRESS BAR
-NB_OBJ = ${words ${OBJ}}
+NB_OBJ = ${words ${SRCS}}
 COUNTER = 1
 PROGRESS = 0
 DONE = 100
@@ -105,7 +104,7 @@ $(NAME): $(OBJS)
 
 $(OBJS): $(OBJS_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-#	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
+	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
 
 $(OBJS_DIR):
 	@mkdir $@

@@ -47,12 +47,12 @@ SRC = ft_atoi.c \
 
 FLAG = -Wall -Werror -Wextra
 
-HEADER = inc/libft.h
-
 OBJ=$(SRC:.c=.o)
 
+HEADER = inc/libft.h
+
 # PROGRESS BAR
-NB_OBJ = ${words ${OBJ}}
+NB_OBJ = ${words ${SRC}}
 COUNTER = 1
 PROGRESS = 0
 DONE = 100

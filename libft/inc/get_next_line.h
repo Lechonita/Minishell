@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:07:41 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 13:09:32 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/19 17:08:41 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*get_line(char *store, char *tmp);
 char	*get_line_store(char *store);
 
 	/*	annexes	*/
-
 // char	*ft_strjoin_gnl(char const *s1, char const *s2);
 void	*ft_memcpy_gnl(void *dest, const void *src, size_t n);
 void	*ft_calloc_gnl(size_t nmemb, size_t size);
