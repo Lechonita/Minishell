@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 11:10:18 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/19 18:11:03 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char *av[], char **env)
 	// ft_read_line(data);
 	// init_history(data);
 	if (ac == 2)
-		ft_printf("%s\n", av[1]);
+		printf("%s\n", av[1]);
 	ft_free_all(data);
 	return (0);
 }

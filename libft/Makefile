@@ -1,9 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/19 18:09:49 by jrouillo          #+#    #+#              #
+#    Updated: 2023/06/19 18:13:54 by jrouillo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libft.a
 
 INC_DIR = ./inc
 INCLUDES += -I $(INC_DIR)
 
-HEADERS += ft_printf.h
 HEADERS += get_next_line.h
 HEADERS += libft.h 
 
@@ -11,7 +22,6 @@ vpath %.h $(INC_DIR)
 
 PATH_LIBFT = ./libft
 PATH_GNL = ./get_next_line
-PATH_PRINTF = ./ft_printf
 
 SRCS = ft_atoi.c \
 	ft_bzero.c \
@@ -57,17 +67,11 @@ SRCS = ft_atoi.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
 	ft_lstmap.c \
-	ft_printf.c \
-	ft_write.c \
-	ft_countone.c \
-	ft_countbis.c \
-	ft_conv.c \
 	get_next_line.c \
 	get_next_line_utils.c
 
 vpath %.c $(PATH_LIBFT)
 vpath %.c $(PATH_GNL)
-vpath %.c $(PATH_PRINTF)
 
 OBJS_DIR = ./objs
 OBJS = $(patsubst %.c, $(OBJS_DIR)/%.o, $(SRCS))

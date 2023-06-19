@@ -9,6 +9,6 @@
         "minishell.h": "c",
         "random": "c",
         "readline.h": "c",
-        "ft_printf.h": "c"
+        "printf.h": "c"
     }
 }

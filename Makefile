@@ -1,8 +1,15 @@
-#################
-#				#
-#	 Project	#
-#				#
-#################
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/19 18:22:42 by jrouillo          #+#    #+#              #
+#    Updated: 2023/06/19 18:33:26 by jrouillo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minishell
 
 ############################### Compiler #######################################
@@ -10,12 +17,11 @@ NAME = minishell
 FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
 CC = gcc
 
-############################### Libraries ######################################
+############################### LIBFT ######################################
 
-#	libft		#
-LIBFT_DIR = ./libft
+LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LDFLAGS += -L $(LIBFT_DIR) #-lft 
+LDFLAGS += -L $(LIBFT_DIR) #-lft
 
 ############################### Includes #######################################
 
@@ -27,9 +33,8 @@ INCLUDES += -I $(LIBFT_DIR)/inc
 
 HEADER += inc/minishell.h
 HEADER += inc/error.h
-# HEADER += ../libft/inc/libft.h
-# HEADER += ../libft/inc/get_next_line.h
-# HEADER += ../libft/inc/ft_printf.h
+HEADER += ../libft/inc/libft.h
+HEADER += ../libft/inc/get_next_line.h
 
 vpath %.h $(INC_DIR)
 
@@ -49,7 +54,7 @@ SRC += argv_find_values.c
 SRC += argv_assign.c
 SRC += print_error.c
 SRC += history_init.c
-SRC += get_next_line.c
+# SRC += get_next_line.c // a retirer, doublon avec ajout du gnl dans la libft
 
 vpath %.c $(SRC_DIR)
 
@@ -95,6 +100,10 @@ $(LIBFT):
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
+
+all: $(LIBFT) $(OBJ_DIR) $(NAME)
+
+
 
 # art:
 # 	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"
