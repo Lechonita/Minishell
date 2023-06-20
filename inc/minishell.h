@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 15:14:11 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:57:10 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define TYPE_DOUBLE_QUOTES 5	// ""
 # define TYPE_SINGLE_QUOTES 6	// ''
 # define TYPE_BLANK 7			// space and \t
+# define TYPE_DOLLAR 8			// $
 
 typedef struct s_exec
 {
@@ -62,20 +63,20 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_argv
+typedef struct s_token
 {
 	int				index;
 	int				type;
 	char			*value;
-	struct s_argv	*next;
-}	t_argv;
+	struct s_token	*next;
+}	t_token;
 
 typedef struct s_line
 {
 	int				index;
 	int				type;
-	int				dq;		// if 0, inexistant. if 1, c'est ouvert. if 2, c'est ferme
-	int				sq;		// if 0, inexistant. if 1, c'est ouvert. if 2, c'est ferme
+	int				dq;
+	int				sq;
 	char			c;
 	struct s_line	*next;
 }	t_line;
@@ -83,9 +84,9 @@ typedef struct s_line
 typedef struct s_bigshell
 {
 	char			**history;
-	t_argv			*argv;
-	t_line			*line;
 	t_env			*env;
+	t_line			*line;
+	t_token			*token;
 	t_exec			*exec;
 }	t_bigshell;
 
@@ -116,27 +117,9 @@ char	*get_env_name(char	*env);
 /***********************************************************/
 /*                       HISTORY                           */
 /***********************************************************/
+
+/* HISTORY INIT */
 void	init_history(t_bigshell *data);
-
-/***********************************************************/
-/*                        ARGUMENTS                        */
-/***********************************************************/
-
-/* ARGV INIT */
-// t_argv	*argv_last(t_argv	*argv);
-// void	argv_addback(t_argv *argv, t_argv *new);
-// t_argv	*argv_new(char *line, int i);
-
-/* ARGV FIND VALUES */
-// int		get_argv_type(char *token);
-// char	*get_argv_value(char *line, int nb, int i, int j);
-void	get_argv_value_type(t_argv *new, char *line, int tkn_nb);
-int		ft_determine_token(t_argv *new, char *line, int i);
-
-/* ARGV ASSIGN */
-int		ft_quotes(t_argv *new, char *line, char limiter, int i);
-
-void	display_argv_struct(t_bigshell *data);
 
 /***********************************************************/
 /*                           LINE                          */
@@ -156,6 +139,7 @@ int		ft_is_separator(char c);
 int		ft_determine_type(char c);
 
 /* TYPE2 */
+int		ft_is_dollar(char c);
 int		ft_is_blank(char c);
 int		ft_is_single_quote(char c);
 int		ft_is_double_quote(char c);
@@ -165,7 +149,16 @@ int		treat_as_quotes(t_line	*line);
 void	find_double_quotes(t_line *line);
 void	find_single_quotes(t_line *line);
 
+/***********************************************************/
+/*                          TOKENS                         */
+/***********************************************************/
+
 /* FIND TOKENS */
+t_token	*token_last(t_token	*token);
+void	token_addback(t_token *token, t_token *new);
+t_token	*token_new(t_line *first, t_line *current, int start);
+void	ft_create_token(t_bigshell *data, t_line *current, int start);
+void	find_tokens(t_bigshell *data);
 
 /***********************************************************/
 /*                           FREE                          */
@@ -173,7 +166,7 @@ void	find_single_quotes(t_line *line);
 
 /* FREE STRUCT*/
 void	ft_free_env(t_bigshell *data);
-void	ft_free_argv(t_bigshell *data);
+void	ft_free_token(t_bigshell *data);
 void	ft_free_history(t_bigshell *data);
 void	ft_free_all(t_bigshell *data);
 
@@ -185,5 +178,6 @@ void	ft_free_all(t_bigshell *data);
 void	ft_exit(int err_no, char *msg);
 void	print_strs(char **strs);
 void	print_t_line(t_bigshell *data);
+void	print_t_token(t_bigshell *data);
 
 #endif

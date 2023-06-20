@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:13:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/20 14:42:33 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:10:19 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_is_word(char c)
 {
 	if (!ft_is_separator(c) && !ft_is_operator(c) && !ft_is_blank(c)
 		&& !ft_is_single_quote(c) && !ft_is_double_quote(c)
-		&& !ft_is_integer(c))
+		&& !ft_is_integer(c) && !ft_is_dollar(c))
 		return (TYPE_WORD);
 	return (0);
 }
@@ -62,5 +62,7 @@ int	ft_determine_type(char c)
 		res = TYPE_SINGLE_QUOTES;
 	else if (ft_is_blank(c))
 		res = TYPE_BLANK;
+	else if (ft_is_dollar(c))
+		res = TYPE_DOLLAR;
 	return (res);
 }

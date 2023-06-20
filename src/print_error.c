@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 14:29:06 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:08:29 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,18 @@ void	print_t_line(t_bigshell *data)
 		printf("[sq] %d\n", data->line->sq);
 		printf("[c] %c\n", data->line->c);
 		data->line = data->line->next;
+	}
+}
+
+void	print_t_token(t_bigshell *data)
+{
+	printf("Je rentre dans la fonction de print ??\n");
+	while (data->token)
+	{
+		printf("=================================\n");
+		printf("[index] %d\n", data->token->index);
+		printf("[type] %d\n", data->token->type);
+		printf("[value] %s\n", data->token->value);
+		data->token = data->token->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/20 12:04:50 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:55:46 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@
 // 		if (line)
 // 		{
 // 			// data->history[i] = remove_new_line(line);
-// 			// init_argv(data, data->history[i - 1]);
-// 			init_argv(data, line);
-// 			// display_argv_struct(data); // A retirer
+// 			// init_token(data, data->history[i - 1]);
+// 			init_token(data, line);
+// 			// display_token_struct(data); // A retirer
 // 			i++;
 // 		}
 // 		if (i == 50)

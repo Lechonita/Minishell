@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/20 09:45:57 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 15:55:46 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ void	ft_free_env(t_bigshell *data)
 	}
 }
 
-void	ft_free_argv(t_bigshell *data)
+void	ft_free_token(t_bigshell *data)
 {
-	t_argv	*tmp;
+	t_token	*tmp;
 
-	if (!data || !data->argv)
+	if (!data || !data->token)
 		return ;
-	while (data->argv)
+	while (data->token)
 	{
-		tmp = data->argv->next;
-		if (data->argv->value)
-			free(data->argv->value);
-		free(data->argv);
-		data->argv = tmp;
+		tmp = data->token->next;
+		if (data->token->value)
+			free(data->token->value);
+		free(data->token);
+		data->token = tmp;
 	}
 }
 
@@ -74,8 +74,8 @@ void	ft_free_all(t_bigshell *data)
 		return ;
 	if (data->history)
 		ft_free_history(data);
-	if (data->argv)
-		ft_free_argv(data);
+	if (data->token)
+		ft_free_token(data);
 	if (data->env)
 		ft_free_env(data);
 	free(data);

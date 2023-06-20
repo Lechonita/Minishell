@@ -41,16 +41,13 @@ SRC += env_init.c
 SRC += env_find_values.c
 SRC += prompt.c
 SRC += free_struct.c
-SRC += argv_init.c
-SRC += argv_find_values.c
-SRC += argv_assign.c
 SRC += print_error.c
 SRC += history_init.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
 SRC += flag_quotes.c
-SRC += find_tokens.c
+SRC += token_find.c
 # SRC += get_next_line.c // a retirer, doublon avec ajout du gnl dans la libft
 
 vpath %.c $(SRC_DIR)
