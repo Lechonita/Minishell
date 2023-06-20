@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 12:02:32 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:10:49 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 # include "error.h"
 
 # include <stdio.h>
-# include <stdlib.h> 	//exit
-# include <unistd.h> 	//access, dup, dup2, execve, fork, pipe, unlink
-# include <sys/types.h> //wait, waitpid
-# include <sys/wait.h> 	//wait, waitpid
+# include <stdlib.h> 			//exit
+# include <unistd.h> 			//access, dup, dup2, execve, fork, pipe, unlink
+# include <sys/types.h> 		//wait, waitpid
+# include <sys/wait.h> 			//wait, waitpid
 # include <errno.h>
-# include <string.h>	//strerror
-# include <fcntl.h>		//open
+# include <string.h>			//strerror
+# include <fcntl.h>				//open
 # include <stdint.h>
-# include <limits.h> 	// INT_MIN (-2147483648) INT_MAX (2147483647)
-# include <signal.h>	// signal
-# include <sys/stat.h>	// TBD
+# include <limits.h> 			// INT_MIN (-2147483648) INT_MAX (2147483647)
+# include <signal.h>			// signal
+# include <sys/stat.h>			// TBD
 # include <assert.h>
 # include <sys/prctl.h>
 # include <readline/readline.h>	//readline
@@ -74,8 +74,8 @@ typedef struct s_line
 {
 	int				i;
 	int				type;
-	int				dq;		// if 0, inexistant. if 1, c'est ouvert. if 2, c'est ferme
-	int				sq;		// if 0, inexistant. if 1, c'est ouvert. if 2, c'est ferme
+	int				dq;		// if 0 -> nonexistant . if 1 -> open. if 2 -> close
+	int				sq;		// if 0 -> nonexistant . if 1 -> open. if 2 -> close
 	char			c;
 	struct s_line	*next;
 }	t_line;
@@ -116,6 +116,13 @@ char	*get_env_name(char	*env);
 /*                       HISTORY                           */
 /***********************************************************/
 void	init_history(t_bigshell *data);
+void	ft_readline(t_bigshell *data);
+
+/***********************************************************/
+/*                       SIGNALS                           */
+/***********************************************************/
+void	ft_sig_handler(int sig);
+void	set_signal(void);
 
 /***********************************************************/
 /*                        ARGUMENTS                        */

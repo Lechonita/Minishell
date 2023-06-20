@@ -32,6 +32,14 @@ vpath %.h $(INC_DIR)
 
 ############################### Path Sources ###################################
 
+TERM_DIR = ./src/term 
+UTILS_DIR = ./src/utils
+BUILTINS_DIR = ./src/builtins
+EXEC_DIR = ./src/exec
+PARSER_DIR = ./src/parser
+ENV_DIR = ./src/env
+LEXER_DIR = ./src/lexer
+SIG_DIR = ./src/signal
 SRC_DIR = ./src
 
 ############################### Sources ########################################
@@ -39,15 +47,23 @@ SRC_DIR = ./src
 SRC += main.c 
 SRC += env_init.c
 SRC += env_find_values.c
-SRC += prompt.c
-SRC += free_struct.c
 SRC += argv_init.c
 SRC += argv_find_values.c
 SRC += argv_assign.c
 SRC += print_error.c
+SRC += free_struct.c
 SRC += history_init.c
-# SRC += get_next_line.c // a retirer, doublon avec ajout du gnl dans la libft
+SRC += prompt.c
+SRC += signal.c
 
+vpath %.c $(TERM_DIR)
+vpath %.c $(UTILS_DIR)
+vpath %.c $(BUILTINS_DIR)
+vpath %.c $(EXEC_DIR)
+vpath %.c $(PARSER_DIR)
+vpath %.c $(ENV_DIR)
+vpath %.c $(LEXER_DIR)
+vpath %.c $(SIG_DIR)
 vpath %.c $(SRC_DIR)
 
 ############################### Objects ########################################
