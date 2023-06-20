@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/13 17:19:20 by bebigel          ###   ########.fr       */
+/*   Created: 2022/11/10 14:24:44 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/20 09:42:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "../includes/libft.h"
 
-# include "minishell.h"
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	*p;
 
-# define W_NO_ENV "\t No environment\n"
-
-#endif
+	p = (unsigned char *)s;
+	while (n--)
+	{
+		if (*p == (unsigned char )c)
+			return (p);
+		p++;
+	}
+	return (NULL);
+}

@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/13 17:19:20 by bebigel          ###   ########.fr       */
+/*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/20 09:46:09 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "../inc/minishell.h"
 
-# include "minishell.h"
+void	ft_exit(int err_no, char *msg)
+{
+	ft_putstr_fd(msg, 2);
+	exit(err_no);
+}
 
-# define W_NO_ENV "\t No environment\n"
+void	print_strs(char **strs)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (strs[i])
+	{
+		printf("[%2d] %s\n", i, strs[i]);
+		i++;
+	}
+}

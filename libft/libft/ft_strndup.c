@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/13 17:19:20 by bebigel          ###   ########.fr       */
+/*   Created: 2023/06/12 17:52:27 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/20 09:42:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "../includes/libft.h"
 
-# include "minishell.h"
+char	*ft_strndup(const char *src, size_t n)
+{
+	size_t		i;
+	char		*copy;
 
-# define W_NO_ENV "\t No environment\n"
-
-#endif
+	i = 0;
+	copy = malloc(sizeof(char) * (n + 1));
+	if (!copy)
+		return (NULL);
+	while (i < n && src[i])
+	{
+		copy[i] = src[i];
+		i++;
+	}
+	copy[i] = '\0';
+	return (copy);
+}

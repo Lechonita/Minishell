@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/12 17:07:08 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:45:49 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 /* Fonction qui cherche la dernier maillon de la liste chainee t_env. */
 
@@ -66,14 +66,18 @@ void	init_env(t_bigshell *data, char **env)
 	while (env[++i])
 	{
 		if (i == 0)
+		{
 			data->env = env_new(env[i]);
+			if (!data->env)
+				ft_exit(EXIT_FAILURE, W_NO_ENV);
+		}
 		else
 			env_addback(data->env, env_new(env[i]));
 	}
 }
 
 /* fonction qui permet d'afficher t_env
-	(equivalent de la commande "env" dans le terminal) */
+	(equivalent de la commande "env" ou "printenv" dans le terminal) */
 
 // void	display_env_struct(t_bigshell *data)
 // {

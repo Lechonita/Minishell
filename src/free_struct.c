@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/12 17:07:15 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:45:57 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 /* Fonction qui free tous les maillons de la liste chainee t_env. */
 
@@ -56,25 +56,28 @@ void	ft_free_history(t_bigshell *data)
 		return ;
 	if (data->history)
 	{
-		i = -1;
-		while (data->history[++i])
+		i = 0;
+		while (data->history[i])
 		{
 			free(data->history[i]);
 			data->history[i] = NULL;
+			i++;
 		}
 		free(data->history);
 		data->history = NULL;
 	}
-	else
-		return ;
 }
 
 void	ft_free_all(t_bigshell *data)
 {
 	if (!data)
 		return ;
-	ft_free_history(data);
-	ft_free_argv(data);
-	ft_free_env(data);
+	if (data->history)
+		ft_free_history(data);
+	if (data->argv)
+		ft_free_argv(data);
+	if (data->env)
+		ft_free_env(data);
+	free(data);
 	data = NULL;
 }

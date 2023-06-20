@@ -1,43 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_find_values.c                                  :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/20 09:45:47 by bebigel          ###   ########.fr       */
+/*   Created: 2022/11/08 15:03:14 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/20 09:42:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../includes/libft.h"
 
-char	*get_env_value(char *env)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	char	*value;
-	int		i;
-
-	i = find_equal(env);
-	value = ft_strndup(env + i + 1, ft_strlen(env) - i);
-	return (value);
-}
-
-int	find_equal(char *env)
-{
-	int		i;
+	size_t	i;
+	size_t	ld;
+	size_t	ls;
 
 	i = 0;
-	while (env[i] != '=')
+	if ((!dest || !src) && !size)
+		return (0);
+	ld = ft_strlen(dest);
+	ls = ft_strlen((char *)src);
+	if (size == 0 || size <= ld)
+		return (ls + size);
+	while (src[i] && i + ld < size - 1)
+	{
+		dest[i + ld] = (char)src[i];
 		i++;
-	return (i);
-}
-
-char	*get_env_name(char	*env)
-{
-	char	*name;
-	int		i;
-
-	i = find_equal(env);
-	name = ft_strndup(env, i);
-	return (name);
+	}
+	dest[i + ld] = '\0';
+	return (ld + ls);
 }

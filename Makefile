@@ -1,39 +1,63 @@
-#################
-#				#
-#	 Project	#
-#				#
-#################
+###############################################################################
+#__________________________Makefile for Minishell_____________________________#
+###############################################################################
+
 NAME = minishell
 
+############################### Compiler #######################################
 
-FLAG = -Wall -Wextra -Werror 
-FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
 CC = gcc
 
-#	Sources		#
-SRC_DIR = src/
-SRC = main.c env_init.c env_find_values.c \
-		prompt.c get_next_line.c free_struct.c \
-		argv_init.c argv_find_values.c argv_assign.c
+############################### LIBFT ##########################################
 
-SRCS = $(addprefix $(SRC_DIR), $(SRC))
-
-#	Objects		#
-OBJ_DIR = obj/
-OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
-
-#	libft		#
-LIBFT_DIR = libft
+LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
+LDFLAGS += -L $(LIBFT_DIR) #-lft
 
-#	Includes	#
-INC = -I ./inc/ \
-	-I ./libft/
+############################### Includes #######################################
 
-HDR = inc/minishell.h
+INC_DIR = ./inc
+INCLUDES += -I $(INC_DIR)
+INCLUDES += -I $(LIBFT_DIR)/includes
 
-# PROGRESS BAR
-NB_OBJ = ${words ${OBJ}}
+############################### Headers ########################################
+
+HEADER += inc/minishell.h
+HEADER += inc/error.h
+# HEADER += ./libft/includes/libft.h
+# HEADER += ./libft/includes/get_next_line.h
+
+vpath %.h $(INC_DIR)
+
+############################### Path Sources ###################################
+
+SRC_DIR = ./src
+
+############################### Sources ########################################
+
+SRC += main.c 
+SRC += env_init.c
+SRC += env_find_values.c
+SRC += prompt.c
+SRC += free_struct.c
+SRC += argv_init.c
+SRC += argv_find_values.c
+SRC += argv_assign.c
+SRC += print_error.c
+SRC += history_init.c
+# SRC += get_next_line.c // a retirer, doublon avec ajout du gnl dans la libft
+
+vpath %.c $(SRC_DIR)
+
+############################### Objects ########################################
+
+OBJ_DIR = ./obj
+OBJ = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
+
+############################### Progress Ber ###################################
+
+NB_OBJ = ${words ${SRC}}
 COUNTER = 1
 PROGRESS = 0
 DONE = 100
@@ -51,57 +75,57 @@ define PROGRESS_BAR
 	$(eval COUNTER=$(shell echo $$(($(COUNTER) + 1))))
 endef
 
-#		MiniShell		#
-all: art $(OBJ_DIR) $(LIBFT) $(NAME)
+############################### Rules ##########################################
 
-art:
-	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"
-	@echo "$(RED) |  \/  | (_)         (_)  / ____| | |            | | | |$(END)"
-	@echo "$(RED) | \  / |  _   _ __    _  | (___   | |__     ___  | | | |$(END)"
-	@echo "$(RED) | |\/| | | | | '_ \  | |  \___ \  | '_ \   / _ \ | | | |$(END)"
-	@echo "$(RED) | |  | | | | | | | | | |  ____) | | | | | |  __/ | | | |$(END)"
-	@echo "$(RED) |_|  |_| |_| |_| |_| |_| |_____/  |_| |_|  \___| |_| |_|$(END)"
-	@echo "$(RED)                                                         $(END)"
+all: $(NAME)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HDR)
-	@$(CC) $(FLAGS) -c $< -o $@ $(INC)
-	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
+$(LIBFT):
+	@make --no-print-directory all -C $(LIBFT_DIR)
+	@echo "\n	⤳$(GREEN) Created libft 🎇\n$(DEF_COLOR)"
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
-#		LIBFT		#
-$(LIBFT):
-	@make -sC $(LIBFT_DIR)
-	@echo "\n	⤳$(GREEN) Created $(LIBFT_DIR) 🎇\n$(DEF_COLOR)"
+$(OBJ) : $(OBJ_DIR)/%.o: %.c | $(LIBFT) $(OBJ_DIR)
+	@$(CC) $(FLAGS) -c $< -o $@ $(INCLUDES)
+	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
 
-#		Rules		#
-$(NAME): $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(INC) -o $(NAME)
+$(NAME): $(LIBFT) $(OBJ)
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline
 	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
 
-bonus: all
+
+# art:
+# 	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"
+# 	@echo "$(RED) |  \/  | (_)         (_)  / ____| | |            | | | |$(END)"
+# 	@echo "$(RED) | \  / |  _   _ __    _  | (___   | |__     ___  | | | |$(END)"
+# 	@echo "$(RED) | |\/| | | | | '_ \  | |  \___ \  | '_ \   / _ \ | | | |$(END)"
+# 	@echo "$(RED) | |  | | | | | | | | | |  ____) | | | | | |  __/ | | | |$(END)"
+# 	@echo "$(RED) |_|  |_| |_| |_| |_| |_| |_____/  |_| |_|  \___| |_| |_|$(END)"
+# 	@echo "$(RED)                                                         $(END)"
 
 norm:
-	@norminette $(SRCS) $(HDR)
+	@norminette $(HEADER) 
+	@norminette $(SRC_DIR)
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"
-	@make clean -sC $(LIBFT_DIR)
-	@echo "$(HGREY)Removing libft...$(END)"
+	@make --no-print-directory clean -C $(LIBFT_DIR)
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@echo "$(HGREY)Removing Pipex...$(END)"
-	@make fclean -sC $(LIBFT_DIR)
+	@echo "$(HGREY)Removing libft...$(END)"
+	@rm -f $(LIBFT)
+	@echo "$(HGREY)Removing MiniShell...$(END)"
 	@rm -f $(NAME)
 	@echo "	⤳$(GREY) All cleaned 🌊\n$(END)"
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 
-######################### Color #########################
+############################### Color ##########################################
+
 END=\033[0m
 RED=\033[5;31m
 LRED=\033[38;5;124m

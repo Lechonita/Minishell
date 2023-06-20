@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_find_values.c                                  :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/20 09:45:47 by bebigel          ###   ########.fr       */
+/*   Created: 2022/11/08 11:23:42 by bebigel           #+#    #+#             */
+/*   Updated: 2023/06/20 09:42:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../includes/libft.h"
 
-char	*get_env_value(char *env)
+long int	ft_atoi(const char *nptr)
 {
-	char	*value;
-	int		i;
-
-	i = find_equal(env);
-	value = ft_strndup(env + i + 1, ft_strlen(env) - i);
-	return (value);
-}
-
-int	find_equal(char *env)
-{
-	int		i;
+	int			i;
+	long int	nb;
+	int			sign;
 
 	i = 0;
-	while (env[i] != '=')
+	sign = 1;
+	nb = 0;
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
-	return (i);
-}
-
-char	*get_env_name(char	*env)
-{
-	char	*name;
-	int		i;
-
-	i = find_equal(env);
-	name = ft_strndup(env, i);
-	return (name);
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (nptr[i] && (nptr[i] >= '0' && nptr[i] <= '9'))
+	{
+		nb = nb * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (sign * nb);
 }
