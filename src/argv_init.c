@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:39:00 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/20 11:52:16 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:14:14 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,4 @@
 // 	return (new);
 // }
 
-int	is_separator(char c)
-{
-	if (c == '<' || c == '>' || c == 34 || c == 39 || c == '|')
-		return (1);
-	return (0);
-}
 
-int	ft_is_operator(char c)
-{
-	return (c == '&' || c == '|' || c == '<' || c == '>'
-		|| c == '(' || c == ')');
-}

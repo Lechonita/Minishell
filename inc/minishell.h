@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 12:02:32 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:07:44 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@
 #  define BUFFER_SIZE BUFSIZ
 # endif
 
-# define TYPE_SEPARATOR 1 
-# define TYPE_OPERATOR 2
-# define TYPE_WORD 3
-# define TYPE_INTEGER 4
-# define TYPE_DOUBLE_QUOTES 5
-# define TYPE_SINGLE_QUOTES 6
-# define TYPE_BLANK 7
+# define TYPE_SEPARATOR 1		// ( ) { }
+# define TYPE_OPERATOR 2		// & | < >
+# define TYPE_WORD 3			// a, b, c ...
+# define TYPE_INTEGER 4			// 0, 1 ,2 ...
+# define TYPE_DOUBLE_QUOTES 5	// ""
+# define TYPE_SINGLE_QUOTES 6	// ''
+# define TYPE_BLANK 7			// space and \t
 
 typedef struct s_exec
 {
@@ -72,7 +72,7 @@ typedef struct s_argv
 
 typedef struct s_line
 {
-	int				i;
+	int				index;
 	int				type;
 	int				dq;		// if 0, inexistant. if 1, c'est ouvert. if 2, c'est ferme
 	int				sq;		// if 0, inexistant. if 1, c'est ouvert. if 2, c'est ferme
@@ -84,6 +84,7 @@ typedef struct s_bigshell
 {
 	char			**history;
 	t_argv			*argv;
+	t_line			*line;
 	t_env			*env;
 	t_exec			*exec;
 }	t_bigshell;
@@ -138,6 +139,28 @@ int		ft_quotes(t_argv *new, char *line, char limiter, int i);
 void	display_argv_struct(t_bigshell *data);
 
 /***********************************************************/
+/*                           LINE                          */
+/***********************************************************/
+
+/* LINE INIT */
+t_line	*line_last(t_line	*line);
+void	line_addback(t_line *line, t_line *new);
+t_line	*line_new(char c, int i);
+void	init_line(t_bigshell *data, char *line);
+
+/* TYPE */
+int		ft_is_integer(char c);
+int		ft_is_word(char c);
+int		ft_is_operator(char c);
+int		ft_is_separator(char c);
+int		ft_determine_type(char c);
+
+/* TYPE2 */
+int		ft_is_blank(char c);
+int		ft_is_single_quote(char c);
+int		ft_is_double_quote(char c);
+
+/***********************************************************/
 /*                           FREE                          */
 /***********************************************************/
 
@@ -154,5 +177,6 @@ void	ft_free_all(t_bigshell *data);
 /* error */
 void	ft_exit(int err_no, char *msg);
 void	print_strs(char **strs);
+void	print_t_line(t_bigshell *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 12:01:19 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:06:46 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_readline(t_bigshell *data)
 			break ;
 		if (buf[0] != '\0')
 		{
-			add_history(data, buf);
+			// add_history(data, buf);
 			init_line(data, buf);
 		}
 		printf("[%s]\n", buf);
@@ -44,7 +44,7 @@ int	main(int ac, char *av[], char **env)
 	data = ft_calloc(1, sizeof(t_bigshell));
 	if (!data)
 		return (0);
-	init_env(data, env);	// recuperer les lignes de env dan t_env
+	init_env(data, env);	// recuperer les lignes de env dans t_env
 	ft_readline(data);		// prompt + interpretation de la ligne (buf)
 	if (ac == 2)
 		printf("%s\n", av[1]);
