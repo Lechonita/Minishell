@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:42 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:09:59 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_line	*line_new(char c, int i)
 	if (!new)
 		return (NULL);
 	new->index = i;
-	new->type = ft_determine_type(c);	// gestion d'erreur => dans le cas ou c'est 0 ?
+	new->type = ft_determine_type(c);	// dans le cas ou c'est 0 ?
 	new->dq = 0;
 	new->sq = 0;
 	new->c = c;
@@ -65,6 +65,7 @@ t_line	*line_new(char c, int i)
 void	init_line(t_bigshell *data, char *line)
 {
 	int		i;
+	t_line	*tmp;
 
 	i = 0;
 	while (line[i])
@@ -75,5 +76,8 @@ void	init_line(t_bigshell *data, char *line)
 			line_addback(data->line, line_new(line[i], i));
 		i++;
 	}
-	print_t_line(data);
+	tmp = data->line;
+	find_double_quotes(tmp);
+	find_single_quotes(tmp);
+	// print_t_line(data);
 }

@@ -49,6 +49,8 @@ SRC += history_init.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
+SRC += flag_quotes.c
+SRC += find_tokens.c
 # SRC += get_next_line.c // a retirer, doublon avec ajout du gnl dans la libft
 
 vpath %.c $(SRC_DIR)

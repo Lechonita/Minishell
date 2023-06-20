@@ -1,34 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type2.c                                            :+:      :+:    :+:   */
+/*   find_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 13:52:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/20 14:42:51 by jrouillo         ###   ########.fr       */
+/*   Created: 2023/06/20 15:13:39 by jrouillo          #+#    #+#             */
+/*   Updated: 2023/06/20 15:14:01 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	ft_is_blank(char c)
-{
-	if (c == ' ' || c == '\t')
-		return (TYPE_BLANK);
-	return (0);
-}
-
-int	ft_is_single_quote(char c)
-{
-	if (c == '\'')
-		return (TYPE_SINGLE_QUOTES);
-	return (0);
-}
-
-int	ft_is_double_quote(char c)
-{
-	if (c == '\"')
-		return (TYPE_DOUBLE_QUOTES);
-	return (0);
-}

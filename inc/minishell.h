@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 14:07:44 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:14:11 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 
 # define TYPE_SEPARATOR 1		// ( ) { }
 # define TYPE_OPERATOR 2		// & | < >
-# define TYPE_WORD 3			// a, b, c ...
+# define TYPE_WORD 3			// tous les autres caracteres
 # define TYPE_INTEGER 4			// 0, 1 ,2 ...
 # define TYPE_DOUBLE_QUOTES 5	// ""
 # define TYPE_SINGLE_QUOTES 6	// ''
@@ -159,6 +159,13 @@ int		ft_determine_type(char c);
 int		ft_is_blank(char c);
 int		ft_is_single_quote(char c);
 int		ft_is_double_quote(char c);
+
+/* FIND QUOTES */
+int		treat_as_quotes(t_line	*line);
+void	find_double_quotes(t_line *line);
+void	find_single_quotes(t_line *line);
+
+/* FIND TOKENS */
 
 /***********************************************************/
 /*                           FREE                          */

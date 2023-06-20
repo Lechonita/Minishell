@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 14:06:46 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:13:14 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_readline(t_bigshell *data)
 		{
 			// add_history(data, buf);
 			init_line(data, buf);
+			find_tokens(data);
 		}
 		printf("[%s]\n", buf);
 		free(buf);
