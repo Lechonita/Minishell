@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   argv_assign.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:12:54 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/09 14:42:02 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/20 09:45:33 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 // int    ft_quotes(t_argv *new, char *line, char limiter, int i)
 // {

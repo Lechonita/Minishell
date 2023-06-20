@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   argv_find_values.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:11:05 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/09 14:41:55 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/20 09:45:41 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 /* Fonction qui determine le type du token pour le maillon en question.
 	Ex: si la line = "echo hello" alors la valeur du premier maillon

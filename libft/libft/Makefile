@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/06/19 18:09:34 by jrouillo          #+#    #+#              #
-#    Updated: 2023/06/19 18:09:37 by jrouillo         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libft.a
 
 SRC = ft_atoi.c \
@@ -55,13 +43,13 @@ SRC = ft_atoi.c \
 	ft_lstdelone.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
-	ft_lstmap.c
+	ft_lstmap.c \
 
 FLAG = -Wall -Werror -Wextra
 
 OBJ=$(SRC:.c=.o)
 
-HEADER = inc/libft.h
+HEADER = includes/libft.h
 
 # PROGRESS BAR
 NB_OBJ = ${words ${SRC}}

@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:39:00 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/12 17:47:15 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:45:44 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 // t_argv	*argv_last(t_argv	*argv)
 // {

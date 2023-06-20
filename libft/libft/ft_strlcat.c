@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:14 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 13:12:14 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:42:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "../includes/libft.h"
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {

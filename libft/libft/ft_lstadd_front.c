@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:30:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 13:10:56 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:42:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "../includes/libft.h"
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {

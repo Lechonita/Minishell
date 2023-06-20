@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/13 17:07:54 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:45:57 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 /* Fonction qui free tous les maillons de la liste chainee t_env. */
 

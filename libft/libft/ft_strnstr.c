@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 09:46:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 13:12:37 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:42:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "../includes/libft.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {

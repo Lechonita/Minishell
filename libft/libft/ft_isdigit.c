@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:56:26 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 13:10:43 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:42:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "../includes/libft.h"
 
 int	ft_isdigit(int c)
 {

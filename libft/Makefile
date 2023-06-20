@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+         #
+#    By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/19 18:09:49 by jrouillo          #+#    #+#              #
-#    Updated: 2023/06/19 18:13:54 by jrouillo         ###   ########.fr        #
+#    Updated: 2023/06/20 09:40:18 by bebigel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-INC_DIR = ./inc
+INC_DIR = ./includes
 INCLUDES += -I $(INC_DIR)
 
 HEADERS += get_next_line.h

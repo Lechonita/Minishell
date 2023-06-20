@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 18:10:27 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 09:43:53 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../libft/inc/libft.h"
-# include "../libft/inc/get_next_line.h"
+# include "../libft/includes/libft.h"
+# include "../libft/includes/get_next_line.h"
 # include "error.h"
 
 # include <stdio.h>

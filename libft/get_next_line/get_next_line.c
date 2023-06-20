@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:11:58 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 13:09:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:43:14 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/get_next_line.h"
+#include "../includes/get_next_line.h"
 
 char	*ft_free_join_gnl(char *s1, char *s2)
 {

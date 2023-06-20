@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 09:36:39 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 13:09:18 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:43:09 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/get_next_line.h"
+#include "../includes/get_next_line.h"
 
 char	*ft_strchr_gnl(const char *s, int c)
 {

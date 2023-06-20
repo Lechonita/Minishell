@@ -1,14 +1,6 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/06/19 18:22:42 by jrouillo          #+#    #+#              #
-#    Updated: 2023/06/19 18:33:26 by jrouillo         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+###############################################################################
+#__________________________Makefile for Minishell_____________________________#
+###############################################################################
 
 NAME = minishell
 
@@ -17,9 +9,9 @@ NAME = minishell
 FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
 CC = gcc
 
-############################### LIBFT ######################################
+############################### LIBFT ##########################################
 
-LIBFT_DIR = libft
+LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LDFLAGS += -L $(LIBFT_DIR) #-lft
 
@@ -27,14 +19,14 @@ LDFLAGS += -L $(LIBFT_DIR) #-lft
 
 INC_DIR = ./inc
 INCLUDES += -I $(INC_DIR)
-INCLUDES += -I $(LIBFT_DIR)/inc
+INCLUDES += -I $(LIBFT_DIR)/includes
 
 ############################### Headers ########################################
 
 HEADER += inc/minishell.h
 HEADER += inc/error.h
-HEADER += ../libft/inc/libft.h
-HEADER += ../libft/inc/get_next_line.h
+# HEADER += ./libft/includes/libft.h
+# HEADER += ./libft/includes/get_next_line.h
 
 vpath %.h $(INC_DIR)
 
@@ -84,15 +76,8 @@ define PROGRESS_BAR
 endef
 
 ############################### Rules ##########################################
+
 all: $(NAME)
-
-$(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(FLAGS) $^ $(LDFLAGS) $(INCLUDES) -o $@ -lreadline
-	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
-
-$(OBJ) : $(OBJ_DIR)/%.o: %.c | $(LIBFT) $(OBJ_DIR)
-	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
-	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
 
 $(LIBFT):
 	@make --no-print-directory all -C $(LIBFT_DIR)
@@ -101,8 +86,13 @@ $(LIBFT):
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
-all: $(LIBFT) $(OBJ_DIR) $(NAME)
+$(OBJ) : $(OBJ_DIR)/%.o: %.c | $(LIBFT) $(OBJ_DIR)
+	@$(CC) $(FLAGS) -c $< -o $@ $(INCLUDES)
+	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
 
+$(NAME): $(LIBFT) $(OBJ)
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline
+	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
 
 
 # art:
@@ -134,7 +124,8 @@ re: fclean all
 
 .PHONY: all clean fclean re
 
-######################### Color #########################
+############################### Color ##########################################
+
 END=\033[0m
 RED=\033[5;31m
 LRED=\033[38;5;124m

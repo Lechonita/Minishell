@@ -6,11 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 15:12:07 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/19 10:50:31 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 09:46:03 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 // void	init_history(t_bigshell *data)
 // {
