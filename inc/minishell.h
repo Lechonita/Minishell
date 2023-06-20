@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 09:43:53 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:21:21 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@
 #  define BUFFER_SIZE BUFSIZ
 # endif
 
-# define TYPE_GENERIC 1 
+# define TYPE_SEPARATOR 1 
 # define TYPE_OPERATOR 2
-# define TYPE_REDIRECTION 3
-# define TYPE_SINGLE_QUOTES 4
+# define TYPE_WORD 3
+# define TYPE_INTEGER 4
 # define TYPE_DOUBLE_QUOTES 5
-# define TYPE_BUILTIN 6
-// #define TYPE_DELIMITOR 7;
+# define TYPE_SINGLE_QUOTES 6
+# define TYPE_BLANK 7
 
 typedef struct s_exec
 {
@@ -69,6 +69,16 @@ typedef struct s_argv
 	char			*value;
 	struct s_argv	*next;
 }	t_argv;
+
+typedef struct s_line
+{
+	int				i;
+	int				type;
+	int				dq;		// if 0, inexistant. if 1, c'est ouvert. if 2, c'est ferme
+	int				sq;		// if 0, inexistant. if 1, c'est ouvert. if 2, c'est ferme
+	char			c;
+	struct s_line	*next;
+}	t_line;
 
 typedef struct s_bigshell
 {
