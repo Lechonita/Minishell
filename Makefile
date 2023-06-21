@@ -13,7 +13,7 @@ CC = gcc
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LDFLAGS += -L $(LIBFT_DIR) #-lft
+LDFLAGS += -L $(LIBFT_DIR) -lft
 
 ############################### Includes #######################################
 
@@ -121,8 +121,15 @@ $(NAME): $(LIBFT) $(OBJ)
 # 	@echo "$(RED)                                                         $(END)"
 
 norm:
-	@norminette $(HEADER) 
-	@norminette $(SRC_DIR)
+	@norminette libft/*/*.c
+	@norminette src/*/*.c
+	@norminette inc/*.h
+
+leaks: fclean $(NAME)
+	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
+	@sleep 0.5
+	@valgrind --leak-check=full --track-fds=yes -q ./$(NAME)
+# --track-origins=yes --show-leak-kinds=all --track-origins=yes --suppressions=./.readline.supp
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"
@@ -145,7 +152,7 @@ re: fclean all
 END=\033[0m
 RED=\033[5;31m
 LRED=\033[38;5;124m
-GREEN=\033[1;5;32m
+GREEN=\033[1;32m #\033[1;5;32m
 LGREEN=\033[38;5;22m
 BLUE=\033[1;34m
 LBLUE=\033[1;94m

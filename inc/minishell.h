@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 17:10:49 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/21 10:52:56 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ
 # endif
+
+# define STDIN 0
 
 # define TYPE_SEPARATOR 1 
 # define TYPE_OPERATOR 2
