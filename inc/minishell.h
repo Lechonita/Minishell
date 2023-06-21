@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 16:57:10 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:19:56 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 # include "error.h"
 
 # include <stdio.h>
-# include <stdlib.h> 	//exit
-# include <unistd.h> 	//access, dup, dup2, execve, fork, pipe, unlink
-# include <sys/types.h> //wait, waitpid
-# include <sys/wait.h> 	//wait, waitpid
+# include <stdlib.h> 			//exit
+# include <unistd.h> 			//access, dup, dup2, execve, fork, pipe, unlink
+# include <sys/types.h> 		//wait, waitpid
+# include <sys/wait.h> 			//wait, waitpid
 # include <errno.h>
-# include <string.h>	//strerror
-# include <fcntl.h>		//open
+# include <string.h>			//strerror
+# include <fcntl.h>				//open
 # include <stdint.h>
-# include <limits.h> 	// INT_MIN (-2147483648) INT_MAX (2147483647)
-# include <signal.h>	// signal
-# include <sys/stat.h>	// TBD
+# include <limits.h> 			// INT_MIN (-2147483648) INT_MAX (2147483647)
+# include <signal.h>			// signal
+# include <sys/stat.h>			// TBD
 # include <assert.h>
 # include <sys/prctl.h>
 # include <readline/readline.h>	//readline
@@ -120,6 +120,13 @@ char	*get_env_name(char	*env);
 
 /* HISTORY INIT */
 void	init_history(t_bigshell *data);
+void	ft_readline(t_bigshell *data);
+
+/***********************************************************/
+/*                       SIGNALS                           */
+/***********************************************************/
+void	ft_sig_handler(int sig);
+void	set_signal(void);
 
 /***********************************************************/
 /*                           LINE                          */

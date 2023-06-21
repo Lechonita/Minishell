@@ -13,7 +13,7 @@ CC = gcc
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LDFLAGS += -L $(LIBFT_DIR) #-lft
+LDFLAGS += -L $(LIBFT_DIR) -lft
 
 ############################### Includes #######################################
 
@@ -32,6 +32,14 @@ vpath %.h $(INC_DIR)
 
 ############################### Path Sources ###################################
 
+TERM_DIR = ./src/term 
+UTILS_DIR = ./src/utils
+BUILTINS_DIR = ./src/builtins
+EXEC_DIR = ./src/exec
+PARSER_DIR = ./src/parser
+ENV_DIR = ./src/env
+LEXER_DIR = ./src/lexer
+SIG_DIR = ./src/signal
 SRC_DIR = ./src
 
 ############################### Sources ########################################
@@ -42,6 +50,7 @@ SRC += env_find_values.c
 SRC += prompt.c
 SRC += free_struct.c
 SRC += print_error.c
+SRC += free_struct.c
 SRC += history_init.c
 SRC += line_init.c
 SRC += type.c
@@ -50,6 +59,14 @@ SRC += flag_quotes.c
 SRC += token_find.c
 # SRC += get_next_line.c // a retirer, doublon avec ajout du gnl dans la libft
 
+vpath %.c $(TERM_DIR)
+vpath %.c $(UTILS_DIR)
+vpath %.c $(BUILTINS_DIR)
+vpath %.c $(EXEC_DIR)
+vpath %.c $(PARSER_DIR)
+vpath %.c $(ENV_DIR)
+vpath %.c $(LEXER_DIR)
+vpath %.c $(SIG_DIR)
 vpath %.c $(SRC_DIR)
 
 ############################### Objects ########################################
@@ -107,8 +124,15 @@ $(NAME): $(LIBFT) $(OBJ)
 # 	@echo "$(RED)                                                         $(END)"
 
 norm:
-	@norminette $(HEADER) 
-	@norminette $(SRC_DIR)
+	@norminette libft/*/*.c
+	@norminette src/*/*.c
+	@norminette inc/*.h
+
+leaks: fclean $(NAME)
+	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
+	@sleep 0.5
+	@valgrind --leak-check=full --track-fds=yes -q ./$(NAME)
+# --track-origins=yes --show-leak-kinds=all --track-origins=yes --suppressions=./.readline.supp
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"
@@ -131,7 +155,7 @@ re: fclean all
 END=\033[0m
 RED=\033[5;31m
 LRED=\033[38;5;124m
-GREEN=\033[1;5;32m
+GREEN=\033[1;32m #\033[1;5;32m
 LGREEN=\033[38;5;22m
 BLUE=\033[1;34m
 LBLUE=\033[1;94m
