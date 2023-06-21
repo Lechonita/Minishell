@@ -32,7 +32,7 @@ vpath %.h $(INC_DIR)
 
 ############################### Path Sources ###################################
 
-TERM_DIR = ./src/term 
+TERM_DIR = ./src/terminal
 UTILS_DIR = ./src/utils
 BUILTINS_DIR = ./src/builtins
 EXEC_DIR = ./src/exec
@@ -57,6 +57,7 @@ SRC += type2.c
 SRC += flag_quotes.c
 SRC += token_find.c
 SRC += signal.c
+SRC += termcap.c
 
 vpath %.c $(TERM_DIR)
 vpath %.c $(UTILS_DIR)
@@ -109,7 +110,7 @@ $(OBJ) : $(OBJ_DIR)/%.o: %.c | $(LIBFT) $(OBJ_DIR)
 	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline -lncurses
 	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
 
 
