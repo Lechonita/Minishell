@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:13:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/20 17:27:11 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:29:25 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	find_tokens(t_bigshell *data)
 		type = data->line->type;
 		if (data->line->next && type != data->line->next->type)
 		{
-			if (!special_cases(data->line)) // gerer les cas particuliers = lorsqu'il y a plusieurs mots d'affiles, les guillemets
+			if (!special_cases(data->line))
+		// gerer les cas speciaux = lorsqu'il y a plusieurs mots d'affiles, les guillemets, $
 			if (type == TYPE_WORD && data->line->next->type == TYPE_BLANK
 				&& data->line->next->next
 				&& data->line->next->next->type == TYPE_WORD)
