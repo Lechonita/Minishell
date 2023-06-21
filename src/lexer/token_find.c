@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_find.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:13:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/20 17:29:25 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:34:53 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,33 @@ void	ft_create_token(t_bigshell *data, t_line *current, int start)
 		token_addback(data->token, token_new(data->line, current, start));
 }
 
-void	find_tokens(t_bigshell *data)
-{
-	int		type;
-	int		start;
+// void	find_tokens(t_bigshell *data)
+// {
+// 	int		type;
+// 	int		start;
 
-	if (!data || !data->line)
-		return ;
-	type = 0;
-	start = 0;
-	while (data->line)
-	{
-		type = data->line->type;
-		if (data->line->next && type != data->line->next->type)
-		{
-			if (!special_cases(data->line))
-		// gerer les cas speciaux = lorsqu'il y a plusieurs mots d'affiles, les guillemets, $
-			if (type == TYPE_WORD && data->line->next->type == TYPE_BLANK
-				&& data->line->next->next
-				&& data->line->next->next->type == TYPE_WORD)
-				continue ;
-			else
-			{
-				ft_create_token(data, data->line, start);
-				start = data->line->index;
-			}
-		}
-		data->line = data->line->next;
-	}
-	print_t_token(data);
-}
+// 	if (!data || !data->line)
+// 		return ;
+// 	type = 0;
+// 	start = 0;
+// 	while (data->line)
+// 	{
+// 		type = data->line->type;
+// 		if (data->line->next && type != data->line->next->type)
+// 		{
+// 			if (!special_cases(data->line))
+// 		// gerer les cas speciaux = lorsqu'il y a plusieurs mots d'affiles, les guillemets, $
+// 			if (type == TYPE_WORD && data->line->next->type == TYPE_BLANK
+// 				&& data->line->next->next
+// 				&& data->line->next->next->type == TYPE_WORD)
+// 				continue ;
+// 			else
+// 			{
+// 				ft_create_token(data, data->line, start);
+// 				start = data->line->index;
+// 			}
+// 		}
+// 		data->line = data->line->next;
+// 	}
+// 	print_t_token(data);
+// }

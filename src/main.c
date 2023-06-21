@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/21 12:13:22 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:26:42 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char *av[], char **env)
 	if (!data)
 		return (0);
 	init_env(data, env);
+	set_signal();
 	ft_readline(data);
 	print_strs(data->history);
 	if (ac == 2)

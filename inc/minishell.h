@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/21 12:19:56 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:22:10 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # include <sys/prctl.h>
 # include <readline/readline.h>	//readline
 # include <readline/history.h>	//readline
+# include <termios.h>			//configuration terminal
+# include <term.h>				//terminal capabilities
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ
