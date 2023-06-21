@@ -39,6 +39,7 @@ EXEC_DIR = ./src/exec
 PARSER_DIR = ./src/parser
 ENV_DIR = ./src/env
 LEXER_DIR = ./src/lexer
+EXPANDER_DIR = ./src/expander
 SIG_DIR = ./src/signal
 SRC_DIR = ./src
 
@@ -50,13 +51,16 @@ SRC += env_find_values.c
 SRC += prompt.c
 SRC += free_struct.c
 SRC += print_error.c
-SRC += free_struct.c
+SRC += signal.c
 SRC += history_init.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
-SRC += flag_quotes.c
+SRC += find_quotes.c
 SRC += token_find.c
+SRC += quote_position.c
+SRC += convert_quotes.c
+SRC += find_strings.c
 # SRC += get_next_line.c // a retirer, doublon avec ajout du gnl dans la libft
 
 vpath %.c $(TERM_DIR)
@@ -66,6 +70,7 @@ vpath %.c $(EXEC_DIR)
 vpath %.c $(PARSER_DIR)
 vpath %.c $(ENV_DIR)
 vpath %.c $(LEXER_DIR)
+vpath %.c $(EXPANDER_DIR)
 vpath %.c $(SIG_DIR)
 vpath %.c $(SRC_DIR)
 

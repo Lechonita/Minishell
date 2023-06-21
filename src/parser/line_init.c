@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/21 12:03:38 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:45:32 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ void	init_line(t_bigshell *data, char *line)
 	find_double_quotes(tmp);
 	find_single_quotes(tmp);
 	find_strings(tmp);
-	// print_t_line(data);
+	print_t_line(data);
 }

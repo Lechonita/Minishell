@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/21 12:12:53 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:19:49 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	catch_ctrl_d(t_bigshell *data)
 	buf[0] = 0;
 	if (!data)
 		return ;
-	if (read(STDIN, buf, 0) == 0)
+	if (read(STDIN_FILENO, buf, 0) == 0)
 	{
 		ft_putstr_fd("ctrl D \n", 2);
 		ft_free_all(data);
@@ -37,22 +37,22 @@ void	ft_save_history(t_bigshell *data, char *input, int count)
 }
 
 
-int main() {
-    char buffer[256];
-    ssize_t bytesRead;
+// int main() {
+//     char buffer[256];
+//     ssize_t bytesRead;
 
-    printf("Entrez du texte (appuyez sur Ctrl+D pour quitter) :\n");
+//     printf("Entrez du texte (appuyez sur Ctrl+D pour quitter) :\n");
 
-    while ((bytesRead = read(STDIN_FILENO, buffer, sizeof(buffer))) > 0) {
-        // Traitez les caractères lus ici
-        // ...
+//     while ((bytesRead = read(STDIN_FILENO, buffer, sizeof(buffer))) > 0) {
+//         // Traitez les caractères lus ici
+//         // ...
 
-        // Lire le caractère suivant
-    }
+//         // Lire le caractère suivant
+//     }
 
-    printf("Fin du programme.\n");
-    return 0;
-}
+//     printf("Fin du programme.\n");
+//     return 0;
+// }
 
 
 
@@ -76,7 +76,7 @@ void	ft_readline(t_bigshell *data)
 			add_history(input);
 			ft_save_history(data, input, count);
 			init_line(data, input);
-			find_tokens(data);
+			// find_tokens(data);
 			count++;
 		}
 		// else if (read(STDIN, input, 0) == EOF)

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/21 12:19:56 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:52:27 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct s_bigshell
 void	ft_readline(t_bigshell *data);
 
 /***********************************************************/
-/*                       ENVIRONMENT                       */
+/*                           ENV                           */
 /***********************************************************/
 
 /*  ENV INIT */
@@ -115,7 +115,7 @@ int		find_equal(char *env);
 char	*get_env_name(char	*env);
 
 /***********************************************************/
-/*                       HISTORY                           */
+/*                         TERM                            */
 /***********************************************************/
 
 /* HISTORY INIT */
@@ -123,13 +123,13 @@ void	init_history(t_bigshell *data);
 void	ft_readline(t_bigshell *data);
 
 /***********************************************************/
-/*                       SIGNALS                           */
+/*                         SIGNAL                          */
 /***********************************************************/
 void	ft_sig_handler(int sig);
 void	set_signal(void);
 
 /***********************************************************/
-/*                           LINE                          */
+/*                          PARSER                         */
 /***********************************************************/
 
 /* LINE INIT */
@@ -152,12 +152,17 @@ int		ft_is_single_quote(char c);
 int		ft_is_double_quote(char c);
 
 /* FIND QUOTES */
-int		treat_as_quotes(t_line	*line);
+// int		treat_as_quotes(t_line	*line);
 void	find_double_quotes(t_line *line);
 void	find_single_quotes(t_line *line);
 
+/* FIND STRINGS */
+int		flag_double_quotes(t_line *line);
+int		flag_single_quotes(t_line *line);
+void	find_strings(t_line *line);
+
 /***********************************************************/
-/*                          TOKENS                         */
+/*                          LEXER                          */
 /***********************************************************/
 
 /* FIND TOKENS */
@@ -168,7 +173,22 @@ void	ft_create_token(t_bigshell *data, t_line *current, int start);
 void	find_tokens(t_bigshell *data);
 
 /***********************************************************/
-/*                           FREE                          */
+/*                        EXPANDER                         */
+/***********************************************************/
+
+/* QUOTE POSITION */
+int		find_end_dq(t_line *line);
+int		find_start_dq(t_line *line);
+int		find_end_sq(t_line *line);
+int		find_start_sq(t_line *line);
+
+/* CONVERT QUOTES */
+void	convert_double_quotes(t_line *line);
+void	convert_single_quotes(t_line *line);
+void	check_both_quotes(t_line *line);
+
+/***********************************************************/
+/*                          UTILS                          */
 /***********************************************************/
 
 /* FREE STRUCT*/
@@ -177,11 +197,7 @@ void	ft_free_token(t_bigshell *data);
 void	ft_free_history(t_bigshell *data);
 void	ft_free_all(t_bigshell *data);
 
-/***********************************************************/
-/*                           ERROR                         */
-/***********************************************************/
-
-/* error */
+/* PRINT ERROR */
 void	ft_exit(int err_no, char *msg);
 void	print_strs(char **strs);
 void	print_t_line(t_bigshell *data);
