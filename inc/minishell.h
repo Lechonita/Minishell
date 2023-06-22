@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/22 12:09:03 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/22 17:07:07 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@
 # define TYPE_SINGLE_QUOTES 6	// ''
 # define TYPE_BLANK 7			// space and \t
 # define TYPE_DOLLAR 8			// $
-
 typedef struct s_exec
 {
 	int				index;
@@ -84,9 +83,16 @@ typedef struct s_line
 	struct s_line	*next;
 }	t_line;
 
+typedef struct s_history
+{
+	int					index;
+	char				*cmd_line;
+	struct s_history	*next;
+}	t_history;
+
 typedef struct s_bigshell
 {
-	char			**history;
+	t_history		*history;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;
@@ -98,120 +104,114 @@ typedef struct s_bigshell
 /***********************************************************/
 
 /* MAIN */
-void	ft_readline(t_bigshell *data);
+void		ft_readline(t_bigshell *data);
 
 /***********************************************************/
 /*                           ENV                           */
 /***********************************************************/
 
 /*  ENV INIT */
-t_env	*env_last(t_env *new);
-void	env_addback(t_env *new, t_env *env);
-t_env	*env_new(char *env);
-void	init_env(t_bigshell *data, char **env);
+t_env		*env_last(t_env *new);
+void		env_addback(t_env *new, t_env *env);
+t_env		*env_new(char *env);
+void		init_env(t_bigshell *data, char **env);
 // void	display_env_struct(t_bigshell *data);
 
 /* ENV FIND VALUES */
 // char	*ft_strndup(const char *src, size_t n);
-char	*get_env_value(char *env);
-int		find_equal(char *env);
-char	*get_env_name(char	*env);
-
-/***********************************************************/
-/*                         TERM                            */
-/***********************************************************/
-
-/* HISTORY INIT */
-void	init_history(t_bigshell *data);
-void	ft_readline(t_bigshell *data);
+char		*get_env_value(char *env);
+int			find_equal(char *env);
+char		*get_env_name(char	*env);
 
 /***********************************************************/
 /*                         SIGNAL                          */
 /***********************************************************/
 
 /* SIGNAL HANDLING */
-void	ft_sig_int(int sig);
-void	set_signal(void);
+void		ft_sig_int(int sig);
+void		set_signal(void);
 
 /***********************************************************/
 /*                  TERMINAL CAPABILITIES                  */
 /***********************************************************/
-int		init_term(void);
-int		ft_termcap(t_bigshell *data);
+int			init_term(void);
+int			ft_termcap(t_bigshell *data);
 
 /***********************************************************/
 /*                           LINE                          */
 /***********************************************************/
 
 /* LINE INIT */
-t_line	*line_last(t_line	*line);
-void	line_addback(t_line *line, t_line *new);
-t_line	*line_new(char c, int i);
-void	init_line(t_bigshell *data, char *line);
+t_line		*line_last(t_line	*line);
+void		line_addback(t_line *line, t_line *new);
+t_line		*line_new(char c, int i);
+void		init_line(t_bigshell *data, char *line);
 
 /* TYPE */
-int		ft_is_integer(char c);
-int		ft_is_word(char c);
-int		ft_is_operator(char c);
-int		ft_is_separator(char c);
-int		ft_determine_type(char c);
+int			ft_is_integer(char c);
+int			ft_is_word(char c);
+int			ft_is_operator(char c);
+int			ft_is_separator(char c);
+int			ft_determine_type(char c);
 
 /* TYPE2 */
-int		ft_is_dollar(char c);
-int		ft_is_blank(char c);
-int		ft_is_single_quote(char c);
-int		ft_is_double_quote(char c);
+int			ft_is_dollar(char c);
+int			ft_is_blank(char c);
+int			ft_is_single_quote(char c);
+int			ft_is_double_quote(char c);
 
 /* FIND QUOTES */
 // int		treat_as_quotes(t_line	*line);
-void	find_double_quotes(t_line *line);
-void	find_single_quotes(t_line *line);
+void		find_double_quotes(t_line *line);
+void		find_single_quotes(t_line *line);
 
 /* FIND STRINGS */
-int		flag_double_quotes(t_line *line);
-int		flag_single_quotes(t_line *line);
-void	find_strings(t_line *line);
+int			flag_double_quotes(t_line *line);
+int			flag_single_quotes(t_line *line);
+void		find_strings(t_line *line);
 
 /***********************************************************/
 /*                          LEXER                          */
 /***********************************************************/
 
 /* FIND TOKENS */
-t_token	*token_last(t_token	*token);
-void	token_addback(t_token *token, t_token *new);
-t_token	*token_new(t_line *first, t_line *current, int start);
-void	ft_create_token(t_bigshell *data, t_line *current, int start);
-void	find_tokens(t_bigshell *data);
+t_token		*token_last(t_token	*token);
+void		token_addback(t_token *token, t_token *new);
+t_token		*token_new(t_line *first, t_line *current, int start);
+void		ft_create_token(t_bigshell *data, t_line *current, int start);
+void		find_tokens(t_bigshell *data);
 
 /***********************************************************/
 /*                        EXPANDER                         */
 /***********************************************************/
 
 /* QUOTE POSITION */
-int		find_end_dq(t_line *line);
-int		find_start_dq(t_line *line);
-int		find_end_sq(t_line *line);
-int		find_start_sq(t_line *line);
+int			find_end_dq(t_line *line);
+int			find_start_dq(t_line *line);
+int			find_end_sq(t_line *line);
+int			find_start_sq(t_line *line);
 
 /* CONVERT QUOTES */
-void	convert_double_quotes(t_line *line);
-void	convert_single_quotes(t_line *line);
-void	check_both_quotes(t_line *line);
+void		convert_double_quotes(t_line *line);
+void		convert_single_quotes(t_line *line);
+void		check_both_quotes(t_line *line);
 
 /***********************************************************/
 /*                          UTILS                          */
 /***********************************************************/
 
 /* FREE STRUCT*/
-void	ft_free_env(t_bigshell *data);
-void	ft_free_token(t_bigshell *data);
-void	ft_free_history(t_bigshell *data);
-void	ft_free_all(t_bigshell *data);
+void		ft_free_env(t_bigshell *data);
+void		ft_free_token(t_bigshell *data);
+void		ft_free_history(t_bigshell *data);
+void		ft_free_all(t_bigshell *data);
 
 /* PRINT ERROR */
-void	ft_exit(int err_no, char *msg);
-void	print_strs(char **strs);
-void	print_t_line(t_bigshell *data);
-void	print_t_token(t_bigshell *data);
+void		ft_exit(int err_no, char *msg);
 
+/* PRINT FUNCTION */
+void		print_strs(char **strs);
+void		print_t_line(t_bigshell *data);
+void		print_t_token(t_bigshell *data);
+void		print_history_lst(t_bigshell *data);
 #endif

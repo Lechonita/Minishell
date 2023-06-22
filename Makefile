@@ -51,7 +51,6 @@ SRC += env_find_values.c
 SRC += prompt.c
 SRC += free_struct.c
 SRC += print_error.c
-SRC += history_init.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
@@ -125,11 +124,11 @@ $(NAME): $(LIBFT) $(OBJ)
 # 	@echo "$(RED)                                                         $(END)"
 
 norm:
-	@norminette libft/*/*.c
 	@norminette src/*/*.c
 	@norminette inc/*.h
+#	@norminette libft/*/*.[ch]
 
-leaks: fclean $(NAME)
+leaks: $(NAME) #fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
 	@valgrind --leak-check=full --track-fds=yes -q ./$(NAME)
