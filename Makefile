@@ -32,7 +32,7 @@ vpath %.h $(INC_DIR)
 
 ############################### Path Sources ###################################
 
-TERM_DIR = ./src/term 
+TERM_DIR = ./src/terminal
 UTILS_DIR = ./src/utils
 BUILTINS_DIR = ./src/builtins
 EXEC_DIR = ./src/exec
@@ -51,17 +51,14 @@ SRC += env_find_values.c
 SRC += prompt.c
 SRC += free_struct.c
 SRC += print_error.c
-SRC += signal.c
 SRC += history_init.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
 SRC += find_quotes.c
 SRC += token_find.c
-SRC += quote_position.c
-SRC += convert_quotes.c
-SRC += find_strings.c
-# SRC += get_next_line.c // a retirer, doublon avec ajout du gnl dans la libft
+SRC += signal.c
+SRC += termcap.c
 
 vpath %.c $(TERM_DIR)
 vpath %.c $(UTILS_DIR)
@@ -115,9 +112,8 @@ $(OBJ) : $(OBJ_DIR)/%.o: %.c | $(LIBFT) $(OBJ_DIR)
 	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline -lncurses
 	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
-
 
 # art:
 # 	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/21 10:08:23 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/21 17:01:57 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ pour le SIGQUIT: CTRL + \
 	rl_redisplay();				redisplay the prompt on a newline
 */
 
-void	ft_sig_handler(int sig)
+void	ft_sig_int(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -33,21 +33,19 @@ void	ft_sig_handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_replace_line("  ", 0);
-		rl_redisplay();
-	}
 }
 
 void	set_signal(void)
 {
-	struct sigaction	sa;
+	struct sigaction	sa_int;
+	struct sigaction	sa_quit;
 
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_handler = &ft_sig_handler;
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	sigemptyset(&sa_int.sa_mask);
+	sa_int.sa_flags = SA_RESTART;
+	sa_int.sa_handler = &ft_sig_int;
+	sigemptyset(&sa_quit.sa_mask);
+	sa_quit.sa_flags = SA_RESTART;
+	sa_quit.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &sa_int, NULL);
+	sigaction(SIGQUIT, &sa_quit, NULL);
 }

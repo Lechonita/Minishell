@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/21 15:52:27 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:09:03 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # include <sys/prctl.h>
 # include <readline/readline.h>	//readline
 # include <readline/history.h>	//readline
+# include <termios.h>			//configuration terminal
+# include <term.h>				//terminal capabilities
+# include <curses.h>			//terminal capabilities
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ
@@ -125,11 +128,19 @@ void	ft_readline(t_bigshell *data);
 /***********************************************************/
 /*                         SIGNAL                          */
 /***********************************************************/
-void	ft_sig_handler(int sig);
+
+/* SIGNAL HANDLING */
+void	ft_sig_int(int sig);
 void	set_signal(void);
 
 /***********************************************************/
-/*                          PARSER                         */
+/*                  TERMINAL CAPABILITIES                  */
+/***********************************************************/
+int		init_term(void);
+int		ft_termcap(t_bigshell *data);
+
+/***********************************************************/
+/*                           LINE                          */
 /***********************************************************/
 
 /* LINE INIT */
