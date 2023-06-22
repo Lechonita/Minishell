@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/22 12:09:03 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/22 17:19:26 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int		find_equal(char *env);
 char	*get_env_name(char	*env);
 
 /***********************************************************/
-/*                         TERM                            */
+/*                       TERMINAL                          */
 /***********************************************************/
 
 /* HISTORY INIT */
@@ -140,7 +140,7 @@ int		init_term(void);
 int		ft_termcap(t_bigshell *data);
 
 /***********************************************************/
-/*                           LINE                          */
+/*                          PARSER                         */
 /***********************************************************/
 
 /* LINE INIT */
@@ -163,14 +163,16 @@ int		ft_is_single_quote(char c);
 int		ft_is_double_quote(char c);
 
 /* FIND QUOTES */
-// int		treat_as_quotes(t_line	*line);
-void	find_double_quotes(t_line *line);
-void	find_single_quotes(t_line *line);
+int		find_closing_quote(t_line *line, char quote);
+void	convert_quotes(t_line *line, char quote);
+void	find_quotes(t_line *line);
+void	flag_double_quotes(t_line *line);
+void	flag_single_quotes(t_line *line);
 
 /* FIND STRINGS */
-int		flag_double_quotes(t_line *line);
-int		flag_single_quotes(t_line *line);
-void	find_strings(t_line *line);
+// int		count_double_quotes(t_line *line);
+// int		count_single_quotes(t_line *line);
+// void	find_strings(t_line *line);
 
 /***********************************************************/
 /*                          LEXER                          */
@@ -187,16 +189,23 @@ void	find_tokens(t_bigshell *data);
 /*                        EXPANDER                         */
 /***********************************************************/
 
-/* QUOTE POSITION */
-int		find_end_dq(t_line *line);
-int		find_start_dq(t_line *line);
-int		find_end_sq(t_line *line);
-int		find_start_sq(t_line *line);
+/* QUOTES POSITION */
+// int		find_end_dq(t_line *line);
+// int		find_start_dq(t_line *line);
+// int		find_end_sq(t_line *line);
+// int		find_start_sq(t_line *line);
 
 /* CONVERT QUOTES */
-void	convert_double_quotes(t_line *line);
-void	convert_single_quotes(t_line *line);
-void	check_both_quotes(t_line *line);
+// t_line	*do_single_quotes(t_line *line);
+// t_line	*do_double_quotes(t_line *line);
+// void	do_both_quotes(t_line *line);
+// void	convert_double_quotes(t_line *line);
+// void	convert_single_quotes(t_line *line);
+// void	check_both_quotes(t_line *line);
+
+/* QUOTES MANAGE */
+// void	close_quotes(t_line *line);
+// void	check_both_quotes(t_line *line);
 
 /***********************************************************/
 /*                          UTILS                          */

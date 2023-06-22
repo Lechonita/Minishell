@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:29:56 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 15:30:04 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/22 13:09:59 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	rec_bits(int signo, siginfo_t *info, void *other)
 	(*rec)++;
 	if (signo == SIGUSR2)
 	{
-		ft_printf("EoString signal received.\n-> Bytes recorded: [%d]\n", *rec);
+		printf("EoString signal received.\n-> Bytes recorded: [%ld]\n", *rec);
 		*rec = 0;
 	}
 }
@@ -89,8 +89,8 @@ void	send_message(int rec_pid, char *to_send)
 
 void	reset_server(int rec_pid)
 {
-	ft_printf("Something went wrong Bytes recorded: [%d]\n", g_rec_bytes);
-	ft_printf("Resetting server...\n");
+	printf("Something went wrong Bytes recorded: [%ld]\n", g_rec_bytes);
+	printf("Resetting server...\n");
 	while (g_rec_bytes != 0)
 	{
 		kill(rec_pid, SIGUSR2);
@@ -99,21 +99,21 @@ void	reset_server(int rec_pid)
 	}
 }
 
-int	main(int ac, char **av)
-{
-	int					server_pid;
-	struct sigaction	sa;
+// int	main(int ac, char **av)
+// {
+// 	int					server_pid;
+// 	struct sigaction	sa;
 
-	if (ac != 3)
-		return (ft_printf("Usage: ./client [PID] [String]\n"), EXIT_FAILURE);
-	sigemptyset(&sa.sa_mask);
-	sa.sa_sigaction = &rec_bits;
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
-	if (!is_number(av[1]) || ft_atoi(av[1]) < 1)
-		return (ft_printf("Wrong PID format\n"), EXIT_FAILURE);
-	server_pid = ft_atoi(av[1]);
-	send_message(server_pid, av[2]);
-	if (g_rec_bytes != 0)
-		reset_server(server_pid);
-}
+// 	if (ac != 3)
+// 		return (printf("Usage: ./client [PID] [String]\n"), EXIT_FAILURE);
+// 	sigemptyset(&sa.sa_mask);
+// 	sa.sa_sigaction = &rec_bits;
+// 	sigaction(SIGUSR1, &sa, NULL);
+// 	sigaction(SIGUSR2, &sa, NULL);
+// 	if (!is_number(av[1]) || ft_atoi(av[1]) < 1)
+// 		return (printf("Wrong PID format\n"), EXIT_FAILURE);
+// 	server_pid = ft_atoi(av[1]);
+// 	send_message(server_pid, av[2]);
+// 	if (g_rec_bytes != 0)
+// 		reset_server(server_pid);
+// }

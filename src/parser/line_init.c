@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/22 12:08:14 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/22 17:19:10 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	init_line(t_bigshell *data, char *line)
 		i++;
 	}
 	tmp = data->line;
-	find_double_quotes(tmp);
-	find_single_quotes(tmp);
-	// find_strings(tmp);
-	// print_t_line(data);
+	flag_double_quotes(tmp);
+	flag_single_quotes(tmp);
+	find_quotes(tmp);
+	print_t_line(data);
 }

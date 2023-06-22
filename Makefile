@@ -46,19 +46,25 @@ SRC_DIR = ./src
 ############################### Sources ########################################
 
 SRC += main.c 
-SRC += env_init.c
 SRC += env_find_values.c
-SRC += prompt.c
-SRC += free_struct.c
-SRC += print_error.c
-SRC += history_init.c
+SRC += env_init.c
+SRC += dollar.c
+SRC += quotes_find.c
+SRC += quotes_open.c
+SRC += quotes_position.c
+SRC += token_find.c
+SRC += flag_quotes.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
-SRC += find_quotes.c
-SRC += token_find.c
+SRC += client.c
+SRC += server.c
 SRC += signal.c
+SRC += history_init.c
+SRC += prompt.c
 SRC += termcap.c
+SRC += free_struct.c
+SRC += print_error.c
 
 vpath %.c $(TERM_DIR)
 vpath %.c $(UTILS_DIR)

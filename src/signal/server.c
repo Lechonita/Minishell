@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:30:13 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/20 15:30:16 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/22 13:10:38 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ void	handler(int signo, siginfo_t *info, void *other)
 	kill(info->si_pid, SIGUSR1);
 }
 
-int	main(void)
-{
-	struct sigaction	sa;
+// int	main(void)
+// {
+// 	struct sigaction	sa;
 
-	ft_printf("Server PID: [%d]\n", getpid());
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_SIGINFO | SA_RESTART;
-	sa.sa_sigaction = &handler;
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
-	ft_printf("NOTE: kill this process by using 'CTRL + C', ");
-	ft_printf("or 'kill -9 [PID]' in another terminal.\n");
-	while (1)
-		pause();
-	return (0);
-}
+// 	printf("Server PID: [%d]\n", getpid());
+// 	sigemptyset(&sa.sa_mask);
+// 	sa.sa_flags = SA_SIGINFO | SA_RESTART;
+// 	sa.sa_sigaction = &handler;
+// 	sigaction(SIGUSR1, &sa, NULL);
+// 	sigaction(SIGUSR2, &sa, NULL);
+// 	printf("NOTE: kill this process by using 'CTRL + C', ");
+// 	printf("or 'kill -9 [PID]' in another terminal.\n");
+// 	while (1)
+// 		pause();
+// 	return (0);
+// }
