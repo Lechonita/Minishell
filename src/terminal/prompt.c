@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/22 18:22:24 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:28:41 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_readline(t_bigshell *data)
 		if (input != NULL)
 		{
 			add_history(input);
-			ft_save_history(data, input, count);
 			init_line(data, input);
 			// find_tokens(data);
 			count++;

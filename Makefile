@@ -60,7 +60,6 @@ SRC += type2.c
 SRC += client.c
 SRC += server.c
 SRC += signal.c
-SRC += history_init.c
 SRC += prompt.c
 SRC += termcap.c
 SRC += free_struct.c

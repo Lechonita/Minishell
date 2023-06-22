@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/22 18:22:06 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:53:44 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,8 @@ int			ft_is_single_quote(char c);
 int			ft_is_double_quote(char c);
 
 /* FIND QUOTES */
-int		find_closing_quote(t_line *line, char quote);
-void	convert_quotes(t_line *line, char quote);
+int		find_closing_quote(t_line *line, int type);
+void	convert_quotes(t_line *line, int type);
 void	find_quotes(t_line *line);
 void	flag_double_quotes(t_line *line);
 void	flag_single_quotes(t_line *line);
