@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_quotes.c                                      :+:      :+:    :+:   */
+/*   find_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:37:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/20 15:11:55 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:52:25 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 /* Fonction qui va permettre de determiner si les guillements sont bien
 	fermes ou non. */
 
-int	treat_as_quotes(t_line	*line)
-{
-	while (line)
-	{
-		if (line->dq == 2)
-			return (1);
-		line = line->next;
-	}
-	return (0);
-}
+// int	treat_as_quotes(t_line	*line)
+// {
+// 	while (line)
+// 	{
+// 		if (line->dq == 2)
+// 			return (1);
+// 		line = line->next;
+// 	}
+// 	return (0);
+// }
 
 /* Fonction qui va flagger les double guillemets s' il y en a.
 	dq = 0 - s'il n'y a eu aucun double guillemet

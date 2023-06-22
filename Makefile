@@ -39,6 +39,7 @@ EXEC_DIR = ./src/exec
 PARSER_DIR = ./src/parser
 ENV_DIR = ./src/env
 LEXER_DIR = ./src/lexer
+EXPANDER_DIR = ./src/expander
 SIG_DIR = ./src/signal
 SRC_DIR = ./src
 
@@ -54,7 +55,7 @@ SRC += history_init.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
-SRC += flag_quotes.c
+SRC += find_quotes.c
 SRC += token_find.c
 SRC += signal.c
 SRC += termcap.c
@@ -66,6 +67,7 @@ vpath %.c $(EXEC_DIR)
 vpath %.c $(PARSER_DIR)
 vpath %.c $(ENV_DIR)
 vpath %.c $(LEXER_DIR)
+vpath %.c $(EXPANDER_DIR)
 vpath %.c $(SIG_DIR)
 vpath %.c $(SRC_DIR)
 
