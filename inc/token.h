@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 11:41:41 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/13 12:13:36 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:14:04 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ enum e_tokentype
 
 /* Tokens.  */
 # define WORD 258					// word
-# define NOTOKEN 259				// invaid character in input
+# define NOTOKEN 259				// invalid character in input
 # define GREAT 260					// >
 # define NEWLINE 261				// \n
 # define LESS 262					// <

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/20 15:55:46 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:18:00 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,11 @@ void	ft_free_token(t_bigshell *data)
 	}
 }
 
-void	ft_free_history(t_bigshell *data)
-{
-	int		i;
-
-	if (!data)
-		return ;
-	if (data->history)
-	{
-		i = 0;
-		while (data->history[i])
-		{
-			free(data->history[i]);
-			data->history[i] = NULL;
-			i++;
-		}
-		free(data->history);
-		data->history = NULL;
-	}
-}
-
 void	ft_free_all(t_bigshell *data)
 {
 	if (!data)
 		return ;
-	if (data->history)
-		ft_free_history(data);
+	rl_clear_history();
 	if (data->token)
 		ft_free_token(data);
 	if (data->env)

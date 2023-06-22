@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/22 13:03:13 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:22:24 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,12 @@ void	catch_ctrl_d(t_bigshell *data, char *input)
 	}
 }
 
-void	ft_save_history(t_bigshell *data, char *input, int count)
-{
-	if (!data || !input)
-		return ;
-	data->history[count] = ft_strdup(input);
-	if (!data->history[count])
-		return ;
-}
-
 void	ft_readline(t_bigshell *data)
 {
 	char	*input;
 	int		count;
 
 	count = 0;
-	data->history = ft_calloc(50, sizeof(char *));
 	while (1)
 	{
 		input = readline("$ ");

@@ -131,11 +131,11 @@ $(NAME): $(LIBFT) $(OBJ)
 # 	@echo "$(RED)                                                         $(END)"
 
 norm:
-	@norminette libft/*/*.c
 	@norminette src/*/*.c
 	@norminette inc/*.h
+#	@norminette libft/*/*.[ch]
 
-leaks: fclean $(NAME)
+leaks: $(NAME) #fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
 	@valgrind --leak-check=full --track-fds=yes -q ./$(NAME)

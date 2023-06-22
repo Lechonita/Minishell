@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/22 14:37:52 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:19:55 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int ac, char *av[], char **env)
 	init_env(data, env);
 	set_signal();
 	ft_readline(data);
-	print_strs(data->history);
 	if (ac == 2)
 		printf("%s\n", av[1]);
 	// ret = ft_termcap(data);
@@ -31,3 +30,9 @@ int	main(int ac, char *av[], char **env)
 	ft_free_all(data);
 	return (0);
 }
+
+/*
+	// int			ret;
+	// ret = ft_termcap(data);
+	// printf("ret = %d\n", ret);
+*/
