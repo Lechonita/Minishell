@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/21 16:07:41 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 11:50:50 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	flag_double_quotes(t_line *line)
 
 	nb = 0;
 	flag = 0;
-	printf("Je rentre dans la fonction flag_double_quotes\n");
+	// printf("Je rentre dans la fonction flag_double_quotes\n");
 	if (!line)
 		return (nb);
 	while (line)
@@ -49,7 +49,7 @@ int	flag_single_quotes(t_line *line)
 
 	nb = 0;
 	flag = 0;
-	printf("Je rentre dans la fonction flag_single_quotes\n");
+	// printf("Je rentre dans la fonction flag_single_quotes\n");
 	if (!line)
 		return (nb);
 	while (line)
@@ -66,6 +66,15 @@ int	flag_single_quotes(t_line *line)
 	return (nb);
 }
 
+/* Jusque-la, les caracteres de la ligne de commande ont ete traites de
+	mainere individuelle et ont dont recu un type selon le caractere
+	qui etait represente.
+	Cette fonction permet de chercher les cas ou les caracteres font en fait
+	partie d'une string. Ce qui fait que chaque caractere dans cette string
+	devra etre traite comme un caractere de type WORD.
+	Applicable par des guillemets ou des series de mots qui ne sont pas
+	coupes par des operateurs. */
+
 void	find_strings(t_line *line)
 {
 	t_line	*tmp;
@@ -77,8 +86,8 @@ void	find_strings(t_line *line)
 	tmp = line;
 	sq_flag = flag_single_quotes(tmp);
 	dq_flag = flag_double_quotes(tmp);
-	printf("mon sq_flag == %d\n", sq_flag);
-	printf("mon dq_flag == %d\n", dq_flag);
+	// printf("mon sq_flag == %d\n", sq_flag);
+	// printf("mon dq_flag == %d\n", dq_flag);
 	if (sq_flag == 2 && dq_flag == 2)
 		check_both_quotes(tmp);
 	else if (sq_flag == 2)

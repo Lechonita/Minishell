@@ -6,11 +6,17 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:45:14 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/21 14:20:42 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 11:48:47 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+/* Toutes ces fonctions permettent de determiner la position de :
+	- l'ouverture des doubles guillemets
+	- la fermeture des doubles guillemets
+	- l'ouverture des simples guillemets
+	- la fermeture des simples guillemets*/
 
 int	find_end_dq(t_line *line)
 {

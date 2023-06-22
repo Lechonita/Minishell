@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:55:34 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/21 15:56:05 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/22 11:50:55 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,18 @@
 	
 // }
 
+/* Dans les cas de doubles guillemets, tous les caracteres se trouvant entre les
+	guillemets deviennent des caracteres de type WORD pour former
+	une seule string, a l'exception du $ (expansion) qui va aller chercher une
+	valeur dans l'environnement et la remplacer dans la string.*/
+
 void	convert_double_quotes(t_line *line)
 {
 	int		first;
 
 	if (!line)
 		return ;
-	printf("Je rentre dans la fonction convert_double_quotes\n");
+	// printf("Je rentre dans la fonction convert_double_quotes\n");
 	first = 0;
 	while (line)
 	{
@@ -45,13 +50,17 @@ void	convert_double_quotes(t_line *line)
 	}
 }
 
+/* Dans les cas de simples guillemets, tous les caracteres se trouvant entre les
+	guillemets deviennent des caracteres de type WORD
+	pour former une seule string.*/
+
 void	convert_single_quotes(t_line *line)
 {
 	int		first;
 
 	if (!line)
 		return ;
-	printf("Je rentre dans la fonction convert_single_quotes\n");
+	// printf("Je rentre dans la fonction convert_single_quotes\n");
 	first = 0;
 	while (line)
 	{
@@ -62,6 +71,15 @@ void	convert_single_quotes(t_line *line)
 		line = line->next;
 	}
 }
+
+/* Si des doubles guillemets et des simples guillemets existent dans la ligne
+	de commande, alors plusieurs cas de figure existent.
+	On va determiner ou chacune s'ouvre et se ferme pour savoir le comportement
+	a leur donner.
+	Voici tous les cas de figure de positions de guillemets lorsque nous avons
+	des simples (sq) et des doubles (dq) :
+	"' '" / '" "' / "' "' / '" '" / "" '' / '' ""
+*/
 
 void	check_both_quotes(t_line *line)
 {
