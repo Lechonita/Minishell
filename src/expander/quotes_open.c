@@ -6,14 +6,34 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:34:19 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/23 13:22:54 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:10:25 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 // Rajouter le ctrl + C
-// gerer plusieurs lignes
+
+void	delete_additional_quotes(t_line *line, int type)
+{
+	t_line	*prev;
+
+	if (!line)
+		return ;
+	prev = line;
+	printf("My HEAD is %c\n", prev->c);
+	while (line)
+	{
+		prev = line;
+		if (line->type == type && line->next)
+		{
+			// ft_free_line_node(line);
+			free(line);
+			line = prev->next;
+		}
+		line = line->next;
+	}
+}
 
 void	assign_type_open_quotes(t_line *line)
 {
@@ -29,9 +49,8 @@ void	assign_type_open_quotes(t_line *line)
 
 int	determine_stop(t_line *line, int type)
 {
-	int		count;
+	static int		count;
 
-	count = 0;
 	while (line)
 	{
 		if (line->type == type)
@@ -52,22 +71,17 @@ int	determine_stop(t_line *line, int type)
 void	input_open_quotes(t_line *line, char *input, int type)
 {
 	int		i;
-	t_line	*tmp;
 
-	if (!input || !line || !type)
+	if (!line || !input || !type)
 		return ;
 	i = -1;
+	while (line->next)
+		line = line->next;
 	while (input[++i])
 	{
-		tmp = line;
 		line_addback(line, line_new(line, input[i], -1));
-		printf("et mon line current = %c\n", line->c);
-		assign_type_open_quotes(line->next);
-		printf("Mon line->next == %c\n", line->next->c);
 		line = line->next;
-		printf("input de i + 1 = -%c-\n", input[i + 1]);
-		if (line->type == type && input[i + 1])
-			// tmp->next = line->next; // delete node line
+		assign_type_open_quotes(line);
 	}
 }
 
@@ -81,12 +95,14 @@ void	get_rest_open_quotes(t_line *line, int type, char *prompt)
 	{
 		input = readline(prompt);
 		if (input)
-			input_open_quotes(line, input, type);
+		{
+			line_addback(line, line_new(line, '\n', -1));
+			input_open_quotes(line->next, input, type);
+		}
 		free(input);
-		if (determine_stop(line, type) % 2 != 0)
+		if (determine_stop(line, type) % 2 == 1)
 			break ;
 	}
-	printf("Apres le break, je passe quand meme ici\n");
 }
 
 void	interpret_open_quotes(t_line *line, int type)
@@ -102,10 +118,10 @@ void	interpret_open_quotes(t_line *line, int type)
 		line->type = TYPE_WORD;
 		line = line->next;
 	}
-	line_addback(tmp, line_new(tmp, '\n', -1));
 	if (type == 5)
 		prompt = "dquote> ";
 	else
 		prompt = "quote> ";
 	get_rest_open_quotes(tmp, type, prompt);
+	delete_additional_quotes(tmp, type);
 }

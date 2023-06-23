@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/23 12:54:35 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:59:15 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,9 +191,9 @@ void		convert_quotes(t_line *line, int type);
 void		find_quotes(t_line *line);
 
 /* QUOTES OPEN */
+void		delete_additional_quotes(t_line *line, int type);
 void		assign_type_open_quotes(t_line *line);
 int			determine_stop(t_line *line, int type);
-void		ft_line_delete(t_line *prev, t_line *current, int type);
 void		input_open_quotes(t_line *line, char *input, int type);
 void		get_rest_open_quotes(t_line *line, int type, char *prompt);
 void		interpret_open_quotes(t_line *line, int type);
@@ -209,6 +209,7 @@ void		interpret_open_quotes(t_line *line, int type);
 /***********************************************************/
 
 /* FREE STRUCT*/
+// void		ft_free_line_node(t_line *line);
 void		ft_free_env(t_bigshell *data);
 void		ft_free_token(t_bigshell *data);
 void		ft_free_history(t_bigshell *data);

@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/22 17:18:00 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/23 15:59:08 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+/* Sert a supprimer un maillon de la liste t_line. Fonction utilisee dans 
+	la gestion des open quotes (voir expander). */
+
+// void	ft_free_line_node(t_line *line)
+// {
+// 	if (!line)
+// 		return ;
+// 	if (line->c)
+// 		free(line->c);
+// 	free(line);
+// 	line = NULL;
+// }
 
 /* Fonction qui free tous les maillons de la liste chainee t_env. */
 
