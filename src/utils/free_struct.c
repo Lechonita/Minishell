@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/22 17:18:00 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/23 16:40:11 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,45 @@
 
 /* Fonction qui free tous les maillons de la liste chainee t_env. */
 
-void	ft_free_env(t_bigshell *data)
+void	free_strs(char **strs)
+{
+	int	i;
+
+	i = 0;
+	if (strs != NULL)
+	{
+		while (strs[i])
+		{
+			free(strs[i]);
+			strs[i] = NULL;
+			i++;
+		}
+		free(strs);
+		strs = NULL;
+	}
+}
+
+void	ft_free_env(t_env **env)
 {
 	t_env	*tmp;
 
-	if (!data || !data->env)
+	if (!env || !(*env))
 		return ;
-	while (data->env)
+	while (*env)
 	{
-		tmp = data->env->next;
-		if (data->env->name)
-			free(data->env->name);
-		if (data->env->value)
-			free(data->env->value);
-		free(data->env);
-		data->env = tmp;
+		tmp = (*env)->next;
+		if ((*env)->name)
+		{
+			free((*env)->name);
+			(*env)->name = NULL;
+		}
+		if ((*env)->env_path)
+			free_strs((*env)->env_path);
+		free(*env);
+		(*env) = tmp;
 	}
+	*env = NULL;
+	
 }
 
 void	ft_free_token(t_bigshell *data)
@@ -53,10 +76,12 @@ void	ft_free_all(t_bigshell *data)
 	if (!data)
 		return ;
 	rl_clear_history();
+	if (data->history)
+		free_strs(data->history);
 	if (data->token)
 		ft_free_token(data);
 	if (data->env)
-		ft_free_env(data);
+		ft_free_env(&data->env);
 	free(data);
 	data = NULL;
 }

@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/22 17:03:28 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/23 15:52:13 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	ft_exit(int err_no, char *msg)
-{
-	ft_putstr_fd(msg, 2);
-	exit(err_no);
-}
 
 void	print_strs(char **strs)
 {
@@ -54,5 +48,21 @@ void	print_t_token(t_bigshell *data)
 		printf("[type] %d\n", data->token->type);
 		printf("[value] %s\n", data->token->value);
 		data->token = data->token->next;
+	}
+}
+/* fonction qui permet d'afficher t_env
+	(equivalent de la commande "env" ou "printenv" dans le terminal) */
+
+void	display_env_struct(t_bigshell *data)
+{
+	t_env	*el;
+
+	if (!data->env)
+		ft_exit(EXIT_FAILURE, "No env to display\n");
+	el = data->env;
+	while (el != NULL)
+	{
+		printf("[%2d] %s=%s\n", el->index, el->name, el->value);
+		el = el->next;
 	}
 }

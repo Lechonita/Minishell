@@ -47,10 +47,11 @@ SRC_DIR = ./src
 
 SRC += main.c 
 SRC += env_init.c
-SRC += env_find_values.c
+SRC += path_handle.c
 SRC += prompt.c
 SRC += free_struct.c
-SRC += print_error.c
+SRC += error.c
+SRC += print.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c

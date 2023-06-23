@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/23 16:38:31 by Bea              ###   ########.fr       */
+/*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
+/*   Updated: 2023/06/23 17:08:16 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	main(int ac, char *av[], char **env)
+void	msg_not_found(char *msg, char *str)
 {
-	t_bigshell	*data;
+	char	*tmp;
+	char	*line;
 
-	data = ft_calloc(1, sizeof(t_bigshell));
-	if (!data)
-		return (0);
-	set_signal();
-	ft_readline(data);
-	init_env(data, env);
-	// print_strs(data->history);
-	// display_env_struct(data);
-	if (ac == 2)
-		printf("%s\n", av[1]);
-	ft_free_all(data);
-	return (0);
+	tmp = ft_strjoin(msg, str);
+	line = ft_strjoin(tmp, "\n");
+	ft_putstr_fd(line, 2);
+	free(tmp);
+	free(line);
 }
 
-/*
-	// int			ret;
-	// ret = ft_termcap(data);
-	// printf("ret = %d\n", ret);
-*/
+void	error_not_found(t_bigshell *data, char *msg, char *str)
+{
+	msg_not_found(msg, str);
+	ft_free_all(data);
+	exit (127);
+}
+
+void	ft_exit(int err_no, char *msg)
+{
+	ft_putstr_fd(msg, 2);
+	exit(err_no);
+}

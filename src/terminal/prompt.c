@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/22 17:05:37 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/23 11:08:01 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,22 @@ void	catch_ctrl_d(t_bigshell *data, char *input)
 	}
 }
 
+void	save_line_for_test(t_bigshell *data, char *input, int count)
+{
+	if (!data)
+		return ;
+	data->history[count] = ft_strdup(input);
+	if (!data->history[count])
+		ft_exit(EXIT_FAILURE, "strdup in save line for test error\n");
+}
+
 void	ft_readline(t_bigshell *data)
 {
 	char	*input;
 	int		count;
 
 	count = 0;
+	data->history = ft_calloc(50, sizeof(char *));
 	while (1)
 	{
 		input = readline("$ ");
@@ -44,6 +54,7 @@ void	ft_readline(t_bigshell *data)
 		if (input != NULL)
 		{
 			add_history(input);
+			save_line_for_test(data, input, count);
 			// init_line(data, input);
 			// find_tokens(data);
 			count++;
