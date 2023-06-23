@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/22 19:05:10 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:42:02 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	find_closing_quote(t_line *line, int type)
 {
 	if (!line || !type)
 		return (-1);
-	printf("===> Je rentre dans la fonction find_closing_quote\n");
-	// printf("A l'entree de cette fonction, mon char est %c\n", line->c);
 	while (line)
 	{
 		if (line->type == type)
@@ -38,16 +36,14 @@ void	convert_quotes(t_line *line, int type)
 	int		close;
 	t_line	*tmp;
 
-	if (!line)
-		return ;
-	printf("Je rentre dans la fonction convert_quotes\n");
-	if (line->next)
+	if (line && line->next)
 		tmp = line->next;
+	else
+		tmp = line;
 	close = find_closing_quote(tmp, type);
-	printf("close = %d\n", close);
-	// if (close == 0)
-	// 	interpret_open_quotes(tmp, type);
-	printf("=====> ici, mon char est %c\n", tmp->c);
+	printf("close == %d\n", close);
+	if (close == 0)
+		interpret_open_quotes(tmp, type);
 	if (close == 1)
 	{
 		while (tmp)
@@ -69,7 +65,6 @@ void	find_quotes(t_line *line)
 {
 	if (!line)
 		return ;
-	printf("Je rentre dans la fonction find_quotes\n");
 	while (line)
 	{
 		if (line->sq == 1)

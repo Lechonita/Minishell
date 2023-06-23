@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/22 18:53:44 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:54:35 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define TYPE_SINGLE_QUOTES 6	// ''
 # define TYPE_BLANK 7			// space and \t
 # define TYPE_DOLLAR 8			// $
+
 typedef struct s_exec
 {
 	int				index;
@@ -144,7 +145,7 @@ int			ft_termcap(t_bigshell *data);
 /* LINE INIT */
 t_line		*line_last(t_line	*line);
 void		line_addback(t_line *line, t_line *new);
-t_line		*line_new(char c, int i);
+t_line		*line_new(t_line *line, char c, int i);
 void		init_line(t_bigshell *data, char *line);
 
 /* TYPE */
@@ -161,16 +162,11 @@ int			ft_is_single_quote(char c);
 int			ft_is_double_quote(char c);
 
 /* FIND QUOTES */
-int		find_closing_quote(t_line *line, int type);
-void	convert_quotes(t_line *line, int type);
-void	find_quotes(t_line *line);
-void	flag_double_quotes(t_line *line);
-void	flag_single_quotes(t_line *line);
-
-/* FIND STRINGS */
-// int		count_double_quotes(t_line *line);
-// int		count_single_quotes(t_line *line);
-// void	find_strings(t_line *line);
+int			find_closing_quote(t_line *line, int type);
+void		convert_quotes(t_line *line, int type);
+void		find_quotes(t_line *line);
+void		flag_double_quotes(t_line *line);
+void		flag_single_quotes(t_line *line);
 
 /***********************************************************/
 /*                          LEXER                          */
@@ -187,23 +183,26 @@ void		find_tokens(t_bigshell *data);
 /*                        EXPANDER                         */
 /***********************************************************/
 
-/* QUOTE POSITION */
-int		find_end_dq(t_line *line);
-int		find_start_dq(t_line *line);
-int		find_end_sq(t_line *line);
-int		find_start_sq(t_line *line);
+/* DOLLAR */
 
-/* CONVERT QUOTES */
-// t_line	*do_single_quotes(t_line *line);
-// t_line	*do_double_quotes(t_line *line);
-// void	do_both_quotes(t_line *line);
-// void	convert_double_quotes(t_line *line);
-// void	convert_single_quotes(t_line *line);
-// void	check_both_quotes(t_line *line);
+/* QUOTES FIND */
+int			find_closing_quote(t_line *line, int type);
+void		convert_quotes(t_line *line, int type);
+void		find_quotes(t_line *line);
 
-/* QUOTES MANAGE */
-// void	close_quotes(t_line *line);
-// void	check_both_quotes(t_line *line);
+/* QUOTES OPEN */
+void		assign_type_open_quotes(t_line *line);
+int			determine_stop(t_line *line, int type);
+void		ft_line_delete(t_line *prev, t_line *current, int type);
+void		input_open_quotes(t_line *line, char *input, int type);
+void		get_rest_open_quotes(t_line *line, int type, char *prompt);
+void		interpret_open_quotes(t_line *line, int type);
+
+/* QUOTES POSITION */
+// int			find_end_dq(t_line *line);
+// int			find_start_dq(t_line *line);
+// int			find_end_sq(t_line *line);
+// int			find_start_sq(t_line *line);
 
 /***********************************************************/
 /*                          UTILS                          */

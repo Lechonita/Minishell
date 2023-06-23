@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/22 17:19:10 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:30:54 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,25 @@ void	line_addback(t_line *line, t_line *new)
 	last->next = new;
 }
 
+int	find_next_index(t_line *line)
+{
+	while (line && line->next)
+		line = line->next;
+	return (line->index);
+}
+
 /* Fonction qui cree un maillon t_line pour ajouter a la
 	liste chainee. */
 
-t_line	*line_new(char c, int i)
+t_line	*line_new(t_line *line, char c, int i)
 {
 	t_line	*new;
 
 	new = malloc(sizeof(t_line));
 	if (!new)
 		return (NULL);
+	if (i == -1 && line)
+		i = find_next_index(line) + 1;
 	new->index = i;
 	new->type = ft_determine_type(c);	// dans le cas ou c'est 0 ?
 	new->dq = 0;
@@ -73,9 +82,9 @@ void	init_line(t_bigshell *data, char *line)
 	while (line[i])
 	{
 		if (i == 0)
-			data->line = line_new(line[i], i);
+			data->line = line_new(NULL, line[i], i);
 		else
-			line_addback(data->line, line_new(line[i], i));
+			line_addback(data->line, line_new(data->line, line[i], i));
 		i++;
 	}
 	tmp = data->line;
