@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   path_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/23 17:12:09 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/26 10:59:09 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	*handle_good_path(t_bigshell *data, char *command)
+/* fonction qui gere les erreurs de commandes/fichiers introuvables 
+	quand le chemin absolu est donné en parametre*/
+
+static char	*handle_good_path(t_bigshell *data, char *command)
 {
 	if (access(command, F_OK & X_OK) == 0)
 		return (command);
@@ -22,6 +25,8 @@ char	*handle_good_path(t_bigshell *data, char *command)
 		error_not_found(data, CMD_NOT_FOUND, command);
 	return (NULL);
 }
+
+/* Fonction qui cherche le chemin absolu d'une commande dans le PATH */
 
 char	*find_path_to_cmd(t_bigshell *data, char *cmd)
 {
@@ -47,7 +52,7 @@ char	*find_path_to_cmd(t_bigshell *data, char *cmd)
 }
 
 /*	
-in child process:	
+in child process: execute command
 	handle_dup(data, pcss);
 	close_pipe(data);
 	while (el)
@@ -67,19 +72,19 @@ in child process:
 
 void	get_path(t_bigshell *data)
 {
-    t_env	*tmp;
+	t_env	*tmp;
 
-    tmp = data->env;
-    while (tmp)
-    {
-        if (ft_strncmp(tmp->name, "PATH", 4) == 0)
-        {
-            tmp->env_paths = ft_split(tmp->value, ':');
+	tmp = data->env;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->name, "PATH", 4) == 0)
+		{
+			tmp->env_paths = ft_split(tmp->value, ':');
 			print_strs(tmp->env_paths);
 			if (!tmp->env_paths)
 				return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_ENV));
-        }
-        tmp = tmp->next;
-    }
-    return ;
+		}
+		tmp = tmp->next;
+	}
+	return ;
 }

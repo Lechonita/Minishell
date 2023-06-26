@@ -40,7 +40,6 @@ PARSER_DIR = ./src/parser
 ENV_DIR = ./src/env
 LEXER_DIR = ./src/lexer
 EXPANDER_DIR = ./src/expander
-SIG_DIR = ./src/signal
 SRC_DIR = ./src
 
 ############################### Sources ########################################
@@ -68,7 +67,6 @@ vpath %.c $(PARSER_DIR)
 vpath %.c $(ENV_DIR)
 vpath %.c $(LEXER_DIR)
 vpath %.c $(EXPANDER_DIR)
-vpath %.c $(SIG_DIR)
 vpath %.c $(SRC_DIR)
 
 ############################### Objects ########################################
@@ -125,8 +123,9 @@ $(NAME): $(LIBFT) $(OBJ)
 # 	@echo "$(RED)                                                         $(END)"
 
 norm:
-	@norminette src/*/*.c
 	@norminette inc/*.h
+	@norminette src/*/*.c
+	
 #	@norminette libft/*/*.[ch]
 
 leaks: $(NAME) #fclean $(NAME)
@@ -149,7 +148,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re leaks norm
 
 ############################### Color ##########################################
 

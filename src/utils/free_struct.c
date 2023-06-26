@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/23 16:40:11 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/26 09:21:27 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ void	ft_free_env(t_env **env)
 			free((*env)->name);
 			(*env)->name = NULL;
 		}
-		if ((*env)->env_path)
-			free_strs((*env)->env_path);
+		if ((*env)->env_paths)
+			free_strs((*env)->env_paths);
 		free(*env);
 		(*env) = tmp;
 	}
 	*env = NULL;
-	
 }
 
 void	ft_free_token(t_bigshell *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/23 17:09:47 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/26 12:37:41 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ typedef struct s_exec
 	int				index;
 	int				fd_in;
 	int				fd_out;
+	char			*in_file;
+	char			*out_file;
 	char			*cmd;
+	char			**args;
 	struct s_exec	*next;
 }	t_exec;
 
@@ -112,7 +115,6 @@ void	init_env(t_bigshell *data, char **env);
 
 /* SEARCH GOOD PATH */
 void	get_path(t_bigshell *data);
-char	*handle_good_path(t_bigshell *data, char *command);
 char	*find_path_to_cmd(t_bigshell *data, char *cmd);
 
 /***********************************************************/
@@ -133,6 +135,13 @@ void	save_line_for_test(t_bigshell *data, char *input, int count);
 /* TERMINAL CAPABILITIES */
 int		init_term(void);
 int		ft_termcap(t_bigshell *data);
+
+/* REDIRECTION */
+void	handle_here_doc(t_bigshell *data, char *limiter);
+void	redirection_append(t_bigshell *data);
+void	redirection_left(t_bigshell *data);
+void	redirection_right(t_bigshell *data);
+void	redirection(t_bigshell *data);
 
 /***********************************************************/
 /*                           LINE                          */

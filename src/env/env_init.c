@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/23 17:06:08 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/26 10:56:05 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ char	*get_env_name(char	*env)
 	return (name);
 }
 
-/* Fonction qui cree un maillon t_env pour ajouter a la
-	liste chainee. */
+/* Fonction qui cree un maillon t_env pour ajouter a la liste chainee. */
 
 static t_env	*env_new(char *env, int idx)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/23 16:38:31 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/26 09:19:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	main(int ac, char *av[], char **env)
 }
 
 /*
-	// int			ret;
-	// ret = ft_termcap(data);
-	// printf("ret = %d\n", ret);
+terminal capabilities :
+	int			ret;
+	ret = ft_termcap(data);
+	printf("ret = %d\n", ret);
 */

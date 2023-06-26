@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/23 17:31:39 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/26 12:18:31 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 // # define W_LST "\t Failure in creating cmds lst\n"
 // # define W_EXECVE "\t Failure with execve /\n"
 // # define W_STRDUP "\t Failure in duplicate str\n "
-// # define W_HD_OPEN "\t Failure in open/creat here_doc\n "
+# define W_HD_OPEN "\t Failure in open/creat here_doc\n "
 # define CMD_NOT_FOUND "bash: command not found: "
-// # define PERM_DENIED "bash: Permission denied: "
+# define PERM_DENIED "bash: Permission denied: "
 # define FILE_NOT_FOUND "bash: No such file or directory: "
 
 #endif
