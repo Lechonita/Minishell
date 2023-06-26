@@ -32,6 +32,7 @@ vpath %.h $(INC_DIR)
 
 ############################### Path Sources ###################################
 
+SRC_DIR = ./src
 TERM_DIR = ./src/terminal
 UTILS_DIR = ./src/utils
 BUILTINS_DIR = ./src/builtins
@@ -40,7 +41,7 @@ PARSER_DIR = ./src/parser
 ENV_DIR = ./src/env
 LEXER_DIR = ./src/lexer
 EXPANDER_DIR = ./src/expander
-SRC_DIR = ./src
+PIPE_DIR = ./src/pipe
 
 ############################### Sources ########################################
 
@@ -58,7 +59,12 @@ SRC += find_quotes.c
 SRC += token_find.c
 SRC += signal.c
 SRC += termcap.c
+SRC += redirection.c
+SRC += here_doc.c
+SRC += pipex.c
+SRC += pipex_utils.c
 
+vpath %.c $(SRC_DIR)
 vpath %.c $(TERM_DIR)
 vpath %.c $(UTILS_DIR)
 vpath %.c $(BUILTINS_DIR)
@@ -67,7 +73,7 @@ vpath %.c $(PARSER_DIR)
 vpath %.c $(ENV_DIR)
 vpath %.c $(LEXER_DIR)
 vpath %.c $(EXPANDER_DIR)
-vpath %.c $(SRC_DIR)
+vpath %.c $(PIPE_DIR)
 
 ############################### Objects ########################################
 
@@ -131,8 +137,9 @@ norm:
 leaks: $(NAME) #fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
-	@valgrind --leak-check=full --track-fds=yes -q ./$(NAME)
+	@valgrind --leak-check=full -q ./$(NAME)
 # --track-origins=yes --show-leak-kinds=all --track-origins=yes --suppressions=./.readline.supp
+# --track-fds=yes
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"

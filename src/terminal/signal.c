@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/21 17:01:57 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/26 15:19:35 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	catch_ctrl_d(t_bigshell *data, char *input)
+{
+	char	tmp[256];
+
+	tmp[0] = 0;
+	if (!data)
+		return ;
+	if (read(STDIN_FILENO, tmp, 0) == 0)
+	{
+		free(input);
+		ft_putstr_fd("exit\n", 2);
+		ft_free_all(data);
+		exit(0);
+	}
+}
 
 /*
 pour le SIGINT: CTRL + C

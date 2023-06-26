@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/26 10:56:05 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/26 17:40:15 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_env	*env_new(char *env, int idx)
 		return (NULL);
 	new->name = get_env_name(env);
 	new->value = getenv(new->name);
-	new->env_paths = NULL;
+	new->env_split = NULL;
 	new->index = idx;
 	new->next = NULL;
 	return (new);

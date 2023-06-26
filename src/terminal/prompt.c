@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/23 11:08:01 by user             ###   ########.fr       */
+/*   Updated: 2023/06/26 15:19:29 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	catch_ctrl_d(t_bigshell *data, char *input)
-{
-	char	tmp[256];
-
-	tmp[0] = 0;
-	if (!data)
-		return ;
-	if (read(STDIN_FILENO, tmp, 0) == 0)
-	{
-		free(input);
-		ft_putstr_fd("exit\n", 2);
-		ft_free_all(data);
-		exit(0);
-	}
-}
 
 void	save_line_for_test(t_bigshell *data, char *input, int count)
 {

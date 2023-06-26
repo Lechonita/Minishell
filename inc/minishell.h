@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/26 12:37:41 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/26 17:16:33 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
 # include "error.h"
+# include "token.h"
 
 # include <stdio.h>
 # include <stdlib.h> 			//exit
@@ -55,8 +56,10 @@ typedef struct s_exec
 	int				index;
 	int				fd_in;
 	int				fd_out;
+	int				nb_cmd;
 	char			*in_file;
 	char			*out_file;
+	int				fd[FOPEN_MAX][2];
 	char			*cmd;
 	char			**args;
 	struct s_exec	*next;
@@ -66,7 +69,7 @@ typedef struct s_env
 {
 	char			*name;
 	char			*value;
-	char			**env_paths;
+	char			**env_split;
 	int				index;
 	struct s_env	*next;
 }	t_env;
@@ -122,6 +125,7 @@ char	*find_path_to_cmd(t_bigshell *data, char *cmd);
 /***********************************************************/
 
 /* SIGNAL HANDLING */
+void	catch_ctrl_d(t_bigshell *data, char *input);
 void	ft_sig_int(int sig);
 void	set_signal(void);
 
@@ -142,6 +146,16 @@ void	redirection_append(t_bigshell *data);
 void	redirection_left(t_bigshell *data);
 void	redirection_right(t_bigshell *data);
 void	redirection(t_bigshell *data);
+
+/***********************************************************/
+/*                  	   PIPEX	                       */
+/***********************************************************/
+
+void	open_pipe(t_bigshell *data);
+void	close_pipe(t_bigshell *data);
+void	handle_dup(t_bigshell *data, int pcss);
+pid_t	execute_pipex(t_bigshell *data, char *env[], int pcss);
+int		ft_waitpid(pid_t last_pid);
 
 /***********************************************************/
 /*                           LINE                          */
@@ -214,6 +228,8 @@ void	ft_free_all(t_bigshell *data);
 
 /* PRINT ERROR */
 void	ft_exit(int err_no, char *msg);
+void	error_execve(t_bigshell *data);
+void	msg_not_found(char *msg, char *str);
 void	error_not_found(t_bigshell *data, char *msg, char *str);
 
 /* PRINT FUNCTION */

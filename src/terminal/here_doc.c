@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/26 12:45:53 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/26 15:10:04 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void	gnl(t_bigshell *data, char *str, char *limiter)
+static void	gnl(t_bigshell *data, char *limiter)
 {
 	int		len;
+	char	*str;
 
 	len = ft_strlen(limiter);
 	while (1)
@@ -33,7 +34,6 @@ static void	gnl(t_bigshell *data, char *str, char *limiter)
 /* << */
 void	handle_here_doc(t_bigshell *data, char *limiter)
 {
-	char	*str;
 	int		ret;
 	char	*file;
 
@@ -41,13 +41,13 @@ void	handle_here_doc(t_bigshell *data, char *limiter)
 	data->exec->fd_in = open(file, O_CREAT | O_WRONLY, 0644);
 	if (data->exec->fd_in < 0)
 		return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
-	gnl(data, str, limiter);
+	gnl(data, limiter);
 	close(data->exec->fd_in);
 	data->exec->fd_in = open(file, O_RDONLY);
 	if (data->exec->fd_in < 0)
 		return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
 	ret = dup2(data->exec->fd_in, STDIN_FILENO);
 	if (ret == -1)
-		return (ft_free_all(data), ft_exit(errno, strerror(errno)), errno);
+		return (ft_free_all(data), ft_exit(errno, strerror(errno)));
 	close(data->exec->fd_in);
 }
