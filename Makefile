@@ -64,6 +64,13 @@ SRC += redirection.c
 SRC += here_doc.c
 SRC += pipex.c
 SRC += pipex_utils.c
+SRC += echo.c
+SRC += cd.c
+SRC += pwd.c
+SRC += export.c
+SRC += unset.c
+SRC += env.c
+SRC += exit.c 
 
 vpath %.c $(SRC_DIR)
 vpath %.c $(TERM_DIR)

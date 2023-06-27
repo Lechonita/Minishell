@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/26 17:16:33 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/27 16:56:02 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,13 @@ int		find_start_sq(t_line *line);
 void	convert_double_quotes(t_line *line);
 void	convert_single_quotes(t_line *line);
 void	check_both_quotes(t_line *line);
+
+/***********************************************************/
+/*                  	  BUILTINS	                       */
+/***********************************************************/
+
+void    env(t_bigshell *data);
+void	pwd(void);
 
 /***********************************************************/
 /*                          UTILS                          */
