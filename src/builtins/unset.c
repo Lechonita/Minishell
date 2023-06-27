@@ -6,8 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:45:03 by Bea               #+#    #+#             */
-/*   Updated: 2023/06/27 16:45:06 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/27 17:21:31 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+/*
+	The unset command deletes a shell variable, effectively setting it to null
+*/
