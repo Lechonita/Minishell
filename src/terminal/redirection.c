@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:03:19 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/26 15:08:16 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/27 10:34:21 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	redirection(t_bigshell *data)
 {
 	if (data->token->type == GREAT)
 		redirection_right(data);
-	else if (data->token->type == LESSLESS)
-		handle_here_doc(data, data->token->value);
+	// else if (data->token->type == LESSLESS)
+	// 	handle_here_doc(data, data->token->value);
 	else if (data->token->type == LESS)
 		redirection_left(data);
 	else if (data->token->type == GREATGREAT)

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/26 09:21:27 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/27 10:22:33 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	ft_free_env(t_env **env)
 			free((*env)->name);
 			(*env)->name = NULL;
 		}
-		if ((*env)->env_paths)
-			free_strs((*env)->env_paths);
+		if ((*env)->env_split)
+			free_strs((*env)->env_split);
 		free(*env);
 		(*env) = tmp;
 	}

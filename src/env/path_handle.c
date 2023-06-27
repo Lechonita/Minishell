@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/26 17:28:01 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/27 10:16:42 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strjoin_bis(char *s1, char *s2)
 {
 	char	*tmp;
 	char	*str;
-	
+
 	tmp = ft_strjoin(s1, "/");
 	if (!tmp)
 		return (NULL);

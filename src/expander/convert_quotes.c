@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:55:34 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/21 15:56:05 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:17:41 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 // void	do_both_quotes(t_line *line)
 // {
-	
 // }
 
 // void	close_quotes(t_line *line)
 // {
-	
 // }
 
 void	convert_double_quotes(t_line *line)

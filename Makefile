@@ -33,15 +33,16 @@ vpath %.h $(INC_DIR)
 ############################### Path Sources ###################################
 
 SRC_DIR = ./src
+BUILTINS_DIR = ./src/builtins
+ENV_DIR = ./src/env
+EXEC_DIR = ./src/exec
+EXPANDER_DIR = ./src/expander
+LEXER_DIR = ./src/lexer
+PARSER_DIR = ./src/parser
+PIPE_DIR = ./src/pipe
 TERM_DIR = ./src/terminal
 UTILS_DIR = ./src/utils
-BUILTINS_DIR = ./src/builtins
-EXEC_DIR = ./src/exec
-PARSER_DIR = ./src/parser
-ENV_DIR = ./src/env
-LEXER_DIR = ./src/lexer
-EXPANDER_DIR = ./src/expander
-PIPE_DIR = ./src/pipe
+
 
 ############################### Sources ########################################
 

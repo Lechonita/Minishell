@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/22 12:08:14 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/27 10:21:14 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Fonction qui retourne le dernier maillon de la liste t_line. */
 
-t_line	*line_last(t_line	*line)
+t_line	*line_last(t_line *line)
 {
 	while (line && line->next)
 		line = line->next;
@@ -49,7 +49,7 @@ t_line	*line_new(char c, int i)
 	if (!new)
 		return (NULL);
 	new->index = i;
-	new->type = ft_determine_type(c);	// dans le cas ou c'est 0 ?
+	new->type = ft_determine_type(c); // dans le cas ou c'est 0 ?
 	new->dq = 0;
 	new->sq = 0;
 	new->c = c;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_strings.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/21 16:07:41 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:18:20 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	find_strings(t_line *line)
 		convert_double_quotes(tmp);
 	// else if (sq_flag == 1 || dq_flag == 1)
 	// 	close_quotes(tmp);
-
 	// check guillemets
 	// check l'ordre des guillemets si plusieurs
 	// 	=> des '' a l'interieur des "" n'ont aucun effet
