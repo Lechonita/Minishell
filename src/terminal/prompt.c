@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/28 11:01:10 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/28 16:30:45 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_readline(t_bigshell *data)
 		if (input != NULL)
 		{
 			add_history(input);
+			save_line_for_test(data, input, count);
 			init_line(data, input);
 			// find_tokens(data);
 			count++;

@@ -43,39 +43,53 @@ PIPE_DIR = ./src/pipe
 TERM_DIR = ./src/terminal
 UTILS_DIR = ./src/utils
 
-
 ############################### Sources ########################################
 
 SRC += main.c 
-SRC += cd.c
+
+#	Builtins functions
 SRC += echo.c
+SRC += cd.c
+SRC += pwd.c
+SRC += export.c
+SRC += unset.c
 SRC += env.c
 SRC += exit.c 
-SRC += export.c
-SRC += pwd.c
-SRC += unset.c
+
+#	Env functions
 SRC += env_init.c
 SRC += path_handle.c
+
+# 	Exec functions
+SRC += pipex.c
+SRC += pipex_utils.c
+SRC += redirection.c
+SRC += here_doc.c
+
+#	Expander functions
 SRC += dollar.c
 SRC += quotes_find.c
 SRC += quotes_open.c
 SRC += quotes_position.c
+
+#	Lexer functions
 SRC += token_find.c
+
+#	Parser functions
 SRC += flag_quotes.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
-SRC += pipex_utils.c
-SRC += pipex.c
-SRC += here_doc.c
+
+#	Terminal functions
 SRC += prompt.c
-SRC += redirection.c
 SRC += signal.c
 SRC += termcap.c
-SRC += error.c
+
+#	Utils functions
 SRC += free_struct.c
+SRC += error.c
 SRC += print.c
-SRC += prompt.c
 
 vpath %.c $(SRC_DIR)
 vpath %.c $(TERM_DIR)

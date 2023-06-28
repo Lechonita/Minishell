@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/28 11:00:51 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/28 16:23:38 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct s_line
 typedef struct s_bigshell
 {
 	char			**history;
-    char            **env_paths;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;
@@ -107,56 +106,56 @@ typedef struct s_bigshell
 /***********************************************************/
 
 /* MAIN */
-void		ft_readline(t_bigshell *data);
+void	ft_readline(t_bigshell *data);
 
 /***********************************************************/
 /*                           ENV                           */
 /***********************************************************/
 
 /*  ENV INIT */
-char		*get_env_name(char	*env);
-void		init_env(t_bigshell *data, char **env);
+char	*get_env_name(char	*env);
+void	init_env(t_bigshell *data, char **env);
 
 /* SEARCH GOOD PATH */
-void		get_path(t_bigshell *data);
-char		*find_path_to_cmd(t_bigshell *data, char *cmd);
+void	get_path(t_bigshell *data);
+char	*find_path_to_cmd(t_bigshell *data, char *cmd);
 
 /***********************************************************/
 /*                         SIGNAL                          */
 /***********************************************************/
 
 /* SIGNAL HANDLING */
-void		get_pathcatch_ctrl_d(t_bigshell *data, char *input);
-void		ft_sig_int(int sig);
-void		set_signal(void);
+void	catch_ctrl_d(t_bigshell *data, char *input);
+void	ft_sig_int(int sig);
+void	set_signal(void);
 
 /***********************************************************/
 /*                  	   TERMINAL	                       */
 /***********************************************************/
 
 /* Test only */
-void		save_line_for_test(t_bigshell *data, char *input, int count);
+void	save_line_for_test(t_bigshell *data, char *input, int count);
 
 /* TERMINAL CAPABILITIES */
-int			init_term(void);
-int			ft_termcap(t_bigshell *data);
+int		init_term(void);
+int		ft_termcap(t_bigshell *data);
 
 /* REDIRECTION */
-void		handle_here_doc(t_bigshell *data, char *limiter);
-void		redirection_append(t_bigshell *data);
-void		redirection_left(t_bigshell *data);
-void		redirection_right(t_bigshell *data);
-void		redirection(t_bigshell *data);
+void	handle_here_doc(t_bigshell *data, char *limiter);
+void	redirection_append(t_bigshell *data);
+void	redirection_left(t_bigshell *data);
+void	redirection_right(t_bigshell *data);
+void	redirection(t_bigshell *data);
 
 /***********************************************************/
 /*                  	   PIPEX	                       */
 /***********************************************************/
 
-void		open_pipe(t_bigshell *data);
-void		close_pipe(t_bigshell *data);
-void		handle_dup(t_bigshell *data, int pcss);
-pid_t		execute_pipex(t_bigshell *data, char *env[], int pcss);
-int			ft_waitpid(pid_t last_pid);
+void	open_pipe(t_bigshell *data);
+void	close_pipe(t_bigshell *data);
+void	handle_dup(t_bigshell *data, int pcss);
+pid_t	execute_pipex(t_bigshell *data, char *env[], int pcss);
+int		ft_waitpid(pid_t last_pid);
 
 /***********************************************************/
 /*                          PARSER                         */
@@ -193,11 +192,11 @@ void		flag_single_quotes(t_line *line);
 /***********************************************************/
 
 /* FIND TOKENS */
-t_token		*token_last(t_token	*token);
-void		token_addback(t_token *token, t_token *new);
-t_token		*token_new(t_line *first, t_line *current, int start);
-void		ft_create_token(t_bigshell *data, t_line *current, int start);
-void		find_tokens(t_bigshell *data);
+t_token	*token_last(t_token	*token);
+void	token_addback(t_token *token, t_token *new);
+t_token	*token_new(t_line *first, t_line *current, int start);
+void	ft_create_token(t_bigshell *data, t_line *current, int start);
+void	find_tokens(t_bigshell *data);
 
 /***********************************************************/
 /*                        EXPANDER                         */
@@ -225,26 +224,33 @@ void		interpret_open_quotes(t_line *line, int type);
 // int			find_start_sq(t_line *line);
 
 /***********************************************************/
+/*                  	  BUILTINS	                       */
+/***********************************************************/
+
+void    env(t_bigshell *data);
+void	pwd(void);
+
+/***********************************************************/
 /*                          UTILS                          */
 /***********************************************************/
 
 /* FREE STRUCT*/
 // void		ft_free_line_node(t_line *line);
-void		ft_free_env(t_bigshell *data);
-void		ft_free_token(t_bigshell *data);
-void		ft_free_history(t_bigshell *data);
-void		ft_free_all(t_bigshell *data);
+void	ft_free_env(t_env **env);
+void	ft_free_token(t_bigshell *data);
+void	ft_free_history(t_bigshell *data);
+void	ft_free_all(t_bigshell *data);
 
 /* PRINT ERROR */
-void		ft_exit(int err_no, char *msg);
-void		error_execve(t_bigshell *data);
-void		msg_not_found(char *msg, char *str);
-void		error_not_found(t_bigshell *data, char *msg, char *str);
+void	ft_exit(int err_no, char *msg);
+void	error_execve(t_bigshell *data);
+void	msg_not_found(char *msg, char *str);
+void	error_not_found(t_bigshell *data, char *msg, char *str);
 
 /* PRINT FUNCTION */
-void		print_strs(char **strs);
-void		print_t_line(t_bigshell *data);
-void		print_t_token(t_bigshell *data);
-void		display_env_struct(t_bigshell *data);
-void		print_history_lst(t_bigshell *data);
+void	print_strs(char **strs);
+void	print_t_line(t_bigshell *data);
+void	print_t_token(t_bigshell *data);
+void	display_env_struct(t_bigshell *data);
+void	print_history_lst(t_bigshell *data);
 #endif

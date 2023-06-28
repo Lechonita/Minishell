@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/28 11:01:18 by lechon           ###   ########.fr       */
+/*   Updated: 2023/06/28 16:29:39 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 // 	free(line);
 // 	line = NULL;
 // }
-
-/* Fonction qui free tous les maillons de la liste chainee t_env. */
 
 void	free_strs(char **strs)
 {
@@ -45,6 +43,7 @@ void	free_strs(char **strs)
 	}
 }
 
+/* Fonction qui free tous les maillons de la liste chainee t_env. */
 void	ft_free_env(t_env **env)
 {
 	t_env	*tmp;
