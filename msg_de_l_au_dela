@@ -6,5 +6,3 @@ tout ca est genere par l'IA, c'est pas mal quand meme !!
 
 < in_file.txt cat | wc -l | head -7 | tail -5 | ls -l > out_file.txt
 < in_file.txt cat | head -7 | taili -5 > out_file.txt
-
-jkl

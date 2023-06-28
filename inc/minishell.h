@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/27 16:56:02 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/28 10:19:19 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_line
 typedef struct s_bigshell
 {
 	char			**history;
+    char            **env_paths;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;
