@@ -158,7 +158,6 @@ $(NAME): $(LIBFT) $(OBJ)
 norm:
 	@norminette inc/*.h
 	@norminette src/*/*.c
-	
 #	@norminette libft/*/*.[ch]
 
 leaks: $(NAME) #fclean $(NAME)

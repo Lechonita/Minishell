@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/28 16:29:39 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/28 17:44:11 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,24 @@ void	ft_free_token(t_bigshell *data)
 	}
 }
 
+void	ft_free_line(t_line **line)
+{
+	t_line	*tmp;
+
+	if (!line || !(*line))
+		return ;
+	printf("line to free : ");
+	while (*line)
+	{
+		tmp = (*line)->next;
+		printf("%c", (*line)->c);
+		free(*line);
+		(*line) = tmp;
+	}
+	*line = NULL;
+	printf("\n");
+}
+
 void	ft_free_all(t_bigshell *data)
 {
 	if (!data)
@@ -91,6 +109,8 @@ void	ft_free_all(t_bigshell *data)
 		free_strs(data->history);
 	if (data->token)
 		ft_free_token(data);
+	if (data->line)
+		ft_free_line(&data->line);
 	if (data->env)
 		ft_free_env(&data->env);
 	free(data);

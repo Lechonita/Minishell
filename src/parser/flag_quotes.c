@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_quotes.c                                      :+:      :+:    :+:   */
+/*   flag_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:37:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/22 17:21:13 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/28 17:35:37 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,35 @@
 void	flag_double_quotes(t_line *line)
 {
 	int		dq;
+	t_line	*el;
 
 	dq = 0;
-	while (line)
+	el = line;
+	while (el != NULL)
 	{
 		if (dq == 2)
 			dq = 0;
-		if (line->type == TYPE_DOUBLE_QUOTES)
+		if (el->type == TYPE_DOUBLE_QUOTES)
 			dq++;
-		line->dq = dq;
-		line = line->next;
+		el->dq = dq;
+		el = el->next;
 	}
 }
 
 void	flag_single_quotes(t_line *line)
 {
 	int		sq;
+	t_line	*el;
 
 	sq = 0;
-	while (line)
+	el = line;
+	while (el != NULL)
 	{
 		if (sq == 2)
 			sq = 0;
-		if (line->type == TYPE_SINGLE_QUOTES)
+		if (el->type == TYPE_SINGLE_QUOTES)
 			sq++;
-		line->sq = sq;
-		line = line->next;
+		el->sq = sq;
+		el = el->next;
 	}
 }

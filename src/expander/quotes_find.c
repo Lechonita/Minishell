@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/23 11:42:02 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/28 17:38:03 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,25 @@ void	convert_quotes(t_line *line, int type)
 
 void	find_quotes(t_line *line)
 {
+	t_line	*el;
+
+
 	if (!line)
 		return ;
-	while (line)
+	el = line;
+	while (el != NULL)
 	{
-		if (line->sq == 1)
+		if (el->sq == 1)
 		{
-			convert_quotes(line, TYPE_SINGLE_QUOTES);
+			convert_quotes(el, TYPE_SINGLE_QUOTES);
 			break ;
 		}
-		else if (line->dq == 1)
+		else if (el->dq == 1)
 		{
-			convert_quotes(line, TYPE_DOUBLE_QUOTES);
+			convert_quotes(el, TYPE_DOUBLE_QUOTES);
 			break ;
 		}
 		else
-			line = line->next;
+			el = el->next;
 	}
 }

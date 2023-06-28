@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/28 16:30:45 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/28 17:42:18 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_readline(t_bigshell *data)
 			count++;
 		}
 		free(input);
+		ft_free_line(&data->line);
 	}
 	free(input);
 }

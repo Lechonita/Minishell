@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/28 16:23:38 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/28 17:42:33 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,7 @@ void	pwd(void);
 
 /* FREE STRUCT*/
 // void		ft_free_line_node(t_line *line);
+void	ft_free_line(t_line **line);
 void	ft_free_env(t_env **env);
 void	ft_free_token(t_bigshell *data);
 void	ft_free_history(t_bigshell *data);
