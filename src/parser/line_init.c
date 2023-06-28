@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/23 12:30:54 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:00:57 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Fonction qui retourne le dernier maillon de la liste t_line. */
 
-t_line	*line_last(t_line	*line)
+t_line	*line_last(t_line *line)
 {
 	while (line && line->next)
 		line = line->next;
@@ -58,7 +58,7 @@ t_line	*line_new(t_line *line, char c, int i)
 	if (i == -1 && line)
 		i = find_next_index(line) + 1;
 	new->index = i;
-	new->type = ft_determine_type(c);	// dans le cas ou c'est 0 ?
+	new->type = ft_determine_type(c); // dans le cas ou c'est 0 ?
 	new->dq = 0;
 	new->sq = 0;
 	new->c = c;

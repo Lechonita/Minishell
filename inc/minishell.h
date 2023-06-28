@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/23 15:59:15 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:00:51 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
 # include "error.h"
+# include "token.h"
 
 # include <stdio.h>
 # include <stdlib.h> 			//exit
@@ -55,7 +56,12 @@ typedef struct s_exec
 	int				index;
 	int				fd_in;
 	int				fd_out;
+	int				nb_cmd;
+	char			*in_file;
+	char			*out_file;
+	int				fd[FOPEN_MAX][2];
 	char			*cmd;
+	char			**args;
 	struct s_exec	*next;
 }	t_exec;
 
@@ -63,6 +69,8 @@ typedef struct s_env
 {
 	char			*name;
 	char			*value;
+	char			**env_split;
+	int				index;
 	struct s_env	*next;
 }	t_env;
 
@@ -84,16 +92,10 @@ typedef struct s_line
 	struct s_line	*next;
 }	t_line;
 
-typedef struct s_history
-{
-	int					index;
-	char				*cmd_line;
-	struct s_history	*next;
-}	t_history;
-
 typedef struct s_bigshell
 {
-	t_history		*history;
+	char			**history;
+    char            **env_paths;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;
@@ -112,31 +114,49 @@ void		ft_readline(t_bigshell *data);
 /***********************************************************/
 
 /*  ENV INIT */
-t_env		*env_last(t_env *new);
-void		env_addback(t_env *new, t_env *env);
-t_env		*env_new(char *env);
-void		init_env(t_bigshell *data, char **env);
-// void	display_env_struct(t_bigshell *data);
-
-/* ENV FIND VALUES */
-// char	*ft_strndup(const char *src, size_t n);
-char		*get_env_value(char *env);
-int			find_equal(char *env);
 char		*get_env_name(char	*env);
+void		init_env(t_bigshell *data, char **env);
+
+/* SEARCH GOOD PATH */
+void		get_path(t_bigshell *data);
+char		*find_path_to_cmd(t_bigshell *data, char *cmd);
 
 /***********************************************************/
 /*                         SIGNAL                          */
 /***********************************************************/
 
 /* SIGNAL HANDLING */
+void		get_pathcatch_ctrl_d(t_bigshell *data, char *input);
 void		ft_sig_int(int sig);
 void		set_signal(void);
 
 /***********************************************************/
-/*                  TERMINAL CAPABILITIES                  */
+/*                  	   TERMINAL	                       */
 /***********************************************************/
+
+/* Test only */
+void		save_line_for_test(t_bigshell *data, char *input, int count);
+
+/* TERMINAL CAPABILITIES */
 int			init_term(void);
 int			ft_termcap(t_bigshell *data);
+
+/* REDIRECTION */
+void		handle_here_doc(t_bigshell *data, char *limiter);
+void		redirection_append(t_bigshell *data);
+void		redirection_left(t_bigshell *data);
+void		redirection_right(t_bigshell *data);
+void		redirection(t_bigshell *data);
+
+/***********************************************************/
+/*                  	   PIPEX	                       */
+/***********************************************************/
+
+void		open_pipe(t_bigshell *data);
+void		close_pipe(t_bigshell *data);
+void		handle_dup(t_bigshell *data, int pcss);
+pid_t		execute_pipex(t_bigshell *data, char *env[], int pcss);
+int			ft_waitpid(pid_t last_pid);
 
 /***********************************************************/
 /*                          PARSER                         */
@@ -217,10 +237,14 @@ void		ft_free_all(t_bigshell *data);
 
 /* PRINT ERROR */
 void		ft_exit(int err_no, char *msg);
+void		error_execve(t_bigshell *data);
+void		msg_not_found(char *msg, char *str);
+void		error_not_found(t_bigshell *data, char *msg, char *str);
 
 /* PRINT FUNCTION */
 void		print_strs(char **strs);
 void		print_t_line(t_bigshell *data);
 void		print_t_token(t_bigshell *data);
+void		display_env_struct(t_bigshell *data);
 void		print_history_lst(t_bigshell *data);
 #endif

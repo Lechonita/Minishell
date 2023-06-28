@@ -3,29 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/22 18:28:41 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:01:10 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	catch_ctrl_d(t_bigshell *data, char *input)
+void	save_line_for_test(t_bigshell *data, char *input, int count)
 {
-	char	tmp[256];
-
-	tmp[0] = 0;
 	if (!data)
 		return ;
-	if (read(STDIN_FILENO, tmp, 0) == 0)
-	{
-		free(input);
-		ft_putstr_fd("exit\n", 2);
-		ft_free_all(data);
-		exit(0);
-	}
+	data->history[count] = ft_strdup(input);
+	if (!data->history[count])
+		ft_exit(EXIT_FAILURE, "strdup in save line for test error\n");
 }
 
 void	ft_readline(t_bigshell *data)
@@ -34,6 +27,7 @@ void	ft_readline(t_bigshell *data)
 	int		count;
 
 	count = 0;
+	data->history = ft_calloc(50, sizeof(char *));
 	while (1)
 	{
 		input = readline("$ ");

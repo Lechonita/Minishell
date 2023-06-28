@@ -32,22 +32,30 @@ vpath %.h $(INC_DIR)
 
 ############################### Path Sources ###################################
 
+SRC_DIR = ./src
+BUILTINS_DIR = ./src/builtins
+ENV_DIR = ./src/env
+EXEC_DIR = ./src/exec
+EXPANDER_DIR = ./src/expander
+LEXER_DIR = ./src/lexer
+PARSER_DIR = ./src/parser
+PIPE_DIR = ./src/pipe
 TERM_DIR = ./src/terminal
 UTILS_DIR = ./src/utils
-BUILTINS_DIR = ./src/builtins
-EXEC_DIR = ./src/exec
-PARSER_DIR = ./src/parser
-ENV_DIR = ./src/env
-LEXER_DIR = ./src/lexer
-EXPANDER_DIR = ./src/expander
-SIG_DIR = ./src/signal
-SRC_DIR = ./src
+
 
 ############################### Sources ########################################
 
 SRC += main.c 
-SRC += env_find_values.c
+SRC += cd.c
+SRC += echo.c
+SRC += env.c
+SRC += exit.c 
+SRC += export.c
+SRC += pwd.c
+SRC += unset.c
 SRC += env_init.c
+SRC += path_handle.c
 SRC += dollar.c
 SRC += quotes_find.c
 SRC += quotes_open.c
@@ -57,14 +65,19 @@ SRC += flag_quotes.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
-SRC += client.c
-SRC += server.c
-SRC += signal.c
+SRC += pipex_utils.c
+SRC += pipex.c
+SRC += here_doc.c
 SRC += prompt.c
+SRC += redirection.c
+SRC += signal.c
 SRC += termcap.c
+SRC += error.c
 SRC += free_struct.c
-SRC += print_error.c
+SRC += print.c
+SRC += prompt.c
 
+vpath %.c $(SRC_DIR)
 vpath %.c $(TERM_DIR)
 vpath %.c $(UTILS_DIR)
 vpath %.c $(BUILTINS_DIR)
@@ -73,8 +86,7 @@ vpath %.c $(PARSER_DIR)
 vpath %.c $(ENV_DIR)
 vpath %.c $(LEXER_DIR)
 vpath %.c $(EXPANDER_DIR)
-vpath %.c $(SIG_DIR)
-vpath %.c $(SRC_DIR)
+vpath %.c $(PIPE_DIR)
 
 ############################### Objects ########################################
 
@@ -130,15 +142,17 @@ $(NAME): $(LIBFT) $(OBJ)
 # 	@echo "$(RED)                                                         $(END)"
 
 norm:
-	@norminette src/*/*.c
 	@norminette inc/*.h
+	@norminette src/*/*.c
+	
 #	@norminette libft/*/*.[ch]
 
 leaks: $(NAME) #fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
-	@valgrind --leak-check=full --track-fds=yes -q ./$(NAME)
+	@valgrind --leak-check=full -q ./$(NAME)
 # --track-origins=yes --show-leak-kinds=all --track-origins=yes --suppressions=./.readline.supp
+# --track-fds=yes
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"
@@ -154,7 +168,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re leaks norm
 
 ############################### Color ##########################################
 

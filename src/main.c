@@ -3,26 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/22 18:19:55 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:01:23 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	main(int ac, char *av[], char **env)
+void	init_minishell(t_bigshell *data, char *env[])
+{
+	set_signal();
+	init_env(data, env);
+	print_strs(data->history);
+	ft_readline(data);
+}
+
+int	main(int ac, char *av[], char *env[])
 {
 	t_bigshell	*data;
 	// int			ret;
 
 	data = ft_calloc(1, sizeof(t_bigshell));
-	if (!data)
-		return (0);
-	init_env(data, env);
-	set_signal();
-	ft_readline(data);
+	init_minishell(data, env);
+	// display_env_struct(data);
 	if (ac == 2)
 		printf("%s\n", av[1]);
 	// ret = ft_termcap(data);
@@ -32,7 +37,8 @@ int	main(int ac, char *av[], char **env)
 }
 
 /*
-	// int			ret;
-	// ret = ft_termcap(data);
-	// printf("ret = %d\n", ret);
+terminal capabilities :
+	int			ret;
+	ret = ft_termcap(data);
+	printf("ret = %d\n", ret);
 */

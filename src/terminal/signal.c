@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/21 17:01:57 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/27 16:33:48 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	catch_ctrl_d(t_bigshell *data, char *input)
+{
+	char	tmp[256];
+
+	tmp[0] = 0;
+	if (!data)
+		return ;
+	if (read(STDIN_FILENO, tmp, 0) == 0)
+	{
+		free(input);
+		ft_putstr_fd("exit\n", 2);
+		ft_free_all(data);
+		exit(0);
+	}
+}
 
 /*
 pour le SIGINT: CTRL + C
@@ -18,10 +34,6 @@ pour le SIGINT: CTRL + C
 	rl_on_new_line();		regenerate the prompt on a newline
 	rl_replace_line("", 0); clear the previous text
 	rl_redisplay();			redisplay the prompt on a newline
-pour le SIGQUIT: CTRL + \
-	rl_on_new_line();			regenerate the prompt on a newline
-	rl_replace_line("  ", 0);	clear the previous text, replace it with 2 spaces
-	rl_redisplay();				redisplay the prompt on a newline
 */
 
 void	ft_sig_int(int sig)
