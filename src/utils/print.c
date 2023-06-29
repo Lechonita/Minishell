@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/29 14:35:59 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/29 16:00:58 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	print_t_token(t_bigshell *data)
 	while (el)
 	{
 		printf("[%2d] ", el->index);
-		printf("pos in line %2d ", el->pos);
 		printf("type %d", el->type);
 		printf(" : %s\n", el->value);
 		el = el->next;

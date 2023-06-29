@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:17:32 by Bea               #+#    #+#             */
-/*   Updated: 2023/06/29 14:44:38 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/29 16:00:13 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	token_addback(t_token *token, t_token *new)
 /* Fonction qui cree un maillon t_token pour ajouter a la
 	liste chainee. */
 
-static t_token	*token_new(char *value, int type, int pos, int idx)
+static t_token	*token_new(char *value, int type, int idx)
 {
 	t_token		*new;
 
@@ -45,7 +45,6 @@ static t_token	*token_new(char *value, int type, int pos, int idx)
 	if (!new)
 		return (NULL);
 	new->index = idx;
-	new->pos = pos;
 	new->type = type;
 	new->value = ft_strdup(value);
 	new->next = NULL;
@@ -56,10 +55,10 @@ void	ft_create_token(t_bigshell *data, t_line *current, char *value, int pos)
 {
 	if (current->index == 0)
 	{
-		data->token = token_new(value, current->type, current->index, pos);
+		data->token = token_new(value, current->type, pos);
 		if (!data->token)
 			ft_exit(EXIT_FAILURE, W_LST_TOK);
 	}
 	else
-		token_addback(data->token, token_new(value, current->type, current->index, pos));
+		token_addback(data->token, token_new(value, current->type, pos));
 }

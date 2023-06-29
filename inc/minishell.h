@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/29 14:39:53 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/29 16:09:31 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ typedef struct s_env
 typedef struct s_token
 {
 	int				index;
-	int				pos;
 	int				type;
 	char			*value;
 	struct s_token	*next;
