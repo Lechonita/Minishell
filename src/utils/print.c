@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/28 17:31:49 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/29 14:35:59 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	print_t_line(t_bigshell *data)
 {
 	t_line	*el;
 
-	if (!data->line)
-		ft_exit(EXIT_FAILURE, "No line to display\n");
 	el = data->line;
 	while (el != NULL)
 	{
@@ -42,28 +40,17 @@ void	print_t_line(t_bigshell *data)
 	}
 }
 
-/*
-		printf("=================================\n");
-		printf("[index] %d\n", el->index);
-		printf("[type] %d\n", el->type);
-		printf("[dq] %d\n", el->dq);
-		printf("[sq] %d\n", el->sq);
-		printf("[c] %c\n", el->c);
-*/
-
 void	print_t_token(t_bigshell *data)
 {
 	t_token	*el;
 
-	if (!data->token)
-		ft_exit(EXIT_FAILURE, "No token to display\n");
 	el = data->token;
 	while (el)
 	{
-		printf("=================================\n");
-		printf("[index] %d\n", el->index);
-		printf("[type] %d\n", el->type);
-		printf("[value] %s\n", el->value);
+		printf("[%2d] ", el->index);
+		printf("pos in line %2d ", el->pos);
+		printf("type %d", el->type);
+		printf(" : %s\n", el->value);
 		el = el->next;
 	}
 }

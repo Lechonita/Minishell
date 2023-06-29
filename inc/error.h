@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/26 17:00:31 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/29 14:44:31 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define CMD_NOT_FOUND "bash: command not found: "
 # define PERM_DENIED "bash: Permission denied: "
 # define FILE_NOT_FOUND "bash: No such file or directory: "
+# define W_LST_TOK "\t Failure in creating token lst\n"
+
 
 // # define W_ARG "\t Wrong argument number\n"
 // # define W_ENV "\t Environment error\n"

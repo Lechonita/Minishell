@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/28 17:42:18 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/29 14:42:07 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void	save_line_for_test(t_bigshell *data, char *input, int count)
 	data->history[count] = ft_strdup(input);
 	if (!data->history[count])
 		ft_exit(EXIT_FAILURE, "strdup in save line for test error\n");
+}
+
+void	free_readline(t_bigshell *data, char *input)
+{
+	free(input);
+	ft_free_line(&data->line);
+	ft_free_token(&data->token);
 }
 
 void	ft_readline(t_bigshell *data)
@@ -40,11 +47,10 @@ void	ft_readline(t_bigshell *data)
 			add_history(input);
 			save_line_for_test(data, input, count);
 			init_line(data, input);
-			// find_tokens(data);
+			find_tokens(data);
 			count++;
 		}
-		free(input);
-		ft_free_line(&data->line);
+		free_readline(data, input);
 	}
 	free(input);
 }

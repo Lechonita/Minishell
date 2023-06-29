@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/28 17:42:33 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/29 14:39:53 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	int				index;
+	int				pos;
 	int				type;
 	char			*value;
 	struct s_token	*next;
@@ -192,10 +193,9 @@ void		flag_single_quotes(t_line *line);
 /***********************************************************/
 
 /* FIND TOKENS */
-t_token	*token_last(t_token	*token);
-void	token_addback(t_token *token, t_token *new);
-t_token	*token_new(t_line *first, t_line *current, int start);
-void	ft_create_token(t_bigshell *data, t_line *current, int start);
+// void	ft_create_token(t_bigshell *data, t_line *current, int start);
+// void	ft_create_token(t_bigshell *data, t_line *current, char *value);
+void	ft_create_token(t_bigshell *data, t_line *current, char *value, int pos);
 void	find_tokens(t_bigshell *data);
 
 /***********************************************************/
@@ -238,7 +238,7 @@ void	pwd(void);
 // void		ft_free_line_node(t_line *line);
 void	ft_free_line(t_line **line);
 void	ft_free_env(t_env **env);
-void	ft_free_token(t_bigshell *data);
+void	ft_free_token(t_token **token);
 void	ft_free_history(t_bigshell *data);
 void	ft_free_all(t_bigshell *data);
 

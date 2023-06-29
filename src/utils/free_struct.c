@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/28 17:44:11 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/29 14:47:39 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,19 @@ void	ft_free_env(t_env **env)
 	*env = NULL;
 }
 
-void	ft_free_token(t_bigshell *data)
+void	ft_free_token(t_token **token)
 {
 	t_token	*tmp;
 
-	if (!data || !data->token)
+	if (!(*token) || !token)
 		return ;
-	while (data->token)
+	while (*token)
 	{
-		tmp = data->token->next;
-		if (data->token->value)
-			free(data->token->value);
-		free(data->token);
-		data->token = tmp;
+		tmp = (*token)->next;
+		if ((*token)->value)
+			free((*token)->value);
+		free((*token));
+		(*token) = tmp;
 	}
 }
 
@@ -88,11 +88,9 @@ void	ft_free_line(t_line **line)
 
 	if (!line || !(*line))
 		return ;
-	printf("line to free : ");
 	while (*line)
 	{
 		tmp = (*line)->next;
-		printf("%c", (*line)->c);
 		free(*line);
 		(*line) = tmp;
 	}
@@ -108,7 +106,7 @@ void	ft_free_all(t_bigshell *data)
 	if (data->history)
 		free_strs(data->history);
 	if (data->token)
-		ft_free_token(data);
+		ft_free_token(&data->token);
 	if (data->line)
 		ft_free_line(&data->line);
 	if (data->env)

@@ -6,7 +6,7 @@ NAME = minishell
 
 ############################### Compiler #######################################
 
-FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
 CC = gcc
 
 ############################### LIBFT ##########################################
@@ -74,6 +74,7 @@ SRC += quotes_position.c
 
 #	Lexer functions
 SRC += token_find.c
+SRC += token_init.c
 
 #	Parser functions
 SRC += flag_quotes.c
