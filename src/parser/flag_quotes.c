@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:37:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/28 17:35:37 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 15:58:55 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/parser.h"
 
 /* Ces fonctions remplissent les valeurs t_line->sq et t_line->dq
 	Elle va flagger les doubles / simplesguillemets s' il y en a.

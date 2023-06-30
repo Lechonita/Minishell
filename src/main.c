@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/28 17:10:39 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 17:21:54 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/env.h"
 
 void	init_minishell(t_bigshell *data, char *env[])
 {
@@ -28,6 +29,7 @@ int	main(int ac, char *av[], char *env[])
 	init_minishell(data, env);
 	if (ac == 2)
 		printf("%s\n", av[1]);
+	executor(data, env);
 	ft_free_all(data);
 	return (0);
 }

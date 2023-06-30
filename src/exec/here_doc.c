@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/27 10:34:11 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/30 15:56:46 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/exec.h"
 
 // static void	gnl(t_bigshell *data, char *limiter)
 // {

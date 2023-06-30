@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:00:06 by Bea               #+#    #+#             */
-/*   Updated: 2023/06/26 17:39:35 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 15:56:53 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/exec.h"
 
 void	open_pipe(t_bigshell *data)
 {

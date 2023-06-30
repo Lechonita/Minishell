@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   termcap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:48:56 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/21 18:23:02 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/30 15:58:25 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/input.h"
 
 int	init_term(void)
 {

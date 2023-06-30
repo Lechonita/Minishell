@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/28 17:38:03 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 15:57:22 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/expander.h"
 
 // 	// check guillemets
 // 	// check l'ordre des guillemets si plusieurs

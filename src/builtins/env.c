@@ -6,13 +6,13 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/06/27 16:56:37 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 16:28:35 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void    env(t_bigshell *data)
+void    ft_env(t_bigshell *data)
 {
     t_env   *el;
 

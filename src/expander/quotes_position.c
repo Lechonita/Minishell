@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_position.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:45:14 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/22 16:42:39 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:57:34 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/expander.h"
 
 /* Toutes ces fonctions permettent de determiner la position de :
 	- l'ouverture des doubles guillemets

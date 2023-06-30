@@ -8,4 +8,9 @@ tout ca est genere par l'IA, c'est pas mal quand meme !!
 < in_file.txt cat | head -7 | taili -5 > out_file.txt
 < in_file.txt cat | wc -l > out_file.txt
 
-jkl
+to do list :
+→ add token to token list (pipe, cmd, etc etc)
+→ finish init_exec
+→ handle { } in parser
+→ check if all grammar is ok in lexer/parser/tokener 
+→ check the pb with .h compilation

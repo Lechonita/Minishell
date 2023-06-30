@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:17:32 by Bea               #+#    #+#             */
-/*   Updated: 2023/06/29 16:00:13 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 15:58:41 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/lexer.h"
 
 static t_token	*token_last(t_token	*token)
 {

@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/27 16:33:48 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 15:58:21 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/input.h"
 
 void	catch_ctrl_d(t_bigshell *data, char *input)
 {

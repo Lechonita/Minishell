@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:13:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/29 16:22:15 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 15:58:35 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/lexer.h"
 
 int	token_size(t_line *current)
 {

@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/29 12:34:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 15:59:02 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/parser.h"
 
 /* Fonction qui retourne le dernier maillon de la liste t_line. */
 

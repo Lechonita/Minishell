@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/29 16:09:31 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 17:30:49 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
 # include "error.h"
-# include "token.h"
+# include "./lexer.h"
+// # include "env.h"
 
 # include <stdio.h>
 # include <stdlib.h> 			//exit
@@ -51,25 +52,37 @@
 # define TYPE_BLANK 7			// space and \t
 # define TYPE_DOLLAR 8			// $
 
+// typedef struct s_builtin
+// {
+// 	char	*name;
+// 	int		(*func)(t_bigshell *data, int cmd_ac, char *cmd_av[]);
+// }	t_builtin;
+
+typedef struct s_cmd
+{
+	char			*instruction;
+	char			*cmd;
+	char			**cmd_arg;
+	int				idx_cmd;
+	struct s_cmd	*next;
+}			t_cmd;
+
 typedef struct s_exec
 {
-	int				index;
 	int				fd_in;
 	int				fd_out;
 	int				nb_cmd;
 	char			*in_file;
 	char			*out_file;
 	int				fd[FOPEN_MAX][2];
-	char			*cmd;
-	char			**args;
-	struct s_exec	*next;
+	int				here_doc;
+	t_cmd			*cmd;
 }	t_exec;
 
 typedef struct s_env
 {
 	char			*name;
 	char			*value;
-	char			**env_split;
 	int				index;
 	struct s_env	*next;
 }	t_env;
@@ -79,6 +92,7 @@ typedef struct s_token
 	int				index;
 	int				type;
 	char			*value;
+	int				token;
 	struct s_token	*next;
 }	t_token;
 
@@ -95,6 +109,7 @@ typedef struct s_line
 typedef struct s_bigshell
 {
 	char			**history;
+	char			**env_paths;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;
@@ -121,20 +136,16 @@ void	get_path(t_bigshell *data);
 char	*find_path_to_cmd(t_bigshell *data, char *cmd);
 
 /***********************************************************/
-/*                         SIGNAL                          */
+/*                  	   INPUT	                       */
 /***********************************************************/
+
+/* Test only */
+void	save_line_for_test(t_bigshell *data, char *input, int count);
 
 /* SIGNAL HANDLING */
 void	catch_ctrl_d(t_bigshell *data, char *input);
 void	ft_sig_int(int sig);
 void	set_signal(void);
-
-/***********************************************************/
-/*                  	   TERMINAL	                       */
-/***********************************************************/
-
-/* Test only */
-void	save_line_for_test(t_bigshell *data, char *input, int count);
 
 /* TERMINAL CAPABILITIES */
 int		init_term(void);
@@ -148,14 +159,21 @@ void	redirection_right(t_bigshell *data);
 void	redirection(t_bigshell *data);
 
 /***********************************************************/
-/*                  	   PIPEX	                       */
+/*                  	   EXECUTOR	                       */
 /***********************************************************/
 
+/* EXEC INIT */
+void	init_exec(t_bigshell *data);
+
+/* EXEC */
+pid_t	execute_pipex(t_bigshell *data, char *env[], int pcss);
+int		ft_waitpid(pid_t last_pid);
+int		executor(t_bigshell *data, char *env[]);
+
+/* PIPE UTILS */
 void	open_pipe(t_bigshell *data);
 void	close_pipe(t_bigshell *data);
 void	handle_dup(t_bigshell *data, int pcss);
-pid_t	execute_pipex(t_bigshell *data, char *env[], int pcss);
-int		ft_waitpid(pid_t last_pid);
 
 /***********************************************************/
 /*                          PARSER                         */
@@ -226,8 +244,8 @@ void		interpret_open_quotes(t_line *line, int type);
 /*                  	  BUILTINS	                       */
 /***********************************************************/
 
-void    env(t_bigshell *data);
-void	pwd(void);
+void	ft_env(t_bigshell *data);
+void	ft_pwd(void);
 
 /***********************************************************/
 /*                          UTILS                          */

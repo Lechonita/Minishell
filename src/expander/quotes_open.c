@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_open.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:34:19 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/23 16:10:25 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:57:53 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/expander.h"
 
 // Rajouter le ctrl + C
 

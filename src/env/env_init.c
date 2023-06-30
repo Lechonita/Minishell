@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/26 17:40:15 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 16:59:31 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/env.h"
 
 /* Fonction qui cherche la dernier maillon de la liste chainee t_env. */
 
@@ -64,7 +65,6 @@ static t_env	*env_new(char *env, int idx)
 		return (NULL);
 	new->name = get_env_name(env);
 	new->value = getenv(new->name);
-	new->env_split = NULL;
 	new->index = idx;
 	new->next = NULL;
 	return (new);

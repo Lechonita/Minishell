@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   type2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:52:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/20 16:10:58 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:59:08 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/parser.h"
 
 int	ft_is_dollar(char c)
 {

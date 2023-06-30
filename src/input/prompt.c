@@ -6,11 +6,12 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/29 14:42:07 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 15:58:14 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/input.h"
 
 void	save_line_for_test(t_bigshell *data, char *input, int count)
 {

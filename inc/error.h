@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/29 14:44:31 by Bea              ###   ########.fr       */
+/*   Updated: 2023/06/30 17:17:14 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define PERM_DENIED "bash: Permission denied: "
 # define FILE_NOT_FOUND "bash: No such file or directory: "
 # define W_LST_TOK "\t Failure in creating token lst\n"
-
+# define W_LST_CMD "\t Failure in creating cmds lst\n"
 
 // # define W_ARG "\t Wrong argument number\n"
 // # define W_ENV "\t Environment error\n"
@@ -33,7 +33,7 @@
 // # define W_SPLIT_CMD "\t Failure in split commands\n"
 // # define W_CMDS "\t Failure in getting commands \n"
 // # define W_NEW_LST "\t Failure in creating new lst\n"
-// # define W_LST "\t Failure in creating cmds lst\n"
+
 // # define W_STRDUP "\t Failure in duplicate str\n "
 
 #endif

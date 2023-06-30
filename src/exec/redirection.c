@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:03:19 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/27 10:34:21 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/30 15:57:01 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/exec.h"
 
 static int	check_access_in(t_bigshell *data, char *file)
 {

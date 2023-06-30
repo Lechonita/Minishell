@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   path_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/27 10:16:42 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/06/30 16:59:08 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/env.h"
 
 /* fonction qui vérifie l'acces des commandes avec le chemin absolu */
 static char	*handle_good_path(t_bigshell *data, char *command)
@@ -42,29 +43,20 @@ char	*ft_strjoin_bis(char *s1, char *s2)
 /* Fonction qui cherche le chemin absolu d'une commande dans le PATH */
 char	*find_path_to_cmd(t_bigshell *data, char *cmd)
 {
-	t_env	*el;
 	char	*command;
 	int		i;
 
 	i = -1;
-	el = data->env;
-	while (el)
+	if (data->env_paths == NULL && ft_strchr(cmd, '/') == NULL)
+		error_not_found(data, FILE_NOT_FOUND, cmd);
+	if (ft_strchr(cmd, '/') != NULL)
+		return (command = handle_good_path(data, cmd));
+	while (data->env_paths[++i])
 	{
-		if (ft_strncmp(el->name, "PATH", 4) == 0)
-		{
-			if (el->env_split == NULL && ft_strchr(cmd, '/') == NULL)
-				error_not_found(data, FILE_NOT_FOUND, cmd);
-			if (ft_strchr(cmd, '/') != NULL)
-				command = handle_good_path(data, cmd);
-			while (el->env_split[++i])
-			{
-				command = ft_strjoin_bis(el->env_split[i], cmd);
-				if (access(command, F_OK & X_OK) == 0)
-					return (command);
-				free(command);
-			}
-		}
-		el = el->next;
+		command = ft_strjoin_bis(data->env_paths[i], cmd);
+		if (access(command, F_OK & X_OK) == 0)
+			return (command);
+		free(command);
 	}
 	return (NULL);
 }
@@ -77,23 +69,11 @@ void	get_path(t_bigshell *data)
 	tmp = data->env;
 	while (tmp)
 	{
-		tmp->env_split = ft_split(tmp->value, ':');
-		if (!tmp->env_split)
+		if (ft_strncmp(tmp->name, "PATH", 4) == 0)
+			data->env_paths = ft_split(tmp->value, ':');
+		if (!data->env_paths)
 			return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_ENV));
 		tmp = tmp->next;
 	}
 	return ;
 }
-
-/*
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->name, "PATH", 4) == 0)
-		{
-			tmp->env_paths = ft_split(tmp->value, ':');
-			if (!tmp->env_paths)
-				return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_ENV));
-		}
-		tmp = tmp->next;
-	}
-*/

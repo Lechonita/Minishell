@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar.c                                           :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/30 15:57:13 by Bea              ###   ########.fr       */
+/*   Created: 2023/06/30 15:39:47 by Bea               #+#    #+#             */
+/*   Updated: 2023/06/30 16:12:47 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
-#include "../inc/expander.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-/* A traiter :
-	- echo "'$PATH'" ==> output la valeur de PATH, sans guillemets
-	- si la valeur x ($x) n'existe pas dans t_env, alors ce n'est pas une erreur
-	mais une valeur NULL. Ex : si a n'a pas ete initialise :
-	echo "'$a'" ==> '' */
+# include "minishell.h"
+
+// void	env(t_bigshell *data);
+// void	pwd(void);
+
+#endif

@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 11:41:41 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/22 12:14:04 by bebigel          ###   ########.fr       */
+/*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
+/*   Updated: 2023/06/30 16:11:50 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H 
+#ifndef LEXER_H
+# define LEXER_H
+
+# include "minishell.h"
 
 # ifndef YYTOKENTYPE
 #  define YYTOKENTYPE
@@ -46,5 +48,9 @@ enum e_tokentype
 # define GREATGREATAMPERSAND 267	// >>&
 # define PIPE 268					// |
 # define INTEGERGREAT 269			// >[0-9]+
+
+// /* FIND TOKENS */
+// void	ft_create_token(t_bigshell *data, t_line *current, char *value, int pos);
+// void	find_tokens(t_bigshell *data);
 
 #endif

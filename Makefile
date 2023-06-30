@@ -24,9 +24,14 @@ INCLUDES += -I $(LIBFT_DIR)/includes
 ############################### Headers ########################################
 
 HEADER += inc/minishell.h
+HEADER += inc/builtins.h
+HEADER += inc/env.h
 HEADER += inc/error.h
-# HEADER += ./libft/includes/libft.h
-# HEADER += ./libft/includes/get_next_line.h
+HEADER += inc/exec.h
+HEADER += inc/expander.h
+HEADER += inc/input.h
+HEADER += inc/lexer.h
+HEADER += inc/parser.h
 
 vpath %.h $(INC_DIR)
 
@@ -40,7 +45,7 @@ EXPANDER_DIR = ./src/expander
 LEXER_DIR = ./src/lexer
 PARSER_DIR = ./src/parser
 PIPE_DIR = ./src/pipe
-TERM_DIR = ./src/terminal
+TERM_DIR = ./src/input
 UTILS_DIR = ./src/utils
 
 ############################### Sources ########################################
@@ -61,6 +66,7 @@ SRC += env_init.c
 SRC += path_handle.c
 
 # 	Exec functions
+SRC += executor.c
 SRC += pipex.c
 SRC += pipex_utils.c
 SRC += redirection.c
@@ -72,6 +78,11 @@ SRC += quotes_find.c
 SRC += quotes_open.c
 SRC += quotes_position.c
 
+#	Input functions
+SRC += prompt.c
+SRC += signal.c
+SRC += termcap.c
+
 #	Lexer functions
 SRC += token_find.c
 SRC += token_init.c
@@ -81,11 +92,6 @@ SRC += flag_quotes.c
 SRC += line_init.c
 SRC += type.c
 SRC += type2.c
-
-#	Terminal functions
-SRC += prompt.c
-SRC += signal.c
-SRC += termcap.c
 
 #	Utils functions
 SRC += free_struct.c
