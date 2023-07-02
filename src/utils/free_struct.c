@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/29 14:47:39 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/02 16:00:56 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	ft_free_env(t_env **env)
 			free((*env)->name);
 			(*env)->name = NULL;
 		}
-		if ((*env)->env_split)
-			free_strs((*env)->env_split);
 		free(*env);
 		(*env) = tmp;
 	}
@@ -102,9 +100,10 @@ void	ft_free_all(t_bigshell *data)
 {
 	if (!data)
 		return ;
-	rl_clear_history();
 	if (data->history)
 		free_strs(data->history);
+	if (data->env_paths)
+		free_strs(data->env_paths);
 	if (data->token)
 		ft_free_token(&data->token);
 	if (data->line)
@@ -113,4 +112,5 @@ void	ft_free_all(t_bigshell *data)
 		ft_free_env(&data->env);
 	free(data);
 	data = NULL;
+	rl_clear_history();
 }

@@ -71,6 +71,8 @@ SRC += pipex.c
 SRC += pipex_utils.c
 SRC += redirection.c
 SRC += here_doc.c
+SRC += cmd_utils.c
+SRC += init_exec.c
 
 #	Expander functions
 SRC += dollar.c

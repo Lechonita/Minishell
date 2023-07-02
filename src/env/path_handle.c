@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/30 16:59:08 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/02 16:44:34 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ void	get_path(t_bigshell *data)
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->name, "PATH", 4) == 0)
+		{
 			data->env_paths = ft_split(tmp->value, ':');
-		if (!data->env_paths)
-			return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_ENV));
+			if (!data->env_paths)
+				return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_ENV));
+		}
 		tmp = tmp->next;
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/30 17:30:49 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/02 16:58:47 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@
 
 typedef struct s_cmd
 {
-	char			*instruction;
 	char			*cmd;
 	char			**cmd_arg;
 	int				idx_cmd;
@@ -78,14 +77,6 @@ typedef struct s_exec
 	int				here_doc;
 	t_cmd			*cmd;
 }	t_exec;
-
-typedef struct s_env
-{
-	char			*name;
-	char			*value;
-	int				index;
-	struct s_env	*next;
-}	t_env;
 
 typedef struct s_token
 {
@@ -105,6 +96,14 @@ typedef struct s_line
 	char			c;
 	struct s_line	*next;
 }	t_line;
+
+typedef struct s_env
+{
+	char			*name;
+	char			*value;
+	int				index;
+	struct s_env	*next;
+}	t_env;
 
 typedef struct s_bigshell
 {
@@ -163,6 +162,7 @@ void	redirection(t_bigshell *data);
 /***********************************************************/
 
 /* EXEC INIT */
+t_cmd	*init_cmd(t_bigshell *data);
 void	init_exec(t_bigshell *data);
 
 /* EXEC */

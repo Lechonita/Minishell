@@ -10,7 +10,10 @@ tout ca est genere par l'IA, c'est pas mal quand meme !!
 
 to do list :
 → add token to token list (pipe, cmd, etc etc)
-→ finish init_exec
 → handle { } in parser
 → check if all grammar is ok in lexer/parser/tokener 
 → check the pb with .h compilation
+
+→ finish init_exec
+	→ here doc : reconnaitre << et le limiter
+	→ init cmd list : add cmd & args (char **) to cmd list 
