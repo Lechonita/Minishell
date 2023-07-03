@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/30 15:57:22 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 11:13:32 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	convert_quotes(t_line *line, int type)
 			// if (quote == 34 && tmp->c == "$")
 			// 	tmp = do_expansion(tmp);
 			else
-				tmp->type = TYPE_WORD;
+				tmp->type = WORD;
 			tmp = tmp->next;
 		}
 		if (tmp->next)
@@ -74,12 +74,12 @@ void	find_quotes(t_line *line)
 	{
 		if (el->sq == 1)
 		{
-			convert_quotes(el, TYPE_SINGLE_QUOTES);
+			convert_quotes(el, SQUOTE);
 			break ;
 		}
 		else if (el->dq == 1)
 		{
-			convert_quotes(el, TYPE_DOUBLE_QUOTES);
+			convert_quotes(el, DQUOTE);
 			break ;
 		}
 		else

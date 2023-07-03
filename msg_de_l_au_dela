@@ -7,6 +7,8 @@ tout ca est genere par l'IA, c'est pas mal quand meme !!
 < in_file.txt cat | wc -l | head -7 | tail -5 | ls -l > out_file.txt
 < in_file.txt cat | head -7 | taili -5 > out_file.txt
 < in_file.txt cat | wc -l > out_file.txt
+echo Hello world
+echo "Hello world"
 
 to do list :
 → add token to token list (pipe, cmd, etc etc)
@@ -16,4 +18,7 @@ to do list :
 
 → finish init_exec
 	→ here doc : reconnaitre << et le limiter
-	→ init cmd list : add cmd & args (char **) to cmd list 
+	→ init cmd list : add cmd & args (char **) to cmd list
+
+if underscore is the first character, the string should be categorized 
+ as an operator (invalid or otherwise) or the beginning of an identifier.

@@ -1,42 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type2.c                                            :+:      :+:    :+:   */
+/*   token_type_bis.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 13:52:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/30 15:59:08 by Bea              ###   ########.fr       */
+/*   Created: 2023/07/03 10:34:37 by Bea               #+#    #+#             */
+/*   Updated: 2023/07/03 10:47:44 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/parser.h"
 
-int	ft_is_dollar(char c)
+int	is_newline(char c)
 {
-	if (c == '$')
-		return (TYPE_DOLLAR);
+	if (c == '\n')
+		return (NEWLINE);
 	return (0);
 }
 
-int	ft_is_blank(char c)
+int	is_ampersand(char c)
 {
-	if (c == ' ' || c == '\t')
-		return (TYPE_BLANK);
+	if (c == '&')
+		return (AMPERSAND);
 	return (0);
 }
 
-int	ft_is_single_quote(char c)
+int	is_separator(char c)
 {
-	if (c == '\'')
-		return (TYPE_SINGLE_QUOTES);
+	if (c == '(' || c == ')' || c == '{' || c == '}' || c == ';')
+		return (SEPARATOR);
 	return (0);
 }
 
-int	ft_is_double_quote(char c)
+int	is_redir(char c)
 {
-	if (c == '\"')
-		return (TYPE_DOUBLE_QUOTES);
+	if (c == '>')
+		return (GREAT);
+	if (c == '<')
+		return (LESS);
+	return (0);
+}
+
+int is_pipe(char c)
+{
+	if (c == '|')
+		return (PIPE);
 	return (0);
 }

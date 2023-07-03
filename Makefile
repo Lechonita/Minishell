@@ -88,12 +88,14 @@ SRC += termcap.c
 #	Lexer functions
 SRC += token_find.c
 SRC += token_init.c
+SRC += grammar.c
 
 #	Parser functions
 SRC += flag_quotes.c
 SRC += line_init.c
-SRC += type.c
-SRC += type2.c
+SRC += find_token_type.c
+SRC += token_type.c
+SRC += token_type_bis.c
 
 #	Utils functions
 SRC += free_struct.c

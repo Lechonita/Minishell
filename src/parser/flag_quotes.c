@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:37:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/30 15:58:55 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 10:59:24 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	flag_double_quotes(t_line *line)
 	{
 		if (dq == 2)
 			dq = 0;
-		if (el->type == TYPE_DOUBLE_QUOTES)
+		if (el->type == DQUOTE)
 			dq++;
 		el->dq = dq;
 		el = el->next;
@@ -50,7 +50,7 @@ void	flag_single_quotes(t_line *line)
 	{
 		if (sq == 2)
 			sq = 0;
-		if (el->type == TYPE_SINGLE_QUOTES)
+		if (el->type == SQUOTE)
 			sq++;
 		el->sq = sq;
 		el = el->next;

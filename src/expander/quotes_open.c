@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:34:19 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/30 15:57:53 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 11:14:20 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	assign_type_open_quotes(t_line *line)
 	if (!line)
 		return ;
 	if (line->c == 39)
-		line->type = TYPE_SINGLE_QUOTES;
+		line->type = SQUOTE;
 	else if (line->c == 34)
-		line->type = TYPE_DOUBLE_QUOTES;
+		line->type = DQUOTE;
 	else
-		line->type = TYPE_WORD;
+		line->type = WORD;
 }
 
 int	determine_stop(t_line *line, int type)
@@ -116,7 +116,7 @@ void	interpret_open_quotes(t_line *line, int type)
 	while (line)
 	{
 		tmp = line;
-		line->type = TYPE_WORD;
+		line->type = WORD;
 		line = line->next;
 	}
 	if (type == 5)

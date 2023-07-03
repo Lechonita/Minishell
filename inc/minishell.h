@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/02 16:58:47 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 10:58:22 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,6 @@
 #  define BUFFER_SIZE BUFSIZ
 # endif
 
-# define TYPE_SEPARATOR 1		// ( ) { }
-# define TYPE_OPERATOR 2		// & | < >
-# define TYPE_WORD 3			// tous les autres caracteres
-# define TYPE_INTEGER 4			// 0, 1 ,2 ...
-# define TYPE_DOUBLE_QUOTES 5	// ""
-# define TYPE_SINGLE_QUOTES 6	// ''
-# define TYPE_BLANK 7			// space and \t
-# define TYPE_DOLLAR 8			// $
-
 // typedef struct s_builtin
 // {
 // 	char	*name;
@@ -83,7 +74,7 @@ typedef struct s_token
 	int				index;
 	int				type;
 	char			*value;
-	int				token;
+	int				aim;
 	struct s_token	*next;
 }	t_token;
 
@@ -185,18 +176,19 @@ void		line_addback(t_line *line, t_line *new);
 t_line		*line_new(t_line *line, char c, int i);
 void		init_line(t_bigshell *data, char *line);
 
-/* TYPE */
-int			ft_is_integer(char c);
-int			ft_is_word(char c);
-int			ft_is_operator(char c);
-int			ft_is_separator(char c);
-int			ft_determine_type(char c);
-
-/* TYPE2 */
-int			ft_is_dollar(char c);
-int			ft_is_blank(char c);
-int			ft_is_single_quote(char c);
-int			ft_is_double_quote(char c);
+/* FIND TYPE */
+int			is_dollar(char c);
+int			is_blank(char c);
+int			is_single_quote(char c);
+int			is_double_quote(char c);
+int			is_integer(char c);
+int			is_newline(char c);
+int			is_ampersand(char c);
+int			is_pipe(char c);
+int			is_redir(char c);
+int			is_separator(char c);
+int			is_word(char c);
+int			determine_type(char c);
 
 /* FIND QUOTES */
 int			find_closing_quote(t_line *line, int type);

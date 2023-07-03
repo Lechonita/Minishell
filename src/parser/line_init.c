@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/06/30 15:59:02 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 11:16:12 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_line	*line_new(t_line *line, char c, int i)
 	if (i == -1 && line)
 		i = find_next_index(line) + 1;
 	new->index = i;
-	new->type = ft_determine_type(c);	// dans le cas ou c'est 0 ?
+	new->type = determine_type(c);	// dans le cas ou c'est 0 ?
 	new->dq = 0;
 	new->sq = 0;
 	new->c = c;
