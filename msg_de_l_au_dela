@@ -19,7 +19,7 @@ to do list :
 
 → finish init_exec
 	→ here doc : reconnaitre << et le limiter
-	→ init cmd list : add cmd & args (char **) to cmd list
+	→ find good parser for exec
 
 if underscore is the first character, the string should be categorized 
  as an operator (invalid or otherwise) or the beginning of an identifier.
