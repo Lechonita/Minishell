@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/06/30 15:58:14 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 17:33:11 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_readline(t_bigshell *data, char *input)
 	ft_free_token(&data->token);
 }
 
-void	ft_readline(t_bigshell *data)
+void	ft_readline(t_bigshell *data, char *env[])
 {
 	char	*input;
 	int		count;
@@ -49,6 +49,7 @@ void	ft_readline(t_bigshell *data)
 			save_line_for_test(data, input, count);
 			init_line(data, input);
 			find_tokens(data);
+			executor(data, env);
 			count++;
 		}
 		free_readline(data, input);

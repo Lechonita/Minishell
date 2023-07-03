@@ -6,12 +6,23 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:17:32 by Bea               #+#    #+#             */
-/*   Updated: 2023/06/30 15:58:41 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 14:11:59 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/lexer.h"
+
+void	token_rm_next(t_token *tok)
+{
+	t_token	*tmp;
+
+	tmp = tok->next;
+	tok->next = tok->next->next;
+	if (tmp->value)
+		free(tmp->value);
+	free(tmp);
+}
 
 static t_token	*token_last(t_token	*token)
 {
@@ -47,6 +58,7 @@ static t_token	*token_new(char *value, int type, int idx)
 		return (NULL);
 	new->index = idx;
 	new->type = type;
+	new->aim = 0;
 	new->value = ft_strdup(value);
 	new->next = NULL;
 	return (new);

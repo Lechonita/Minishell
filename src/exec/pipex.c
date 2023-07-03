@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:37:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/02 15:44:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 17:34:16 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,21 @@
 // 	return (return_value);
 // }
 
-// int	executor(t_bigshell *data, char *env[])
-// {
-// 	int			nb_pro;
-// 	pid_t		last_pid;
+int	executor(t_bigshell *data, char *env[])
+{
+	// int			nb_pro;
+	// pid_t		last_pid;
 
-// 	nb_pro = -1;
-// 	data->exec = ft_calloc(1, sizeof(t_exec));
-// 	init_exec(data);
-// 	open_pipe(data);
-// 	while (++nb_pro < data->exec->nb_cmd)
-// 		last_pid = execute_pipex(data, env, nb_pro);
-// 	close_pipe(data);
-// 	ft_free_all(data);
-// 	return (ft_waitpid(last_pid));
-// }
+	// nb_pro = -1;
+	(void)env;
+	data->exec = ft_calloc(1, sizeof(t_exec));
+	init_exec(data);
+	print_cmd_lst(data);
+	// open_pipe(data);
+	// while (++nb_pro < data->exec->nb_cmd)
+	// 	last_pid = execute_pipex(data, env, nb_pro);
+	// close_pipe(data);
+	// ft_free_all(data);
+	// return (ft_waitpid(last_pid));
+	return (0);
+}

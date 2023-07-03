@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/03 11:15:10 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 12:06:48 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 /* Tokens.  */
 enum e_tokentype
 {
-	WORD = 1,				// [a-z A-Z +all]			
+	WORD = 1,			// [a-z A-Z +all]				1	
 	INTEGER,			// [0-9]						2
 	DQUOTE,				// ""							3
 	SQUOTE,				// ''							4
@@ -38,6 +38,14 @@ enum e_tokentype
 	NOTOKEN,			// invalid character in input	15
 };
 # endif
+
+enum e_aim
+{
+	REDIR = 20,		// > < >> <<							20
+	SIMPLE_CMD,		// [a-z A-Z +all]						21
+	BUILTIN,		// echo cd pwd export unset env exit	22
+	PIPEX,			// |									23
+};
 
 // /* FIND TOKENS */
 // void	ft_create_token(t_bigshell *data, t_line *current, char *value, int pos);

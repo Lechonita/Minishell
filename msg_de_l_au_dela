@@ -4,9 +4,10 @@ periode de creux la... je suis en train de me faire chier comme un rat mort !!
 mais bon, je vais pas me plaindre, j'ai quand meme un boulot, et je suis paye a rien foutre, c'est pas mal quand meme !!
 tout ca est genere par l'IA, c'est pas mal quand meme !!
 
-< in_file.txt cat | wc -l | head -7 | tail -5 | ls -l > out_file.txt
+< in_file.txt cat | wc -l | head -77 | tail -5 | ls -l >> out_file.txt
 < in_file.txt cat | head -7 | taili -5 > out_file.txt
-< in_file.txt cat | wc -l > out_file.txt
+< in_file.txt cat | wc -l >> out_file.txt
+
 echo Hello world
 echo "Hello world"
 
@@ -22,3 +23,4 @@ to do list :
 
 if underscore is the first character, the string should be categorized 
  as an operator (invalid or otherwise) or the beginning of an identifier.
+

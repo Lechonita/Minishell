@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/30 17:17:14 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 17:18:02 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@
 # define FILE_NOT_FOUND "bash: No such file or directory: "
 # define W_LST_TOK "\t Failure in creating token lst\n"
 # define W_LST_CMD "\t Failure in creating cmds lst\n"
+# define W_LST_CMD_DUP "\t Failure in duplicate cmd name\n"
+# define W_SPLIT_CMD "\t Failure in split commands\n"
 
 // # define W_ARG "\t Wrong argument number\n"
 // # define W_ENV "\t Environment error\n"
 // # define W_JOIN_PATH "\t Failure in joining path with / \n"
 // # define W_ENV_PATH "env PATH is empty\n"
 // # define W_SPLIT_ENV "\t Failure in split environment\n"
-// # define W_SPLIT_CMD "\t Failure in split commands\n"
+
 // # define W_CMDS "\t Failure in getting commands \n"
 // # define W_NEW_LST "\t Failure in creating new lst\n"
 

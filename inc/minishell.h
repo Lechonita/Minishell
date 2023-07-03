@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/03 10:58:22 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/03 17:33:25 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }			t_cmd;
 
+typedef struct s_redir
+{
+	int				type;		// 0 = <, 1 = >, 2 = >>, 3 = <<
+	char			*file;		// file name
+	char			*limiter;	// word for heredoc
+	struct s_redir	*next;
+}	t_redir;
+
 typedef struct s_exec
 {
 	int				fd_in;
@@ -66,6 +74,7 @@ typedef struct s_exec
 	char			*out_file;
 	int				fd[FOPEN_MAX][2];
 	int				here_doc;
+	t_redir			*redir;
 	t_cmd			*cmd;
 }	t_exec;
 
@@ -73,8 +82,8 @@ typedef struct s_token
 {
 	int				index;
 	int				type;
-	char			*value;
 	int				aim;
+	char			*value;
 	struct s_token	*next;
 }	t_token;
 
@@ -111,7 +120,7 @@ typedef struct s_bigshell
 /***********************************************************/
 
 /* MAIN */
-void	ft_readline(t_bigshell *data);
+void	ft_readline(t_bigshell *data, char *env[]);
 
 /***********************************************************/
 /*                           ENV                           */
@@ -202,10 +211,16 @@ void		flag_single_quotes(t_line *line);
 /***********************************************************/
 
 /* FIND TOKENS */
-// void	ft_create_token(t_bigshell *data, t_line *current, int start);
-// void	ft_create_token(t_bigshell *data, t_line *current, char *value);
+void	token_rm_next(t_token *tok);
 void	ft_create_token(t_bigshell *data, t_line *current, char *value, int pos);
 void	find_tokens(t_bigshell *data);
+
+/* GRAMMAR */
+void	check_builtin(t_bigshell *data);
+void	same_aim(t_bigshell *data);
+void	add_arg_to_cmd(t_bigshell *data);
+void	parser_job(t_bigshell *data);
+void	apply_grammar(t_bigshell *data);
 
 /***********************************************************/
 /*                        EXPANDER                         */
@@ -259,6 +274,7 @@ void	error_not_found(t_bigshell *data, char *msg, char *str);
 
 /* PRINT FUNCTION */
 void	print_strs(char **strs);
+void	print_cmd_lst(t_bigshell *data);
 void	print_t_line(t_bigshell *data);
 void	print_t_token(t_bigshell *data);
 void	display_env_struct(t_bigshell *data);
