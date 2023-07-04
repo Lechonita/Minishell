@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/03 17:09:19 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/04 10:57:39 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@
 // 	file = data->exec->in_file;
 // 	data->exec->fd_in = open(file, O_CREAT | O_WRONLY, 0644);
 // 	if (data->exec->fd_in < 0)
-// 		return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
+// 		return (free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
 // 	gnl(data, limiter);
 // 	close(data->exec->fd_in);
 // 	data->exec->fd_in = open(file, O_RDONLY);
 // 	if (data->exec->fd_in < 0)
-// 		return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
+// 		return (free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
 // 	ret = dup2(data->exec->fd_in, STDIN_FILENO);
 // 	if (ret == -1)
-// 		return (ft_free_all(data), ft_exit(errno, strerror(errno)));
+// 		return (free_all(data), ft_exit(errno, strerror(errno)));
 // 	close(data->exec->fd_in);
 // }

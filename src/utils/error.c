@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/06/26 17:00:03 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/04 10:57:39 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	error_execve(t_bigshell *data)
 {
 	ft_putnbr_fd(errno, 2);
 	if (errno == EACCES)
-		return (ft_free_all(data), ft_exit(errno, strerror(errno)));
+		return (free_all(data), ft_exit(errno, strerror(errno)));
 	else
-		return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_EXECVE));
+		return (free_all(data), ft_exit(EXIT_FAILURE, W_EXECVE));
 }
 
 void	msg_not_found(char *msg, char *str)
@@ -36,7 +36,7 @@ void	msg_not_found(char *msg, char *str)
 void	error_not_found(t_bigshell *data, char *msg, char *str)
 {
 	msg_not_found(msg, str);
-	ft_free_all(data);
+	free_all(data);
 	exit (127);
 }
 

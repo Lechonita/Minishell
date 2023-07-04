@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/02 16:44:34 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/04 16:28:07 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*find_path_to_cmd(t_bigshell *data, char *cmd)
 	int		i;
 
 	i = -1;
+	// dprintf(2, "find path cmd = %s\n", cmd);
 	if (data->env_paths == NULL && ft_strchr(cmd, '/') == NULL)
 		error_not_found(data, FILE_NOT_FOUND, cmd);
 	if (ft_strchr(cmd, '/') != NULL)
@@ -73,7 +74,7 @@ void	get_path(t_bigshell *data)
 		{
 			data->env_paths = ft_split(tmp->value, ':');
 			if (!data->env_paths)
-				return (ft_free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_ENV));
+				return (free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_ENV));
 		}
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/03 17:33:25 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/04 15:10:43 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,8 @@ int		ft_termcap(t_bigshell *data);
 
 /* REDIRECTION */
 void	handle_here_doc(t_bigshell *data, char *limiter);
-void	redirection_append(t_bigshell *data);
-void	redirection_left(t_bigshell *data);
-void	redirection_right(t_bigshell *data);
-void	redirection(t_bigshell *data);
+void	redir_in_file(t_bigshell *data);
+void	redir_out_file(t_bigshell *data);
 
 /***********************************************************/
 /*                  	   EXECUTOR	                       */
@@ -263,8 +261,9 @@ void	ft_pwd(void);
 void	ft_free_line(t_line **line);
 void	ft_free_env(t_env **env);
 void	ft_free_token(t_token **token);
+void	ft_free_cmd(t_cmd **cmd);
 void	ft_free_history(t_bigshell *data);
-void	ft_free_all(t_bigshell *data);
+void	free_all(t_bigshell *data);
 
 /* PRINT ERROR */
 void	ft_exit(int err_no, char *msg);

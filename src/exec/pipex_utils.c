@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:00:06 by Bea               #+#    #+#             */
-/*   Updated: 2023/06/30 15:56:53 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/04 15:56:53 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	open_pipe(t_bigshell *data)
 	while (i < data->exec->nb_cmd - 1)
 	{
 		if (pipe(data->exec->fd[2 * i]) == -1)
-			return (ft_free_all(data), ft_exit(errno, strerror(errno)));
+			return (free_all(data), ft_exit(errno, strerror(errno)));
 		i++;
 	}
 }
@@ -51,13 +51,14 @@ static void	dup_bis(int new_read, int new_write)
 
 void	handle_dup(t_bigshell *data, int pcss)
 {
+	if ((data->exec->fd_in < 3 && pcss == 0)
+		|| (data->exec->fd_out < 3 && pcss == data->exec->nb_cmd - 1))
+		return (free_all(data), exit(EXIT_FAILURE));
 	if (pcss == 0)
 		dup_bis(data->exec->fd_in, data->exec->fd[0][1]);
 	else if (pcss == data->exec->nb_cmd - 1)
 		dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd_out);
 	else
 		dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd[pcss * 2][1]);
-	if ((data->exec->fd_in < 3 && pcss == 0)
-		|| (data->exec->fd_out < 3 && pcss == data->exec->nb_cmd - 1))
-		return (ft_free_all(data), exit(EXIT_FAILURE));
+
 }

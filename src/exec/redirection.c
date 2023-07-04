@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:03:19 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/30 15:57:01 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/04 16:06:53 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,35 @@ static int	check_access_in(t_bigshell *data, char *file)
 /* < should redirect input from std_in to fd_in*/
 void	redirection_left(t_bigshell *bs)
 {
-	int		ret;
 	char	*file;
 
 	file = bs->exec->in_file;
+
 	if (check_access_in(bs, file))
 	{
 		bs->exec->fd_in = open(file, O_RDONLY);
 		if (bs->exec->fd_in < 0)
-			return (ft_free_all(bs), ft_exit(errno, strerror(errno)));
-		ret = dup2(bs->exec->fd_in, STDIN_FILENO);
-		if (ret == -1)
-			return (ft_free_all(bs), ft_exit(errno, strerror(errno)));
-		close(bs->exec->fd_in);
+			return (free_all(bs), ft_exit(errno, strerror(errno)));
+	}
+	return ;
+}
+
+
+void	redir_in_file(t_bigshell *data)
+{
+	t_token	*tok;
+
+	tok = data->token;
+	while (tok != NULL)
+	{
+		if (ft_strncmp(tok->value, "<", 1) == 0)
+		{
+			redirection_left(data);
+			break ;
+		}
+		// else if (ft_strncmp(tok->value, "<<", 2) == 0)
+		// 	return (handle_here_doc(data));
+		tok = tok->next;
 	}
 	return ;
 }
@@ -55,7 +71,6 @@ void	redirection_left(t_bigshell *bs)
 /* > should redirect output from std_out to fd_out */
 void	redirection_right(t_bigshell *bs)
 {
-	int		ret;
 	char	*file;
 
 	file = bs->exec->out_file;
@@ -67,18 +82,13 @@ void	redirection_right(t_bigshell *bs)
 	}
 	bs->exec->fd_out = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (bs->exec->fd_out < 0)
-		return (ft_free_all(bs), ft_exit(errno, strerror(errno)));
-	ret = dup2(bs->exec->fd_out, STDOUT_FILENO);
-	if (ret == -1)
-		return (ft_free_all(bs), ft_exit(errno, strerror(errno)));
-	close(bs->exec->fd_out);
+		return (free_all(bs), ft_exit(errno, strerror(errno)));
 	return ;
 }
 
 /* >> */
 void	redirection_append(t_bigshell *data)
 {
-	int		ret;
 	char	*file;
 
 	file = data->exec->out_file;
@@ -90,23 +100,28 @@ void	redirection_append(t_bigshell *data)
 	}
 	data->exec->fd_out = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (data->exec->fd_out < 0)
-		return (ft_free_all(data), ft_exit(errno, strerror(errno)));
-	ret = dup2(data->exec->fd_out, STDOUT_FILENO);
-	if (ret == -1)
-		return (ft_free_all(data), ft_exit(errno, strerror(errno)));
-	close(data->exec->fd_out);
+		return (free_all(data), ft_exit(errno, strerror(errno)));
 	return ;
 }
 
-void	redirection(t_bigshell *data)
+void	redir_out_file(t_bigshell *data)
 {
-	if (data->token->type == GREAT)
-		redirection_right(data);
-	// else if (data->token->type == LESSLESS)
-	// 	handle_here_doc(data, data->token->value);
-	else if (data->token->type == LESS)
-		redirection_left(data);
-	else if (data->token->type == GREATGREAT)
-		redirection_append(data);
+	t_token	*tok;
+
+	tok = data->token;
+	while (tok != NULL)
+	{
+		if (ft_strncmp(tok->value, ">", 1) == 0)
+		{
+			redirection_right(data);
+			break ;			
+		}
+		else if (ft_strncmp(tok->value, ">>", 2) == 0)
+		{
+			redirection_append(data);
+			break ;
+		}
+		tok = tok->next;
+	}
 	return ;
 }

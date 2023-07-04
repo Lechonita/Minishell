@@ -6,13 +6,13 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:15:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/03 17:42:33 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/04 11:49:14 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static t_cmd	*new_lst(int idx, char *cmd)
+static t_cmd	*new_lst(t_bigshell *data, int idx, char *cmd)
 {
 	t_cmd	*new;
 
@@ -21,10 +21,10 @@ static t_cmd	*new_lst(int idx, char *cmd)
 		return (NULL);
 	new -> cmd = ft_strdup(cmd);
 	if (!new -> cmd)
-		ft_exit(EXIT_FAILURE, W_LST_CMD_DUP);
+		return (free_all(data), ft_exit(EXIT_FAILURE, W_LST_CMD_DUP), NULL);
 	new -> cmd_arg = ft_split(cmd, ' ');
 	if (!new -> cmd_arg)
-		ft_exit(EXIT_FAILURE, W_SPLIT_CMD);
+		return (free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_CMD), NULL);
 	new -> idx_cmd = idx;
 	new -> next = NULL;
 	return (new);
@@ -63,13 +63,12 @@ t_cmd	*init_cmd(t_bigshell *data)
 	{
 		if (i == 0 && el->aim == SIMPLE_CMD)
 		{
-			lst_cmd = new_lst(i, el->value);
+			lst_cmd = new_lst(data, i++, el->value);
 			if (lst_cmd == NULL)
-				return (NULL);
+				return (free_all(data), ft_exit(EXIT_FAILURE, W_LST_CMD), NULL);
 		}			
 		else if (i > 0 && el->aim == SIMPLE_CMD)
-			lst_add_back(&lst_cmd, new_lst(i, el->value));
-		i++;
+			lst_add_back(&lst_cmd, new_lst(data, i++, el->value));
 		el = el->next;
 	}
 	return (lst_cmd);

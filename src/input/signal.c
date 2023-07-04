@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/30 15:58:21 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/04 10:57:39 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	catch_ctrl_d(t_bigshell *data, char *input)
 	{
 		free(input);
 		ft_putstr_fd("exit\n", 2);
-		ft_free_all(data);
+		free_all(data);
 		exit(0);
 	}
 }
