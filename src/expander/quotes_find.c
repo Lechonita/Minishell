@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/03 11:13:32 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 09:31:14 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	convert_quotes(t_line *line, int type)
 	else
 		tmp = line;
 	close = find_closing_quote(tmp, type);
-	printf("close == %d\n", close);
 	if (close == 0)
 		interpret_open_quotes(tmp, type);
 	if (close == 1)
@@ -65,7 +64,6 @@ void	convert_quotes(t_line *line, int type)
 void	find_quotes(t_line *line)
 {
 	t_line	*el;
-
 
 	if (!line)
 		return ;

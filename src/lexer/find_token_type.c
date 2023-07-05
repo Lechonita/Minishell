@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_token_type.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:13:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/03 11:47:25 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 09:25:12 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ int	determine_type(char c)
 	else if (is_redir(c) == LESS)
 		return (LESS);
 	else if (is_pipe(c))
-		return PIPE;
+		return (PIPE);
 	return (NOTOKEN);
 }

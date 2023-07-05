@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aim_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/03 16:33:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 09:26:21 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	same_aim(t_bigshell *data)
 	}
 }
 
-static char	*join_with_space(char *cmd, char *arg)
+static char	*join_wh_space(char *cmd, char *arg)
 {
 	char	*tmp;
 	char	*cmd_arg;
@@ -60,7 +60,7 @@ void	add_arg_to_cmd(t_bigshell *data)
 		{
 			while (tok->next->next && tok->next->next->aim == SIMPLE_CMD)
 			{
-				tok->value = join_with_space(tok->value, tok->next->next->value);
+				tok->value = join_wh_space(tok->value, tok->next->next->value);
 				if (tok->next->type == BLANK)
 					token_rm_next(tok);
 				if (tok->next->type == WORD || tok->next->type == INTEGER)

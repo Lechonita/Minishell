@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/04 15:10:43 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 09:19:21 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }			t_cmd;
 
-typedef struct s_redir
-{
-	int				type;		// 0 = <, 1 = >, 2 = >>, 3 = <<
-	char			*file;		// file name
-	char			*limiter;	// word for heredoc
-	struct s_redir	*next;
-}	t_redir;
+// typedef struct s_redir
+// {
+// 	int				type;		// 0 = <, 1 = >, 2 = >>, 3 = <<
+// 	char			*file;		// file name
+// 	char			*limiter;	// word for heredoc
+// 	struct s_redir	*next;
+// }	t_redir;
 
 typedef struct s_exec
 {
@@ -74,7 +74,6 @@ typedef struct s_exec
 	char			*out_file;
 	int				fd[FOPEN_MAX][2];
 	int				here_doc;
-	t_redir			*redir;
 	t_cmd			*cmd;
 }	t_exec;
 
@@ -178,31 +177,31 @@ void	handle_dup(t_bigshell *data, int pcss);
 /***********************************************************/
 
 /* LINE INIT */
-t_line		*line_last(t_line	*line);
-void		line_addback(t_line *line, t_line *new);
-t_line		*line_new(t_line *line, char c, int i);
-void		init_line(t_bigshell *data, char *line);
+t_line	*line_last(t_line	*line);
+void	line_addback(t_line *line, t_line *new);
+t_line	*line_new(t_line *line, char c, int i);
+void	init_line(t_bigshell *data, char *line);
 
 /* FIND TYPE */
-int			is_dollar(char c);
-int			is_blank(char c);
-int			is_single_quote(char c);
-int			is_double_quote(char c);
-int			is_integer(char c);
-int			is_newline(char c);
-int			is_ampersand(char c);
-int			is_pipe(char c);
-int			is_redir(char c);
-int			is_separator(char c);
-int			is_word(char c);
-int			determine_type(char c);
+int		is_dollar(char c);
+int		is_blank(char c);
+int		is_single_quote(char c);
+int		is_double_quote(char c);
+int		is_integer(char c);
+int		is_newline(char c);
+int		is_ampersand(char c);
+int		is_pipe(char c);
+int		is_redir(char c);
+int		is_separator(char c);
+int		is_word(char c);
+int		determine_type(char c);
 
 /* FIND QUOTES */
-int			find_closing_quote(t_line *line, int type);
-void		convert_quotes(t_line *line, int type);
-void		find_quotes(t_line *line);
-void		flag_double_quotes(t_line *line);
-void		flag_single_quotes(t_line *line);
+int		find_closing_quote(t_line *line, int type);
+void	convert_quotes(t_line *line, int type);
+void	find_quotes(t_line *line);
+void	flag_double_quotes(t_line *line);
+void	flag_single_quotes(t_line *line);
 
 /***********************************************************/
 /*                          LEXER                          */
@@ -210,7 +209,7 @@ void		flag_single_quotes(t_line *line);
 
 /* FIND TOKENS */
 void	token_rm_next(t_token *tok);
-void	ft_create_token(t_bigshell *data, t_line *current, char *value, int pos);
+void	create_token(t_bigshell *data, t_line *current, char *value, int pos);
 void	find_tokens(t_bigshell *data);
 
 /* GRAMMAR */
@@ -227,23 +226,23 @@ void	apply_grammar(t_bigshell *data);
 /* DOLLAR */
 
 /* QUOTES FIND */
-int			find_closing_quote(t_line *line, int type);
-void		convert_quotes(t_line *line, int type);
-void		find_quotes(t_line *line);
+int		find_closing_quote(t_line *line, int type);
+void	convert_quotes(t_line *line, int type);
+void	find_quotes(t_line *line);
 
 /* QUOTES OPEN */
-void		delete_additional_quotes(t_line *line, int type);
-void		assign_type_open_quotes(t_line *line);
-int			determine_stop(t_line *line, int type);
-void		input_open_quotes(t_line *line, char *input, int type);
-void		get_rest_open_quotes(t_line *line, int type, char *prompt);
-void		interpret_open_quotes(t_line *line, int type);
+void	delete_additional_quotes(t_line *line, int type);
+void	assign_type_open_quotes(t_line *line);
+int		determine_stop(t_line *line, int type);
+void	input_open_quotes(t_line *line, char *input, int type);
+void	get_rest_open_quotes(t_line *line, int type, char *prompt);
+void	interpret_open_quotes(t_line *line, int type);
 
 /* QUOTES POSITION */
-// int			find_end_dq(t_line *line);
-// int			find_start_dq(t_line *line);
-// int			find_end_sq(t_line *line);
-// int			find_start_sq(t_line *line);
+// int		find_end_dq(t_line *line);
+// int		find_start_dq(t_line *line);
+// int		find_end_sq(t_line *line);
+// int		find_start_sq(t_line *line);
 
 /***********************************************************/
 /*                  	  BUILTINS	                       */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:17:32 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/03 14:11:59 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 09:32:33 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	token_addback(t_token *token, t_token *new)
 
 /* Fonction qui cree un maillon t_token pour ajouter a la
 	liste chainee. */
-
 static t_token	*token_new(char *value, int type, int idx)
 {
 	t_token		*new;
@@ -64,7 +63,7 @@ static t_token	*token_new(char *value, int type, int idx)
 	return (new);
 }
 
-void	ft_create_token(t_bigshell *data, t_line *current, char *value, int pos)
+void	create_token(t_bigshell *data, t_line *current, char *value, int pos)
 {
 	if (current->index == 0)
 	{

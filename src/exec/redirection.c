@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:03:19 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/04 16:06:53 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 09:30:33 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	redirection_left(t_bigshell *bs)
 	char	*file;
 
 	file = bs->exec->in_file;
-
 	if (check_access_in(bs, file))
 	{
 		bs->exec->fd_in = open(file, O_RDONLY);
@@ -47,7 +46,6 @@ void	redirection_left(t_bigshell *bs)
 	}
 	return ;
 }
-
 
 void	redir_in_file(t_bigshell *data)
 {
@@ -114,7 +112,7 @@ void	redir_out_file(t_bigshell *data)
 		if (ft_strncmp(tok->value, ">", 1) == 0)
 		{
 			redirection_right(data);
-			break ;			
+			break ;
 		}
 		else if (ft_strncmp(tok->value, ">>", 2) == 0)
 		{

@@ -169,8 +169,8 @@ $(NAME): $(LIBFT) $(OBJ)
 # 	@echo "$(RED)                                                         $(END)"
 
 norm:
-	@norminette inc/*.h
 	@norminette src/*/*.c
+	@norminette inc/*.h
 #	@norminette libft/*/*.[ch]
 
 leaks: $(NAME) #fclean $(NAME)

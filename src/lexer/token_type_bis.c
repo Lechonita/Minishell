@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_type_bis.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 10:34:37 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/03 10:47:44 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 09:25:49 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	is_redir(char c)
 	return (0);
 }
 
-int is_pipe(char c)
+int	is_pipe(char c)
 {
 	if (c == '|')
 		return (PIPE);
