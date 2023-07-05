@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/05 09:19:21 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/05 10:33:40 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,6 @@ typedef struct s_cmd
 	int				idx_cmd;
 	struct s_cmd	*next;
 }			t_cmd;
-
-// typedef struct s_redir
-// {
-// 	int				type;		// 0 = <, 1 = >, 2 = >>, 3 = <<
-// 	char			*file;		// file name
-// 	char			*limiter;	// word for heredoc
-// 	struct s_redir	*next;
-// }	t_redir;
 
 typedef struct s_exec
 {

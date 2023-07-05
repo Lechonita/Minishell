@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/04 16:27:12 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 10:30:33 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_readline(t_bigshell *data, char *env[])
 	int		ret;
 
 	count = 0;
+	ret = 0;
 	data->history = ft_calloc(50, sizeof(char *));
 	while (1)
 	{
@@ -42,7 +43,7 @@ void	ft_readline(t_bigshell *data, char *env[])
 			init_line(data, input);
 			find_tokens(data);
 			ret = executor(data, env);
-			dprintf(2, "_____RETOUR = %d____________________________\n", ret);
+			dprintf(2, "RETOUR = %d \n", ret);
 			count++;
 		}
 		free_readline(data, input);

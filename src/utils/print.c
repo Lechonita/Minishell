@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/05 09:26:51 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/05 09:47:00 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	print_t_token(t_bigshell *data)
 	while (el)
 	{
 		printf("[%2d] ", el->index);
-		// printf("tok %2d ", el->type);
+		printf("tok %2d ", el->type);
 		printf(": %12s ", el->value);
 		printf("→ %2d\n", el->aim);
 		el = el->next;

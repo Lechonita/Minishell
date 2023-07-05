@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/05 09:19:01 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/05 09:47:59 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ enum e_tokentype
 	PIPE,				// |							8
 	GREAT,				// >							9
 	LESS,				// <							10
-	GREATGREAT,			// >>							11
-	LESSLESS,			// <<							12
 	AMPERSAND,			// &							13
 	SEPARATOR,			// ; ( ) { }					14
 	NOTOKEN,			// invalid character in input	15

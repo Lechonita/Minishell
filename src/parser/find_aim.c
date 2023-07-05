@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_aim.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/04 15:23:39 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 09:49:45 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ void	parser_job(t_bigshell *data)
 	aim_pipe(data);
 	aim_cmd(data);
 	check_builtin(data);
-	// print_t_token(data);
+	print_t_token(data);
 }

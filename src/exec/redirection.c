@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:03:19 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/05 09:30:33 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/05 10:22:10 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,14 @@ void	redir_out_file(t_bigshell *data)
 	tok = data->token;
 	while (tok != NULL)
 	{
+		if (ft_strncmp(tok->value, ">>", 2) == 0)
+		{
+			redirection_append(data);
+			break ;
+		}
 		if (ft_strncmp(tok->value, ">", 1) == 0)
 		{
 			redirection_right(data);
-			break ;
-		}
-		else if (ft_strncmp(tok->value, ">>", 2) == 0)
-		{
-			redirection_append(data);
 			break ;
 		}
 		tok = tok->next;

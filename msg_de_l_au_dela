@@ -12,18 +12,19 @@ echo Hello world
 echo "Hello world"
 
 to do list :
-→ add token to token list (pipe, cmd, etc etc)
 → handle { } in parser
 → check if all grammar is ok in lexer/parser/tokener 
 → check the pb with .h compilation
+→ rm BLANK in lexer
+→ expansion of $ 
+→ $?  print the exit status of the last command executed (ret)
+→ add when no redir ex : ls -l | wc -l
+
 
 → finish init_exec
 	→ here doc : reconnaitre << et le limiter
-	→ find good parser for exec
+	→ 
 
 if underscore is the first character, the string should be categorized 
  as an operator (invalid or otherwise) or the beginning of an identifier.
 
-
-# Path: msg_de_l_au_dela
-jfke
