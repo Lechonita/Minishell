@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:37:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/04 16:27:53 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/05 14:17:38 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/exec.h"
 
+/* dprintf(2, "cmd = %s\n", el->cmd); */
 void	child_process(t_bigshell *data, char *env[], int pcss)
 {
 	t_cmd	*el;
@@ -25,7 +26,6 @@ void	child_process(t_bigshell *data, char *env[], int pcss)
 		if (pcss == el->idx_cmd)
 		{
 			el->cmd = find_path_to_cmd(data, el->cmd_arg[0]);
-			dprintf(2, "cmd = %s\n", el->cmd);
 			if (el->cmd == NULL)
 				error_not_found(data, CMD_NOT_FOUND, el->cmd_arg[0]);
 			execve(el->cmd, el->cmd_arg, env);
@@ -83,5 +83,4 @@ int	executor(t_bigshell *data, char *env[])
 	close_pipe(data);
 	dprintf(2, " wait pid = %d\n", ft_waitpid(last_pid));
 	return (ft_waitpid(last_pid));
-	// return (0);
 }
