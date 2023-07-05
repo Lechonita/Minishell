@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/05 09:47:59 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/05 11:40:55 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,5 @@ enum e_aim
 	BUILTIN,		// echo cd pwd export unset env exit	22
 	PIPEX,			// |									23
 };
-
-// /* FIND TOKENS */
-// void	create_token(t_bigshell *data, t_line *current, char *value, int pos);
-// void	find_tokens(t_bigshell *data);
 
 #endif

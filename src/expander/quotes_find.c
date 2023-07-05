@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/05 09:31:14 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:29:00 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	convert_quotes(t_line *line, int type)
 		{
 			if (tmp->type == type)
 				break ;
-			// if (quote == 34 && tmp->c == "$")
-			// 	tmp = do_expansion(tmp);
+			if (type == DQUOTE && tmp->c == '$')
+				tmp = do_expansion(tmp);
 			else
 				tmp->type = WORD;
 			tmp = tmp->next;

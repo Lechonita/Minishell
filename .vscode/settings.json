@@ -2,6 +2,7 @@
 	"files.associations": {
 		"unistd.h": "c",
 		"minishell.h": "c",
-		"lexer.h": "c"
+		"lexer.h": "c",
+		"error.h": "c"
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/05 10:33:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:29:48 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
 # include "error.h"
-# include "./lexer.h"
+# include "lexer.h"
 // # include "env.h"
 
 # include <stdio.h>
@@ -216,6 +216,9 @@ void	apply_grammar(t_bigshell *data);
 /***********************************************************/
 
 /* DOLLAR */
+int		get_var_len(t_line *line);
+char	*get_var(t_line *line);
+t_line	*do_expansion(t_line *line);
 
 /* QUOTES FIND */
 int		find_closing_quote(t_line *line, int type);
