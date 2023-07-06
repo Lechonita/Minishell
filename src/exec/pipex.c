@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:37:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/05 14:17:38 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/06 13:42:06 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,5 @@ int	executor(t_bigshell *data, char *env[])
 	while (++nb_pro < data->exec->nb_cmd)
 		last_pid = execute_pipex(data, env, nb_pro);
 	close_pipe(data);
-	dprintf(2, " wait pid = %d\n", ft_waitpid(last_pid));
 	return (ft_waitpid(last_pid));
 }

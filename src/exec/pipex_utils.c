@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:00:06 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/05 09:30:06 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/06 17:31:13 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,35 @@ void	close_pipe(t_bigshell *data)
 		close(data->exec->fd_out);
 }
 
-static void	dup_bis(int new_read, int new_write)
-{
-	if (dup2(new_read, STDIN_FILENO) < 0 || dup2(new_write, STDOUT_FILENO) < 0)
-		return ;
-}
 
+
+/*
 void	handle_dup(t_bigshell *data, int pcss)
 {
-	if ((data->exec->fd_in < 3 && pcss == 0)
-		|| (data->exec->fd_out < 3 && pcss == data->exec->nb_cmd - 1))
+	int	red;
+
+	red = data->exec->no_redir;
+	dprintf(2, "no redirect = %d\n", red);
+	if ((data->exec->fd_in < 3 && pcss == 0 && (red == 0 || red == 2))
+		|| (data->exec->fd_out < 3 && pcss == (data->exec->nb_cmd - 1)
+			&& (red == 0 || red == 1)))
 		return (free_all(data), exit(EXIT_FAILURE));
 	if (pcss == 0)
-		dup_bis(data->exec->fd_in, data->exec->fd[0][1]);
+	{
+		if (red == 0)
+			dup_bis(data->exec->fd_in, data->exec->fd[0][1]);
+		else if (red == 1 || red == 3)
+			dup2(data->exec->fd[1][0], STDIN_FILENO);
+	}
 	else if (pcss == data->exec->nb_cmd - 1)
-		dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd_out);
+	{
+		if (red == 0)
+			dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd_out);
+		else if (red == 2 || red == 3)
+			dup2(data->exec->fd[(pcss - 1) * 2][1], STDOUT_FILENO);
+	}
 	else
 		dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd[pcss * 2][1]);
 }
+
+*/

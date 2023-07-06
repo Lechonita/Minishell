@@ -8,7 +8,6 @@
 {
 	usrbin
 	Memcheck:Leak
-	match-leak-kinds: reachable
 	...
 	obj:/usr/bin/*
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:15:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/04 11:49:14 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/06 13:41:37 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ t_cmd	*init_cmd(t_bigshell *data)
 	i = 0;
 	while (el != NULL)
 	{
-		if (i == 0 && el->aim == SIMPLE_CMD)
+		if (i == 0 && (el->aim == SIMPLE_CMD || el->aim == BUILTIN))
 		{
 			lst_cmd = new_lst(data, i++, el->value);
 			if (lst_cmd == NULL)
 				return (free_all(data), ft_exit(EXIT_FAILURE, W_LST_CMD), NULL);
 		}			
-		else if (i > 0 && el->aim == SIMPLE_CMD)
+		else if (i > 0 && (el->aim == SIMPLE_CMD || el->aim == BUILTIN))
 			lst_add_back(&lst_cmd, new_lst(data, i++, el->value));
 		el = el->next;
 	}

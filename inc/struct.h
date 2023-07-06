@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/05 15:11:04 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/06 14:30:43 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,35 +47,6 @@
 // 	int		(*func)(t_bigshell *data, int cmd_ac, char *cmd_av[]);
 // }	t_builtin;
 
-typedef struct s_cmd
-{
-	char			*cmd;
-	char			**cmd_arg;
-	int				idx_cmd;
-	struct s_cmd	*next;
-}			t_cmd;
-
-typedef struct s_exec
-{
-	int				fd_in;
-	int				fd_out;
-	int				nb_cmd;
-	char			*in_file;
-	char			*out_file;
-	int				fd[FOPEN_MAX][2];
-	int				here_doc;
-	t_cmd			*cmd;
-}	t_exec;
-
-typedef struct s_token
-{
-	int				index;
-	int				type;
-	int				aim;
-	char			*value;
-	struct s_token	*next;
-}	t_token;
-
 typedef struct s_line
 {
 	int				index;
@@ -93,6 +64,36 @@ typedef struct s_env
 	int				index;
 	struct s_env	*next;
 }	t_env;
+
+typedef struct s_cmd
+{
+	char			*cmd;
+	char			**cmd_arg;
+	int				idx_cmd;
+	struct s_cmd	*next;
+}			t_cmd;
+
+typedef struct s_exec
+{
+	int				fd_in;
+	int				fd_out;
+	int				nb_cmd;
+	char			*in_file;
+	char			*out_file;
+	int				fd[FOPEN_MAX][2];
+	int				here_doc;
+	int				no_redir;
+	t_cmd			*cmd;
+}	t_exec;
+
+typedef struct s_token
+{
+	int				index;
+	int				type;
+	int				aim;
+	char			*value;
+	struct s_token	*next;
+}	t_token;
 
 typedef struct s_bigshell
 {

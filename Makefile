@@ -71,9 +71,11 @@ SRC += executor.c
 SRC += pipex.c
 SRC += pipex_utils.c
 SRC += redirection.c
+SRC += no_redir.c
 SRC += here_doc.c
 SRC += cmd_utils.c
 SRC += init_exec.c
+SRC += simple_cmd.c
 
 #	Expander functions
 SRC += dollar.c
@@ -81,7 +83,7 @@ SRC += quotes_find.c
 SRC += quotes_open.c
 SRC += quotes_position.c
 
-#	Input functions
+#	Input functionsSTDIN_FILENO
 SRC += prompt.c
 SRC += signal.c
 SRC += termcap.c
@@ -175,11 +177,11 @@ norm:
 	@norminette inc/*.h
 #	@norminette libft/*/*.[ch]
 
-leaks: fclean $(NAME)
+leaks: $(NAME) #fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=./.readline_supp -q ./$(NAME)
-# --gen-suppressions=all
+	@valgrind --leak-check=full  --track-origins=yes  --trace-children=yes --suppressions=./.readline_supp -q ./$(NAME)
+# --gen-suppressions=all --track-fds=yes
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"
