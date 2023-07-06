@@ -6,7 +6,7 @@ NAME = minishell
 
 ############################### Compiler #######################################
 
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
+FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
 CC = gcc
 
 ############################### LIBFT ##########################################
@@ -23,6 +23,7 @@ INCLUDES += -I $(LIBFT_DIR)/includes
 
 ############################### Headers ########################################
 
+HEADER += inc/struct.h
 HEADER += inc/minishell.h
 HEADER += inc/builtins.h
 HEADER += inc/env.h
@@ -101,6 +102,7 @@ SRC += aim_cmd.c
 
 #	Utils functions
 SRC += free_struct.c
+SRC += free_struct_bis.c
 SRC += error.c
 SRC += print.c
 
@@ -173,12 +175,11 @@ norm:
 	@norminette inc/*.h
 #	@norminette libft/*/*.[ch]
 
-leaks: $(NAME) #fclean $(NAME)
+leaks: fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
-	@valgrind --leak-check=full -q ./$(NAME)
-# --track-origins=yes --show-leak-kinds=all --track-origins=yes --suppressions=./.readline.supp
-# --track-fds=yes
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=./.readline_supp -q ./$(NAME)
+# --gen-suppressions=all
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/05 10:30:33 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:14:03 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,22 @@
 
 void	free_readline(t_bigshell *data, char *input)
 {
-	free(input);
-	ft_free_line(&data->line);
-	ft_free_token(&data->token);
-	ft_free_cmd(&data->exec->cmd);
+	if (input != NULL)
+		free(input);
+	if (data->line != NULL)
+		ft_free_line(&data->line);
+	if (data->token != NULL)
+		ft_free_token(&data->token);
+	if (data->exec != NULL)
+		ft_free_exec(&data->exec);
 }
 
 void	ft_readline(t_bigshell *data, char *env[])
 {
 	char	*input;
 	int		count;
-	int		ret;
 
 	count = 0;
-	ret = 0;
-	data->history = ft_calloc(50, sizeof(char *));
 	while (1)
 	{
 		input = readline("$ ");
@@ -42,11 +43,10 @@ void	ft_readline(t_bigshell *data, char *env[])
 			add_history(input);
 			init_line(data, input);
 			find_tokens(data);
-			ret = executor(data, env);
-			dprintf(2, "RETOUR = %d \n", ret);
+			data->ret = executor(data, env);
 			count++;
 		}
 		free_readline(data, input);
 	}
-	free(input);
+	free_readline(data, input);
 }

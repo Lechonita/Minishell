@@ -6,39 +6,32 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:03:19 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/05 10:22:10 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/05 15:35:40 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/exec.h"
 
-static int	check_access_in(t_bigshell *data, char *file)
-{
-	if (access(file, F_OK & R_OK) == 0)
-		return (1);
-	else if (access(file, F_OK) < 0)
-	{
-		msg_not_found(FILE_NOT_FOUND, file);
-		data->exec->fd_in = 0;
-		return (0);
-	}
-	else if (access(file, R_OK) < 0)
-	{
-		msg_not_found(PERM_DENIED, file);
-		data->exec->fd_in = 0;
-		return (0);
-	}
-	return (0);
-}
-
-/* < should redirect input from std_in to fd_in*/
-void	redirection_left(t_bigshell *bs)
+/* < */
+static void	redirection_left(t_bigshell *bs)
 {
 	char	*file;
 
 	file = bs->exec->in_file;
-	if (check_access_in(bs, file))
+	if (access(file, F_OK) < 0)
+	{
+		msg_not_found(FILE_NOT_FOUND, file);
+		bs->exec->fd_in = 0;
+		return ;
+	}
+	else if (access(file, R_OK) < 0)
+	{
+		msg_not_found(PERM_DENIED, file);
+		bs->exec->fd_in = 0;
+		return ;
+	}
+	else if (access(file, F_OK & R_OK) == 0)
 	{
 		bs->exec->fd_in = open(file, O_RDONLY);
 		if (bs->exec->fd_in < 0)
@@ -54,20 +47,23 @@ void	redir_in_file(t_bigshell *data)
 	tok = data->token;
 	while (tok != NULL)
 	{
-		if (ft_strncmp(tok->value, "<", 1) == 0)
+		if (ft_strncmp(tok->value, "<<", 2) == 0)
+		{
+			handle_here_doc(data, data->exec->in_file);
+			break ;
+		}
+		else if (ft_strncmp(tok->value, "<", 1) == 0)
 		{
 			redirection_left(data);
 			break ;
 		}
-		// else if (ft_strncmp(tok->value, "<<", 2) == 0)
-		// 	return (handle_here_doc(data));
 		tok = tok->next;
 	}
 	return ;
 }
 
-/* > should redirect output from std_out to fd_out */
-void	redirection_right(t_bigshell *bs)
+/* > */
+static void	redirection_right(t_bigshell *bs)
 {
 	char	*file;
 
@@ -85,7 +81,7 @@ void	redirection_right(t_bigshell *bs)
 }
 
 /* >> */
-void	redirection_append(t_bigshell *data)
+static void	redirection_append(t_bigshell *data)
 {
 	char	*file;
 
@@ -114,7 +110,7 @@ void	redir_out_file(t_bigshell *data)
 			redirection_append(data);
 			break ;
 		}
-		if (ft_strncmp(tok->value, ">", 1) == 0)
+		else if (ft_strncmp(tok->value, ">", 1) == 0)
 		{
 			redirection_right(data);
 			break ;
