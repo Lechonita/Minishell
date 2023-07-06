@@ -18,6 +18,12 @@ to do list :
 	→ gérer les open/close de fd avant l'exec
 	→ gérer avec plusieurs redirection : ls -l > out_file > out_file2 ou <<1 <<2 <<3 ls -l avec des droits ou non sur les fichiers du milieu
 
+to do expansion :
+	→ gérer les $ entre quotes
+	→ cmd="ls -l" puis $cmd affiche le resultat de ls -l
+	→ echo $?
+	→ "$cmd" doit afficher "ls -lra: command not found"
+	→ export bout="s -l" puis faire l$bout -ra : ca doit afficher le resultat de "ls -l -ra"
 
 if underscore is the first character, the string should be categorized as an operator (invalid or otherwise) or the beginning of an identifier.
 

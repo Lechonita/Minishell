@@ -178,8 +178,8 @@ norm:
 leaks: fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=./.readline_supp -q ./$(NAME)
-# --gen-suppressions=all
+	@valgrind --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=./.readline_supp -q ./$(NAME)
+# --gen-suppressions=all  --show-leak-kinds=all
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"

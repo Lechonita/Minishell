@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/05 15:16:46 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/06 14:35:09 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "minishell.h"
 
 /* DOLLAR */
+int		get_var_len(t_line *line, int acolade);
+char	*get_var(t_line *line);
+t_line	*do_expansion(t_line *line);
 
 /* QUOTES FIND */
 int		find_closing_quote(t_line *line, int type);

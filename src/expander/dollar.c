@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/05 14:33:56 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:45:35 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 		- Si aucun name ne correspond et qu'on n'est pas dans des guillemets,
 			afficher un retour a la ligne. */
 
-int	get_var_len(t_line *line)
+int	get_var_len(t_line *line, int acolade)
 {
 	t_line	*tmp;
 	int		i;
@@ -41,21 +41,12 @@ int	get_var_len(t_line *line)
 		return (0);
 	tmp = line;
 	i = 1;
-	if (tmp->c == '{')
+	while (tmp)
 	{
-		while (tmp && tmp->c != '}')
-		{
+		if ((acolade == 1 && tmp->c != '}')
+			|| (acolade == 0 && tmp->type != BLANK))
 			i++;
-			tmp = tmp->next;
-		}
-	}
-	else
-	{
-		while (tmp && tmp->type != BLANK)
-		{
-			i++;
-			tmp = tmp->next;
-		}
+		tmp = tmp->next;
 	}
 	printf("==> The length of my var = %d\n", i);
 	return (i);
@@ -65,28 +56,24 @@ char	*get_var(t_line *line)
 {
 	t_line	*tmp;
 	char	*var;
+	int		acolade;
 	int		i;
 
 	if (!line || !line->next)
 		return (NULL);
 	tmp = line;
-	var = malloc(sizeof(char) * (get_var_len(tmp) + 1));
+	acolade = 0;
 	i = 0;
 	if (tmp->c == '{')
+		acolade = 1;
+	printf("La j'ai une adolade ? %d\n", acolade);
+	var = malloc(sizeof(char) * (get_var_len(tmp, acolade) + 1));
+	while (tmp)
 	{
-		while (tmp && tmp->c != '}')
-		{
+		if ((acolade == 1 && tmp->c != '}')
+			|| (acolade == 0 && tmp->type != BLANK))
 			var[i++] = tmp->c;
-			tmp = tmp->next;
-		}
-	}
-	else
-	{
-		while (tmp && tmp->type != BLANK)
-		{
-			var[i++] = tmp->c;
-			tmp = tmp->next;
-		}
+		tmp = tmp->next;
 	}
 	var[i] = '\0';
 	return (var);
