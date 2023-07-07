@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:25:25 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/06 17:50:57 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/07 10:45:31 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,5 @@ void	init_exec(t_bigshell *data)
 	redir_in_file(data);
 	redir_out_file(data);
 	data->exec->nb_cmd = count_cmd(data) + 1;
-	dprintf(2, "nb_cmd = %d\n", data->exec->nb_cmd);
 	data->exec->cmd = init_cmd(data);
-	if (data->exec->nb_cmd == 1)
-		exec_simple_cmd(data);
 }

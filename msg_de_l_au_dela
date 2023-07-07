@@ -13,11 +13,16 @@ to do list :
 	→ check if all grammar is ok in lexer/parser/tokener 
 	→ expansion of $ 
 	→ $? print the exit status of the last command executed (ret)
-	→ gérer simple cmd ex : wc -l
-	→ gérer sans redir ex : ls -l | wc -l
+	→ gérer cat ou /bin/cat ou cat ou /usr/bin/cat → donne le meme resultat !!
 	→ gérer les redirection avant l'exec
 	→ gérer les open/close de fd avant l'exec
+
 	→ gérer avec plusieurs redirection : ls -l > out_file > out_file2 ou <<1 <<2 <<3 ls -l avec des droits ou non sur les fichiers du milieu
+
+to do list error :
+	→ $ < ou << ou >> ou >
+	bash: syntax error near unexpected token `newline'
+	→ $ 
 
 
 if underscore is the first character, the string should be categorized as an operator (invalid or otherwise) or the beginning of an identifier.
