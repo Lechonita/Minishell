@@ -19,11 +19,11 @@ to do list :
 
 	→ gérer avec plusieurs redirection : ls -l > out_file > out_file2 ou <<1 <<2 <<3 ls -l avec des droits ou non sur les fichiers du milieu
 
-to do list error :
+example / error :
 	→ $ < ou << ou >> ou >
 	bash: syntax error near unexpected token `newline'
-	→ $ 
 
+	→ $ e'c'"h"o salut
+	salut
 
-if underscore is the first character, the string should be categorized as an operator (invalid or otherwise) or the beginning of an identifier.
-
+	
