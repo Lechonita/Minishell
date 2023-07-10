@@ -68,8 +68,7 @@ SRC += path_handle.c
 
 # 	Exec functions
 SRC += executor.c
-SRC += pipex.c
-SRC += pipex_utils.c
+SRC += exec_utils.c
 SRC += redirection.c
 SRC += no_redir.c
 SRC += here_doc.c
@@ -83,10 +82,9 @@ SRC += quotes_find.c
 SRC += quotes_open.c
 SRC += quotes_position.c
 
-#	Input functionsSTDIN_FILENO
+#	Input functions
 SRC += prompt.c
 SRC += signal.c
-SRC += termcap.c
 
 #	Lexer functions
 SRC += flag_quotes.c
@@ -98,7 +96,6 @@ SRC += token_type.c
 SRC += token_type_bis.c
 
 #	Parser functions
-SRC += grammar.c
 SRC += find_aim.c
 SRC += aim_cmd.c
 

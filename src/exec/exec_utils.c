@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:00:06 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/06 17:31:13 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/10 09:47:20 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	close_pipe(t_bigshell *data)
 		close(data->exec->fd_out);
 }
 
-
-
 /*
 void	handle_dup(t_bigshell *data, int pcss)
 {
@@ -73,5 +71,4 @@ void	handle_dup(t_bigshell *data, int pcss)
 	else
 		dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd[pcss * 2][1]);
 }
-
 */
