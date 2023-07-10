@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/10 10:45:19 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/10 11:47:33 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ char	*ft_strjoin_bis(char *s1, char *s2)
 		return (NULL);
 	str = ft_strjoin(tmp, s2);
 	if (!str)
-		return (NULL);
+		return (free (tmp), NULL);
 	free(tmp);
 	return (str);
 }
 
 /* Fonction qui cherche le chemin absolu d'une commande dans le PATH */
-char	*find_path_to_cmd(t_bigshell *data, char *cmd)
+char	*find_path_to_cmd(t_bigshell *data, char *cmd, char *path)
 {
 	char	*command;
 	int		i;
@@ -58,6 +58,7 @@ char	*find_path_to_cmd(t_bigshell *data, char *cmd)
 			return (command);
 		free(command);
 	}
+	free(path);
 	return (NULL);
 }
 
