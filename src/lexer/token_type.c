@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:52:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/03 10:47:56 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/10 13:42:00 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/parser.h"
+#include "../inc/lexer.h"
 
 int	is_dollar(char c)
 {

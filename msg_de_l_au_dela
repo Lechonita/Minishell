@@ -19,12 +19,13 @@ to do list :
 	→ gérer avec plusieurs redirection : ls -l > out_file > out_file2 ou <<1 <<2 <<3 ls -l avec des droits ou non sur les fichiers du milieu
 
 to do expansion :
-	→ gérer les $ entre quotes
+	→ gérer les $ entre quotes et hors quotes
 	→ cmd="ls -l" puis $cmd affiche le resultat de ls -l
 	→ echo $?
 	→ "$cmd" doit afficher "ls -lra: command not found"
 	→ export bout="s -l" puis faire l$bout -ra : ca doit afficher le resultat de "ls -l -ra"
 example / error :
+	→ cmd=321 echo yes => le cmd=321 n'est pas pris en compte quand autre commande derriere
 	→ $ < ou << ou >> ou >
 	bash: syntax error near unexpected token `newline'
 

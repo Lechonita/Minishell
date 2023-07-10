@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/06 14:35:09 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:46:10 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int		get_var_len(t_line *line, int acolade);
 char	*get_var(t_line *line);
 t_line	*do_expansion(t_line *line);
+void	find_dollar(t_line *line);
 
 /* QUOTES FIND */
 int		find_closing_quote(t_line *line, int type);

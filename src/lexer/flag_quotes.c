@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   flag_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:37:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/03 10:59:24 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/10 13:42:14 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/parser.h"
+#include "../inc/lexer.h"
 
 /* Ces fonctions remplissent les valeurs t_line->sq et t_line->dq
 	Elle va flagger les doubles / simplesguillemets s' il y en a.

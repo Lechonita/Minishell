@@ -6,18 +6,17 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/06 14:24:46 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:51:40 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
 
-// 	// check guillemets
-// 	// check l'ordre des guillemets si plusieurs
-// 	// 	=> des '' a l'interieur des "" n'ont aucun effet
-// 	// check serie de mots
-// }
+	// check guillemets
+	// check l'ordre des guillemets si plusieurs
+	// 	=> des '' a l'interieur des "" n'ont aucun effet
+	// check serie de mots
 
 int	find_closing_quote(t_line *line, int type)
 {
@@ -50,9 +49,9 @@ void	convert_quotes(t_line *line, int type)
 		{
 			if (tmp->type == type)
 				break ;
-			if (type == DQUOTE && tmp->c == '$')
-				tmp = do_expansion(tmp);
-			else
+			// if (type == DQUOTE && tmp->c == '$')
+			// 	tmp = do_expansion(tmp);
+			// else
 				tmp->type = WORD;
 			tmp = tmp->next;
 		}

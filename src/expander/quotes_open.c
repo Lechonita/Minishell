@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_open.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:34:19 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/03 11:14:20 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/10 15:06:30 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,25 @@
 #include "../inc/expander.h"
 
 // Rajouter le ctrl + C
+
+// void	delete_additional_quotes(t_line *line, int type)
+// {
+// 	t_line	*tmp;
+
+// 	if (!line || !line->next)
+// 		return ;
+// 	tmp = line->next;
+// 	line->next = line->next->next;
+// 	while (tmp)
+// 	{
+// 		if (tmp->type == type)
+// 		{
+// 			free(tmp->c);
+// 			free(tmp);
+// 		}
+// 		tmp = line->next;
+// 	}
+// }
 
 void	delete_additional_quotes(t_line *line, int type)
 {
@@ -60,14 +79,6 @@ int	determine_stop(t_line *line, int type)
 	}
 	return (count);
 }
-
-// void	ft_line_delete(t_line *prev, t_line *current, int type)
-// {
-// 	if (!prev || !current || !type)
-// 		return ;
-// 	if (current->next->type == type)
-// 		prev->next = current->next;
-// }
 
 void	input_open_quotes(t_line *line, char *input, int type)
 {

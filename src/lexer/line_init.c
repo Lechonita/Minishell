@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   line_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/05 09:31:46 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/10 16:39:45 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/parser.h"
+#include "../inc/lexer.h"
 
 /* Fonction qui retourne le dernier maillon de la liste t_line. */
 
@@ -89,8 +89,10 @@ void	init_line(t_bigshell *data, char *line)
 		i++;
 	}
 	tmp = data->line;
+	// new_var(tmp); // gestion des cmd=123 => rajouter la var dans t_env;
 	flag_double_quotes(tmp);
 	flag_single_quotes(tmp);
 	find_quotes(tmp);
-	// print_t_line(data);
+	find_dollar(tmp);
+	print_t_line(data);
 }
