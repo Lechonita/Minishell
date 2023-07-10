@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:03:19 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/05 15:35:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/06 17:32:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,6 @@ static void	redirection_left(t_bigshell *bs)
 		bs->exec->fd_in = open(file, O_RDONLY);
 		if (bs->exec->fd_in < 0)
 			return (free_all(bs), ft_exit(errno, strerror(errno)));
-	}
-	return ;
-}
-
-void	redir_in_file(t_bigshell *data)
-{
-	t_token	*tok;
-
-	tok = data->token;
-	while (tok != NULL)
-	{
-		if (ft_strncmp(tok->value, "<<", 2) == 0)
-		{
-			handle_here_doc(data, data->exec->in_file);
-			break ;
-		}
-		else if (ft_strncmp(tok->value, "<", 1) == 0)
-		{
-			redirection_left(data);
-			break ;
-		}
-		tok = tok->next;
 	}
 	return ;
 }
@@ -98,10 +76,44 @@ static void	redirection_append(t_bigshell *data)
 	return ;
 }
 
+void	redir_in_file(t_bigshell *data)
+{
+	t_token	*tok;
+
+	if (data->exec->in_file == NULL)
+	{
+		data->exec->fd_in = 0;
+		data->exec->no_redir = 1;
+		return ;
+	}
+	tok = data->token;
+	while (tok != NULL)
+	{
+		if (ft_strncmp(tok->value, "<<", 2) == 0)
+		{
+			handle_here_doc(data, data->exec->in_file);
+			break ;
+		}
+		else if (ft_strncmp(tok->value, "<", 1) == 0)
+		{
+			redirection_left(data);
+			break ;
+		}
+		tok = tok->next;
+	}
+	return ;
+}
+
 void	redir_out_file(t_bigshell *data)
 {
 	t_token	*tok;
 
+	if (data->exec->out_file == NULL)
+	{
+		data->exec->fd_out = 0;
+		data->exec->no_redir = 2 + data->exec->no_redir;
+		return ;
+	}
 	tok = data->token;
 	while (tok != NULL)
 	{

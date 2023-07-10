@@ -2,13 +2,17 @@
 	rdline
 	Memcheck:Leak
 	...
-	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.0
 	fun:readline
+}
+{
+   ignore_libreadline_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libreadline.so.*
 }
 {
 	usrbin
 	Memcheck:Leak
-	# match-leak-kinds: reachable
 	...
 	obj:/usr/bin/*
 }

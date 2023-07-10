@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:13:36 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/06 13:39:29 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/10 10:45:38 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_free_cmd(t_cmd **cmd)
 	while (*cmd)
 	{
 		tmp = (*cmd)->next;
-		if ((*cmd)->cmd)
+		// if ((*cmd)->cmd)
 			free((*cmd)->cmd);
 		if ((*cmd)->cmd_arg)
 			free_strs((*cmd)->cmd_arg);

@@ -3,6 +3,7 @@ yo mate !! how are you??
 < Makefile cat | wc -l | head -77 | tail -5 | ls -l >> out_file
 < Makefile cat | head -7 | taili -5 >> out_file.txt
 < Makefile cat | wc -l > out_file
+< Makefile ls -l | head -42 | echo hello world  > out_file
 
 echo Hello world
 echo "Hello world"
@@ -12,10 +13,10 @@ to do list :
 	→ check if all grammar is ok in lexer/parser/tokener 
 	→ expansion of $ 
 	→ $? print the exit status of the last command executed (ret)
-	→ gérer simple cmd ex : wc -l
-	→ gérer sans redir ex : ls -l | wc -l
+	→ gérer cat ou /bin/cat ou cat ou /usr/bin/cat → donne le meme resultat !!
 	→ gérer les redirection avant l'exec
 	→ gérer les open/close de fd avant l'exec
+
 	→ gérer avec plusieurs redirection : ls -l > out_file > out_file2 ou <<1 <<2 <<3 ls -l avec des droits ou non sur les fichiers du milieu
 
 to do expansion :
@@ -24,6 +25,11 @@ to do expansion :
 	→ echo $?
 	→ "$cmd" doit afficher "ls -lra: command not found"
 	→ export bout="s -l" puis faire l$bout -ra : ca doit afficher le resultat de "ls -l -ra"
+example / error :
+	→ $ < ou << ou >> ou >
+	bash: syntax error near unexpected token `newline'
 
-if underscore is the first character, the string should be categorized as an operator (invalid or otherwise) or the beginning of an identifier.
+	→ $ e'c'"h"o salut
+	salut
 
+	
