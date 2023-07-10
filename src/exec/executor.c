@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:37:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/10 11:41:35 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/10 13:49:03 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	executor(t_bigshell *data, char *env[])
 
 	nb_pro = -1;
 	data->exec = ft_calloc(1, sizeof(t_exec));
-	print_t_token(data);
 	init_exec(data);
 	if (data->exec->nb_cmd == 1)
 		last_pid = exec_simple_cmd(data, env);

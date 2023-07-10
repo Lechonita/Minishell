@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/06 14:30:43 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/10 16:44:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@
 # include <sys/prctl.h>
 # include <readline/readline.h>	//readline
 # include <readline/history.h>	//readline
-# include <termios.h>			//configuration terminal
-# include <term.h>				//terminal capabilities
-# include <curses.h>			//terminal capabilities
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ
@@ -73,6 +70,14 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }			t_cmd;
 
+typedef struct s_redir
+{
+	char			*type;
+	char			*file;
+	int				idx;
+	struct s_redir	*next;
+}	t_redir;
+
 typedef struct s_exec
 {
 	int				fd_in;
@@ -102,6 +107,8 @@ typedef struct s_bigshell
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;
+	t_redir			*in;
+	t_redir			*out;
 	t_exec			*exec;
 }	t_bigshell;
 

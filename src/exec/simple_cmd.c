@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 17:41:14 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/10 09:46:45 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/10 12:00:11 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ pid_t	exec_simple_cmd(t_bigshell *data, char *env[])
 	{
 		simple_cmd = data->exec->cmd;
 		handle_dup_simp_cmd(data);
-		simple_cmd->cmd = find_path_to_cmd(data, simple_cmd->cmd_arg[0]);
+		simple_cmd->cmd = find_path_to_cmd(data, simple_cmd->cmd_arg[0],
+				simple_cmd->cmd);
 		if (simple_cmd->cmd == NULL)
 			error_not_found(data, CMD_NOT_FOUND, simple_cmd->cmd_arg[0]);
 		execve(simple_cmd->cmd, simple_cmd->cmd_arg, env);

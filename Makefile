@@ -23,7 +23,7 @@ INCLUDES += -I $(LIBFT_DIR)/includes
 
 ############################### Headers ########################################
 
-HEADER += inc/struct.h
+
 HEADER += inc/minishell.h
 HEADER += inc/builtins.h
 HEADER += inc/env.h
@@ -33,6 +33,8 @@ HEADER += inc/expander.h
 HEADER += inc/input.h
 HEADER += inc/lexer.h
 HEADER += inc/parser.h
+HEADER += inc/redirection.h
+HEADER += inc/struct.h
 
 vpath %.h $(INC_DIR)
 
@@ -43,10 +45,11 @@ BUILTINS_DIR = ./src/builtins
 ENV_DIR = ./src/env
 EXEC_DIR = ./src/exec
 EXPANDER_DIR = ./src/expander
+TERM_DIR = ./src/input
 LEXER_DIR = ./src/lexer
 PARSER_DIR = ./src/parser
 PIPE_DIR = ./src/pipe
-TERM_DIR = ./src/input
+REDIR_DIR = ./src/redirection
 UTILS_DIR = ./src/utils
 
 ############################### Sources ########################################
@@ -69,9 +72,6 @@ SRC += path_handle.c
 # 	Exec functions
 SRC += executor.c
 SRC += exec_utils.c
-SRC += redirection.c
-SRC += no_redir.c
-SRC += here_doc.c
 SRC += cmd_utils.c
 SRC += init_exec.c
 SRC += simple_cmd.c
@@ -99,6 +99,12 @@ SRC += token_type_bis.c
 SRC += find_aim.c
 SRC += aim_cmd.c
 
+#	Redirection functions
+SRC += redirection.c
+SRC += handle_redir.c
+SRC += in_out.c
+SRC += here_doc.c
+
 #	Utils functions
 SRC += free_struct.c
 SRC += free_struct_bis.c
@@ -107,6 +113,7 @@ SRC += print.c
 
 vpath %.c $(SRC_DIR)
 vpath %.c $(TERM_DIR)
+vpath %.c $(REDIR_DIR)
 vpath %.c $(UTILS_DIR)
 vpath %.c $(BUILTINS_DIR)
 vpath %.c $(EXEC_DIR)

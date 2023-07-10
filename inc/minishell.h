@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/05 15:18:54 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:04:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 # define MINISHELL_H
 
 # include "struct.h"
-# include "error.h"
-# include "lexer.h"
-# include "env.h"
-# include "parser.h"
-# include "exec.h"
 # include "builtins.h"
-# include "input.h"
+# include "env.h"
+# include "error.h"
 # include "exec.h"
 # include "expander.h"
+# include "exec.h"
+# include "input.h"
+# include "lexer.h"
+# include "parser.h"
+# include "redirection.h"
 
 /* MAIN */
 void	ft_readline(t_bigshell *data, char *env[]);
@@ -52,6 +53,7 @@ void	print_strs(char **strs);
 void	print_cmd_lst(t_bigshell *data);
 void	print_t_line(t_bigshell *data);
 void	print_t_token(t_bigshell *data);
+void	print_redir(t_bigshell *data, char *str);
 void	display_env_struct(t_bigshell *data);
 void	print_history_lst(t_bigshell *data);
 
