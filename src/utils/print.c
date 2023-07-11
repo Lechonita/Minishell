@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/10 17:30:02 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/11 15:20:28 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	print_t_line(t_bigshell *data)
 		el = el->next;
 	}
 }
+// printf("_______________________________________________\n");
 
 void	print_t_token(t_bigshell *data)
 {
@@ -74,27 +75,33 @@ void	print_t_token(t_bigshell *data)
 		printf("→ %2d\n", el->aim);
 		el = el->next;
 	}
-	printf("_______________________________________________\n");
 }
 
 void	print_redir(t_bigshell *data, char *str)
 {
 	t_redir	*el;
 
+	printf("__________________REDIR");
 	if (!ft_strncmp(str, "IN", 3))
+	{
 		el = data->in;
+		printf(" IN_____________________\n");
+	}
 	else if (!ft_strncmp(str, "OUT", 3))
+	{
 		el = data->out;
-	printf("____________________REDIR");
-	printf(" %s____________________\n", str);
+		printf(" OUT____________________\n");
+	}
 	while (el)
 	{
 		printf("[%2d] ", el->idx);
-		printf("type %2s ", el->type);
-		printf(": %s\n", el->file);
+		printf(" %2s ", el->type);
+		printf(": %20s ", el->file);
+		printf("→ fd %d\n", el->fd);
+		// printf("& perm %d\n", el->exec_perm);
 		el = el->next;
 	}
-	printf("_______________________________________________\n");
+	printf("\n");
 }
 
 /* fonction qui permet d'afficher t_env

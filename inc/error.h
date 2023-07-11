@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/10 17:13:43 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/11 10:10:25 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,12 @@
 # define W_LST_RED_FIL "\t Failure in duplicate redirection file name\n"
 # define W_SPLIT_CMD "\t Failure in split commands\n"
 
-
-
-// # define W_ARG "\t Wrong argument number\n"
 // # define W_ENV "\t Environment error\n"
 // # define W_JOIN_PATH "\t Failure in joining path with / \n"
 // # define W_ENV_PATH "env PATH is empty\n"
 // # define W_SPLIT_ENV "\t Failure in split environment\n"
 // # define W_CMDS "\t Failure in getting commands \n"
-// # define W_NEW_LST "\t Failure in creating new lst\n"
+
 // # define W_STRDUP "\t Failure in duplicate str\n "
 
 #endif

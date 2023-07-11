@@ -85,3 +85,4 @@ void	parser_job(t_bigshell *data)
 	rm_blank(data);
 	print_t_token(data);
 }
+      3       3      21

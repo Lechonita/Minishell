@@ -103,6 +103,7 @@ SRC += aim_cmd.c
 SRC += redirection.c
 SRC += handle_redir.c
 SRC += in_out.c
+SRC += in_out_utils.c
 SRC += here_doc.c
 
 #	Utils functions
@@ -184,8 +185,8 @@ norm:
 leaks: $(NAME) #fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
-	@valgrind --leak-check=full  --track-origins=yes  --trace-children=yes --suppressions=./.readline_supp -q ./$(NAME)
-# --gen-suppressions=all --track-fds=yes
+	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./.readline_supp -q  ./$(NAME)
+# --gen-suppressions=all --gen-suppressions=all --log-file="valou"
 
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"

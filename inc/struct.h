@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/10 16:44:32 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/11 16:54:43 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_redir
 	char			*type;
 	char			*file;
 	int				idx;
+	int				fd;
 	struct s_redir	*next;
 }	t_redir;
 
@@ -103,7 +104,7 @@ typedef struct s_token
 typedef struct s_bigshell
 {
 	char			**env_paths;
-	int				ret;
+	int				exit_status;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;

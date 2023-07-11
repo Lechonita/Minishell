@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/10 17:16:03 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/11 16:09:04 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_free_line(t_line **line)
 	*line = NULL;
 }
 
-void	free_redirection(t_redir **redir)
+void	ft_free_redirection(t_redir **redir)
 {
 	t_redir	*tmp;
 
@@ -73,6 +73,8 @@ void	free_redirection(t_redir **redir)
 	while (*redir)
 	{
 		tmp = (*redir)->next;
+		if ((*redir)->fd)
+			close((*redir)->fd);
 		if ((*redir)->file)
 			free((*redir)->file);
 		if ((*redir)->type)
@@ -95,9 +97,9 @@ void	free_all(t_bigshell *data)
 	if (data->token)
 		ft_free_token(&data->token);
 	if (data->in)
-		free_redirection(&data->in);
+		ft_free_redirection(&data->in);
 	if (data->out)
-		free_redirection(&data->out);
+		ft_free_redirection(&data->out);
 	if (data->line)
 		ft_free_line(&data->line);
 	if (data->env)
