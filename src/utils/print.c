@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/10 11:22:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/11 18:52:59 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	print_t_line(t_bigshell *data)
 	t_line	*el;
 
 	el = data->line;
+	printf(">> Je rentre dans la fonction print_t_line\n");
 	while (el != NULL)
 	{
 		printf("[idx] %2d ", el->index);

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/10 16:58:31 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/11 18:56:36 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,67 +32,30 @@
 		- Si aucun name ne correspond et qu'on n'est pas dans des guillemets,
 			afficher un retour a la ligne. */
 
-int	get_var_len(t_line *line, int acolade)
+
+t_line	*dollar_between_quotes(t_line *line, t_line *first)
 {
 	t_line	*tmp;
-	int		i;
 
 	if (!line)
-		return (0);
-	tmp = line;
-	// printf("====> Ici, mon line->c = %c\n", tmp->c);
-	i = 0;
-	while (tmp)
-	{
-		if (acolade == 1 && tmp->c == '}')
-		{
-			i++;
-			break ;
-		}
-		if (acolade == 0 && tmp->type == BLANK)
-			break ;
-		else
-			i++;
-		// printf("====> et apres c'est %c pour i = %d\n", tmp->c, i);
-		tmp = tmp->next;
-	}
-	// printf("==> The length of my var = %d\n", i);
-	return (i);
-}
-
-char	*get_var(t_line *line)
-{
-	t_line	*tmp;
-	char	*var;
-	int		acolade;
-	int		i;
-
-	if (!line || !line->next)
 		return (NULL);
-	tmp = line;
-	acolade = 0;
-	i = 0;
-	if (tmp->c == '{')
-		acolade = 1;
-	// printf("La j'ai une acolade ? %d\n", acolade);
-	var = malloc(sizeof(char) * (get_var_len(tmp, acolade) + 1));
+	tmp = first;
 	while (tmp)
 	{
-		if (acolade == 0 && tmp->type == BLANK)
-			break ;
-		if (acolade == 1 && tmp->c == '}')
+		if (tmp->next && tmp->next->next)
 		{
-			var[i++] = tmp->c;
-			break ;
+			if ((tmp->c == 39 && tmp->next->c == '$'
+					&& tmp->next->next->c == 39)
+				|| (tmp->c == 34 && tmp->next->c == '$'
+					&& tmp->next->next->c == 34))
+				return (tmp->next->next);
 		}
-		var[i++] = tmp->c;
 		tmp = tmp->next;
 	}
-	var[i] = '\0';
-	return (var);
+	return (line);
 }
 
-t_line	*do_expansion(t_line *line, t_line *first)
+t_line	*do_expansion(t_bigshell *data, t_line *line, t_line *first)
 {
 	char	*var;
 	t_line	*tmp;
@@ -101,38 +64,29 @@ t_line	*do_expansion(t_line *line, t_line *first)
 		return (NULL);
 	tmp = line;
 	var = get_var(tmp->next);
+	if (!var)
+	{
+		free(var);
+		return (tmp);
+	}
 	printf("==> My var = %s\n", var);
-	dollar_between_quotes(tmp, first); // voir si le dollar est entoure de quotes
-	dollar_between_dq(tmp);
-	dollar_no_quotes(tmp);
-	dollar_with_quotes_inside(tmp);
+	if (tmp->dq == 0 && tmp->sq == 0)
+		tmp = dollar_expand(data, tmp, var);
+	tmp = dollar_between_quotes(tmp, first);
+	// tmp = dollar_in_dq(tmp);
+	// tmp = dollar_with_quotes_inside(tmp);
+	printf("<< Je sors de la fonction do_expansion\n");
 	return (tmp);
 }
 
-// t_line	*quote_dollar(t_line *line)
-// {
-// 	t_line	*tmp;
-// 	int		type;
-
-// 	if (!line)
-// 		return (NULL);
-// 	tmp = line;
-// 	if (tmp->c == 34)
-// 		type = DQUOTE;
-// 	else if (tmp->c == 39)
-// 		type = SQUOTE;
-// 	if (tmp->next->next && tmp->next->next->type == type)
-// 		return ()
-// }
-
-void	find_dollar(t_line *line)
+void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 {
 	t_line	*tmp;
 
 	if (!line)
 		return ;
 	tmp = line;
-	// printf("Je rentre dans la fonction find_dollar\n");
+	// printf("Je rentre dans la fonction find_dollar_dollar_bill\n");
 	while (tmp)
 	{
 		// if ((tmp->c == DQUOTE || tmp->c == SQUOTE) && tmp->next->c == '$')
@@ -140,9 +94,10 @@ void	find_dollar(t_line *line)
 		if (tmp->c == '$')
 		{
 			if (tmp->dq == 1 || (tmp->dq == 0 && tmp->sq == 0))
-				tmp = do_expansion(tmp, line);
-			tmp = tmp->next;
+				tmp = do_expansion(data, tmp, line);
 		}
+		printf("Je sors du if qui a fait l'expansion\n");
 		tmp = tmp->next;
 	}
+	printf("<< Je sors de la fonction find_dollar_dollar_bill\n");
 }
