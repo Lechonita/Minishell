@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/06 11:45:48 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:47:32 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 # define MINISHELL_H
 
 # include "struct.h"
-# include "error.h"
-# include "lexer.h"
-# include "env.h"
-# include "parser.h"
-# include "exec.h"
 # include "builtins.h"
-# include "input.h"
+# include "env.h"
+# include "error.h"
 # include "exec.h"
 # include "expander.h"
+# include "exec.h"
+# include "input.h"
+# include "lexer.h"
+# include "parser.h"
+# include "redirection.h"
 
 /* MAIN */
 void	ft_readline(t_bigshell *data, char *env[]);
@@ -39,6 +40,7 @@ void	ft_free_token(t_token **token);
 void	ft_free_cmd(t_cmd **cmd);
 void	ft_free_exec(t_exec **exec);
 void	ft_free_history(t_bigshell *data);
+void	ft_free_redirection(t_redir **redir);
 void	free_all(t_bigshell *data);
 
 /* PRINT ERROR */
@@ -52,6 +54,7 @@ void	print_strs(char **strs);
 void	print_cmd_lst(t_bigshell *data);
 void	print_t_line(t_bigshell *data);
 void	print_t_token(t_bigshell *data);
+void	print_redir(t_bigshell *data, char *str);
 void	display_env_struct(t_bigshell *data);
 void	print_history_lst(t_bigshell *data);
 

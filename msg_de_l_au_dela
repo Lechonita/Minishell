@@ -5,6 +5,10 @@ yo mate !! how are you??
 < Makefile cat | wc -l > out_file
 < Makefile ls -l | head -42 | echo hello world  > out_file
 
+<Makefile << fin <src/main.c head -15 | echo hello world 15 >out_file >> files/out_file
+
+< files/no_right << files/write_o < files/all_rights ls -l >files/read_o >>files/read_write >files/exec_o.c 
+
 echo Hello world
 echo "Hello world"
 
@@ -16,7 +20,8 @@ to do list :
 	→ gérer les redirection avant l'exec
 	→ gérer les open/close de fd avant l'exec
 
-	→ gérer avec plusieurs redirection : ls -l > out_file > out_file2 ou <<1 <<2 <<3 ls -l avec des droits ou non sur les fichiers du milieu
+	→ gérer avec plusieurs redirection : ls -l > out_file > out_file2 
+	redirection precedence
 
 to do expansion :
 	→ gérer les $ entre quotes et hors quotes
@@ -31,5 +36,17 @@ example / error :
 
 	→ $ e'c'"h"o salut
 	salut
+
+	→ $ echo > in Hello
+	Hello dans in
+
+	→ $ echo 1 > out1 2 3 > /dev/stdout << 1 << 2 << 3 < in < in2
+		→ ouvrir tous les heredocs
+		→ /dev/stdout est ignore car il est ouvert en dernier
+		→ out1 est bien cree mais il est vide
+		→ in et in2 n'existent pas 
+			→ erreur sur <in bash: in: No such file or directory
+			→ arret du programme 
+			→ echo ne s'execute pas
 
 	
