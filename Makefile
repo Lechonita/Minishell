@@ -100,7 +100,7 @@ SRC += find_aim.c
 SRC += aim_cmd.c
 
 #	Redirection functions
-SRC += redirection.c
+SRC += path_name.c
 SRC += handle_redir.c
 SRC += in_out.c
 SRC += in_out_utils.c

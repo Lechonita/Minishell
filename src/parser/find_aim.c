@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_aim.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/10 17:23:21 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/13 15:29:02 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ void	aim_redir(t_bigshell *data)
 		if ((tok->type == LESS || tok->type == GREAT) && !tok->aim)
 		{
 			tok->aim = REDIR;
-			if (tok->next != NULL && (tok->next->type == WORD
-					|| tok->next->type == INTEGER))
+			if (tok->next != NULL && tok->next->type == WORD)
 				tok->next->aim = REDIR;
-			else if (tok->next->next != NULL && (tok->next->next->type == WORD
-					|| tok->next->next->type == INTEGER))
+			else if (tok->next->next != NULL && tok->next->next->type == WORD)
 				tok->next->next->aim = REDIR;
 		}
 		tok = tok->next;
@@ -53,7 +51,7 @@ void	aim_cmd(t_bigshell *data)
 	tok = data->token;
 	while (tok != NULL)
 	{
-		if ((tok->type == WORD || tok->type == INTEGER) && !tok->aim)
+		if (tok->type == WORD && !tok->aim)
 			tok->aim = SIMPLE_CMD;
 		tok = tok->next;
 	}

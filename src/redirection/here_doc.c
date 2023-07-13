@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/11 15:57:22 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/13 16:25:48 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	gnl(t_bigshell *data, char *limiter)
 	char	*tmp;
 
 	len = ft_strlen(limiter);
-	dprintf(2, "limiter = %s, len %d\n", limiter, len);
+	dprintf(2, "gnl, limiter = %s\n", limiter);
 	while (1)
 	{
 		tmp = readline("> ");
@@ -59,7 +59,7 @@ static void	read_stdin_hd(t_redir *redir)
 	char	*tmp;
 
 	len = ft_strlen(redir->file);
-	dprintf(2, "limiter = %s, len %d\n", redir->file, len);
+	dprintf(2, "read_stdin_hd limiter = %s\n", redir->file);
 	while (1)
 	{
 		tmp = readline("> ");

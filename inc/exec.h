@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:38:19 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/10 15:39:30 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/13 17:39:10 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /* EXEC INIT */
 t_cmd	*init_cmd(t_bigshell *data);
 void	init_exec(t_bigshell *data);
+int		count_file(t_bigshell *data, int type);
 
 /* EXEC */
 pid_t	execute_pipex(t_bigshell *data, char *env[], int pcss);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aim_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/10 14:12:16 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/13 15:28:07 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	add_arg_to_cmd(t_bigshell *data)
 				tok->value = join_wh_space(tok->value, tok->next->next->value);
 				if (tok->next->type == BLANK)
 					token_rm_next(tok);
-				if (tok->next->type == WORD || tok->next->type == INTEGER)
+				if (tok->next->type == WORD)
 					token_rm_next(tok);
 				if (tok->next == NULL)
 					break ;

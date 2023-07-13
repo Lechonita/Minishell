@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:35:23 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/11 15:55:08 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/13 17:36:05 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 
 void	redirection_here_doc(t_bigshell *data, t_redir *redir);
 
-t_redir	*init_redir(t_bigshell *data, int type);
+t_redir	*init_redir(t_bigshell *data, int typ1, int typ2);
 void	redir_job(t_bigshell *data);
 
-void	redir_in_file(t_bigshell *data);
-void	redir_out_file(t_bigshell *data);
+char	*out_file_path(t_bigshell *data);
+char	*in_file_path(t_bigshell *data);
 void	handle_here_doc(t_bigshell *data, char *limiter);
 
 void	handle_dup(t_bigshell *data, int pcss);

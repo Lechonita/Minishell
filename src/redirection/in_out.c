@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_out.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:51:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/11 16:07:14 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/13 16:18:45 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ void	open_fd(t_bigshell *data, t_redir *redir)
 	el = redir;
 	while (el != NULL)
 	{
-		if (!ft_strncmp(el->type, "<<", 2))
+		if (el->type == DLESS)
 			redirection_here_doc(data, el);
-		else if (!ft_strncmp(el->type, "<", 1))
+		else if (el->type == LESS)
 			redirection_less(data, el);
-		else if (!ft_strncmp(el->type, ">>", 2))
+		else if (el->type == DGREAT)
 			redirection_append(data, el);
-		else if (!ft_strncmp(el->type, ">", 1))
+		else if (el->type == GREAT)
 			redirection_great(data, el);
 		el = el->next;
 	}
@@ -81,8 +81,9 @@ void	open_fd(t_bigshell *data, t_redir *redir)
 
 void	redir_job(t_bigshell *data)
 {
-	data->in = init_redir(data, LESS);
-	data->out = init_redir(data, GREAT);
+	print_t_token(data);
+	data->in = init_redir(data, LESS, DLESS);
+	data->out = init_redir(data, GREAT, DGREAT);
 	open_fd(data, data->in);
 	open_fd(data, data->out);
 	print_redir(data, "IN");
