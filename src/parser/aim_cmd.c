@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/13 15:28:07 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/14 17:59:29 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,21 @@ void	check_builtin(t_bigshell *data)
 			|| ft_strncmp(tok->value, "env", ft_strlen("env")) == 0
 			|| ft_strncmp(tok->value, "exit", ft_strlen("exit")) == 0)
 			tok->aim = BUILTIN;
+		tok = tok->next;
+	}
+}
+
+void	check_double_redir(t_bigshell *data)
+{
+	t_token	*tok;
+
+	tok = data->token;
+	while (tok != NULL)
+	{
+		if (ft_strncmp(tok->value, "<<", 2) == 0)
+			tok->type = DLESS;
+		else if (ft_strncmp(tok->value, ">>", 2) == 0)
+			tok->type = DGREAT;
 		tok = tok->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/12 11:55:00 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/14 16:44:48 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ typedef struct s_exec
 	char			*out_file;
 	int				fd[FOPEN_MAX][2];
 	int				here_doc;
-	int				no_redir;
 	t_cmd			*cmd;
 }	t_exec;
 
@@ -104,12 +103,12 @@ typedef struct s_token
 typedef struct s_bigshell
 {
 	char			**env_paths;
+	int				redir_or_not;
 	int				exit_status;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;
-	t_redir			*in;
-	t_redir			*out;
+	t_redir			*in_out;
 	t_exec			*exec;
 }	t_bigshell;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/07/06 12:18:49 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/14 11:35:46 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	error_not_found(t_bigshell *data, char *msg, char *str)
 
 void	ft_exit(int err_no, char *msg)
 {
-	ft_putstr_fd(msg, 2);
+	if (msg)
+		ft_putstr_fd(msg, 2);
 	exit(err_no);
 }

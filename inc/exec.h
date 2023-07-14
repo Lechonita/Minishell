@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:38:19 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/13 17:39:10 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/14 17:40:02 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 # include "minishell.h"
 
 /* EXEC INIT */
+char	*out_file_path(t_bigshell *data);
+char	*in_file_path(t_bigshell *data);
+t_redir	*last_redir(t_bigshell *data, int type);
 t_cmd	*init_cmd(t_bigshell *data);
 void	init_exec(t_bigshell *data);
-int		count_file(t_bigshell *data, int type);
 
 /* EXEC */
 pid_t	execute_pipex(t_bigshell *data, char *env[], int pcss);

@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/12 11:57:51 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/14 13:58:29 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,8 @@ void	free_all(t_bigshell *data)
 		ft_free_exec(&data->exec);
 	if (data->token)
 		ft_free_token(&data->token);
-	if (data->in)
-		ft_free_redirection(&data->in);
-	if (data->out)
-		ft_free_redirection(&data->out);
+	if (data->in_out)
+		ft_free_redirection(&data->in_out);
 	if (data->line)
 		ft_free_line(&data->line);
 	if (data->env)

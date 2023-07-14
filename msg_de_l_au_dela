@@ -33,6 +33,8 @@ example / error :
 	→ $ echo > in Hello
 	Hello dans in
 
+	echo 1 > out12 2 3 << 1 << 2 << 3 < in < in2 >>out13
+
 	→ $ echo 1 > out1 2 3 > /dev/stdout << 1 << 2 << 3 < in < in2
 		→ ouvrir tous les heredocs
 		→ /dev/stdout est ignore car il est ouvert en dernier

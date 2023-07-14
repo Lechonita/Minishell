@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/11 10:39:59 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/14 15:34:30 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	print_strs(char **strs);
 void	print_cmd_lst(t_bigshell *data);
 void	print_t_line(t_bigshell *data);
 void	print_t_token(t_bigshell *data);
-void	print_redir(t_bigshell *data, char *str);
+void	print_redir(t_bigshell *data);
+void	print_exec(t_bigshell *data);
 void	display_env_struct(t_bigshell *data);
 void	print_history_lst(t_bigshell *data);
 

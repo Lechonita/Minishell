@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/13 15:29:02 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/14 17:59:50 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ void	parser_job(t_bigshell *data)
 	aim_pipe(data);
 	aim_cmd(data);
 	check_builtin(data);
+	check_double_redir(data);
 	rm_blank(data);
 }

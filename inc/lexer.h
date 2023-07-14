@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/13 15:57:51 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/14 17:59:46 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	find_tokens(t_bigshell *data);
 
 /* GRAMMAR */
 void	check_builtin(t_bigshell *data);
+void	check_double_redir(t_bigshell *data);
 void	same_aim(t_bigshell *data);
 void	add_arg_to_cmd(t_bigshell *data);
 void	parser_job(t_bigshell *data);

@@ -104,7 +104,7 @@ SRC += path_name.c
 SRC += handle_redir.c
 SRC += in_out.c
 SRC += in_out_utils.c
-SRC += here_doc.c
+SRC += handle_fd.c
 
 #	Utils functions
 SRC += free_struct.c

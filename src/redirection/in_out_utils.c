@@ -6,11 +6,31 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:35:49 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/13 16:29:49 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/14 17:08:09 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static t_redir	*lst_last(t_redir *lst)
+{
+	while (lst != NULL && lst -> next != NULL)
+		lst = lst -> next;
+	return (lst);
+}
+
+static void	lst_add_back(t_redir **lst, t_redir *new)
+{
+	t_redir	*last;
+
+	if (!*lst || !lst)
+	{
+		*lst = new;
+		return ;
+	}
+	last = lst_last(*lst);
+	last -> next = new;
+}
 
 static int	type_redir(char *type)
 {
@@ -40,27 +60,7 @@ static t_redir	*new_lst(t_bigshell *data, int idx, char *type, char *file)
 	return (new);
 }
 
-static t_redir	*lst_last(t_redir *lst)
-{
-	while (lst != NULL && lst -> next != NULL)
-		lst = lst -> next;
-	return (lst);
-}
-
-static void	lst_add_back(t_redir **lst, t_redir *new)
-{
-	t_redir	*last;
-
-	if (!*lst || !lst)
-	{
-		*lst = new;
-		return ;
-	}
-	last = lst_last(*lst);
-	last -> next = new;
-}
-
-t_redir	*init_redir(t_bigshell *data, int typ1, int typ2)
+t_redir	*init_redir(t_bigshell *data)
 {
 	t_redir		*redir;
 	t_token		*el;
@@ -71,13 +71,15 @@ t_redir	*init_redir(t_bigshell *data, int typ1, int typ2)
 	i = 0;
 	while (el->next != NULL)
 	{
-		if (i == 0 && (el->type == typ1 || el->type == typ2))
+		if (i == 0 && (el->type == LESS || el->type == DLESS
+			|| el->type == GREAT || el->type == DGREAT))
 		{
 			redir = new_lst(data, i++, el->value, el->next->value);
 			if (redir == NULL)
 				return (free_all(data), ft_exit(EXIT_FAILURE, W_LST_RED), NULL);
 		}			
-		else if (i > 0 && (el->type == typ1 || el->type == typ2))
+		else if (i > 0 && (el->type == LESS || el->type == DLESS
+			|| el->type == GREAT || el->type == DGREAT))
 			lst_add_back(&redir,
 				new_lst(data, i++, el->value, el->next->value));
 		el = el->next;

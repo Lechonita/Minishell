@@ -1,6 +1,13 @@
-    226     691    5726
-226
-226
-226
-226
-226
+total 92
+drwxrwxr-x  2 user user  4096 juil. 14 17:21 files
+drwxrwxr-x  2 user user  4096 juil. 12 09:05 inc
+drwxrwxr-x  6 user user  4096 juil. 14 17:43 libft
+-rw-rw-r--  1 user user  5810 juil. 14 17:10 Makefile
+-rwxrwxr-x  1 user user 48552 juil. 14 18:10 minishell
+-rw-r--r--  1 user user    41 juil. 14 18:11 minishell_here_doc
+-rw-rw-r--  1 user user  1399 juil. 14 10:42 msg_de_l_au_dela
+drwxrwxr-x  2 user user  4096 juil. 14 18:10 obj
+-rw-r--r--  1 user user    15 juil. 14 18:11 out_file
+-rw-rw-r--  1 user user     0 juil. 14 17:22 out_fileb
+drwxrwxr-x 11 user user  4096 juil. 12 09:05 src
+drwxrwxr-x  2 user user  4096 juin  21 20:38 workflows
