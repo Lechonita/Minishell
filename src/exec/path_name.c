@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:03:19 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/14 18:12:10 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/16 16:29:57 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ char	*in_file_path(t_bigshell *data)
 	tok = data->token;
 	if (data->redir_or_not == 0 || data->redir_or_not == 2)
 	{
-		if (count_file(data, LESS) == 1 && data->exec->here_doc == 0)
+		if ((count_file(data, LESS) == 1 && data->exec->here_doc == 0)
+			|| (count_file(data, LESS) == 0 && data->exec->here_doc == 1))
 		{
 			while (tok->next != NULL)
 			{
-				if (tok->type == LESS && tok->next->type == WORD)
+				if ((tok->type == LESS || tok->type == DLESS)
+					&& tok->next->type == WORD)
 					return (tok->next->value);
 				tok = tok->next;
 			}		

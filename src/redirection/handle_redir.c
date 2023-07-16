@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
+/*   handle_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/14 17:09:40 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/16 17:55:56 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,28 @@
 static void	read_stdin_hd(t_redir *redir)
 {
 	int		len;
+	int		count;
 	char	*str;
 	char	*tmp;
 
 	len = ft_strlen(redir->file);
+	count = 0;
 	while (1)
 	{
+		set_signal_here_doc();
 		tmp = readline("> ");
+		if (tmp == NULL)
+		{
+			ctrl_d_here_doc(tmp, redir->file, count);
+			break ;
+		}
 		if (ft_strlen(tmp) == len && ft_strncmp(tmp, redir->file, len) == 0)
 			break ;
 		str = ft_strjoin(tmp, "\n");
 		ft_putstr_fd(str, redir->fd);
 		free(tmp);
 		free(str);
+		count++;
 	}
 	free(tmp);
 	return ;

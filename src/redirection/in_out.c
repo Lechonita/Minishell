@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:51:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/14 18:30:36 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/15 18:49:41 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ int	count_file(t_bigshell *data, int type)
 
 static int	is_redirection(t_bigshell *data)
 {	
-	if (count_file(data, LESS) == 0 && count_file(data, GREAT) > 0)
+	if ((count_file(data, LESS) == 0 && count_file(data, DLESS) == 0)
+		&& (count_file(data, GREAT) > 0 || count_file(data, DGREAT) > 0))
 		return (1);
-	else if (count_file(data, LESS) > 0 && count_file(data, GREAT) == 0)
+	else if ((count_file(data, LESS) > 0 || count_file(data, DLESS) > 0)
+		&& (count_file(data, GREAT) == 0 && count_file(data, DGREAT) == 0))
 		return (2);
-	else if (count_file(data, LESS) == 0 && count_file(data, GREAT) == 0)
+	else if (count_file(data, LESS) == 0 && count_file(data, DLESS) == 0
+		&& count_file(data, GREAT) == 0 && count_file(data, DGREAT) == 0)
 		return (3);
 	else
 		return (0);

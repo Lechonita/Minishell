@@ -85,6 +85,7 @@ SRC += quotes_position.c
 #	Input functions
 SRC += prompt.c
 SRC += signal.c
+SRC += signal_here_doc.c
 
 #	Lexer functions
 SRC += flag_quotes.c

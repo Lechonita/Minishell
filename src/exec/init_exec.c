@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:25:25 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/14 18:13:39 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/16 16:30:32 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ void	fd_in_file(t_bigshell *data)
 	if (data->exec->in_file == NULL)
 		return ;
 	el = data->in_out;
-	if (count_file(data, LESS) == 1 && data->exec->here_doc == 0)
+	if ((count_file(data, LESS) == 1 && data->exec->here_doc == 0)
+		|| (count_file(data, LESS) == 0 && data->exec->here_doc == 1))
 	{
 		while (el)
 		{
-			if (el->type == LESS)
+			if (el->type == LESS || el->type == DLESS)
 				data->exec->fd_in = el->fd;
 			el = el->next;
 		}
@@ -82,6 +83,7 @@ void	fd_out_file(t_bigshell *data)
 
 void	init_exec(t_bigshell *data)
 {
+	print_t_token(data);
 	data->exec->here_doc = count_file(data, DLESS);
 	data->exec->in_file = in_file_path(data);
 	data->exec->out_file = out_file_path(data);
