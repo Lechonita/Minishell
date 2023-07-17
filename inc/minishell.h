@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/14 15:34:30 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/17 09:38:38 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	ft_readline(t_bigshell *data, char *env[]);
 /***********************************************************/
 /*                          UTILS                          */
 /***********************************************************/
+
+char	*free_strjoin(char *to_free, char *buf);
+char	*ft_strjoin_bis(char *s1, char *s2, char *to_add);
 
 /* FREE STRUCT*/
 void	free_strs(char **strs);

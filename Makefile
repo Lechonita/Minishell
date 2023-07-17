@@ -112,6 +112,7 @@ SRC += free_struct.c
 SRC += free_struct_bis.c
 SRC += error.c
 SRC += print.c
+SRC += print_bis.c
 
 vpath %.c $(SRC_DIR)
 vpath %.c $(TERM_DIR)

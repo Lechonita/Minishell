@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/10 11:42:31 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/17 09:38:41 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,6 @@ static char	*handle_good_path(t_bigshell *data, char *command)
 	return (NULL);
 }
 
-char	*ft_strjoin_bis(char *s1, char *s2)
-{
-	char	*tmp;
-	char	*str;
-
-	tmp = ft_strjoin(s1, "/");
-	if (!tmp)
-		return (NULL);
-	str = ft_strjoin(tmp, s2);
-	if (!str)
-		return (free (tmp), NULL);
-	free(tmp);
-	return (str);
-}
-
 /* Fonction qui cherche le chemin absolu d'une commande dans le PATH */
 char	*find_path_to_cmd(t_bigshell *data, char *cmd, char *path)
 {
@@ -53,7 +38,7 @@ char	*find_path_to_cmd(t_bigshell *data, char *cmd, char *path)
 		return (command = handle_good_path(data, cmd));
 	while (data->env_paths[++i])
 	{
-		command = ft_strjoin_bis(data->env_paths[i], cmd);
+		command = ft_strjoin_bis(data->env_paths[i], cmd, "/");
 		if (access(command, F_OK & X_OK) == 0)
 			return (command);
 		free(command);

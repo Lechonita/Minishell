@@ -3,28 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   path_name.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:03:19 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/16 16:29:57 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/17 11:26:50 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/exec.h"
 
-t_redir	*last_redir(t_bigshell *data, int type)
+t_redir	*last_redir(t_bigshell *data, int type, int type2)
 {
 	int		count;
 	t_redir	*lst;
 
-	count = count_file(data, type);
+	if (type == GREAT && type2 == DGREAT)
+		count = count_file(data, GREAT) + count_file(data, DGREAT);
+	else if (type == LESS && type2 == DLESS)
+		count = count_file(data, LESS) + count_file(data, DLESS);
 	lst = data->in_out;
 	while (lst != NULL && count > 0)
 	{
-		if (lst->type == type)
+		if (lst->type == type || lst->type == type2)
 			count--;
-		if (count == 0 && lst->type == type)
+		if (count == 0 && (lst->type == type || lst->type == type2))
 			return (lst);
 		lst = lst->next;
 	}
@@ -52,7 +55,7 @@ char	*in_file_path(t_bigshell *data)
 		}
 		else
 		{
-			redir_last = last_redir(data, LESS);
+			redir_last = last_redir(data, LESS, DLESS);
 			return (redir_last->file);
 		}
 	}
@@ -80,7 +83,7 @@ char	*out_file_path(t_bigshell *data)
 		}
 		else
 		{
-			redir_last = last_redir(data, GREAT);
+			redir_last = last_redir(data, GREAT, DGREAT);
 			return (redir_last->file);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/15 18:10:52 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/17 14:51:58 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	free_readline(t_bigshell *data, char *input)
 		ft_free_exec(&data->exec);
 	if (data->in_out != NULL)
 		ft_free_redirection(&data->in_out);
-
 }
 
 void	ft_readline(t_bigshell *data, char *env[])
@@ -34,19 +33,16 @@ void	ft_readline(t_bigshell *data, char *env[])
 
 	while (1)
 	{
-		input = readline("$ ");
+		input = readline("🔥 ");
 		if (input == NULL)
 			catch_ctrl_d(data, input);
 		if (!ft_strncmp(input, "exit", 4) && ft_strlen(input) == 4)
 			break ;
-		if (input != NULL)
-		{
-			add_history(input);
-			init_line(data, input);
-			find_tokens(data);
-			if (redir_job(data) == 1)
-				data->exit_status = executor(data, env);
-		}
+		add_history(input);
+		init_line(data, input);
+		find_tokens(data);
+		if (redir_job(data) == 1)
+			data->exit_status = executor(data, env);
 		free_readline(data, input);
 	}
 	free_readline(data, input);

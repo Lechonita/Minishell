@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal_here_doc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/16 17:53:26 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/17 16:36:07 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/input.h"
 
 void	print_ctrl_d_hd(char *limiter, int count)
 {
@@ -22,14 +21,11 @@ void	print_ctrl_d_hd(char *limiter, int count)
 
 	nb = ft_itoa(count);
 	tmp = ft_strjoin("bash: warning: here-document at line ", nb);
-	tmp2 = ft_strjoin(tmp, " delimited by end-of-file (wanted `");
-	free(tmp);
-	tmp = ft_strjoin(tmp2, limiter);
-	msg = ft_strjoin(tmp, "')\n");
-	ft_putstr_fd(msg, 2);
-	free(tmp);
-	free(tmp2);
 	free(nb);
+	tmp2 = free_strjoin(tmp, " delimited by end-of-file (wanted `");
+	tmp = free_strjoin(tmp2, limiter);
+	msg = free_strjoin(tmp, "')\n");
+	ft_putstr_fd(msg, 2);
 	free(msg);
 }
 

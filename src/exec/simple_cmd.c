@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 17:41:14 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/14 16:46:42 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/17 18:09:21 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ static void	handle_dup_simp_cmd(t_bigshell *data)
 		dup2(data->exec->fd_out, STDOUT_FILENO);
 		dup2(data->exec->fd_in, STDIN_FILENO);
 	}
+	if (data->exec->fd_in)
+		close(data->exec->fd_in);
+	if (data->exec->fd_out)
+		close(data->exec->fd_out);
 }
 
 pid_t	exec_simple_cmd(t_bigshell *data, char *env[])

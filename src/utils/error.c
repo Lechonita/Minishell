@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/07/14 11:35:46 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/17 14:49:39 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ void	msg_not_found(char *msg, char *str)
 	char	*line;
 
 	tmp = ft_strjoin(msg, str);
-	line = ft_strjoin(tmp, "\n");
+	line = free_strjoin(tmp, "\n");
 	ft_putstr_fd(line, 2);
-	free(tmp);
 	free(line);
 }
 
