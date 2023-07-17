@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/17 13:37:10 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:47:23 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_cmd_lst(t_bigshell *data)
 	}
 }
 
-void	print_t_line(t_bigshell *data)
+void	print_t_line(t_line *line)
 {
 	t_line	*el;
 	const char	*tokentype_str[] =
@@ -65,8 +65,8 @@ void	print_t_line(t_bigshell *data)
 		"NOTOKEN",
 	};
 
-	el = data->line;
-	printf(">> Je rentre dans la fonction print_t_line\n");
+	el = line;
+		printf("___________________LINE______________________\n");
 	while (el != NULL)
 	{
 		printf("[%2d] ", el->index);
@@ -91,7 +91,7 @@ void	print_t_token(t_bigshell *data)
 	};
 
 	el = data->token;
-	printf("__________________TOKEN________________________\n");
+	printf("__________________TOKEN_______________________\n");
 	while (el)
 	{
 		printf("[%2d] ", el->index);

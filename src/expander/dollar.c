@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/11 18:56:36 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:01:49 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@
 			afficher un retour a la ligne. */
 
 
-t_line	*dollar_between_quotes(t_line *line, t_line *first)
+int	dollar_between_quotes(t_line *line, t_line *first)
 {
 	t_line	*tmp;
 
 	if (!line)
-		return (NULL);
+		return (0);
 	tmp = first;
 	while (tmp)
 	{
@@ -48,35 +48,31 @@ t_line	*dollar_between_quotes(t_line *line, t_line *first)
 					&& tmp->next->next->c == 39)
 				|| (tmp->c == 34 && tmp->next->c == '$'
 					&& tmp->next->next->c == 34))
-				return (tmp->next->next);
+				return (0);
 		}
 		tmp = tmp->next;
 	}
-	return (line);
+	return (1);
 }
 
-t_line	*do_expansion(t_bigshell *data, t_line *line, t_line *first)
+void	do_expansion(t_bigshell *data, t_line *line, t_line *first, int index)
 {
 	char	*var;
 	t_line	*tmp;
 
 	if (!line || !line->next)
-		return (NULL);
+		return ;
 	tmp = line;
 	var = get_var(tmp->next);
 	if (!var)
-	{
-		free(var);
-		return (tmp);
-	}
-	printf("==> My var = %s\n", var);
+		return (free(var));
 	if (tmp->dq == 0 && tmp->sq == 0)
-		tmp = dollar_expand(data, tmp, var);
-	tmp = dollar_between_quotes(tmp, first);
-	// tmp = dollar_in_dq(tmp);
-	// tmp = dollar_with_quotes_inside(tmp);
-	printf("<< Je sors de la fonction do_expansion\n");
-	return (tmp);
+		dollar_expand(data, tmp, var, index);
+	if (dollar_between_quotes(tmp, first) == 1)
+	{
+		// tmp = dollar_in_dq(tmp);
+		// tmp = dollar_with_quotes_inside(tmp);
+	}
 }
 
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
@@ -86,7 +82,6 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 	if (!line)
 		return ;
 	tmp = line;
-	// printf("Je rentre dans la fonction find_dollar_dollar_bill\n");
 	while (tmp)
 	{
 		// if ((tmp->c == DQUOTE || tmp->c == SQUOTE) && tmp->next->c == '$')
@@ -94,10 +89,8 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 		if (tmp->c == '$')
 		{
 			if (tmp->dq == 1 || (tmp->dq == 0 && tmp->sq == 0))
-				tmp = do_expansion(data, tmp, line);
+				do_expansion(data, tmp, line, tmp->index);
 		}
-		printf("Je sors du if qui a fait l'expansion\n");
 		tmp = tmp->next;
 	}
-	printf("<< Je sors de la fonction find_dollar_dollar_bill\n");
 }

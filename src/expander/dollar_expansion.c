@@ -6,77 +6,104 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/11 18:56:17 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:26:40 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
 
-t_line	*add_var(t_bigshell *data, t_line *line, char *value)
+t_line	*line_add_node(t_line *line, char value, int index)
+{
+	if (!line)
+		return (NULL);
+	while (line && line->next && line->index != index)
+		line = line->next;
+	line->next = line_new(line, value, 0);
+	return (line);
+}
+
+void	add_var(t_bigshell *data, t_line *line, char *value, int index)
 {
 	t_line	*tmp;
 	int		i;
 
-	printf(">> Je rentre dans la fonction add_var\n");
+	print_t_line(line);
 	if (!data || !line || !value)
-		return (NULL);
+		return ;
 	tmp = line;
 	i = 0;
-	printf("Mon value = %s\n", value);
 	while (value[i])
 	{
-		printf("	Mon value[%d] = %c\n", i, value[i]);
-		tmp = line_new(tmp, value[i], tmp->index);
+		tmp = line_add_node(tmp, value[i], index);
+		align_line_index(data);
 		i++;
+		index++;
 	}
-	printf("Je sors de la boucle while avant de remettre les index\n");
-	align_line_index(data);
-	printf("Jái remis les index\n<< Et je sors de la fonction\n");
-	return (tmp);
+	print_t_line(line);
 }
 
-t_line	*compare_var(t_bigshell *data, t_line *line, char *var)
+void	var_not_found(t_line *line, char *var)
 {
-	t_line		*tmp;
-	t_bigshell	*bis;
+	t_line	*tmp;
+	t_line	*prochain;
+	int		acolade;
+	int		len;
 
-	printf(">> Je rentre dans la fonction compare_var\n");
 	if (!line || !var)
-		return (NULL);
+		return ;
+	printf("Au tout debut, mon line->c = %c\n", line->c);
 	tmp = line;
+	acolade = 0;
+	if (tmp->c == '{')
+		acolade = 1;
+	len = get_var_len(tmp, acolade);
+	printf("Ensuite, ma len = %d\n", len);
+	while (tmp && len > 0)
+	{
+		prochain = tmp->next;
+		printf("Mon prochain->c devient = %c\n", prochain->c);
+		free(tmp);
+		len--;
+		tmp = prochain;
+		printf("Et mon tmp a la fin de la boucle cest %c\n", tmp->c);
+	}
+}
+
+void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
+{
+	t_bigshell	*bis;
+	int			flag;
+
+	if (!line || !var)
+		return ;
 	bis = data;
-	printf("Juste avant de rentrer dans la boucle while env\n");
+	flag = 1;
 	while (bis->env)
 	{
-		printf("	Ensuite je rentre dans la boucle bis->env->name = %s\n", bis->env->name);
-		printf("Ca donne quoi ca %d\n", ft_strncmp(bis->env->name, var, ft_strlen(var)));
 		if (ft_strncmp(bis->env->name, var, ft_strlen(var)) == 0)
 		{
-			printf("Je rentre dans le if !\n");
-			tmp = add_var(bis, tmp, bis->env->value);
+			add_var(bis, line, bis->env->value, index);
+			flag = 0;
 			break ;
 		}
 		bis->env = bis->env->next;
 	}
-	printf("<< Ensuite je sors de compare_var\n");
-	return (tmp);
+	if (flag == 1)
+		var_not_found(line, var);
 }
 
-t_line	*dollar_expand(t_bigshell *data, t_line *line, char *var)
+void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
 {
 	t_line	*tmp;
 	int		i;
 
-	printf(" ==> JE RENTRE ICI <==\n");
 	if (!line)
-		return (NULL);
+		return ;
 	tmp = line->next;
 	i = 0;
-	printf("Avant de rentrer dans la boucle, mon tmp->c = %c\n", tmp->c);
 	if (tmp->c == 123)
 	{
-		printf("Je passe par la !!!!!\n");
 		tmp = tmp->next;
 		while (var[i])
 		{
@@ -84,10 +111,8 @@ t_line	*dollar_expand(t_bigshell *data, t_line *line, char *var)
 				var[i] = '\0';
 			i++;
 		}
-		tmp = compare_var(data, tmp, var + 1);
+		compare_var(data, line, var + 1, index);
 	}
 	else
-		tmp = compare_var(data, tmp, var);
-	printf("A la fin de dollar expand, mon var = %s\n", var);
-	return (tmp);
+		compare_var(data, line, var, index);
 }

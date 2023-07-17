@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/17 13:37:20 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:48:13 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	error_not_found(t_bigshell *data, char *msg, char *str);
 /* PRINT FUNCTION */
 void	print_strs(char **strs);
 void	print_cmd_lst(t_bigshell *data);
-void	print_t_line(t_bigshell *data);
+void	print_t_line(t_line *line);
 void	print_t_token(t_bigshell *data);
 void	print_redir(t_bigshell *data);
 void	print_exec(t_bigshell *data);

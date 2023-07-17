@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/11 17:57:48 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:53:02 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,22 @@
 
 # include "minishell.h"
 
+/* DOLLAR EXPANSION */
+t_line	*line_add_node(t_line *line, char value, int index);
+void	add_var(t_bigshell *data, t_line *line, char *value, int index);
+void	compare_var(t_bigshell *data, t_line *line, char *var, int index);
+void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index);
+
 /* DOLLAR UTILS */
 void	align_line_index(t_bigshell *data);
 int		get_var_len(t_line *line, int acolade);
+char	*check_var_case(char *var);
+char	*get_var_bis(t_line *line, char *var, int acolade);
 char	*get_var(t_line *line);
 
 /* DOLLAR */
-t_line	*dollar_between_quotes(t_line *line, t_line *first);
-t_line	*dollar_expand(t_bigshell *data, t_line *line, char *var);
-t_line	*do_expansion(t_bigshell *data, t_line *line, t_line *first);
+int		dollar_between_quotes(t_line *line, t_line *first);
+void	do_expansion(t_bigshell *data, t_line *line, t_line *first, int index);
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line);
 
 /* QUOTES FIND */

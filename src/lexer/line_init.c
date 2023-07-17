@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/17 13:36:49 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:36:53 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_line	*line_new(t_line *line, char c, int i)
 	if (i == -1 && line)
 		i = find_next_index(line) + 1;
 	new->index = i;
-	new->type = determine_type(c);// dans le cas ou c'est 0 ?
+	new->type = determine_type(c);
 	new->dq = 0;
 	new->sq = 0;
 	new->c = c;
@@ -94,5 +94,5 @@ void	init_line(t_bigshell *data, char *line)
 	flag_single_quotes(tmp);
 	find_quotes(tmp);
 	find_dollar_dollar_bill(data, tmp);
-	print_t_line(data);
+	// print_t_line(tmp);
 }
