@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/10 13:41:56 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:37:43 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 enum e_tokentype
 {
 	WORD = 1,
-	INTEGER,
 	DQUOTE,
 	SQUOTE,
 	NEW_LINE,
@@ -30,7 +29,9 @@ enum e_tokentype
 	DOLLAR,
 	PIPE,
 	GREAT,
+	DGREAT,
 	LESS,
+	DLESS,
 	AMPERSAND,
 	SEPARATOR,
 	NOTOKEN,
@@ -47,19 +48,20 @@ enum e_aim
 };
 
 /*
-	WORD = 1,		[a-z A-Z +all]				1
-	INTEGER,		[0-9]						2
-	DQUOTE,			""							3
-	SQUOTE,			''							4
-	NEW_LINE,		\n							5
-	BLANK,			space + \t					6
-	DOLLAR,			$							7
-	PIPE,			|							8
-	GREAT,			>							9
+	WORD = 1,		[a-z A-Z +all]	[0-9]		1
+	DQUOTE,			""							2
+	SQUOTE,			''							3
+	NEW_LINE,		\n							4
+	BLANK,			space + \t					5
+	DOLLAR,			$							6
+	PIPE,			|							7
+	GREAT,			>							8
+	DGREAT,			>>							9
 	LESS,			<							10
-	AMPERSAND,		&							13
-	SEPARATOR,		; ( ) { }					14
-	NOTOKEN,		invalid character in input	15
+	DLESS,			<<							11
+	AMPERSAND,		&							12
+	SEPARATOR,		; ( ) { }					13
+	NOTOKEN,		invalid character in input	14
 
 	REDIR = 20,		> < >> <<							20
 	SIMPLE_CMD,		[a-z A-Z +all]						21
@@ -98,6 +100,7 @@ void	find_tokens(t_bigshell *data);
 
 /* GRAMMAR */
 void	check_builtin(t_bigshell *data);
+void	check_double_redir(t_bigshell *data);
 void	same_aim(t_bigshell *data);
 void	add_arg_to_cmd(t_bigshell *data);
 void	parser_job(t_bigshell *data);

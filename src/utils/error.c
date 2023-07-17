@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/07/10 10:45:28 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:38:17 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	error_not_found(t_bigshell *data, char *msg, char *str)
 
 void	ft_exit(int err_no, char *msg)
 {
-	ft_putstr_fd(msg, 2);
+	if (msg)
+		ft_putstr_fd(msg, 2);
 	exit(err_no);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_token_type.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:13:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/05 09:25:12 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/13 16:05:30 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	is_word(char c)
 {
-	if (!is_separator(c) && !is_blank(c) && !is_integer(c) && !is_dollar(c)
+	if (!is_separator(c) && !is_blank(c) && !is_dollar(c)
 		&& !is_single_quote(c) && !is_double_quote(c) && !is_newline(c)
 		&& !is_ampersand(c) && !is_redir(c) && !is_pipe(c))
 		return (WORD);
@@ -30,8 +30,6 @@ int	determine_type(char c)
 		return (NEWLINE);
 	else if (is_word(c))
 		return (WORD);
-	else if (is_integer(c))
-		return (INTEGER);
 	else if (is_double_quote(c))
 		return (DQUOTE);
 	else if (is_single_quote(c))

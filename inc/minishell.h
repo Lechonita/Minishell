@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/12 15:47:32 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:37:20 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	print_strs(char **strs);
 void	print_cmd_lst(t_bigshell *data);
 void	print_t_line(t_bigshell *data);
 void	print_t_token(t_bigshell *data);
-void	print_redir(t_bigshell *data, char *str);
+void	print_redir(t_bigshell *data);
+void	print_exec(t_bigshell *data);
 void	display_env_struct(t_bigshell *data);
 void	print_history_lst(t_bigshell *data);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aim_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/10 14:12:16 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/14 17:59:29 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	add_arg_to_cmd(t_bigshell *data)
 				tok->value = join_wh_space(tok->value, tok->next->next->value);
 				if (tok->next->type == BLANK)
 					token_rm_next(tok);
-				if (tok->next->type == WORD || tok->next->type == INTEGER)
+				if (tok->next->type == WORD)
 					token_rm_next(tok);
 				if (tok->next == NULL)
 					break ;
@@ -88,6 +88,21 @@ void	check_builtin(t_bigshell *data)
 			|| ft_strncmp(tok->value, "env", ft_strlen("env")) == 0
 			|| ft_strncmp(tok->value, "exit", ft_strlen("exit")) == 0)
 			tok->aim = BUILTIN;
+		tok = tok->next;
+	}
+}
+
+void	check_double_redir(t_bigshell *data)
+{
+	t_token	*tok;
+
+	tok = data->token;
+	while (tok != NULL)
+	{
+		if (ft_strncmp(tok->value, "<<", 2) == 0)
+			tok->type = DLESS;
+		else if (ft_strncmp(tok->value, ">>", 2) == 0)
+			tok->type = DGREAT;
 		tok = tok->next;
 	}
 }

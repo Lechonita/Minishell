@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/11 16:12:42 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/15 18:10:52 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ void	free_readline(t_bigshell *data, char *input)
 		ft_free_token(&data->token);
 	if (data->exec != NULL)
 		ft_free_exec(&data->exec);
-	if (data->in != NULL)
-		ft_free_redirection(&data->in);
-	if (data->out != NULL)
-		ft_free_redirection(&data->out);
+	if (data->in_out != NULL)
+		ft_free_redirection(&data->in_out);
+
 }
 
 void	ft_readline(t_bigshell *data, char *env[])
@@ -45,8 +44,8 @@ void	ft_readline(t_bigshell *data, char *env[])
 			add_history(input);
 			init_line(data, input);
 			find_tokens(data);
-			redir_job(data);
-			data->exit_status = executor(data, env);
+			if (redir_job(data) == 1)
+				data->exit_status = executor(data, env);
 		}
 		free_readline(data, input);
 	}

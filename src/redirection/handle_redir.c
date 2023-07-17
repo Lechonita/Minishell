@@ -1,76 +1,109 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   no_redir.c                                         :+:      :+:    :+:   */
+/*   handle_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 16:19:29 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/06 17:33:26 by bebigel          ###   ########.fr       */
+/*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
+/*   Updated: 2023/07/16 17:55:56 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/exec.h"
 
-static void	dup_bis(int new_read, int new_write)
+static void	read_stdin_hd(t_redir *redir)
 {
-	if (dup2(new_read, STDIN_FILENO) < 0 || dup2(new_write, STDOUT_FILENO) < 0)
-		return ;
-}
+	int		len;
+	int		count;
+	char	*str;
+	char	*tmp;
 
-void	no_redir_in(t_bigshell *data, int pcss)
-{
-	if (pcss == 0)
-		dup2(data->exec->fd[0][1], STDOUT_FILENO);
-	else if (pcss == data->exec->nb_cmd - 1)
-		dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd_out);
-	else
-		dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd[pcss * 2][1]);
-}
-
-void	no_redir_out(t_bigshell *data, int pcss)
-{
-	if (pcss == 0)
-		dup_bis(data->exec->fd_in, data->exec->fd[0][1]);
-	else if (pcss == data->exec->nb_cmd - 1)
-		dup2(data->exec->fd[(pcss - 1) * 2][0], STDIN_FILENO);
-	else
-		dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd[pcss * 2][1]);
-}
-
-void	no_redir_in_out(t_bigshell *data, int pcss)
-{
-	if (pcss == 0)
-		dup2(data->exec->fd[0][1], STDOUT_FILENO);
-	else if (pcss == data->exec->nb_cmd - 1)
-		dup2(data->exec->fd[(pcss - 1) * 2][0], STDIN_FILENO);
-	else
-		dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd[pcss * 2][1]);
-}
-
-void	handle_dup(t_bigshell *data, int pcss)
-{
-	int	red;
-
-	red = data->exec->no_redir;
-	if ((data->exec->fd_in < 3 && pcss == 0 && (red == 0 || red == 2))
-		|| (data->exec->fd_out < 3 && pcss == (data->exec->nb_cmd - 1)
-			&& (red == 0 || red == 1)))
-		return (free_all(data), exit(EXIT_FAILURE));
-	if (red == 1)
-		no_redir_in(data, pcss);
-	else if (red == 2)
-		no_redir_out(data, pcss);
-	else if (red == 3)
-		no_redir_in_out(data, pcss);
-	else
+	len = ft_strlen(redir->file);
+	count = 0;
+	while (1)
 	{
-		if (pcss == 0)
-			dup_bis(data->exec->fd_in, data->exec->fd[0][1]);
-		else if (pcss == data->exec->nb_cmd - 1)
-			dup_bis(data->exec->fd[(pcss - 1) * 2][0], data->exec->fd_out);
-		else
-			dup_bis(data->exec->fd[(pcss - 1) * 2][0],
-				data->exec->fd[pcss * 2][1]);
+		set_signal_here_doc();
+		tmp = readline("> ");
+		if (tmp == NULL)
+		{
+			ctrl_d_here_doc(tmp, redir->file, count);
+			break ;
+		}
+		if (ft_strlen(tmp) == len && ft_strncmp(tmp, redir->file, len) == 0)
+			break ;
+		str = ft_strjoin(tmp, "\n");
+		ft_putstr_fd(str, redir->fd);
+		free(tmp);
+		free(str);
+		count++;
 	}
+	free(tmp);
+	return ;
+}
+
+void	redirection_here_doc(t_bigshell *data, t_redir *redir)
+{
+	redir->fd = open("minishell_here_doc", O_CREAT | O_WRONLY, 0644);
+	if (redir->fd < 0)
+		return (free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
+	read_stdin_hd(redir);
+	close(redir->fd);
+	redir->fd = open("minishell_here_doc", O_RDONLY);
+	if (redir->fd < 0)
+		return (free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
+}
+
+int	redirection_less(t_bigshell *data, t_redir *redir)
+{
+	if (access(redir->file, F_OK) < 0)
+	{
+		msg_not_found(FILE_NOT_FOUND, redir->file);
+		data->exit_status = 1;
+		redir->fd = 0;
+		return (0);
+	}
+	else if (access(redir->file, R_OK) < 0)
+	{
+		msg_not_found(PERM_DENIED, redir->file);
+		data->exit_status = 1;
+		redir->fd = 0;
+		return (0);
+	}
+	else if (access(redir->file, F_OK & R_OK) == 0)
+	{
+		redir->fd = open(redir->file, O_RDONLY);
+		if (redir->fd < 0)
+			return (free_all(data), ft_exit(errno, strerror(errno)), errno);
+	}
+	return (1);
+}
+
+int	redirection_great(t_bigshell *data, t_redir *redir)
+{
+	if (access(redir->file, F_OK) == 0 && access(redir->file, W_OK) < 0)
+	{
+		msg_not_found(PERM_DENIED, redir->file);
+		data->exit_status = 1;
+		redir->fd = 0;
+		return (0);
+	}
+	redir->fd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (redir->fd < 0)
+		return (free_all(data), ft_exit(errno, strerror(errno)), errno);
+	return (1);
+}
+
+void	redirection_append(t_bigshell *data, t_redir *redir)
+{
+	if (access(redir->file, F_OK) == 0 && access(redir->file, W_OK) < 0)
+	{
+		msg_not_found(PERM_DENIED, redir->file);
+		data->exit_status = 1;
+		redir->fd = 0;
+	}
+	redir->fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (redir->fd < 0)
+		return (free_all(data), ft_exit(errno, strerror(errno)));
 }

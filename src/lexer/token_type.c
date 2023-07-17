@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:52:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/10 13:42:00 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:37:51 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,5 @@ int	is_double_quote(char c)
 {
 	if (c == '\"')
 		return (DQUOTE);
-	return (0);
-}
-
-int	is_integer(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (INTEGER);
 	return (0);
 }

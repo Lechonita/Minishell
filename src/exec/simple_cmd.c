@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 17:41:14 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/12 15:47:57 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:38:02 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	handle_dup_simp_cmd(t_bigshell *data)
 {
 	int	red;
 
-	red = data->exec->no_redir;
+	red = data->redir_or_not;
 	if ((data->exec->fd_in < 3 && (red == 0 || red == 2))
 		|| (data->exec->fd_out < 3 && (red == 0 || red == 1)))
 		return (free_all(data), exit(EXIT_FAILURE));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/12 15:48:21 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:37:10 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_cmd_lst(t_bigshell *data)
 		j = 0;
 		while (el->cmd_arg[j])
 		{
-			dprintf(2, "\t\t\t cmd_arg [%d] → %s\n", j, el->cmd_arg[j]);
+			dprintf(2, "\t\t args [%d] → %s\n", j, el->cmd_arg[j]);
 			j++;
 		}
 		el = el->next;
@@ -47,15 +47,32 @@ void	print_cmd_lst(t_bigshell *data)
 void	print_t_line(t_bigshell *data)
 {
 	t_line	*el;
+	const char	*tokentype_str[] =
+	{
+		"WORD",
+		"DQUOTE",
+		"SQUOTE",
+		"\n",
+		"BLANK",
+		"$",
+		"|",
+		">",
+		">>",
+		"<",
+		"<<",
+		"&",
+		"; () {}",
+		"NOTOKEN",
+	};
 
 	el = data->line;
 	printf(">> Je rentre dans la fonction print_t_line\n");
 	while (el != NULL)
 	{
-		printf("[idx] %2d ", el->index);
-		printf("[type] %2d ", el->type);
-		printf("[dq] %2d ", el->dq);
-		printf("[sq] %2d ", el->sq);
+		printf("[%2d] ", el->index);
+		printf("type : %2d  %8s ", el->type, tokentype_str[el->type - 1]);
+		// printf("[dq] %2d ", el->dq);
+		// printf("[sq] %2d ", el->sq);
 		printf("[c] %c\n", el->c);
 		el = el->next;
 	}
@@ -65,6 +82,13 @@ void	print_t_line(t_bigshell *data)
 void	print_t_token(t_bigshell *data)
 {
 	t_token	*el;
+	const char	*aim_str[] =
+	{
+		"REDIR",
+		"CMD",
+		"BUILTIN",
+		"PIPEX",
+	};
 
 	el = data->token;
 	printf("__________________TOKEN________________________\n");
@@ -73,36 +97,58 @@ void	print_t_token(t_bigshell *data)
 		printf("[%2d] ", el->index);
 		printf("tok %2d ", el->type);
 		printf(": %20s ", el->value);
-		printf("→ %2d\n", el->aim);
+		printf("→ %2d %8s\n", el->aim, aim_str[el->aim - 20]);
 		el = el->next;
 	}
 }
 
-void	print_redir(t_bigshell *data, char *str)
+void	print_redir(t_bigshell *data)
 {
 	t_redir	*el;
+	const char	*tokentype_str[] =
+	{
+		"WORD",
+		"DQUOTE",
+		"SQUOTE",
+		"\n",
+		"BLANK",
+		"$",
+		"|",
+		">",
+		">>",
+		"<",
+		"<<",
+		"&",
+		"; () {}",
+		"NOTOKEN",
+	};
 
-	printf("__________________REDIR");
-	if (!ft_strncmp(str, "IN", 3))
-	{
-		el = data->in;
-		printf(" IN_____________________\n");
-	}
-	else if (!ft_strncmp(str, "OUT", 3))
-	{
-		el = data->out;
-		printf(" OUT____________________\n");
-	}
+	el = data->in_out;
+	printf("__________________REDIR________________________\n");
 	while (el)
 	{
 		printf("[%2d] ", el->idx);
-		printf(" %2s ", el->type);
-		printf(": %20s ", el->file);
+		printf(" %2d %2s ", el->type, tokentype_str[el->type - 1]);
+		printf(": %15s ", el->file);
 		printf("→ fd %d\n", el->fd);
 		// printf("& perm %d\n", el->exec_perm);
 		el = el->next;
 	}
 	printf("\n");
+}
+
+void	print_exec(t_bigshell *data)
+{
+	t_exec	*el;
+
+	el = data->exec;
+	printf("__________________EXEC_________________________\n");
+	dprintf(2, "fd_in    = %d 	fd_out = %d\n", el->fd_in, el->fd_out);
+	dprintf(2, "nb_cmd   = %d\n", el->nb_cmd);
+	dprintf(2, "in_file  : %s\nout_file : %s\n", el->in_file, el->out_file);
+	dprintf(2, "heredoc  = %d\nredir/no_redir %d\n", el->here_doc, data->redir_or_not);
+	print_cmd_lst(data);
+	printf("\n_______________________________________________\n");
 }
 
 /* fonction qui permet d'afficher t_env

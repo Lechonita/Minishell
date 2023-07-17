@@ -87,6 +87,7 @@ SRC += quotes_position.c
 #	Input functions
 SRC += prompt.c
 SRC += signal.c
+SRC += signal_here_doc.c
 
 #	Lexer functions
 SRC += flag_quotes.c
@@ -102,11 +103,11 @@ SRC += find_aim.c
 SRC += aim_cmd.c
 
 #	Redirection functions
-SRC += redirection.c
+SRC += path_name.c
 SRC += handle_redir.c
 SRC += in_out.c
 SRC += in_out_utils.c
-SRC += here_doc.c
+SRC += handle_fd.c
 
 #	Utils functions
 SRC += free_struct.c
