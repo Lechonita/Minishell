@@ -6,13 +6,13 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:57 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/05 09:23:32 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 12:04:13 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	pwd(void)
+void	print_working_directory(void)
 {
 	char	*pwd;
 

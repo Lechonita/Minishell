@@ -6,8 +6,13 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/05 09:28:33 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 12:06:59 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	change_directory(char **args, t_bigshell *data)
+{
+	return ;
+}

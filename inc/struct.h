@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/14 16:44:48 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/18 12:02:39 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@
 # include <sys/prctl.h>
 # include <readline/readline.h>	//readline
 # include <readline/history.h>	//readline
+
+# define PROMPT "$ "
+# define TRUE 1
+# define FALSE 0
+
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ
