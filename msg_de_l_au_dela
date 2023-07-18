@@ -51,4 +51,11 @@ example / error :
 			→ arret du programme 
 			→ echo ne s'execute pas
 
+	→ $ echo "$"path ET echo '$'path
+		ca donne => $path
 	
+	→ $ echo '$path'
+		ca donne $path
+
+	→ par contre $ echo "$path"
+		ca donne bien la valeur de path

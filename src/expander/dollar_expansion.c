@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/17 17:26:40 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:17:59 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,31 @@ void	add_var(t_bigshell *data, t_line *line, char *value, int index)
 	print_t_line(line);
 }
 
-void	var_not_found(t_line *line, char *var)
+void	var_not_found(t_line **line, char *var)
 {
 	t_line	*tmp;
-	t_line	*prochain;
+	t_line	*prev;
 	int		acolade;
 	int		len;
 
-	if (!line || !var)
+	if (!line || !(*line) || !var)
 		return ;
-	printf("Au tout debut, mon line->c = %c\n", line->c);
-	tmp = line;
+	tmp = *line;
 	acolade = 0;
 	if (tmp->c == '{')
 		acolade = 1;
 	len = get_var_len(tmp, acolade);
-	printf("Ensuite, ma len = %d\n", len);
 	while (tmp && len > 0)
 	{
-		prochain = tmp->next;
-		printf("Mon prochain->c devient = %c\n", prochain->c);
-		free(tmp);
+		prev = tmp;
+		tmp = tmp->next;
+		if (!tmp)
+			return ;
+		// prev->next = tmp->next;
+		free(prev);
 		len--;
-		tmp = prochain;
-		printf("Et mon tmp a la fin de la boucle cest %c\n", tmp->c);
 	}
+	// s'il n'y a pas d'autres caractères après, alors mettre un newline
 }
 
 void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
@@ -81,7 +81,7 @@ void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
 	flag = 1;
 	while (bis->env)
 	{
-		if (ft_strncmp(bis->env->name, var, ft_strlen(var)) == 0)
+		if (ft_strncmp(bis->env->name, var, ft_strlen(bis->env->name)) == 0)
 		{
 			add_var(bis, line, bis->env->value, index);
 			flag = 0;
@@ -90,7 +90,7 @@ void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
 		bis->env = bis->env->next;
 	}
 	if (flag == 1)
-		var_not_found(line, var);
+		var_not_found(&line, var);
 }
 
 void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
