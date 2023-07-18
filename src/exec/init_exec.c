@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:25:25 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/17 18:07:14 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 10:31:52 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	fd_out_file(t_bigshell *data)
 
 void	init_exec(t_bigshell *data)
 {
-	print_redir(data);
 	data->exec->here_doc = count_file(data, DLESS);
 	data->exec->in_file = in_file_path(data);
 	data->exec->out_file = out_file_path(data);
@@ -65,32 +64,3 @@ void	init_exec(t_bigshell *data)
 	data->exec->cmd = init_cmd(data);
 	print_exec(data);
 }
-
-/*
-void	fd_out_file(t_bigshell *data)
-{
-	t_redir	*redir_last;
-	t_redir	*el;
-
-	if (data->exec->out_file == NULL)
-		return ;
-	el = data->in_out;
-	if ((count_file(data, GREAT) == 1 && count_file(data, DGREAT) == 0)
-		|| (count_file(data, GREAT) == 0 && count_file(data, DGREAT) == 1))
-	{
-		while (el)
-		{
-			if (el->type == GREAT || el->type == DGREAT)
-				data->exec->fd_out = el->fd;
-			el = el->next;
-		}
-	}
-	else
-	{
-		redir_last = last_redir(data, GREAT, DGREAT);
-		data->exec->fd_out = redir_last->fd;
-		close_fd(data, redir_last->idx, DGREAT, GREAT);
-	}
-	return ;
-}
-*/

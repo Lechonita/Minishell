@@ -6,14 +6,13 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:37:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/10 13:49:03 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 10:58:40 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/exec.h"
 
-/* dprintf(2, "cmd = %s\n", el->cmd); */
 void	child_process(t_bigshell *data, char *env[], int pcss)
 {
 	t_cmd	*el;

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/17 09:42:56 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 10:40:43 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_strs(char **strs)
 	i = 0;
 	while (strs[i])
 	{
-		printf("[%2d] %s\n", i, strs[i]);
+		dprintf(2, "[%2d] %s\n", i, strs[i]);
 		i++;
 	}
 }

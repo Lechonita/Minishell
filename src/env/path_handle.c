@@ -6,12 +6,23 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/17 09:38:41 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 11:03:30 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/env.h"
+
+static char	*ft_strjoin_bis(char *s1, char *s2, char *to_add)
+{
+	char	*tmp;
+	char	*str;
+
+	tmp = ft_strjoin(s1, to_add);
+	str = ft_strjoin(tmp, s2);
+	free(tmp);
+	return (str);
+}
 
 /* fonction qui vérifie l'acces des commandes avec le chemin absolu */
 static char	*handle_good_path(t_bigshell *data, char *command)

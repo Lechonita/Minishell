@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/17 09:40:06 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 11:02:31 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ void	same_aim(t_bigshell *data)
 	}
 }
 
+static char	*join_spac(char *s1, char *s2, char *to_add)
+{
+	char	*tmp;
+	char	*str;
+
+	tmp = free_strjoin(s1, to_add);
+	str = ft_strjoin(tmp, s2);
+	free(tmp);
+	return (str);
+}
+
 void	add_arg_to_cmd(t_bigshell *data)
 {
 	t_token	*tok;
@@ -40,8 +51,7 @@ void	add_arg_to_cmd(t_bigshell *data)
 		{
 			while (tok->next->next && tok->next->next->aim == SIMPLE_CMD)
 			{
-				tok->value = ft_strjoin_bis(tok->value,
-						tok->next->next->value, " ");
+				tok->value = join_spac(tok->value, tok->next->next->value, " ");
 				if (tok->next->type == BLANK)
 					token_rm_next(tok);
 				if (tok->next->type == WORD)

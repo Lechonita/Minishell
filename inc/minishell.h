@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/17 09:38:38 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 11:04:05 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_readline(t_bigshell *data, char *env[]);
 /***********************************************************/
 
 char	*free_strjoin(char *to_free, char *buf);
-char	*ft_strjoin_bis(char *s1, char *s2, char *to_add);
 
 /* FREE STRUCT*/
 void	free_strs(char **strs);

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:38:19 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/17 17:04:49 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 09:14:02 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		ft_waitpid(pid_t last_pid);
 
 /* PIPE UTILS */
 void	close_fd(t_bigshell *data, int idx, int type, int type2);
-// void	close_fd(t_bigshell *data);
 void	open_pipe(t_bigshell *data);
 void	close_pipe(t_bigshell *data);
 
