@@ -5,13 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 10:28:05 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/11 15:00:21 by bebigel          ###   ########.fr       */
+/*   Created: 2023/07/17 16:38:06 by bebigel           #+#    #+#             */
+/*   Updated: 2023/07/18 11:02:42 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/env.h"
+
+char	*free_strjoin(char *to_free, char *buf)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(to_free, buf);
+	return (free(to_free), tmp);
+}
 
 void	init_minishell(t_bigshell *data, char *env[])
 {

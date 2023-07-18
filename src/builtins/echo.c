@@ -6,8 +6,13 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:30 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/05 09:28:36 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 12:08:27 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	print_echo(char *cmd, char **args, t_bigshell *data)
+{
+	return ;
+}

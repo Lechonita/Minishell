@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/17 14:48:13 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:24:57 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_readline(t_bigshell *data, char *env[]);
 /***********************************************************/
 /*                          UTILS                          */
 /***********************************************************/
+
+char	*free_strjoin(char *to_free, char *buf);
 
 /* FREE STRUCT*/
 void	free_strs(char **strs);

@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   print_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 12:24:36 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:30:19 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/minishell.h"
-
-void	print_strs(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		dprintf(2, "[%2d] %s\n", i, strs[i]);
-		i++;
-	}
-}
 
 void	print_cmd_lst(t_bigshell *data)
 {
@@ -45,11 +32,10 @@ void	print_cmd_lst(t_bigshell *data)
 	}
 }
 
-void	print_t_line(t_line *line)
+void	print_t_line(t_bigshell *data)
 {
-	t_line	*el;
-	const char	*tokentype_str[] =
-	{
+	t_line		*el;
+	const char	*tokentype_str[] = {
 		"WORD",
 		"DQUOTE",
 		"SQUOTE",
@@ -66,25 +52,22 @@ void	print_t_line(t_line *line)
 		"NOTOKEN",
 	};
 
-	el = line;
-		printf("___________________LINE______________________\n");
+	el = data->line;
 	while (el != NULL)
 	{
-		printf("[%2d] ", el->index);
-		printf("type : %2d  %8s ", el->type, tokentype_str[el->type - 1]);
-		// printf("[dq] %2d ", el->dq);
-		// printf("[sq] %2d ", el->sq);
-		printf("[c] %c\n", el->c);
+		printf("[%2d] type : %2d %8s [c] %c\n", el->index, el->type,
+			tokentype_str[el->type - 1], el->c);
 		el = el->next;
 	}
 }
-// printf("_______________________________________________\n");
+
+		// printf("[dq] %2d ", el->dq);
+		// printf("[sq] %2d ", el->sq);
 
 void	print_t_token(t_bigshell *data)
 {
-	t_token	*el;
-	const char	*aim_str[] =
-	{
+	t_token		*el;
+	const char	*aim_str[] = {
 		"REDIR",
 		"CMD",
 		"BUILTIN",
@@ -92,7 +75,7 @@ void	print_t_token(t_bigshell *data)
 	};
 
 	el = data->token;
-	printf("__________________TOKEN_______________________\n");
+	printf("__________________TOKEN________________________\n");
 	while (el)
 	{
 		printf("[%2d] ", el->index);
@@ -105,9 +88,8 @@ void	print_t_token(t_bigshell *data)
 
 void	print_redir(t_bigshell *data)
 {
-	t_redir	*el;
-	const char	*tokentype_str[] =
-	{
+	t_redir		*el;
+	const char	*toktype[] = {
 		"WORD",
 		"DQUOTE",
 		"SQUOTE",
@@ -128,14 +110,10 @@ void	print_redir(t_bigshell *data)
 	printf("__________________REDIR________________________\n");
 	while (el)
 	{
-		printf("[%2d] ", el->idx);
-		printf(" %2d %2s ", el->type, tokentype_str[el->type - 1]);
-		printf(": %15s ", el->file);
-		printf("→ fd %d\n", el->fd);
-		// printf("& perm %d\n", el->exec_perm);
+		printf("[%2d] %2d %2s ", el->idx, el->type, toktype[el->type - 1]);
+		printf(": %15s → fd %d\n", el->file, el->fd);
 		el = el->next;
 	}
-	printf("\n");
 }
 
 void	print_exec(t_bigshell *data)
@@ -147,21 +125,8 @@ void	print_exec(t_bigshell *data)
 	dprintf(2, "fd_in    = %d 	fd_out = %d\n", el->fd_in, el->fd_out);
 	dprintf(2, "nb_cmd   = %d\n", el->nb_cmd);
 	dprintf(2, "in_file  : %s\nout_file : %s\n", el->in_file, el->out_file);
-	dprintf(2, "heredoc  = %d\nredir/no_redir %d\n", el->here_doc, data->redir_or_not);
+	dprintf(2, "heredoc  = %d\nredir/no_redir %d\n", el->here_doc,
+		data->redir_or_not);
 	print_cmd_lst(data);
 	printf("\n_______________________________________________\n");
-}
-
-/* fonction qui permet d'afficher t_env
-	(equivalent de la commande "env" ou "printenv" dans le terminal) */
-void	display_env_struct(t_bigshell *data)
-{
-	t_env	*el;
-
-	el = data->env;
-	while (el != NULL)
-	{
-		printf("[%2d] %s=%s\n", el->index, el->name, el->value);
-		el = el->next;
-	}
 }

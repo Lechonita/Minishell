@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   aim_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/14 17:59:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/18 11:02:31 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-static char	*free_strjoin(char *c, char *buf)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(c, buf);
-	return (free(c), tmp);
-}
 
 void	same_aim(t_bigshell *data)
 {
@@ -37,16 +29,15 @@ void	same_aim(t_bigshell *data)
 	}
 }
 
-static char	*join_wh_space(char *cmd, char *arg)
+static char	*join_spac(char *s1, char *s2, char *to_add)
 {
 	char	*tmp;
-	char	*cmd_arg;
+	char	*str;
 
-	tmp = ft_strjoin(cmd, " ");
-	cmd_arg = ft_strjoin(tmp, arg);
-	free(cmd);
+	tmp = free_strjoin(s1, to_add);
+	str = ft_strjoin(tmp, s2);
 	free(tmp);
-	return (cmd_arg);
+	return (str);
 }
 
 void	add_arg_to_cmd(t_bigshell *data)
@@ -60,7 +51,7 @@ void	add_arg_to_cmd(t_bigshell *data)
 		{
 			while (tok->next->next && tok->next->next->aim == SIMPLE_CMD)
 			{
-				tok->value = join_wh_space(tok->value, tok->next->next->value);
+				tok->value = join_spac(tok->value, tok->next->next->value, " ");
 				if (tok->next->type == BLANK)
 					token_rm_next(tok);
 				if (tok->next->type == WORD)

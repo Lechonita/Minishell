@@ -5,7 +5,7 @@ yo mate !! how are you??
 < Makefile cat | wc -l > out_file
 < Makefile ls -l | head -42 | echo hello world  > out_file
 
-<Makefile << fin <src/main.c head -15 | echo hello world 15 >out_file >> files/out_file
+<Makefile << fin <src/main.c head -15 | echo hello 15 >out_file >> files/out_file
 
 < files/no_right << files/write_o < files/all_rights ls -l >files/read_o >>files/read_write >files/exec_o.c 
 

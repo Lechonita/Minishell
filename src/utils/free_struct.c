@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/14 13:58:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/18 10:58:11 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	free_all(t_bigshell *data)
 {
 	if (!data)
 		return ;
-	rl_clear_history();
 	if (data->env_paths)
 		free_strs(data->env_paths);
 	if (data->exec)
@@ -100,6 +99,7 @@ void	free_all(t_bigshell *data)
 		ft_free_line(&data->line);
 	if (data->env)
 		ft_free_env(&data->env);
+	rl_clear_history();
 	if (data != NULL)
 		free(data);
 	data = NULL;

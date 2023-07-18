@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/07/17 13:38:17 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:25:35 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ void	msg_not_found(char *msg, char *str)
 	char	*line;
 
 	tmp = ft_strjoin(msg, str);
-	line = ft_strjoin(tmp, "\n");
+	line = free_strjoin(tmp, "\n");
 	ft_putstr_fd(line, 2);
-	free(tmp);
 	free(line);
 }
 
