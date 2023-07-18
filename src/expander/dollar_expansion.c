@@ -6,12 +6,28 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/18 12:17:59 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:31:31 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
+
+t_line	*line_new_var(t_line *line, t_line *next, char c)
+{
+	t_line	*new;
+
+	new = malloc(sizeof(*new));
+	if (!new)
+		return (NULL);
+	new->index = 0;
+	new->type = WORD;
+	new->dq = line->dq;
+	new->sq = line->sq;
+	new->c = c;
+	new->next = next;
+	return (new);
+}
 
 t_line	*line_add_node(t_line *line, char value, int index)
 {
@@ -19,34 +35,37 @@ t_line	*line_add_node(t_line *line, char value, int index)
 		return (NULL);
 	while (line && line->next && line->index != index)
 		line = line->next;
-	line->next = line_new(line, value, 0);
+	// line->next = line_new(line, value, 0);
+	line->next = line_new_var(line, line->next, value);
 	return (line);
 }
 
-void	add_var(t_bigshell *data, t_line *line, char *value, int index)
+/* A revoir parce qu'on perd les maillons d'après une fois qu'on appelle
+	line_add_node */
+
+void	add_var(t_bigshell *data, t_line *line, char *value, int idx)
 {
 	t_line	*tmp;
 	int		i;
 
-	print_t_line(line);
-	if (!data || !line || !value)
+	if (!data || !line || !value || !idx)
 		return ;
 	tmp = line;
 	i = 0;
+	printf("Mon value = %s\n", value);
 	while (value[i])
 	{
-		tmp = line_add_node(tmp, value[i], index);
+		tmp = line_add_node(tmp, value[i], idx);
+		print_t_line(line);
 		align_line_index(data);
 		i++;
-		index++;
+		idx++;
 	}
-	print_t_line(line);
 }
 
 void	var_not_found(t_line **line, char *var)
 {
 	t_line	*tmp;
-	t_line	*prev;
 	int		acolade;
 	int		len;
 
@@ -59,38 +78,40 @@ void	var_not_found(t_line **line, char *var)
 	len = get_var_len(tmp, acolade);
 	while (tmp && len > 0)
 	{
-		prev = tmp;
+		tmp->type = BLANK;
+		tmp->c = ' ';
 		tmp = tmp->next;
-		if (!tmp)
-			return ;
-		// prev->next = tmp->next;
-		free(prev);
 		len--;
 	}
-	// s'il n'y a pas d'autres caractères après, alors mettre un newline
+	return ;
 }
 
 void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
 {
-	t_bigshell	*bis;
+	t_env		*env;
 	int			flag;
 
-	if (!line || !var)
+	// printf("\nA l'entrée de compare_var, avant de COMMENCER ===>\n");
+	// print_t_line(line);
+	if (!data || !line || !var | !index)
 		return ;
-	bis = data;
+	env = data->env;
 	flag = 1;
-	while (bis->env)
+	printf("Mon var = %s\n", var);
+	while (env)
 	{
-		if (ft_strncmp(bis->env->name, var, ft_strlen(bis->env->name)) == 0)
+		if (ft_strncmp(env->name, var, ft_strlen(env->name)) == 0)
 		{
-			add_var(bis, line, bis->env->value, index);
+			add_var(data, line, env->value, index);
 			flag = 0;
 			break ;
 		}
-		bis->env = bis->env->next;
+		env = env->next;
 	}
 	if (flag == 1)
 		var_not_found(&line, var);
+	// printf("\nA la fin de compare_var, avant de rendre a do_expansion ===>\n");
+	// print_t_line(line);
 }
 
 void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
@@ -98,7 +119,9 @@ void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
 	t_line	*tmp;
 	int		i;
 
-	if (!line)
+	// printf("\nA l'entrée de dollar_expand, avant de COMMENCER ===>\n");
+	// print_t_line(line);
+	if (!data || !line || !var | !index)
 		return ;
 	tmp = line->next;
 	i = 0;
@@ -115,4 +138,6 @@ void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
 	}
 	else
 		compare_var(data, line, var, index);
+	// printf("\nA la fin de dollar_expand, avant de rendre a do_expansion ===>\n");
+	// print_t_line(line);
 }

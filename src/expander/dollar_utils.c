@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:02:22 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/17 13:59:23 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:50:35 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,6 @@ int	get_var_len(t_line *line, int acolade)
 	return (i);
 }
 
-char	*check_var_case(char *var)
-{
-	int		maj;
-	int		i;
-
-	maj = 0;
-	i = -1;
-	if (var[1] > 64 && var[1] < 91)
-		maj = 1;
-	while (var[++i])
-	{
-		if (maj == 1 && var[i] > 96 && var[i] < 123)
-			return (NULL);
-		else if (maj == 0 && var[i] > 64 && var[i] < 91)
-			return (NULL);
-	}
-	if (maj == 0)
-	{
-		i = -1;
-		while (var[++i])
-			var[i] = ft_toupper(var[i]);
-	}
-	return (var);
-}
-
 char	*get_var_bis(t_line *line, char *var, int acolade)
 {
 	int		i;
@@ -115,6 +90,5 @@ char	*get_var(t_line *line)
 	if (!var)
 		return (NULL);
 	var = get_var_bis(tmp, var, acolade);
-	var = check_var_case(var);
 	return (var);
 }
