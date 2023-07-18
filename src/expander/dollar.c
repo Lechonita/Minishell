@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/17 17:01:49 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:39:27 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 			ne rien faire.
 		- Si aucun name ne correspond et qu'on n'est pas dans des guillemets,
 			afficher un retour a la ligne. */
-
 
 int	dollar_between_quotes(t_line *line, t_line *first)
 {

@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:05:13 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/17 17:05:27 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:39:58 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
-

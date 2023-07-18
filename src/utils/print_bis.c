@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/17 09:30:19 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 12:40:21 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_cmd_lst(t_bigshell *data)
 	}
 }
 
-void	print_t_line(t_bigshell *data)
+void	print_t_line(t_line *line)
 {
 	t_line		*el;
 	const char	*tokentype_str[] = {
@@ -52,7 +52,8 @@ void	print_t_line(t_bigshell *data)
 		"NOTOKEN",
 	};
 
-	el = data->line;
+	el = line;
+	printf("___________________LINE______________________\n");
 	while (el != NULL)
 	{
 		printf("[%2d] type : %2d %8s [c] %c\n", el->index, el->type,
@@ -130,3 +131,34 @@ void	print_exec(t_bigshell *data)
 	print_cmd_lst(data);
 	printf("\n_______________________________________________\n");
 }
+
+/*
+void	print_t_line(t_bigshell *data)
+{
+	t_line		*el;
+	const char	*tokentype_str[] = {
+		"WORD",
+		"DQUOTE",
+		"SQUOTE",
+		"\n",
+		"BLANK",
+		"$",
+		"|",
+		">",
+		">>",
+		"<",
+		"<<",
+		"&",
+		"; () {}",
+		"NOTOKEN",
+	};
+
+	el = data->line;
+	while (el != NULL)
+	{
+		printf("[%2d] type : %2d %8s [c] %c\n", el->index, el->type,
+			tokentype_str[el->type - 1], el->c);
+		el = el->next;
+	}
+}
+*/
