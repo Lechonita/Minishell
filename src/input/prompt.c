@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/17 14:51:58 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 15:35:02 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_readline(t_bigshell *data, char *env[])
 
 	while (1)
 	{
-		input = readline("🔥 ");
+		input = readline(PROMPT);
 		if (input == NULL)
 			catch_ctrl_d(data, input);
 		if (!ft_strncmp(input, "exit", 4) && ft_strlen(input) == 4)

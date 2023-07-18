@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 12:02:39 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 15:34:54 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@
 # include <readline/readline.h>	//readline
 # include <readline/history.h>	//readline
 
-# define PROMPT "$ "
+// # define PROMPT "$ "
+# define PROMPT "🔥 "
 # define TRUE 1
 # define FALSE 0
 

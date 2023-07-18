@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/07/18 12:39:00 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 17:39:59 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_cmd	*init_cmd(t_bigshell *data)
 			if (lst_cmd == NULL)
 				return (free_all(data), ft_exit(EXIT_FAILURE, W_LST_CMD), NULL);
 		}			
-		else if (i > 0 && el->aim == SIMPLE_CMD)
+		else if (i > 0 && (el->aim == SIMPLE_CMD || el->aim == BUILTIN))
 			lst_add_back(&lst_cmd, new_lst(data, i++, el->value));
 		el = el->next;
 	}

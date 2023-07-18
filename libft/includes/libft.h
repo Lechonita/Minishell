@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:48:27 by bebigel           #+#    #+#             */
-/*   Updated: 2023/06/19 12:26:05 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 19:33:29 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ char		*ft_strndup(const char *src, size_t n);
 /*locates the first occurrence of the null-term string little in the string big,
 where not more than len characters are searched*/
 char		*ft_strnstr(const char *big, const char *little, size_t len);
+
+/*Compares the 2 strings s1 and s2 */
+int			ft_strcmp(const char *s1, const char *s2);
 
 /*Compares at most the first n bytes of str1 and str2*/
 int			ft_strncmp(const char *s1, const char *s2, size_t n);

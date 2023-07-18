@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:57 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/18 12:32:09 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/18 18:23:05 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// void	print_working_directory(void)
-// {
-// 	char	*pwd;
+void	print_working_directory(void)
+{
+	char	*pwd;
 
-// 	pwd = getcwd(NULL, 0);
-// 	printf("%s\n", pwd);
-// 	free(pwd);
-// }
+	pwd = getcwd(NULL, 0);
+	printf("%s\n", pwd);
+	free(pwd);
+}

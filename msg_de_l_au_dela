@@ -3,7 +3,7 @@ yo mate !! how are you??
 < Makefile cat | wc -l | head -77 | tail -5 | ls -l >> out_file
 < Makefile cat | head -7 | taili -5 >> out_file
 < Makefile cat | wc -l > out_file
-< Makefile ls -l | head -42 | echo hello world  > out_file
+< Makefile cat | head -42 | echo hello world  > out_file
 
 <Makefile << fin <src/main.c head -15 | echo hello 15 >out_file >> files/out_file
 
