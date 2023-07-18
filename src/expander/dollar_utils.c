@@ -6,19 +6,19 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:02:22 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/18 14:50:35 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:55:39 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
 
-void	align_line_index(t_bigshell *data)
+void	align_line_index(t_line *line)
 {
 	t_line	*tmp;
 	int		i;
 
-	tmp = data->line;
+	tmp = line;
 	i = 0;
 	while (tmp)
 	{

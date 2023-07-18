@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/18 15:31:35 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:56:14 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 
 /* DOLLAR EXPANSION */
 t_line	*line_add_node(t_line *line, char value, int index);
-void	add_var(t_bigshell *data, t_line *line, char *value, int idx);
+void	add_var(t_line *line, char *value, int idx, char *var);
 void	var_not_found(t_line **line, char *var);
 void	compare_var(t_bigshell *data, t_line *line, char *var, int index);
 void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index);
 
 /* DOLLAR UTILS */
-void	align_line_index(t_bigshell *data);
+void	align_line_index(t_line *line);
 int		get_var_len(t_line *line, int acolade);
 char	*get_var_bis(t_line *line, char *var, int acolade);
 char	*get_var(t_line *line);
