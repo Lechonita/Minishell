@@ -57,13 +57,14 @@ UTILS_DIR = ./src/utils
 SRC += main.c 
 
 #	Builtins functions
-SRC += echo.c
+SRC += builtins.c
 SRC += cd.c
-SRC += pwd.c
-SRC += export.c
-SRC += unset.c
+SRC += echo.c
 SRC += env.c
 SRC += exit.c 
+SRC += export.c
+SRC += pwd.c
+SRC += unset.c
 
 #	Env functions
 SRC += env_init.c
