@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/18 15:56:14 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:30:08 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	compare_var(t_bigshell *data, t_line *line, char *var, int index);
 void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index);
 
 /* DOLLAR UTILS */
-void	align_line_index(t_line *line);
+void	align_line_index(t_line *line, int start);
 int		get_var_len(t_line *line, int acolade);
 char	*get_var_bis(t_line *line, char *var, int acolade);
 char	*get_var(t_line *line);

@@ -3,28 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:02:22 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/18 15:55:39 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:51:53 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
 
-void	align_line_index(t_line *line)
+void	align_line_index(t_line *line, int start)
 {
 	t_line	*tmp;
-	int		i;
 
 	tmp = line;
-	i = 0;
+	while (tmp && tmp->index != start)
+		tmp = tmp->next;
 	while (tmp)
 	{
-		tmp->index = i;
-		tmp = tmp->next;
-		i++;
+		tmp->index = start;
+		start++;
 	}
 }
 

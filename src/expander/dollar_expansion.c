@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/18 16:02:02 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:57:43 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,22 @@ t_line	*line_new_var(t_line *line, t_line *next, char c)
 {
 	t_line	*new;
 
+	printf("Est-ce que ca vient rajouter ici ?\n");
 	new = malloc(sizeof(*new));
 	if (!new)
 		return (NULL);
 	new->index = 0;
 	new->type = WORD;
-	new->dq = line->dq;
-	new->sq = line->sq;
+	if (line)
+	{
+		new->dq = line->dq;
+		new->sq = line->sq;
+	}
+	else
+	{
+		new->dq = 0;
+		new->sq = 0;
+	}
 	new->c = c;
 	new->next = next;
 	return (new);
@@ -31,43 +40,71 @@ t_line	*line_new_var(t_line *line, t_line *next, char c)
 
 t_line	*line_add_node(t_line *line, char value, int index)
 {
+	printf("Je passe au moins par la avec un index de %d\n", index);
 	if (!line)
-		return (NULL);
-	while (line && line->next && line->index != index)
-		line = line->next;
-	line->next = line_new_var(line, line->next, value);
+		line = line_new_var(line, NULL, value);
+	else
+	{
+		while (line && line->next && line->index != index)
+			line = line->next;
+		printf("Une fois la boucle finie, je suis sur %c\n", line->c);
+		line->next = line_new_var(line, line->next, value);
+	}
 	return (line);
+}
+
+t_line	*line_replace_node(t_line *line, char value, int index)
+{
+	if (!line || !value || !index)
+		return (NULL);
+	line->c = value;
+	line->type = WORD;
+	return (line);
+}
+
+t_line	*check_next_node(t_line *line)
+{
+	t_line	*tmp;
+
+	tmp = line;
+	if (tmp->next)
+		return (tmp->next);
+	return (NULL);
 }
 
 void	add_var(t_line *line, char *value, int idx, char *var)
 {
 	t_line	*tmp;
 	int		i;
-	int		len;
+	int		j;
 
 	if (!line || !value || !idx || !var)
 		return ;
-	tmp = line;
-	i = 0;
-	len = ft_strlen(var);
-	while (value[i])
+	tmp = line->next;
+	i = -1;
+	j = 0;
+	while (value[++i])
 	{
-		// if (len > 0)
-		// {
-		// 	tmp->type = WORD;
-		// 	tmp->c = value[i];
-		// 	tmp = tmp->next;
-		// }
-		// else
+		
+		printf("Index = %d\n", idx);
+		if (var[j] && tmp->c == var[j])
+		{
+			printf("Est-ce que je passe par la ?\n");
+			tmp = line_replace_node(tmp, value[i], idx);
+			tmp = tmp->next;
+			j++;
+		}
+		else
+		{
+			printf("A ce niveau la\n");
 			tmp = line_add_node(tmp, value[i], idx);
-		// if (tmp->next && tmp->next->type != BLANK)
-		// 	tmp->next = tmp->next->next;
+			// tmp = line_new_var(tmp, check_next_node(tmp), value[i]);
+		}
+			idx++;
 		print_t_line(line);
-		align_line_index(line);
-		i++;
-		len--;
-		idx++;
+		printf(" Segfault par la ?\n");
 	}
+		// align_line_index(line, idx);
 }
 
 void	var_not_found(t_line **line, char *var)
