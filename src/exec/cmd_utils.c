@@ -6,13 +6,13 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/07/18 17:39:59 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/19 10:50:52 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static t_cmd	*new_lst(t_bigshell *data, int idx, char *cmd)
+static t_cmd	*new_lst(t_bigshell *data, int idx, char *cmd, int builtin)
 {
 	t_cmd	*new;
 
@@ -26,6 +26,10 @@ static t_cmd	*new_lst(t_bigshell *data, int idx, char *cmd)
 	if (!new -> cmd_arg)
 		return (free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_CMD), NULL);
 	new -> idx_cmd = idx;
+	if (builtin == BUILTIN)
+		new -> builtin = TRUE;
+	else
+		new -> builtin = FALSE;
 	new -> next = NULL;
 	return (new);
 }
@@ -63,12 +67,12 @@ t_cmd	*init_cmd(t_bigshell *data)
 	{
 		if (i == 0 && (el->aim == SIMPLE_CMD || el->aim == BUILTIN))
 		{
-			lst_cmd = new_lst(data, i++, el->value);
+			lst_cmd = new_lst(data, i++, el->value, el->aim);
 			if (lst_cmd == NULL)
 				return (free_all(data), ft_exit(EXIT_FAILURE, W_LST_CMD), NULL);
 		}			
 		else if (i > 0 && (el->aim == SIMPLE_CMD || el->aim == BUILTIN))
-			lst_add_back(&lst_cmd, new_lst(data, i++, el->value));
+			lst_add_back(&lst_cmd, new_lst(data, i++, el->value, el->aim));
 		el = el->next;
 	}
 	return (lst_cmd);

@@ -156,7 +156,7 @@ endef
 
 ############################### Rules ##########################################
 
-all: $(NAME)
+all: $(NAME) art_bis
 
 $(LIBFT):
 	@make --no-print-directory all -C $(LIBFT_DIR)
@@ -182,12 +182,24 @@ $(NAME): $(LIBFT) $(OBJ)
 # 	@echo "$(RED) |_|  |_| |_| |_| |_| |_| |_____/  |_| |_|  \___| |_| |_|$(END)"
 # 	@echo "$(RED)                                                         $(END)"
 
+art_bis:
+	@echo "	 	 ________________________________________________________   \n \
+			/\                                                       \	\n \
+			\_|                                                      |	\n \
+			  |                ▙▗▌▗    ▗ ▞▀▖▌     ▜▜                 |	\n \
+			  |                ▌▘▌▄ ▛▀▖▄ ▚▄ ▛▀▖▞▀▖▐▐                 |	\n \
+			  |                ▌ ▌▐ ▌ ▌▐ ▖ ▌▌ ▌▛▀ ▐▐                 |	\n \
+			  |                ▘ ▘▀▘▘ ▘▀▘▝▀ ▘ ▘▝▀▘ ▘▘                |	\n \
+			  |                                                      |	\n \
+			  |   ___________________________________________________|_	\n \
+			   \_/_____________________________________________________/\n " | lolcat
+
 norm:
 	@norminette src/*/*.c
 	@norminette inc/*.h
 #	@norminette libft/*/*.[ch]
 
-leaks: $(NAME) #fclean $(NAME)
+leaks: $(NAME) art_bis #fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
 	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./.readline_supp -q  ./$(NAME)

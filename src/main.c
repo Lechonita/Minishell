@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:38:06 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 11:02:42 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/19 20:01:25 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char *av[], char *env[])
 	init_minishell(data, env);
 	if (ac == 2)
 		printf("%s\n", av[1]);
+	// printf("\n%s\n\n", WELCOME_MSG);
 	ft_readline(data, env);
 	dprintf(2, "exit status → %d\n", data->exit_status);
 	free_all(data);

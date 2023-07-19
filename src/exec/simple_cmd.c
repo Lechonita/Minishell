@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 17:41:14 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 12:25:20 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:17:13 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,19 @@ pid_t	exec_simple_cmd(t_bigshell *data, char *env[])
 	else if (pid == 0)
 	{
 		simple_cmd = data->exec->cmd;
+		dprintf(2, "cmd = %s builtin %d\n", simple_cmd->cmd, simple_cmd->builtin);
 		handle_dup_simp_cmd(data);
-		simple_cmd->cmd = find_path_to_cmd(data, simple_cmd->cmd_arg[0],
+		if (simple_cmd->builtin == 0)
+		{
+			simple_cmd->cmd = find_path_to_cmd(data, simple_cmd->cmd_arg[0],
 				simple_cmd->cmd);
-		if (simple_cmd->cmd == NULL)
-			error_not_found(data, CMD_NOT_FOUND, simple_cmd->cmd_arg[0]);
-		execve(simple_cmd->cmd, simple_cmd->cmd_arg, env);
-		error_execve(data);
+			if (simple_cmd->cmd == NULL)
+				error_not_found(data, CMD_NOT_FOUND, simple_cmd->cmd_arg[0]);
+			execve(simple_cmd->cmd, simple_cmd->cmd_arg, env);
+			error_execve(data);
+		}
+		else
+			exec_builtin_cmd(data, simple_cmd->cmd, simple_cmd->cmd_arg);
 	}
 	return (pid);
 }

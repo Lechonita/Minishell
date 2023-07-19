@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/18 19:39:27 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/19 11:28:43 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	print_declare_env(t_bigshell *data)
 	alphabetical_sort_env(data);
 	while (el)
 	{
-		printf("declare -x %s=\"%s\"\n", el->name, el->value);
+		if (ft_strncmp(el->name, "_", 2) != 0)
+			printf("declare -x %s=\"%s\"\n", el->name, el->value);
 		el = el->next;
 	}
 	return ;
@@ -57,8 +58,8 @@ void	print_declare_env(t_bigshell *data)
 
 void	export_var(char *cmd, char **args, t_bigshell *data)
 {
-	(void)cmd;
-	if (args == NULL)
+	dprintf(2, "%s\n", cmd);
+	if (args[1] == NULL)
 		print_declare_env(data);
 	return ;
 }
