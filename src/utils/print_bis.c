@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 12:40:21 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/20 12:07:37 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	print_t_line(t_line *line)
 			tokentype_str[el->type - 1], el->c);
 		el = el->next;
 	}
+	printf("\n");
 }
 
 		// printf("[dq] %2d ", el->dq);

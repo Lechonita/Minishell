@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/18 14:58:18 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:06:42 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	do_expansion(t_bigshell *data, t_line *line, t_line *first, int index)
 	var = get_var(tmp->next);
 	if (!var)
 		return (free(var));
-	printf("\nAvant de faire expansion, t_line cést ====>\n");
-	print_t_line(line);
 	if (tmp->dq == 0 && tmp->sq == 0)
 		dollar_expand(data, tmp, var, index);
 	// printf("\nEn sortant ca donne ====>\n");
