@@ -78,6 +78,7 @@ SRC += init_exec.c
 SRC += simple_cmd.c
 
 #	Expander functions
+SRC += dollar_add_value.c
 SRC += dollar_expansion.c
 SRC += dollar_utils.c
 SRC += dollar.c
