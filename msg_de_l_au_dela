@@ -3,7 +3,7 @@ yo mate !! how are you??
 < Makefile cat | wc -l | head -77 | tail -5 | ls -l >> out_file
 < Makefile cat | head -7 | taili -5 >> out_file
 < Makefile cat | wc -l > out_file
-< Makefile ls -l | head -42 | echo hello world  > out_file
+< Makefile cat | head -42 | echo hello world  > out_file
 
 <Makefile << fin <src/main.c head -15 | echo hello 15 >out_file >> files/out_file
 
@@ -62,3 +62,44 @@ example / error :
 	
 	→ $ echo $popo (popo n'existe pas)
 		ca doit retourner un retour a la ligne
+
+
+# 	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"
+# 	@echo "$(RED) |  \/  | (_)         (_)  / ____| | |            | | | |$(END)"
+# 	@echo "$(RED) | \  / |  _   _ __    _  | (___   | |__     ___  | | | |$(END)"
+# 	@echo "$(RED) | |\/| | | | | '_ \  | |  \___ \  | '_ \   / _ \ | | | |$(END)"
+# 	@echo "$(RED) | |  | | | | | | | | | |  ____) | | | | | |  __/ | | | |$(END)"
+# 	@echo "$(RED) |_|  |_| |_| |_| |_| |_| |_____/  |_| |_|  \___| |_| |_|$(END)"
+# 	@echo "$(RED)                                                         $(END)"
+
+toilet -f small 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
+toilet -f script 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
+toilet -f circle 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
+toilet -f future 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
+toilet -f pagga 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
+toilet -f smblock 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
+
+
+toilet -f future 'MiniShell' | boxes -d parchment -a hcvc | lolcat 
+toilet -f future 'MiniShell' | boxes -d parchment -a hcvc -s 60x10 | lolcat 
+toilet -f future 'MiniShell' | boxes -d parchment -a hcvc -s 50x10 | lolcat 
+
+
+toilet -f small 'MiniShell' | boxes -d spring -a hcvc | lolcat 
+toilet -f script 'MiniShell' | boxes -d spring -a hcvc | lolcat 
+toilet -f circle 'MiniShell' | boxes -d spring -a hcvc | lolcat 
+toilet -f future 'MiniShell' | boxes -d spring -a hcvc | lolcat 
+toilet -f pagga 'MiniShell' | boxes -d spring -a hcvc | lolcat 
+toilet -f smblock 'MiniShell' | boxes -d spring -a hcvc | lolcat 
+
+
+"			 ________________________________________________________   \n \
+			/\                                                       \	\n \
+			\_|                                                      |	\n \
+			  |                ▙▗▌▗    ▗ ▞▀▖▌     ▜▜                 |	\n \
+			  |                ▌▘▌▄ ▛▀▖▄ ▚▄ ▛▀▖▞▀▖▐▐                 |	\n \
+			  |                ▌ ▌▐ ▌ ▌▐ ▖ ▌▌ ▌▛▀ ▐▐                 |	\n \
+			  |                ▘ ▘▀▘▘ ▘▀▘▝▀ ▘ ▘▝▀▘ ▘▘                |	\n \
+			  |                                                      |	\n \
+			  |   ___________________________________________________|_	\n \
+			   \_/_____________________________________________________/\n " | lolcat

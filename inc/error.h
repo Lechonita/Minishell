@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/16 17:27:53 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/19 17:33:46 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define W_LST_RED_TYP "\t Failure in duplicate redirection type\n"
 # define W_LST_RED_FIL "\t Failure in duplicate redirection file name\n"
 # define W_SPLIT_CMD "\t Failure in split commands\n"
+# define W_EXIT_ARG "\t exit: too many arguments\n"
 
 // # define W_ENV "\t Environment error\n"
 // # define W_JOIN_PATH "\t Failure in joining path with / \n"

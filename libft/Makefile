@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+         #
+#    By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/19 18:09:49 by jrouillo          #+#    #+#              #
-#    Updated: 2023/06/20 09:40:18 by bebigel          ###   ########.fr        #
+#    Updated: 2023/07/18 19:34:06 by Bea              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS = ft_atoi.c \
 	ft_memcpy.c \
 	ft_memmove.c \
 	ft_memset.c \
+	ft_strcmp.c \
 	ft_strchr.c \
 	ft_strdup.c \
 	ft_strndup.c \

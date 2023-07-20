@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/20 12:07:37 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/20 14:37:25 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	print_cmd_lst(t_bigshell *data)
 	el = data->exec->cmd;
 	while (el != NULL)
 	{
-		dprintf(2, "path : %s, command n°%d → %s\n", el->cmd,
-			el->idx_cmd, el->cmd_arg[0]);
+		dprintf(2, "path : %s, command n°%d → %s builtin %d\n", el->cmd,
+			el->idx_cmd, el->cmd_arg[0], el->builtin);
 		j = 0;
 		while (el->cmd_arg[j])
 		{
