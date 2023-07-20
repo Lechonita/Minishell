@@ -24,7 +24,6 @@ to do list :
 	redirection precedence
 
 to do expansion :
-	→ gérer les $ entre quotes et hors quotes
 	→ cmd="ls -l" puis $cmd affiche le resultat de ls -l
 	→ echo $?
 	→ "$cmd" doit afficher "ls -lra: command not found"
@@ -63,6 +62,15 @@ example / error :
 	→ $ echo $popo (popo n'existe pas)
 		ca doit retourner un retour a la ligne
 
+	→ $ echo "'$USER'"
+		ca doit retourner 'jrouillo'
+	
+	→ JESS TO DO => regarder pourquoi le premier caractere de l'expansion ne s'affiche pas !
+
+POUR INFO :
+	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
+		$ echo ${PATH{  OU   echo ${PATH
+			ca renvoie PATH
 
 # 	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"
 # 	@echo "$(RED) |  \/  | (_)         (_)  / ____| | |            | | | |$(END)"

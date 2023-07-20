@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/20 15:22:16 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/20 17:16:18 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,7 @@
 		- Si aucun name ne correspond et qu'on n'est pas dans des guillemets,
 			afficher un retour a la ligne. */
 
-int	dollar_between_quotes(t_line *line, t_line *first)
-{
-	t_line	*tmp;
-
-	if (!line)
-		return (0);
-	tmp = first;
-	while (tmp)
-	{
-		if (tmp->next && tmp->next->next)
-		{
-			if ((tmp->c == 39 && tmp->next->c == '$'
-					&& tmp->next->next->c == 39)
-				|| (tmp->c == 34 && tmp->next->c == '$'
-					&& tmp->next->next->c == 34))
-				return (0);
-		}
-		tmp = tmp->next;
-	}
-	return (1);
-}
-
-void	do_expansion(t_bigshell *data, t_line *line, t_line *first, int index)
+void	do_expansion(t_bigshell *data, t_line *line, int index)
 {
 	char	*var;
 	t_line	*tmp;
@@ -65,15 +43,13 @@ void	do_expansion(t_bigshell *data, t_line *line, t_line *first, int index)
 	var = get_var(tmp->next);
 	if (!var)
 		return (free(var));
-	if (tmp->dq == 0 && tmp->sq == 0)
+	if ((tmp->dq == 0 && tmp->sq == 0) || tmp-> dq == 1)
+	{
 		dollar_expand(data, tmp, var, index);
+		align_line_index(line, index);
+	}
 	printf("\nEn sortant ca donne ====>\n");
 	print_t_line(line);
-	if (dollar_between_quotes(tmp, first) == 1)
-	{
-		// tmp = dollar_in_dq(tmp);
-		// tmp = dollar_with_quotes_inside(tmp);
-	}
 }
 
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
@@ -83,14 +59,17 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 	if (!line)
 		return ;
 	tmp = line;
+	printf("On a rien fait encore\n");
+	print_t_line(line);
 	while (tmp)
 	{
-		// if ((tmp->c == DQUOTE || tmp->c == SQUOTE) && tmp->next->c == '$')
-		// 	tmp = quote_dollar(tmp);
 		if (tmp->c == '$')
 		{
 			if (tmp->dq == 1 || (tmp->dq == 0 && tmp->sq == 0))
-				do_expansion(data, tmp, line, tmp->index);
+			{
+				if (tmp->next->type == WORD)
+					do_expansion(data, tmp, tmp->index);
+			}
 		}
 		tmp = tmp->next;
 	}
