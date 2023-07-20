@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/16 17:45:25 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/20 16:49:02 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,9 @@ void	catch_ctrl_d(t_bigshell *data, char *input)
 		free(input);
 		ft_putstr_fd("exit\n", 2);
 		free_all(data);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 }
-
-/*
-pour le SIGINT: CTRL + C
-	printf("\n");			move to the next line
-	rl_on_new_line();		regenerate the prompt on a newline
-	rl_replace_line("", 0); clear the previous text
-	rl_redisplay();			redisplay the prompt on a newline
-*/
 
 void	ft_sig_int(int sig)
 {
@@ -62,3 +54,11 @@ void	set_signal(void)
 	sigaction(SIGINT, &sa_int, NULL);
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
+
+/*
+pour le SIGINT: CTRL + C
+	printf("\n");			move to the next line
+	rl_on_new_line();		regenerate the prompt on a newline
+	rl_replace_line("", 0); clear the previous text
+	rl_redisplay();			redisplay the prompt on a newline
+*/

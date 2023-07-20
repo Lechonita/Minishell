@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:37:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/18 10:58:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/20 18:22:50 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ int	executor(t_bigshell *data, char *env[])
 			last_pid = execute_pipex(data, env, nb_pro);
 		close_pipe(data);
 	}
+	// dprintf(2, "exit → %d\n", ft_waitpid(last_pid));
 	return (ft_waitpid(last_pid));
 }

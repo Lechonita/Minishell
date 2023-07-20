@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/18 12:31:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/20 15:40:53 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// void	change_directory(char **args, t_bigshell *data)
+// int	change_directory(char **args, t_bigshell *data)
 // {
-// 	return ;
+// 	return (EXIT_SUCCESS);
 // }

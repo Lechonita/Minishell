@@ -173,15 +173,6 @@ $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline -lncurses
 	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
 
-# art:
-# 	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"
-# 	@echo "$(RED) |  \/  | (_)         (_)  / ____| | |            | | | |$(END)"
-# 	@echo "$(RED) | \  / |  _   _ __    _  | (___   | |__     ___  | | | |$(END)"
-# 	@echo "$(RED) | |\/| | | | | '_ \  | |  \___ \  | '_ \   / _ \ | | | |$(END)"
-# 	@echo "$(RED) | |  | | | | | | | | | |  ____) | | | | | |  __/ | | | |$(END)"
-# 	@echo "$(RED) |_|  |_| |_| |_| |_| |_| |_____/  |_| |_|  \___| |_| |_|$(END)"
-# 	@echo "$(RED)                                                         $(END)"
-
 art_bis:
 	@echo "	 	 ________________________________________________________   \n \
 			/\                                                       \	\n \

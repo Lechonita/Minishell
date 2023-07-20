@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:45:03 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/18 12:32:01 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/20 15:42:15 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// void	unset_var(char *cmd, char **args, t_bigshell *data)
+// int	unset_var(char *cmd, char **args, t_bigshell *data)
 // {
-// 	return ;
+// 	return (EXIT_SUCCESS);
 // }

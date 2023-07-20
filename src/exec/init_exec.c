@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:25:25 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/19 11:21:21 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/20 17:11:51 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ void	init_exec(t_bigshell *data)
 	fd_out_file(data);
 	data->exec->nb_cmd = count_cmd(data) + 1;
 	data->exec->cmd = init_cmd(data);
-	print_exec(data);
+	// print_exec(data);
 }

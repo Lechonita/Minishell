@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 12:24:57 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:03:55 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 /* MAIN */
 void	ft_readline(t_bigshell *data, char *env[]);
+// int		ft_readline(t_bigshell *data, char *env[]);
 
 /***********************************************************/
 /*                          UTILS                          */
