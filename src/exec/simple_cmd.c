@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 17:41:14 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/20 19:08:36 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/21 12:53:44 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ pid_t	exec_simple_cmd(t_bigshell *data, char *env[])
 		|| !ft_strncmp(cmd->cmd_arg[0], "cd", ft_strlen("cd"))
 		|| !ft_strncmp(cmd->cmd_arg[0], "export", ft_strlen("export"))
 		|| !ft_strncmp(cmd->cmd_arg[0], "unset", ft_strlen("unset")))
-		return (exec_builtin_no_fork(data, cmd->cmd, cmd->cmd_arg));
+		return (exit_status = exec_builtin_no_fork(data, cmd->cmd, cmd->cmd_arg));
 	pid = fork();
 	if (pid < 0)
 		return (free_all(data), ft_exit(errno, strerror(errno)), pid);

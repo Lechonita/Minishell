@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/17 17:12:06 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/21 10:42:21 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ int	redirection_less(t_bigshell *data, t_redir *redir)
 	if (access(redir->file, F_OK) < 0)
 	{
 		msg_not_found(FILE_NOT_FOUND, redir->file);
-		data->exit_status = 1;
+		exit_status = 1;
 		redir->fd = 0;
 		return (0);
 	}
 	else if (access(redir->file, R_OK) < 0)
 	{
 		msg_not_found(PERM_DENIED, redir->file);
-		data->exit_status = 1;
+		exit_status = 1;
 		redir->fd = 0;
 		return (0);
 	}
@@ -82,7 +82,7 @@ int	redirection_great(t_bigshell *data, t_redir *redir)
 	if (access(redir->file, F_OK) == 0 && access(redir->file, W_OK) < 0)
 	{
 		msg_not_found(PERM_DENIED, redir->file);
-		data->exit_status = 1;
+		exit_status = 1;
 		redir->fd = 0;
 		return (0);
 	}
@@ -97,7 +97,7 @@ void	redirection_append(t_bigshell *data, t_redir *redir)
 	if (access(redir->file, F_OK) == 0 && access(redir->file, W_OK) < 0)
 	{
 		msg_not_found(PERM_DENIED, redir->file);
-		data->exit_status = 1;
+		exit_status = 1;
 		redir->fd = 0;
 	}
 	redir->fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);

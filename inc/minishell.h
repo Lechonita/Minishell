@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/20 17:03:55 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/21 10:57:45 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include "lexer.h"
 # include "parser.h"
 # include "redirection.h"
+
+/* GLOBAL VARIABLE */
+extern int	exit_status;
 
 /* MAIN */
 void	ft_readline(t_bigshell *data, char *env[]);
