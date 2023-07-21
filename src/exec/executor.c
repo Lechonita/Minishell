@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 15:37:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/21 11:59:20 by Bea              ###   ########.fr       */
+/*   Created: 2023/06/30 16:48:15 by Bea               #+#    #+#             */
+/*   Updated: 2023/07/21 16:07:41 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/exec.h"
 
 void	child_process(t_bigshell *data, char *env[], int pcss)
 {
@@ -50,7 +49,6 @@ int	ft_waitpid(pid_t last_pid)
 {
 	pid_t	wpid;
 	int		wstatus;
-	int		return_value;
 
 	while (1)
 	{
@@ -60,12 +58,12 @@ int	ft_waitpid(pid_t last_pid)
 		if (wpid == last_pid)
 		{
 			if (WIFEXITED(wstatus))
-				return_value = WEXITSTATUS(wstatus);
+				exit_status = WEXITSTATUS(wstatus);
 			else
-				return_value = 128 + WTERMSIG(wstatus);
+				exit_status = 128 + WTERMSIG(wstatus);
 		}
 	}
-	return (return_value);
+	return (0);
 }
 
 int	executor(t_bigshell *data, char *env[])
@@ -77,13 +75,15 @@ int	executor(t_bigshell *data, char *env[])
 	data->exec = ft_calloc(1, sizeof(t_exec));
 	init_exec(data);
 	if (data->exec->nb_cmd == 1)
-		last_pid = exec_simple_cmd(data, env);
+		exec_simple_cmd(data, env);
 	else
 	{
 		open_pipe(data);
 		while (++nb_pro < data->exec->nb_cmd)
 			last_pid = execute_pipex(data, env, nb_pro);
 		close_pipe(data);
+		ft_waitpid(last_pid);
 	}
-	return (ft_waitpid(last_pid));
+	
+	return (0);
 }

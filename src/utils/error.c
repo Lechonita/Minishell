@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/07/18 12:25:35 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:34:59 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	error_execve(t_bigshell *data)
 		return (free_all(data), ft_exit(EXIT_FAILURE, W_EXECVE));
 }
 
-void	msg_not_found(char *msg, char *str)
+int	msg_not_found(char *msg, char *str)
 {
 	char	*tmp;
 	char	*line;
@@ -30,13 +30,14 @@ void	msg_not_found(char *msg, char *str)
 	line = free_strjoin(tmp, "\n");
 	ft_putstr_fd(line, 2);
 	free(line);
+	return (127);
 }
 
 void	error_not_found(t_bigshell *data, char *msg, char *str)
 {
 	msg_not_found(msg, str);
 	free_all(data);
-	exit (127);
+	exit(127);
 }
 
 void	ft_exit(int err_no, char *msg)

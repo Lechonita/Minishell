@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/21 12:12:57 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/21 15:27:15 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,12 @@ void	print_exec(t_bigshell *data)
 
 	el = data->exec;
 	printf("__________________EXEC_________________________\n");
-	dprintf(2, "fd_in    = %d 	fd_out = %d\n", el->fd_in, el->fd_out);
-	dprintf(2, "nb_cmd   = %d\n", el->nb_cmd);
+	dprintf(2, "fd_in    = %d\tfd_out   = %d\n", el->fd_in, el->fd_out);
+	dprintf(2, "nb_cmd   = %d\theredoc  = %d\tno/redir =%d\n", el->nb_cmd,
+		el->here_doc, data->redir_or_not);
 	dprintf(2, "in_file  : %s\nout_file : %s\n", el->in_file, el->out_file);
-	dprintf(2, "heredoc  = %d\nredir/no_redir %d\n", el->here_doc,
-		data->redir_or_not);
 	print_cmd_lst(data);
-	printf("\n_______________________________________________\n");
+	printf("_______________________________________________\n");
 }
 
 /*

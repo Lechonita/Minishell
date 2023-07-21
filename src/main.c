@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:38:06 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/21 12:00:49 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/21 15:15:07 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	main(int ac, char *av[], char *env[])
 		printf("%s\n", av[1]);
 	ft_readline(data, env);
 	free_all(data);
+	dprintf(2, "exit status = %d\n", exit_status);
 	return (0);
 }
