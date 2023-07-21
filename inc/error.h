@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/21 15:41:12 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/21 16:31:56 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 // # define W_JOIN_PATH "\t Failure in joining path with / \n"
 // # define W_ENV_PATH "env PATH is empty\n"
 // # define W_SPLIT_ENV "\t Failure in split environment\n"
-// # define W_CMDS "\t Failure in getting commands \n"
 
 // # define W_STRDUP "\t Failure in duplicate str\n "
 
