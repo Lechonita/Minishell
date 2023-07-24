@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:45 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/24 09:31:27 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/24 09:50:05 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	is_str_digit(char *str)
 	return (1);
 }
 
-static void	determine_exit_status(t_bigshell *data, char **args)
+static void	determine_g_exit_status(t_bigshell *data, char **args)
 {
 	int	exit_code;
 
@@ -57,6 +57,6 @@ int	exit_shell(char **args, t_bigshell *data)
 	ft_putendl_fd("exit by MiniShell", STDERR_FILENO);
 	if (args[1] && args[2])
 		return (ft_putstr_fd(W_EXIT_ARG, STDERR_FILENO), EXIT_FAILURE);
-	determine_exit_status(data, args);
+	determine_g_exit_status(data, args);
 	return (EXIT_SUCCESS);
 }

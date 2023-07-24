@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/24 09:46:13 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/24 09:50:05 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	exec_simple_cmd(t_bigshell *data, char *env[])
 		|| !ft_strncmp(cmd->cmd_arg[0], "export", ft_strlen("export"))
 		|| !ft_strncmp(cmd->cmd_arg[0], "unset", ft_strlen("unset")))
 	{
-		exit_status = exec_builtin_no_fork(data, cmd->cmd, cmd->cmd_arg);
+		g_exit_status = exec_builtin_no_fork(data, cmd->cmd, cmd->cmd_arg);
 		return ;
 	}
 	pid = fork();
@@ -90,5 +90,5 @@ void	exec_simple_cmd(t_bigshell *data, char *env[])
 		handle_simple_cmd(data, env);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		exit_status = WEXITSTATUS(status);
+		g_exit_status = WEXITSTATUS(status);
 }
