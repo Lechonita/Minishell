@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:02:22 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/20 17:27:55 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:07:09 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,31 @@ void	align_line_index(t_line *line, int index)
 	while (tmp)
 	{
 		tmp->index = i++;
-		tmp = tmp->next;	
+		tmp = tmp->next;
 	}
+}
+
+char	*get_var_bis(t_line *line, char *var, int acolade)
+{
+	int		i;
+
+	i = 0;
+	while (line)
+	{
+		if (line->c == 34 || line->c == 39)
+			break ;
+		if (acolade == 0 && (line->c == ' ' || line->c == '\t'))
+			break ;
+		if (acolade == 1 && line->c == '}')
+		{
+			var[i++] = line->c;
+			break ;
+		}
+		var[i++] = line->c;
+		line = line->next;
+	}
+	var[i] = '\0';
+	return (var);
 }
 
 int	get_var_len(t_line *line, int acolade)
@@ -56,35 +79,10 @@ int	get_var_len(t_line *line, int acolade)
 	return (i);
 }
 
-char	*get_var_bis(t_line *line, char *var, int acolade)
-{
-	int		i;
-
-	i = 0;
-	while (line)
-	{
-		// printf("A ce moment la mon line c'est %c et son type %d\n", line->c, line->type);
-		if (line->c == 34)
-			break ;
-		if (acolade == 0 && (line->c == ' ' || line->c == '\t'))
-			break ;
-		if (acolade == 1 && line->c == '}')
-		{
-			var[i++] = line->c;
-			break ;
-		}
-		var[i++] = line->c;
-		line = line->next;
-	}
-	var[i] = '\0';
-	return (var);
-}
-
 int	find_closing_bracket(t_line *line)
 {
 	t_line	*tmp;
 
-	// printf("Je ne pense pas rentrer ici\n");
 	if (!line)
 		return (1);
 	tmp = line;
@@ -95,7 +93,6 @@ int	find_closing_bracket(t_line *line)
 		tmp = tmp->next;
 	}
 	return (1);
-		
 }
 
 char	*get_var(t_line *line)
@@ -118,6 +115,5 @@ char	*get_var(t_line *line)
 	if (!var)
 		return (NULL);
 	var = get_var_bis(tmp, var, acolade);
-	// printf("Des le debut mon var est -%s-\n", var);
 	return (var);
 }

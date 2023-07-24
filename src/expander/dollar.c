@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/20 17:16:18 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:31:03 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void	do_expansion(t_bigshell *data, t_line *line, int index)
 		dollar_expand(data, tmp, var, index);
 		align_line_index(line, index);
 	}
-	printf("\nEn sortant ca donne ====>\n");
-	print_t_line(line);
+	free(var);
+	// printf("\nEn sortant ca donne ====>\n");
+	// print_t_line(line);
 }
 
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
@@ -59,8 +60,8 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 	if (!line)
 		return ;
 	tmp = line;
-	printf("On a rien fait encore\n");
-	print_t_line(line);
+	// printf("On a rien fait encore\n");
+	// print_t_line(line);
 	while (tmp)
 	{
 		if (tmp->c == '$')
@@ -70,7 +71,11 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 				if (tmp->next->type == WORD)
 					do_expansion(data, tmp, tmp->index);
 			}
+			else
+				tmp->type = WORD;
 		}
 		tmp = tmp->next;
 	}
+	printf("\nEn sortant ca donne ====>\n");
+	print_t_line(line);
 }
