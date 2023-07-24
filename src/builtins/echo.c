@@ -6,13 +6,13 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:30 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/19 15:05:07 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/20 16:30:33 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	print_echo(char *cmd, char **args)
+int	print_echo(char *cmd, char **args)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ void	print_echo(char *cmd, char **args)
 		i++;
 	}
 	if (args[1] && args[1][0] == '-' && args[1][1] == 'n' && args[1][2] == '\0')
-		return ;
+		return (EXIT_SUCCESS);
 	printf("\n");
-	return ;
+	return (EXIT_SUCCESS);
 }

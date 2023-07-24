@@ -6,13 +6,13 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/18 18:23:00 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/20 15:41:15 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	print_env(t_bigshell *data)
+int	print_env(t_bigshell *data)
 {
 	t_env	*el;
 
@@ -22,4 +22,5 @@ void	print_env(t_bigshell *data)
 		printf("%s=%s\n", el->name, el->value);
 		el = el->next;
 	}
+	return (EXIT_SUCCESS);
 }

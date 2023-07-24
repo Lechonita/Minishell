@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/19 20:01:14 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/21 10:51:23 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,14 @@
 # include <readline/readline.h>	//readline
 # include <readline/history.h>	//readline
 
-// # define PROMPT "$ "
-# define PROMPT "🔥 "
+# define PROMPT "$ "
+// # define PROMPT "🔥 "
 # define TRUE 1
 # define FALSE 0
-
-// # define WELCOME_MSG	"\033[96m╔═══════════════════════════════════════════════════════════════════════════════════╗\n║	                                                                                ║\n║	        __  __   _           _    _____   _              _   _       			║\n║	       |  \\/  | (_)         (_)  / ____| | |            | | | |       		 ║\n║	       | \\  / |  _   _ __    _  | (___   | |__     ___  | | | |       		 ║\n║	       | |\\/| | | | | '_ \\  | |  \\___ \\  | '_ \\   / _ \\ | | | |       	      ║\n║	       | |  | | | | | | | | | |  ____) | | | | | |  __/ | | | |       		║\n║	       |_|  |_| |_| |_| |_| |_| |_____/  |_| |_|  \\___| |_| |_|       		 ║\n║	                                                                                ║\n╚════════════════════════════════════════════════════════════════════════════════════╝"
-
-# define HEREDOC_MSG	"\033[1;34m> \033[0m"
-
-# define READLINE_MSG	"\033[1;36mminishell\033[34m$ \033[0m"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ
 # endif
-
-// typedef struct s_builtin
-// {
-// 	char	*name;
-// 	int		(*func)(t_bigshell *data, int cmd_ac, char *cmd_av[]);
-// }	t_builtin;
 
 typedef struct s_line
 {
@@ -116,7 +104,6 @@ typedef struct s_bigshell
 {
 	char			**env_paths;
 	int				redir_or_not;
-	int				exit_status;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;

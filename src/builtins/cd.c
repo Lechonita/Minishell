@@ -6,13 +6,15 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/18 12:31:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/24 09:45:37 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// void	change_directory(char **args, t_bigshell *data)
-// {
-// 	return ;
-// }
+int	change_directory(char **args, t_bigshell *data)
+{
+	(void)data;
+	(void)args;
+	return (EXIT_SUCCESS);
+}

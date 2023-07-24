@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 12:24:57 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/24 09:50:25 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@
 # include "parser.h"
 # include "redirection.h"
 
+/* GLOBAL VARIABLE */
+extern int	g_exit_status;
+
 /* MAIN */
 void	ft_readline(t_bigshell *data, char *env[]);
+// int		ft_readline(t_bigshell *data, char *env[]);
 
 /***********************************************************/
 /*                          UTILS                          */
@@ -48,7 +52,7 @@ void	free_all(t_bigshell *data);
 /* PRINT ERROR */
 void	ft_exit(int err_no, char *msg);
 void	error_execve(t_bigshell *data);
-void	msg_not_found(char *msg, char *str);
+int		msg_not_found(char *msg, char *str);
 void	error_not_found(t_bigshell *data, char *msg, char *str);
 
 /* PRINT FUNCTION */
