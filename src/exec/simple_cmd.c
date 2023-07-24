@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/24 09:50:05 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/24 15:39:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,6 @@ void	exec_simple_cmd(t_bigshell *data, char *env[])
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		g_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		g_exit_status = WTERMSIG(status) + 128;
 }

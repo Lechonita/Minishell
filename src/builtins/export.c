@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/20 15:41:48 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/24 15:47:52 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int	export_var(char *cmd, char **args, t_bigshell *data)
 	dprintf(2, "%s\n", cmd);
 	if (args[1] == NULL)
 		print_declare_env(data);
+	
 	return (EXIT_SUCCESS);
 }

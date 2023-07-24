@@ -15,7 +15,6 @@ echo "Hello world"
 to do list :
 	→ handle { } in parser
 	→ check if all grammar is ok in lexer/parser/tokener 
-	→ expansion of $ 
 	→ $? print the exit status of the last command executed (ret)
 	→ gérer les redirection avant l'exec
 	→ gérer les open/close de fd avant l'exec

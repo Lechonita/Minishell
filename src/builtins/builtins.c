@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 11:38:32 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/21 12:27:44 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/24 15:15:55 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ int	exec_builtin_no_fork(t_bigshell *data, char *cmd, char **args)
 		ret = export_var(cmd, args, data);
 	else if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0)
 		ret = unset_var(NULL, args, data);
-	dprintf(2, "ret = %d\n", ret);
 	return (ret);
 }
