@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/20 17:58:10 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:11:40 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
 
-void rm_var_excess(t_line *line, int index, char *var)
+void	rm_var_excess(t_line *line, int index, char *var)
 {
-	t_line *tmp;
-	int len;
+	t_line	*tmp;
+	int		len;
 
 	if (!line || !var)
-		return;
+		return ;
 	tmp = line;
 	len = ft_strlen(var) - 1;
 	while (tmp && tmp->index != (index + 2))
@@ -32,24 +32,21 @@ void rm_var_excess(t_line *line, int index, char *var)
 	}
 	while (tmp && len > 0)
 	{
-		// if (tmp->c != 39)
-		// {
-			tmp->type = BLANK;
-			tmp->c = ' ';
-			tmp = tmp->next;
-			len--;
-		// }
+		tmp->type = BLANK;
+		tmp->c = 11;
+		tmp = tmp->next;
+		len--;
 	}
 }
 
-void var_not_found(t_line **line, char *var)
+void	var_not_found(t_line **line, char *var)
 {
-	t_line *tmp;
-	int acolade;
-	int len;
+	t_line	*tmp;
+	int		acolade;
+	int		len;
 
 	if (!line || !(*line) || !var)
-		return;
+		return ;
 	tmp = *line;
 	acolade = 0;
 	if (tmp->c == '{')
@@ -58,24 +55,22 @@ void var_not_found(t_line **line, char *var)
 	while (tmp && len > 0)
 	{
 		tmp->type = BLANK;
-		tmp->c = ' ';
+		tmp->c = 11;
 		tmp = tmp->next;
 		len--;
 	}
-	return;
+	return ;
 }
 
-void compare_var(t_bigshell *data, t_line *line, char *var, int index)
+void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
 {
-	t_env 	*env;
-	int 	flag;
+	t_env	*env;
+	int		flag;
 
 	if (!data || !line || !var | !index)
-		return;
+		return ;
 	env = data->env;
 	flag = 1;
-	// printf("===> Au milieu (compare_var), on a :\n");
-	// print_t_line(line);
 	while (env)
 	{
 		if (ft_strncmp(env->name, var, ft_strlen(env->name)) == 0
@@ -83,7 +78,7 @@ void compare_var(t_bigshell *data, t_line *line, char *var, int index)
 		{
 			add_var(line, env->value, index, var);
 			flag = 0;
-			break;
+			break ;
 		}
 		env = env->next;
 	}
@@ -97,23 +92,20 @@ void	rm_dollar(t_line *line)
 
 	if (!line || !line->next)
 		return ;
-	// printf("La je suis sur %c\n", line->c);
 	tmp = line;
-	line = line->next;
-	free(tmp);
+	tmp->type = BLANK;
+	tmp->c = 11;
 }
 
-void dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
+void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
 {
-	t_line *tmp;
-	int i;
+	t_line	*tmp;
+	int		i;
 
 	if (!data || !line || !var | !index)
-		return;
+		return ;
 	rm_dollar(line);
-	// print_t_line(line);
 	tmp = line->next;
-	printf("Et maintenant mon tmp c'est %c\n", tmp->c);
 	i = 0;
 	if (tmp->c == 123)
 	{

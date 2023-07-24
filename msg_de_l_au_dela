@@ -65,7 +65,9 @@ example / error :
 	→ $ echo "'$USER'"
 		ca doit retourner 'jrouillo'
 	
-	→ JESS TO DO => regarder pourquoi le premier caractere de l'expansion ne s'affiche pas !
+	→ $ echo $ user
+		ca doit retourner - $ user -
+
 
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
