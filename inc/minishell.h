@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/21 15:11:09 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/24 09:48:19 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "redirection.h"
 
 /* GLOBAL VARIABLE */
-extern int	exit_status;
+extern int	g_exit_status;
 
 /* MAIN */
 void	ft_readline(t_bigshell *data, char *env[]);

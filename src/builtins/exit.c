@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:45 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/21 15:45:33 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/24 09:31:27 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	error_arg_exit(char *arg)
 {
 	char	*tmp;
 	char	*line;
-	
+
 	tmp = ft_strjoin("Minishell: exit: ", arg);
 	line = free_strjoin(tmp, ": numeric argument required\n");
 	ft_putstr_fd(line, STDERR_FILENO);

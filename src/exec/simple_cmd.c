@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 17:41:14 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/21 15:54:48 by Bea              ###   ########.fr       */
+/*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
+/*   Updated: 2023/07/24 09:46:13 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void handle_dup_simp_cmd(t_bigshell *data)
+static void	handle_dup_simp_cmd(t_bigshell *data)
 {
-	int red;
+	int	red;
 
 	red = data->redir_or_not;
 	if ((data->exec->fd_in < 3 && (red == 0 || red == 2))
@@ -35,10 +35,10 @@ static void handle_dup_simp_cmd(t_bigshell *data)
 		close(data->exec->fd_out);
 }
 
-int find_cmd(t_bigshell *data, t_cmd *simple_cmd, char *env[])
+int	find_cmd(t_bigshell *data, t_cmd *simple_cmd, char *env[])
 {
 	simple_cmd->cmd = find_path_to_cmd(data, simple_cmd->cmd_arg[0],
-									   simple_cmd->cmd);
+			simple_cmd->cmd);
 	if (simple_cmd->cmd == NULL)
 		return (msg_not_found(CMD_NOT_FOUND, simple_cmd->cmd_arg[0]));
 	execve(simple_cmd->cmd, simple_cmd->cmd_arg, env);
@@ -46,10 +46,10 @@ int find_cmd(t_bigshell *data, t_cmd *simple_cmd, char *env[])
 	return (EXIT_FAILURE);
 }
 
-void handle_simple_cmd(t_bigshell *data, char *env[])
+void	handle_simple_cmd(t_bigshell *data, char *env[])
 {
-	t_cmd *simple_cmd;
-	int ret;
+	t_cmd	*simple_cmd;
+	int		ret;
 
 	ret = 0;
 	simple_cmd = data->exec->cmd;
@@ -66,14 +66,14 @@ void handle_simple_cmd(t_bigshell *data, char *env[])
 	exit(ret);
 }
 
-void exec_simple_cmd(t_bigshell *data, char *env[])
+void	exec_simple_cmd(t_bigshell *data, char *env[])
 {
-	pid_t pid;
-	int status;
-	t_cmd *cmd;
+	pid_t	pid;
+	int		status;
+	t_cmd	*cmd;
 
 	if (data->exec->cmd == NULL)
-		return;
+		return ;
 	cmd = data->exec->cmd;
 	if (!ft_strncmp(cmd->cmd_arg[0], "exit", ft_strlen("exit"))
 		|| !ft_strncmp(cmd->cmd_arg[0], "cd", ft_strlen("cd"))
@@ -81,7 +81,7 @@ void exec_simple_cmd(t_bigshell *data, char *env[])
 		|| !ft_strncmp(cmd->cmd_arg[0], "unset", ft_strlen("unset")))
 	{
 		exit_status = exec_builtin_no_fork(data, cmd->cmd, cmd->cmd_arg);
-		return;
+		return ;
 	}
 	pid = fork();
 	if (pid < 0)
