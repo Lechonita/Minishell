@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/20 17:16:18 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/24 10:47:49 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	do_expansion(t_bigshell *data, t_line *line, int index)
 		align_line_index(line, index);
 	}
 	printf("\nEn sortant ca donne ====>\n");
-	print_t_line(line);
+	// print_t_line(line);
 }
 
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
@@ -59,8 +59,8 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 	if (!line)
 		return ;
 	tmp = line;
-	printf("On a rien fait encore\n");
-	print_t_line(line);
+	// printf("On a rien fait encore\n");
+	// print_t_line(line);
 	while (tmp)
 	{
 		if (tmp->c == '$')

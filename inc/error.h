@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/21 16:31:56 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/24 10:42:24 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # define W_SPLIT_ENV "\t Failure spliting environment\n"
 # define W_EXECVE "\t Failure with execve /\n"
 # define W_HD_OPEN "\t Failure in open/creat here_doc\n "
-# define CMD_NOT_FOUND "bash: command not found: "
-# define PERM_DENIED "bash: Permission denied: "
-# define FILE_NOT_FOUND "bash: No such file or directory: "
+# define CMD_NOT_FOUND "Minishell: command not found: "
+# define PERM_DENIED "Minishell: Permission denied: "
+# define FILE_NOT_FOUND "Minishell: No such file or directory: "
 # define W_LST_TOK "\t Failure in creating token lst\n"
 # define W_LST_CMD "\t Failure in creating cmds lst\n"
 # define W_LST_RED "\t Failure in creating redirection lst\n"

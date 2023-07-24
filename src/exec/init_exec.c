@@ -6,13 +6,12 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:25:25 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/24 09:39:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/24 10:58:51 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-/* compte le nombre de pipe donc de processus */
 int	count_cmd(t_bigshell *data)
 {
 	int		count;
@@ -62,5 +61,5 @@ void	init_exec(t_bigshell *data)
 	fd_out_file(data);
 	data->exec->nb_cmd = count_cmd(data) + 1;
 	data->exec->cmd = init_cmd(data);
-	print_exec(data);
+	// print_exec(data);
 }

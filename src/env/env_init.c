@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/02 15:59:06 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/24 12:13:40 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static t_env	*env_new(char *env, int idx)
 	new->name = get_env_name(env);
 	new->value = getenv(new->name);
 	new->index = idx;
+	new->to_export = FALSE;
 	new->next = NULL;
 	return (new);
 }

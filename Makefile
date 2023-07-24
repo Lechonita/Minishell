@@ -94,6 +94,7 @@ SRC += signal_here_doc.c
 #	Lexer functions
 SRC += flag_quotes.c
 SRC += line_init.c
+SRC += check_equal.c
 SRC += token_find.c
 SRC += token_init.c
 SRC += find_token_type.c
@@ -184,7 +185,7 @@ art_bis:
 			  |                ▘ ▘▀▘▘ ▘▀▘▝▀ ▘ ▘▝▀▘ ▘▘                |	\n \
 			  |                                                      |	\n \
 			  |   ___________________________________________________|_	\n \
-			   \_/_____________________________________________________/  \t★  Lechon & BeBig ★ \n" #| lolcat
+			   \_/_____________________________________________________/  \t★ Lechon & BeBig ★ \n" #| lolcat
 
 norm:
 	@norminette src/*/*.c

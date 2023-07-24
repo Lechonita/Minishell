@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/17 13:37:43 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/24 11:46:07 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ enum e_aim
 };
 
 /*
-	WORD = 1,		[a-z A-Z +all]	[0-9]		1
+	WORD = 1,		[a-z A-Z +all]	[0-9] =		1
 	DQUOTE,			""							2
 	SQUOTE,			''							3
 	NEW_LINE,		\n							4
@@ -97,6 +97,9 @@ void	flag_single_quotes(t_line *line);
 void	token_rm_next(t_token *tok);
 void	create_token(t_bigshell *data, t_line *current, char *value, int pos);
 void	find_tokens(t_bigshell *data);
+
+/* EXPORT PREP */
+void	check_for_export(t_bigshell *data, t_line *line);
 
 /* GRAMMAR */
 void	check_builtin(t_bigshell *data);
