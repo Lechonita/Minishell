@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:45:03 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/25 12:08:50 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/25 15:17:31 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	rm_one_for_unset(t_env **env)
 			free(el);
 		}
 		else
-			env = &head->next;
+			head = head->next;
 	}
 }
 

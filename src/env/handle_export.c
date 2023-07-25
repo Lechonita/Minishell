@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_equal.c                                      :+:      :+:    :+:   */
+/*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/25 11:42:01 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/25 17:44:59 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 	equal_is_here = 0;
 	while (input[equal_is_here] && input[equal_is_here] != '=')
 		equal_is_here++;
+	if (equal_is_here == ft_strlen(input))
+		return ;
 	if (is_word_near_equal(line, equal_is_here, 1)
 		&& is_word_near_equal(line, equal_is_here, -1))
 		add_to_env(data, equal_is_here, input);

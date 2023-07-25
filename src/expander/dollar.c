@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/25 14:17:30 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/25 17:38:17 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,30 @@ void	do_expansion(t_bigshell *data, t_line *line, int index)
 		return (free(var));
 	if ((tmp->dq == 0 && tmp->sq == 0) || tmp-> dq == 1)
 	{
-		printf("Estce que je rentre la ?\n");
 		dollar_expand(data, tmp, var, index);
 		align_line_index(line, index);
 	}
 	free(var);
+}
+
+void	do_dollar_ret(t_line *line)
+{
+	t_line	*tmp;
+	char	*ret;
+
+	if (!line)
+		return ;
+	tmp = line;
+	ret = ft_itoa(g_exit_status);
+	tmp->c = ret[0];
+	if (ret[1])
+		tmp = line_add_node(tmp, ret[1], tmp->index);
+	if (ft_strlen(ret) == 3 && ret[2])
+	{
+		tmp = tmp->next;
+		tmp = line_add_node(tmp, ret[2], tmp->index);
+	}
+	free(ret);
 }
 
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
@@ -63,6 +82,8 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 	{
 		if (tmp->c == '$')
 		{
+			if (tmp->next && tmp->next->c == '?')
+				do_dollar_ret(tmp->next);
 			if (tmp->dq == 1 || (tmp->dq == 0 && tmp->sq == 0))
 			{
 				if (tmp->next->type == WORD)
