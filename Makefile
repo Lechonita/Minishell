@@ -69,6 +69,7 @@ SRC += unset.c
 #	Env functions
 SRC += env_init.c
 SRC += path_handle.c
+SRC += handle_export.c
 
 # 	Exec functions
 SRC += executor.c
@@ -157,7 +158,7 @@ endef
 
 ############################### Rules ##########################################
 
-all: $(NAME) art_bis
+all: $(NAME) #art_bis
 
 $(LIBFT):
 	@make --no-print-directory all -C $(LIBFT_DIR)
@@ -184,14 +185,14 @@ art_bis:
 			  |                ▘ ▘▀▘▘ ▘▀▘▝▀ ▘ ▘▝▀▘ ▘▘                |	\n \
 			  |                                                      |	\n \
 			  |   ___________________________________________________|_	\n \
-			   \_/_____________________________________________________/  \t★  Lechon & BeBig ★ \n" #| lolcat
+			   \_/_____________________________________________________/  \t★ Lechon & BeBig ★ \n" #| lolcat
 
 norm:
 	@norminette src/*/*.c
 	@norminette inc/*.h
 #	@norminette libft/*/*.[ch]
 
-leaks: $(NAME) art_bis #fclean $(NAME)
+leaks: $(NAME) #art_bis #fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
 	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./.readline_supp -q  ./$(NAME)

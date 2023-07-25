@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/24 11:24:22 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/24 13:32:29 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_env
 	char			*name;
 	char			*value;
 	int				index;
+	int				to_export;
 	struct s_env	*next;
 }	t_env;
 

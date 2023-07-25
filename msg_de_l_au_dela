@@ -9,19 +9,13 @@ yo mate !! how are you??
 
 < files/no_right << files/write_o < files/all_rights ls -l >files/read_o >>files/read_write >files/exec_o.c 
 
-echo Hello world
-echo "Hello world"
-
 to do list :
 	→ handle { } in parser
 	→ check if all grammar is ok in lexer/parser/tokener 
-	→ expansion of $ 
 	→ $? print the exit status of the last command executed (ret)
 	→ gérer les redirection avant l'exec
 	→ gérer les open/close de fd avant l'exec
 
-	→ gérer avec plusieurs redirection : ls -l > out_file > out_file2 
-	redirection precedence
 
 to do expansion :
 	→ cmd="ls -l" puis $cmd affiche le resultat de ls -l
@@ -35,9 +29,6 @@ example / error :
 
 	→ $ e'c'"h"o salut
 	salut
-
-	→ $ echo > in Hello
-	Hello dans in
 
 	echo 1 > out12 2 3 << 1 << 2 << 3 < in < in2 >>out13
 

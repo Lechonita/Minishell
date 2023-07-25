@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:48:15 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/24 09:50:05 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/24 15:35:36 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_waitpid(pid_t last_pid)
 		{
 			if (WIFEXITED(wstatus))
 				g_exit_status = WEXITSTATUS(wstatus);
-			else
+			else if (WIFSIGNALED(wstatus))
 				g_exit_status = 128 + WTERMSIG(wstatus);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 12:38:05 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/25 12:11:04 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	display_env_struct(t_bigshell *data)
 	el = data->env;
 	while (el != NULL)
 	{
-		printf("[%2d] %s=%s\n", el->index, el->name, el->value);
+		printf("[%2d] %d %s=%s\n", el->index, el->to_export,
+			el->name, el->value);
 		el = el->next;
 	}
 }

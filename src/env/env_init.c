@@ -3,46 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/02 15:59:06 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/25 13:44:44 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/env.h"
 
-/* Fonction qui cherche la dernier maillon de la liste chainee t_env. */
-
-static t_env	*env_last(t_env *env)
-{
-	while (env && env->next)
-		env = env->next;
-	return (env);
-}
-
-/* Fonction qui ajoute un nouveau maillon a la liste
-	chainee deja existante t_env. */
-
-static void	env_addback(t_env *env, t_env *new)
+void	env_addback(t_env **env, t_env *new)
 {
 	t_env	*last;
 
 	if (!new)
 		return ;
-	if (!env)
+	if (!(*env))
 	{
-		env = new;
+		(*env) = new;
 		return ;
 	}
-	last = env_last(env);
+	last = (*env);
+	while (last->next)
+		last = last->next;
 	last->next = new;
 }
 
-/* Fonction qui delimite le nom de la ligne de l'env */
-
-char	*get_env_name(char	*env)
+static char	*get_env_name(char	*env)
 {
 	char	*name;
 	int		pos_equal;
@@ -54,9 +42,19 @@ char	*get_env_name(char	*env)
 	return (name);
 }
 
-/* Fonction qui cree un maillon t_env pour ajouter a la liste chainee. */
+static char	*get_env_for_export(char *env)
+{
+	char	*value;
+	int		pos_equal;
 
-static t_env	*env_new(char *env, int idx)
+	pos_equal = 0;
+	while (env[pos_equal] != '=')
+		pos_equal++;
+	value = ft_strdup(env + pos_equal + 1);
+	return (value);
+}
+
+t_env	*env_new(char *env, int idx, int to_export)
 {
 	t_env	*new;
 
@@ -64,14 +62,15 @@ static t_env	*env_new(char *env, int idx)
 	if (!new)
 		return (NULL);
 	new->name = get_env_name(env);
-	new->value = getenv(new->name);
+	if (to_export == TRUE)
+		new->value = get_env_for_export(env);
+	else
+		new->value = ft_strdup(getenv(new->name));
 	new->index = idx;
+	new->to_export = to_export;
 	new->next = NULL;
 	return (new);
 }
-
-/* Fonction qui rempli la structure t_env. C'est la creation
-	de la liste chainee t_env. */
 
 void	init_env(t_bigshell *data, char **env)
 {
@@ -82,12 +81,12 @@ void	init_env(t_bigshell *data, char **env)
 	{
 		if (i == 0)
 		{
-			data->env = env_new(env[i], i);
+			data->env = env_new(env[i], i, FALSE);
 			if (!data->env)
 				ft_exit(EXIT_FAILURE, W_NO_ENV);
 		}
 		else
-			env_addback(data->env, env_new(env[i], i));
+			env_addback(&data->env, env_new(env[i], i, FALSE));
 	}
 	get_path(data);
 }

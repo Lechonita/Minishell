@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/25 13:53:05 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:17:55 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ void	init_line(t_bigshell *data, char *line)
 	flag_single_quotes(tmp);
 	find_quotes(tmp);
 	find_dollar_dollar_bill(data, tmp);
-	// printf("Et a la fin : \n");
+	check_for_export(data, tmp, line);
 	// print_t_line(tmp);
 }
