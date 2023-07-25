@@ -69,6 +69,7 @@ SRC += unset.c
 #	Env functions
 SRC += env_init.c
 SRC += path_handle.c
+SRC += handle_export.c
 
 # 	Exec functions
 SRC += executor.c
@@ -94,7 +95,6 @@ SRC += signal_here_doc.c
 #	Lexer functions
 SRC += flag_quotes.c
 SRC += line_init.c
-SRC += check_equal.c
 SRC += token_find.c
 SRC += token_init.c
 SRC += find_token_type.c
@@ -158,7 +158,7 @@ endef
 
 ############################### Rules ##########################################
 
-all: $(NAME) art_bis
+all: $(NAME) #art_bis
 
 $(LIBFT):
 	@make --no-print-directory all -C $(LIBFT_DIR)
@@ -192,7 +192,7 @@ norm:
 	@norminette inc/*.h
 #	@norminette libft/*/*.[ch]
 
-leaks: $(NAME) art_bis #fclean $(NAME)
+leaks: $(NAME) #art_bis #fclean $(NAME)
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
 	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./.readline_supp -q  ./$(NAME)

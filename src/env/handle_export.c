@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/24 18:59:04 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/25 11:42:01 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ int	export_size(char *input, int equal, int direction)
 	}
 	if (direction > 0)
 		return (end);
-	else
-		return (start);
+	return (start);
 }
 
 void	add_to_env(t_bigshell *data, int equal, char *input)
@@ -96,11 +95,8 @@ void	add_to_env(t_bigshell *data, int equal, char *input)
 		env_size++;
 		tmp = tmp->next;
 	}
-	dprintf(2, "start/end = %d/%d\n", start, end);
-	dprintf(2, "env size = %d\n", env_size);
 	str = ft_substr(input, start, end - start);
-	dprintf(2, "str = %s\n", str);
-	env_addback(data->env, env_new(str, env_size, TRUE));
+	env_addback(&data->env, env_new(str, env_size, TRUE));
 	free(str);
 }
 
@@ -114,26 +110,4 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 	if (is_word_near_equal(line, equal_is_here, 1)
 		&& is_word_near_equal(line, equal_is_here, -1))
 		add_to_env(data, equal_is_here, input);
-	else
-		dprintf(2, "export: not a valid identifier\n");
-	print_env(data);
 }
-
-/*
-int	check_equal(t_line *line)
-{
-	t_line	*tmp;
-	int		count;
-
-	tmp = line;
-	count = 0;
-	while (tmp)
-	{
-		if (tmp->c == '=')
-			return (count);
-		tmp = tmp->next;
-		count++;
-	}
-	return (FALSE);
-}
-*/

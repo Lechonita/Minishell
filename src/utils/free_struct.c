@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/24 18:51:12 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/25 11:47:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	ft_free_env(t_env **env)
 		{
 			free((*env)->name);
 			(*env)->name = NULL;
+		}
+		if ((*env)->value)
+		{
+			free((*env)->value);
+			(*env)->value = NULL;
 		}
 		free(*env);
 		(*env) = tmp;
