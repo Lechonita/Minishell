@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/24 12:11:40 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:09:02 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	var_not_found(t_line **line, char *var)
 		tmp = tmp->next;
 		len--;
 	}
-	return ;
 }
 
 void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
@@ -67,7 +66,7 @@ void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
 	t_env	*env;
 	int		flag;
 
-	if (!data || !line || !var | !index)
+	if (!data || !line || !var)
 		return ;
 	env = data->env;
 	flag = 1;
@@ -102,12 +101,12 @@ void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
 	t_line	*tmp;
 	int		i;
 
-	if (!data || !line || !var | !index)
+	if (!data || !line || !var)
 		return ;
 	rm_dollar(line);
 	tmp = line->next;
 	i = 0;
-	if (tmp->c == 123)
+	if (tmp->c == '{')
 	{
 		tmp = tmp->next;
 		while (var[i])

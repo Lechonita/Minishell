@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/24 12:31:03 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:00:16 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	do_expansion(t_bigshell *data, t_line *line, int index)
 		return (free(var));
 	if ((tmp->dq == 0 && tmp->sq == 0) || tmp-> dq == 1)
 	{
+		printf("Estce que je rentre la ?\n");
 		dollar_expand(data, tmp, var, index);
 		align_line_index(line, index);
 	}

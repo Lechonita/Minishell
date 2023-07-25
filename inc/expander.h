@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/20 16:19:24 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/25 14:07:27 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /* DOLLAR ADD VALUE */
 t_line *line_new_var(t_line *line, t_line *after, char c, int index);
 t_line	*line_add_node(t_line *line, char value, int index);
-t_line *line_replace_node(t_line *line, char value, int index);
+t_line *line_replace_node(t_line *line, char value);
 void	add_var(t_line *line, char *value, int idx, char *var);
 
 /* DOLLAR EXPANSION */

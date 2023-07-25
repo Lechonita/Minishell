@@ -53,12 +53,6 @@ example / error :
 	→ $ echo "$"path ET echo '$'path
 		ca donne => $path
 	
-	→ $ echo '$path'
-		ca donne $path
-
-	→ par contre $ echo "$path"
-		ca donne bien la valeur de path
-	
 	→ $ echo $popo (popo n'existe pas)
 		ca doit retourner un retour a la ligne
 

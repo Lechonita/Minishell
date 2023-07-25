@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/24 11:37:49 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:53:05 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	init_line(t_bigshell *data, char *line)
 		i++;
 	}
 	tmp = data->line;
-	// new_var(tmp); // gestion des cmd=123 => rajouter la var dans t_env;
 	flag_double_quotes(tmp);
 	flag_single_quotes(tmp);
 	find_quotes(tmp);

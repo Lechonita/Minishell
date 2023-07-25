@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:28:20 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/24 12:07:48 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:07:10 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ t_line	*line_add_node(t_line *line, char value, int index)
 	return (line);
 }
 
-t_line	*line_replace_node(t_line *line, char value, int index)
+t_line	*line_replace_node(t_line *line, char value)
 {
-	if (!line || !value || !index)
+	if (!line || !value)
 		return (NULL);
 	line->c = value;
 	line->type = WORD;
@@ -61,7 +61,7 @@ void	add_var(t_line *line, char *value, int idx, char *var)
 	int		i;
 	int		j;
 
-	if (!line || !value || !idx || !var)
+	if (!line || !value || !var)
 		return ;
 	tmp = line->next;
 	index = idx;
@@ -71,7 +71,7 @@ void	add_var(t_line *line, char *value, int idx, char *var)
 	{
 		if (var[j] && tmp->c == var[j] && j == 0)
 		{
-			tmp = line_replace_node(tmp, value[i], idx);
+			tmp = line_replace_node(tmp, value[i]);
 			j++;
 		}
 		else
