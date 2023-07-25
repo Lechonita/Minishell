@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/24 13:32:29 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:52:36 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ typedef struct s_cmd
 {
 	char			*cmd;
 	char			**cmd_arg;
+	int				fd_in;
+	int				fd_out;
+	char			*in_file;
+	char			*out_file;
 	int				idx_cmd;
 	int				builtin;
 	struct s_cmd	*next;
@@ -77,6 +81,7 @@ typedef struct s_redir
 	char			*file;
 	int				idx;
 	int				fd;
+	int				with_cmd_nb;
 	struct s_redir	*next;
 }	t_redir;
 
@@ -111,5 +116,6 @@ typedef struct s_bigshell
 	t_redir			*in_out;
 	t_exec			*exec;
 }	t_bigshell;
+
 
 #endif

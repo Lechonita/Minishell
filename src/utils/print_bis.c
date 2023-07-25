@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/24 10:10:22 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/25 17:08:48 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ void	print_t_line(t_line *line)
 	printf("\n");
 }
 
-		// printf("[dq] %2d ", el->dq);
-		// printf("[sq] %2d ", el->sq);
-
 void	print_t_token(t_bigshell *data)
 {
 	t_token		*el;
@@ -113,7 +110,8 @@ void	print_redir(t_bigshell *data)
 	while (el)
 	{
 		printf("[%2d] %2d %2s ", el->idx, el->type, toktype[el->type - 1]);
-		printf(": %15s → fd %d\n", el->file, el->fd);
+		printf(": %15s → fd %d & with cmd n°%d \n", el->file, el->fd,
+			el->with_cmd_nb);
 		el = el->next;
 	}
 }

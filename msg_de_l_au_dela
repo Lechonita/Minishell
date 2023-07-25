@@ -1,5 +1,30 @@
 yo mate !! how are you??
 
+<Makefile head -10 >>out >out1 | wc >out2 | <banner >>out3 | head -15 | tail -5 >> out_file
+
+<Makefile head -10 >>out >out1 | wc >out2 | <banner cat >>out3 | head -15 | tail -5 >> out_file
+
+→ << fin wc > out
+
+→ pwd >out
+
+→ ls -l | pwd
+
+→ > 1 cat | wc -w
+
+→ ls | < 1 cat
+
+→ echo -nnnnnnnnnnnnnnnnnnn test
+
+→ echo -nnnnnnnnnnnnnnnnnnn -n -n test
+
+→ 
+
+→ 
+
+→ 
+
+
 < Makefile cat | wc -l | head -77 | tail -5 | ls -l >> out_file
 < Makefile cat | head -7 | taili -5 >> out_file
 < Makefile cat | wc -l > out_file

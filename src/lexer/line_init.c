@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/25 09:40:46 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/25 13:59:30 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,4 @@ void	init_line(t_bigshell *data, char *line)
 	find_quotes(tmp);
 	find_dollar_dollar_bill(data, tmp);
 	check_for_export(data, tmp, line);
-	// print_t_line(tmp);
 }

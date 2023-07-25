@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:25:25 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/25 12:11:47 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/25 16:50:28 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	fd_out_file(t_bigshell *data)
 void	init_exec(t_bigshell *data)
 {
 	data->exec->here_doc = count_file(data, DLESS);
+	data->exec->nb_cmd = count_cmd(data) + 1;
 	data->exec->in_file = in_file_path(data);
 	data->exec->out_file = out_file_path(data);
 	fd_in_file(data);
 	fd_out_file(data);
-	data->exec->nb_cmd = count_cmd(data) + 1;
 	data->exec->cmd = init_cmd(data);
 	// print_exec(data);
 }

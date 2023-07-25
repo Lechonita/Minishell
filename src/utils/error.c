@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/07/21 15:34:59 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/25 16:41:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,12 @@ void	ft_exit(int err_no, char *msg)
 	if (msg)
 		ft_putstr_fd(msg, 2);
 	exit(err_no);
+}
+
+int	ft_error(int err_no, char *msg)
+{
+	if (msg)
+		ft_putstr_fd(msg, 2);
+	g_exit_status = err_no;
+	return (EXIT_FAILURE);
 }
