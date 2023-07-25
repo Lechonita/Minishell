@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/24 10:10:22 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:16:47 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ void	print_t_line(t_line *line)
 	printf("___________________LINE______________________\n");
 	while (el != NULL)
 	{
-		printf("[%2d] type : %2d %8s [c] %c\n", el->index, el->type,
+		printf("[%2d] type : %2d %8s [c] %c   ", el->index, el->type,
 			tokentype_str[el->type - 1], el->c);
+		printf("[dq] %2d   ", el->dq);
+		printf("[sq] %2d \n", el->sq);
 		el = el->next;
 	}
 	printf("\n");
 }
 
-		// printf("[dq] %2d ", el->dq);
-		// printf("[sq] %2d ", el->sq);
 
 void	print_t_token(t_bigshell *data)
 {

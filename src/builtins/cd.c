@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/24 09:45:37 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/25 18:42:09 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+/* Fonctions autorisées : chdir, getcwd, opendir, readdir, closedir*/
 
 int	change_directory(char **args, t_bigshell *data)
 {
