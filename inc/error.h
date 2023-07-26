@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/24 10:42:24 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/26 14:40:15 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define W_SPLIT_CMD "\t Failure in split commands\n"
 # define W_EXIT_ARG "Minishell: exit: too many arguments\n"
 # define W_EXIT_ARG_NUM ": numeric argument required\n"
+# define HOME_NOT_SET "Minishell: HOME not set\n"
+# define OLDPWD_NOT_SET "Minishell: OLDPWD not set\n"
+# define W_CD_ARG "Minishell: cd: too many arguments\n"
 
 // # define W_ENV "\t Environment error\n"
 // # define W_JOIN_PATH "\t Failure in joining path with / \n"

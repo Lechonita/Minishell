@@ -63,10 +63,11 @@ example / error :
 
 	→ $ '<'Makefile wc
 		ca doit retourner: <Makefile: command not found
+
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
-		$ echo ${PATH{  OU   echo ${PATH
-			ca renvoie PATH
+		$ echo ${PATH{   OU   echo ${PATH
+			ca renvoie: PATH
 
 # 	@echo "$(RED)  __  __   _           _    _____   _              _   _ $(END)"
 # 	@echo "$(RED) |  \/  | (_)         (_)  / ____| | |            | | | |$(END)"
