@@ -14,14 +14,8 @@ yo mate !! how are you??
 
 → ls | < 1 cat
 
-→ echo -nnnnnnnnnnnnnnnnnnn test
-
-→ echo -nnnnnnnnnnnnnnnnnnn -n -n test
-
 → 
-
 → 
-
 → 
 
 
@@ -56,6 +50,7 @@ example / error :
 	salut
 
 	echo 1 > out12 2 3 << 1 << 2 << 3 < in < in2 >>out13
+	echo 1 > out12 2 <Makefile in2 >>out13
 
 	→ $ echo 1 > out1 2 3 > /dev/stdout << 1 << 2 << 3 < in < in2
 		→ ouvrir tous les heredocs

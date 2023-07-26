@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/25 16:52:36 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/26 17:05:19 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,24 @@ typedef struct s_exec
 	t_cmd			*cmd;
 }	t_exec;
 
+typedef struct s_simple_cmd
+{
+	char				*cmd;
+	char				**cmd_arg;
+	int					fd_in;
+	int					fd_out;
+	char				*in_file;
+	char				*out_file;
+	int					idx;
+	int					builtin;
+	t_redir				*redir;
+	struct s_simple_cmd	*next;
+}	t_simple_cmd;
+
 typedef struct s_token
 {
 	int				index;
+	int				group;
 	int				type;
 	int				aim;
 	char			*value;
@@ -115,6 +130,7 @@ typedef struct s_bigshell
 	t_token			*token;
 	t_redir			*in_out;
 	t_exec			*exec;
+	t_simple_cmd	*simple_cmd;
 }	t_bigshell;
 
 

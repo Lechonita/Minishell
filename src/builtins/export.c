@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/25 12:14:23 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/26 14:53:04 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	print_declare_env(t_bigshell *data)
 	}
 	return ;
 }
+
+// "\'\"\\$ ,.:/[{]}+=-?&*^%#@!~"
 
 void	do_export(t_bigshell *data, char **args)
 {

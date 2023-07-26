@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_aim.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/24 11:57:41 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:44:45 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,9 @@ void	parser_job(t_bigshell *data)
 	check_builtin(data);
 	check_double_redir(data);
 	rm_blank(data);
+	token_group(data->token);
+	print_t_token(data);
+	data->simple_cmd = init_simple_cmd();
+	add_redir_to_cmd(data);
+	print_simple_cmd(data);
 }

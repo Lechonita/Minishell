@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/25 17:08:48 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/26 17:33:43 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_t_token(t_bigshell *data)
 	printf("__________________TOKEN________________________\n");
 	while (el)
 	{
-		printf("[%2d] ", el->index);
+		printf("[%2d] grp  n°%2d ", el->index, el->group);
 		printf("tok %2d ", el->type);
 		printf(": %20s ", el->value);
 		printf("→ %2d %8s\n", el->aim, aim_str[el->aim - 20]);
@@ -130,33 +130,19 @@ void	print_exec(t_bigshell *data)
 	printf("_______________________________________________\n");
 }
 
-/*
-void	print_t_line(t_bigshell *data)
-{
-	t_line		*el;
-	const char	*tokentype_str[] = {
-		"WORD",
-		"DQUOTE",
-		"SQUOTE",
-		"\n",
-		"BLANK",
-		"$",
-		"|",
-		">",
-		">>",
-		"<",
-		"<<",
-		"&",
-		"; () {}",
-		"NOTOKEN",
-	};
 
-	el = data->line;
+void	print_simple_cmd(t_bigshell *data)
+{
+	t_simple_cmd		*el;
+
+	el = data->simple_cmd;
+	printf("__________________SIMPLE_________________________\n");
 	while (el != NULL)
 	{
-		printf("[%2d] type : %2d %8s [c] %c\n", el->index, el->type,
-			tokentype_str[el->type - 1], el->c);
+		dprintf(2, "[%2d] cmd : %8s builtin y/n %d\n", el->idx, el->cmd, el->builtin);
+		dprintf(2, "\tfd_in   = %d\tfd_out   = %d\n", el->fd_in, el->fd_out);
+		dprintf(2, "\tin_file : %s\tout_file : %s\n", el->in_file, el->out_file);
 		el = el->next;
 	}
+	printf("_________________________________________________\n");
 }
-*/

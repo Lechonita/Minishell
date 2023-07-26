@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:38:06 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/25 13:51:30 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/26 17:11:35 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+t_global	g_global;
 
 char	*free_strjoin(char *to_free, char *buf)
 {
@@ -24,6 +26,8 @@ void	init_minishell(t_bigshell *data, char *env[])
 {
 	set_signal();
 	init_env(data, env);
+	g_global.exit_status = 0;
+	g_global.nb_cmd = 0;
 }
 
 int	main(int ac, char *av[], char *env[])

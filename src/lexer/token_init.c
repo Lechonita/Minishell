@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:17:32 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/05 14:23:48 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/26 16:27:16 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static t_token	*token_new(char *value, int type, int idx)
 	if (!new)
 		return (NULL);
 	new->index = idx;
+	new->group = 0;
 	new->type = type;
 	new->aim = 0;
 	new->value = ft_strdup(value);
