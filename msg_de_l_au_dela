@@ -4,6 +4,9 @@ yo mate !! how are you??
 
 <Makefile head -10 >>out >out1 | wc >out2 | <banner cat >>out3 | head -15 | tail -5 >> out_file
 
+<Makefile head -10 >>out >out1 | wc >out2 | <banner cat >>out3 | echo 1 >out4 bonjour <Makefile in2 >>out41 | tail -5 >> out_file
+echo 1 > out12 2 <Makefile in2 >>out13
+
 → << fin wc > out
 
 → pwd >out

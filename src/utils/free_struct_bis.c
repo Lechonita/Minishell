@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct_bis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:13:36 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 12:25:44 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:56:26 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,35 @@ void	free_strs(char **strs)
 		free(strs);
 		strs = NULL;
 	}
+}
+
+void	ft_free_simple_cmd(t_simple_cmd **simple_cmd)
+{
+	t_simple_cmd	*tmp;
+
+	if (!simple_cmd || !(*simple_cmd))
+		return ;
+	while (*simple_cmd)
+	{
+		tmp = (*simple_cmd)->next;
+		if ((*simple_cmd)->cmd)
+			free((*simple_cmd)->cmd);
+		if ((*simple_cmd)->cmd_arg)
+			free_strs((*simple_cmd)->cmd_arg);
+		// if ((*simple_cmd)->in_file)
+		// 	free((*simple_cmd)->in_file);
+		// if ((*simple_cmd)->out_file)
+		// 	free((*simple_cmd)->out_file);
+		if ((*simple_cmd)->redir)
+			ft_free_redirection(&(*simple_cmd)->redir);
+		if ((*simple_cmd)->fd_in)
+			close((*simple_cmd)->fd_in);
+		if ((*simple_cmd)->fd_out)
+			close((*simple_cmd)->fd_out);
+		free((*simple_cmd));
+		(*simple_cmd) = tmp;
+	}
+	(*simple_cmd) = NULL;
 }
 
 void	ft_free_cmd(t_cmd **cmd)

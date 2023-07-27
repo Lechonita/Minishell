@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/26 17:33:43 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/27 14:59:23 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,15 +134,44 @@ void	print_exec(t_bigshell *data)
 void	print_simple_cmd(t_bigshell *data)
 {
 	t_simple_cmd		*el;
+	// t_redir				*tmp;
+	// const char			*toktype[] = {
+	// 	"WORD",
+	// 	"DQUOTE",
+	// 	"SQUOTE",
+	// 	"\n",
+	// 	"BLANK",
+	// 	"$",
+	// 	"|",
+	// 	">",
+	// 	">>",
+	// 	"<",
+	// 	"<<",
+	// 	"&",
+	// 	"; () {}",
+	// 	"NOTOKEN",
+	// };
 
 	el = data->simple_cmd;
 	printf("__________________SIMPLE_________________________\n");
 	while (el != NULL)
 	{
-		dprintf(2, "[%2d] cmd : %8s builtin y/n %d\n", el->idx, el->cmd, el->builtin);
-		dprintf(2, "\tfd_in   = %d\tfd_out   = %d\n", el->fd_in, el->fd_out);
-		dprintf(2, "\tin_file : %s\tout_file : %s\n", el->in_file, el->out_file);
+		dprintf(2, "[%2d] cmd : %8s\tbuiltin y/n %d\t redir y/n %d\n", el->idx,
+			el->cmd, el->builtin, el->redir_or_not);
+		dprintf(2, "\tfd_in   = %2d\tin_file  : %s\n", el->fd_in, el->in_file);
+		dprintf(2, "\tfd_out  = %2d\tout_file : %s\n", el->fd_out, el->out_file);
+		// tmp = el->redir;
+		// printf("\t\t______________REDIR______________\n");
+		// while (tmp)
+		// {
+		// 	printf("\t[%2d] %2d %2s ", tmp->idx, tmp->type,
+		// 		toktype[tmp->type - 1]);
+		// 	printf(": %15s → fd %d\n", tmp->file, tmp->fd);
+		// 	tmp = tmp->next;
+		// }
 		el = el->next;
 	}
 	printf("_________________________________________________\n");
+
+
 }

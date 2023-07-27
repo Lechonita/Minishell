@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:00:06 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/17 17:45:09 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/27 14:28:42 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,22 @@ void	close_fd(t_bigshell *data, int idx, int type, int type2)
 
 	i = 0;
 	el = data->in_out;
+	while (el != NULL && i < idx)
+	{
+		if (el->fd && (el->type == type || el->type == type2))
+			close(el->fd);
+		i++;
+		el = el->next;
+	}
+}
+
+void	close_fd_in_cmd(t_redir *redir, int idx, int type, int type2)
+{
+	t_redir	*el;
+	int		i;
+
+	i = 0;
+	el = redir;
 	while (el != NULL && i < idx)
 	{
 		if (el->fd && (el->type == type || el->type == type2))

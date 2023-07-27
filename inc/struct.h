@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/26 17:05:19 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/27 11:52:23 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_simple_cmd
 	char				*out_file;
 	int					idx;
 	int					builtin;
+	int					redir_or_not;
 	t_redir				*redir;
 	struct s_simple_cmd	*next;
 }	t_simple_cmd;
@@ -132,6 +133,5 @@ typedef struct s_bigshell
 	t_exec			*exec;
 	t_simple_cmd	*simple_cmd;
 }	t_bigshell;
-
 
 #endif

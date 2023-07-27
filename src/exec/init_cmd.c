@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 15:29:30 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/26 18:21:45 by Bea              ###   ########.fr       */
+/*   Created: 2023/07/27 09:48:37 by bebigel           #+#    #+#             */
+/*   Updated: 2023/07/27 12:13:38 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,65 @@ t_redir	*init_redir_in_cmd(t_token **token, int grp)
 	redir = NULL;
 	el = *token;
 	i = 0;
-	while (el->next != NULL && el->group == grp)
+	while (el != NULL)
 	{
-		if (i == 0 && el->aim == REDIR)
+		if (i == 0 && (el->type == LESS || el->type == DLESS
+				|| el->type == GREAT || el->type == DGREAT) && el->group == grp)
 			redir = new_lst(i++, el->value, el->next->value);
-		else if (i > 0 && el->aim == REDIR)
+		else if (i > 0 && (el->type == LESS || el->type == DLESS
+				|| el->type == GREAT || el->type == DGREAT) && el->group == grp)
 			add_back(&redir, new_lst(i++, el->value, el->next->value));
+		else if (el->group != grp)
+			el = el->next;
 		el = el->next;
 	}
 	return (redir);
 }
 
+int	count_file_in_cmd(t_redir *redir, int type)
+{
+	t_redir	*el;
+	int		count;
+
+	el = redir;
+	count = 0;
+	while (el != NULL)
+	{
+		if (el->type == type)
+			count++;
+		el = el->next;
+	}
+	return (count);
+}
+
+int	is_redir_in_cmd(t_redir *redir)
+{	
+	if ((count_file_in_cmd(redir, LESS) == 0 && count_file_in_cmd(redir, DLESS) == 0)
+		&& (count_file_in_cmd(redir, GREAT) > 0 || count_file_in_cmd(redir, DGREAT) > 0))
+		return (1);
+	else if ((count_file_in_cmd(redir, LESS) > 0 || count_file_in_cmd(redir, DLESS) > 0)
+		&& (count_file_in_cmd(redir, GREAT) == 0 && count_file_in_cmd(redir, DGREAT) == 0))
+		return (2);
+	else if (count_file_in_cmd(redir, LESS) == 0 && count_file_in_cmd(redir, DLESS) == 0
+		&& count_file_in_cmd(redir, GREAT) == 0 && count_file_in_cmd(redir, DGREAT) == 0)
+		return (3);
+	else
+		return (0);
+}
+
 void	add_redir_to_cmd(t_bigshell *data)
 {
-	t_token *tok;
-	t_simple_cmd *cmd;
-	int		grp;
-	
+	t_token			*tok;
+	t_simple_cmd	*cmd;
+
 	tok = data->token;
 	cmd = data->simple_cmd;
-	grp = 0;
-	while (grp < g_global.nb_cmd && cmd)
+	while (cmd != NULL)
 	{
-		cmd->redir = init_redir_in_cmd(data, grp);
+		cmd->redir = init_redir_in_cmd(&tok, cmd->idx);
+		cmd->redir_or_not = is_redir_in_cmd(cmd->redir);
+		open_fd(data, cmd->redir);
 		cmd = cmd->next;
-		grp++;
 	}
+	// print_simple_cmd(data);
 }

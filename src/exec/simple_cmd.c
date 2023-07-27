@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/26 17:09:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/27 09:56:38 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	exec_simple_cmd(t_bigshell *data, char *env[])
 	if (data->exec->cmd == NULL)
 		return ;
 	cmd = data->exec->cmd;
-	if (!ft_strncmp(cmd->cmd_arg[0], "exit", ft_strlen("exit"))
-		|| !ft_strncmp(cmd->cmd_arg[0], "cd", ft_strlen("cd"))
-		|| !ft_strncmp(cmd->cmd_arg[0], "export", ft_strlen("export"))
-		|| !ft_strncmp(cmd->cmd_arg[0], "unset", ft_strlen("unset")))
+	if (!ft_strcmp(cmd->cmd_arg[0], "exit") || !ft_strcmp(cmd->cmd_arg[0], "cd")
+		|| !ft_strcmp(cmd->cmd_arg[0], "export")
+		|| !ft_strcmp(cmd->cmd_arg[0], "unset"))
 	{
-		g_global.exit_status = exec_builtin_no_fork(data, cmd->cmd, cmd->cmd_arg);
+		g_global.exit_status = exec_builtin_no_fork(data, cmd->cmd,
+				cmd->cmd_arg);
 		return ;
 	}
 	pid = fork();
@@ -94,3 +94,10 @@ void	exec_simple_cmd(t_bigshell *data, char *env[])
 	else if (WIFSIGNALED(status))
 		g_global.exit_status = WTERMSIG(status) + 128;
 }
+
+/*
+	if (!ft_strncmp(cmd->cmd_arg[0], "exit", ft_strlen("exit"))
+		|| !ft_strncmp(cmd->cmd_arg[0], "cd", ft_strlen("cd"))
+		|| !ft_strncmp(cmd->cmd_arg[0], "export", ft_strlen("export"))
+		|| !ft_strncmp(cmd->cmd_arg[0], "unset", ft_strlen("unset")))
+*/

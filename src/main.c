@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:38:06 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/26 17:11:35 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/27 11:41:43 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_minishell(t_bigshell *data, char *env[])
 	init_env(data, env);
 	g_global.exit_status = 0;
 	g_global.nb_cmd = 0;
+	g_global.heredoc = 0;
 }
 
 int	main(int ac, char *av[], char *env[])

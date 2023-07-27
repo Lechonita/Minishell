@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aim_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/24 11:57:34 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/27 11:44:14 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ void	check_double_redir(t_bigshell *data)
 	while (tok != NULL)
 	{
 		if (ft_strncmp(tok->value, "<<", 2) == 0)
+		{
 			tok->type = DLESS;
+			g_global.heredoc = 1;
+		}
 		else if (ft_strncmp(tok->value, ">>", 2) == 0)
 			tok->type = DGREAT;
 		tok = tok->next;

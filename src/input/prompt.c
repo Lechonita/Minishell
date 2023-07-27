@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/26 17:07:26 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/27 18:38:24 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ void	reset_prompt(t_bigshell *data, char *input)
 		ft_free_exec(&data->exec);
 	if (data->in_out != NULL)
 		ft_free_redirection(&data->in_out);
+	if (data->simple_cmd)
+		ft_free_simple_cmd(&data->simple_cmd);
 }
 
 void	ft_readline(t_bigshell *data, char *env[])
 {
 	char	*input;
 
+	(void)env;
 	while (1)
 	{
 		input = readline(PROMPT);
@@ -38,8 +41,8 @@ void	ft_readline(t_bigshell *data, char *env[])
 		add_history(input);
 		init_line(data, input);
 		find_tokens(data);
-		if (redir_job(data) == 1)
-			executor(data, env);
+		// if (redir_job(data) == 1)
+		// 	executor(data, env);
 		reset_prompt(data, input);
 	}
 	reset_prompt(data, input);

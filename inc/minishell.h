@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/26 17:19:47 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/27 11:41:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 typedef struct s_global
 {
 	int	exit_status;
+	int	heredoc;
 	int	nb_cmd;
 }				t_global;
 
@@ -55,6 +56,7 @@ void	ft_free_cmd(t_cmd **cmd);
 void	ft_free_exec(t_exec **exec);
 void	ft_free_history(t_bigshell *data);
 void	ft_free_redirection(t_redir **redir);
+void	ft_free_simple_cmd(t_simple_cmd **simple_cmd);
 void	free_all(t_bigshell *data);
 
 /* PRINT ERROR */
