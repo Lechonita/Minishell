@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/26 15:41:57 by lechon           ###   ########.fr       */
+/*   Updated: 2023/07/27 16:40:31 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,82 +14,26 @@
 
 /* Fonctions autorisées : chdir, getcwd, opendir, readdir, closedir*/
 
-// static char	*get_env_path(t_env *env, char *str, size_t len)
-// {
-	
-// }
-
-// static int	exists_in_env(char **env_paths, char *oldpwd)
-// {
-// 	int		i;
-
-// 	if (!*env_paths || !env_paths || !oldpwd)
-// 		return (0);
-// 	i = -1;
-// 	while (env_paths[++i])
-// 	{
-// 		if (ft_strcmp(env_paths[i], oldpwd) == 0)
-			
-// 	}
-// }
-
-// static int	update_oldpwd(t_bigshell *data)
-// {
-// 	char	cwd[_PC_PATH_MAX];
-// 	char	*oldpwd;
-// 	int		ret;
-
-// 	ret = getcwd(cwd, _PC_PATH_MAX);
-// 	if (!ret)
-// 		return (EXIT_FAILURE);
-// 	oldpwd = ft_strjoin("OLDPWD=", cwd);
-// 	if (!oldpwd)
-// 		return (EXIT_FAILURE);
-// 	if (exists_in_env(data->env_paths, oldpwd) == 1)
-// 		add_in_env(oldpwd, data->env);
-// }
-
-// static int	go_back_home(t_bigshell *data)
-// {
-// 	int		ret;
-// 	char	*env_path;
-
-// 	ret = update_oldpwd(data);
-// 	env_path = get_env_path(data->env, "HOME", 4);
-// 	if (!env_path)
-// 	{
-// 		ft_putstr_fd(HOME_NOT_FOUND, 2);
-// 		ret = EXIT_FAILURE;
-// 	}
-// 	return (ret);
-// }
-
-// int	change_directory(char **args, t_bigshell *data)
-// {
-// 	int		ret;
-
-// 	if (!data)
-// 		return (EXIT_FAILURE);
-// 	ret = EXIT_SUCCESS;
-// 	if (!args[1] || ft_strcmp(args[1], "~") == 0)
-// 		ret = go_back_home(data);
-// 	else if (ft_strcmp(args[1], "-") == 0)
-// 		// afficher la ou on va et retourner un directroy en arriere
-// 	else
-// 	{
-		
-// 	}
-// 	return (ret);
-// }
-
-static int	update_pwd(t_bigshell *data)
+static int	set_env_value(t_bigshell *data, char *name, char *value)
 {
-	char	cwd[_PC_PATH_MAX];
+	t_env	*env;
 
-	if (get_env_value(data, "PWD"))
+	if (!data || !name || !value)
+		return (EXIT_FAILURE);
+	env = data->env;
+	while (env)
 	{
-		if ()
+		if (ft_strcmp(env->name, name) == 0)
+		{
+			if (ft_strcmp(env->value, value) == 0)
+				return (EXIT_SUCCESS);
+			free(env->value);
+			env->value = ft_strdup(value);
+			return (EXIT_SUCCESS);
+		}
+		env = env->next;
 	}
+	return (EXIT_FAILURE);
 }
 
 static char	*get_env_value(t_bigshell *data, char *name)
@@ -106,6 +50,39 @@ static char	*get_env_value(t_bigshell *data, char *name)
 		env = env->next;
 	}
 	return (NULL);
+}
+
+static int	update_pwd(t_bigshell *data)
+{
+	char	*cwd;
+
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		perror("Minishell: cd");
+		return (EXIT_FAILURE);
+	}
+	if (get_env_value(data, "PWD"))
+	{
+		if (set_env_value(data, "OLDPWD", get_env_value(data, "PWD")) == 1)
+			return (EXIT_FAILURE);
+	}
+	else
+	{
+		do_export_cd(data, "PWD", cwd);
+		do_export_cd(data, "OLDPWD", NULL);
+	}
+	// {
+	// 	env_addback(&data->env, env_new_cd(data, "PWD", cwd));
+	// 	env_addback(&data->env, env_new_cd(data, "OLDPWD", NULL));
+	// }
+	if (set_env_value(data, "PWD", cwd) == 1)
+	{
+		free(cwd);
+		return (EXIT_FAILURE);
+	}
+	free(cwd);
+	return (EXIT_SUCCESS);
 }
 
 static char	*get_dir(t_bigshell *data, char **args)
@@ -139,17 +116,15 @@ int	change_directory(char **args, t_bigshell *data)
 	char	*dir;
 
 	dir = get_dir(data, args);
-	if (!dir)
+	if (!dir || !data)
 		return (EXIT_FAILURE);
 	if (chdir(dir) == -1)
 	{
-		ft_putstr_fd("Minishell: cd: ", 2);
-		ft_putstr_fd(dir, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		error_cd(dir);
 		return (EXIT_FAILURE);
 	}
 	if (args[1] && ft_strcmp(args[1], "-") == 0)
-		ft_putstr_fd(dir, STDOUT_FILENO);
+		ft_putstr_fd(ft_strjoin(dir, "\n"), STDOUT_FILENO);
 	if (update_pwd(data) == 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

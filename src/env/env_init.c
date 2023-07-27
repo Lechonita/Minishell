@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/25 13:44:44 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/27 15:29:52 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static char	*get_env_for_export(char *env)
 	pos_equal = 0;
 	while (env[pos_equal] != '=')
 		pos_equal++;
+	if (ft_strlen(env) == pos_equal)
+		return (env);
 	value = ft_strdup(env + pos_equal + 1);
 	return (value);
 }

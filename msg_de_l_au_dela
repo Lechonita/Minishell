@@ -64,6 +64,9 @@ example / error :
 	→ $ '<'Makefile wc
 		ca doit retourner: <Makefile: command not found
 
+	→ Lorsqu'une variable a été unset et qu'on utilise echo $ pour la voir dans le terminal,
+		il faut renvoyer un retour à la ligne
+
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
 		$ echo ${PATH{   OU   echo ${PATH

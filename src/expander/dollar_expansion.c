@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/25 14:09:02 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:59:30 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,12 @@ void	rm_var_excess(t_line *line, int index, char *var)
 void	var_not_found(t_line **line, char *var)
 {
 	t_line	*tmp;
-	int		acolade;
 	int		len;
 
 	if (!line || !(*line) || !var)
 		return ;
 	tmp = *line;
-	acolade = 0;
-	if (tmp->c == '{')
-		acolade = 1;
-	len = get_var_len(tmp, acolade);
+	len = get_var_len(tmp);
 	while (tmp && len > 0)
 	{
 		tmp->type = BLANK;
@@ -59,6 +55,7 @@ void	var_not_found(t_line **line, char *var)
 		tmp = tmp->next;
 		len--;
 	}
+	print_t_line(*line);
 }
 
 void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
@@ -73,7 +70,8 @@ void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
 	while (env)
 	{
 		if (ft_strncmp(env->name, var, ft_strlen(env->name)) == 0
-			&& (ft_strlen(env->name) == ft_strlen(var)))
+			&& (ft_strlen(env->name) == ft_strlen(var))
+			&& env->to_export == FALSE)
 		{
 			add_var(line, env->value, index, var);
 			flag = 0;
@@ -85,38 +83,15 @@ void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
 		var_not_found(&line, var);
 }
 
-void	rm_dollar(t_line *line)
+void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
 {
 	t_line	*tmp;
 
-	if (!line || !line->next)
+	if (!data || !line || !var)
 		return ;
 	tmp = line;
 	tmp->type = BLANK;
 	tmp->c = 11;
-}
-
-void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
-{
-	t_line	*tmp;
-	int		i;
-
-	if (!data || !line || !var)
-		return ;
-	rm_dollar(line);
 	tmp = line->next;
-	i = 0;
-	if (tmp->c == '{')
-	{
-		tmp = tmp->next;
-		while (var[i])
-		{
-			if (var[i] == '}')
-				var[i] = '\0';
-			i++;
-		}
-		compare_var(data, line, var + 1, index);
-	}
-	else
-		compare_var(data, line, var, index);
+	compare_var(data, line, var, index);
 }

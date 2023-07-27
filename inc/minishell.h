@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/24 09:50:25 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/27 12:22:43 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_free_redirection(t_redir **redir);
 void	free_all(t_bigshell *data);
 
 /* PRINT ERROR */
+void	error_cd(char *str);
 void	ft_exit(int err_no, char *msg);
 void	error_execve(t_bigshell *data);
 int		msg_not_found(char *msg, char *str);
