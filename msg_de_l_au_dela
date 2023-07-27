@@ -67,6 +67,8 @@ example / error :
 	→ Lorsqu'une variable a été unset et qu'on utilise echo $ pour la voir dans le terminal,
 		il faut renvoyer un retour à la ligne
 
+TO DO JESS => gérer le cas où on unset la variable PWD et OLDPWD
+
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
 		$ echo ${PATH{   OU   echo ${PATH
