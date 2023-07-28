@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_aim.c                                         :+:      :+:    :+:   */
+/*   parser_job.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/27 18:54:16 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/28 18:28:04 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,43 +74,6 @@ void	rm_blank(t_bigshell *data)
 	}
 }
 
-int	count_aim(t_bigshell *data, int type)
-{
-	t_token	*tok;
-	int		count;
-
-	tok = data->token;
-	count = 0;
-	while (tok != NULL)
-	{
-		if (tok->aim == type)
-			count++;
-		tok = tok->next;
-	}
-	return (count);
-}
-
-void	merge_token_cmd(t_bigshell *data)
-{
-	t_token	*tok;
-	int		group;
-	int		count;
-
-	tok = data->token;
-	group = 0;
-	while (group < g_global.nb_cmd)
-	{
-		count = 0;
-		while (tok != NULL && tok->group != group)
-			tok = tok->next;
-		count = count_aim(data, SIMPLE_CMD) + count_aim(data, BUILTIN);
-		if (count > 1)
-			dprintf(2, "count_aim(data, WORD) = %d group = %d\n",
-				count, group);
-		group++;
-	}
-}
-
 void	parser_job(t_bigshell *data)
 {
 	aim_redir(data);
@@ -120,9 +83,10 @@ void	parser_job(t_bigshell *data)
 	check_double_redir(data);
 	rm_blank(data);
 	token_group(data->token);
-	merge_token_cmd(data);
 	data->simple_cmd = init_simple_cmd();
 	add_redir_to_cmd(data);
 	add_in_out_to_cmd(data);
+	merge_token_cmd(data);
+	add_cmd_to_cmd(data);
 	print_simple_cmd(data);
 }

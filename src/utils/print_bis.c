@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/27 14:59:23 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/28 18:08:13 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	print_simple_cmd(t_bigshell *data)
 	printf("__________________SIMPLE_________________________\n");
 	while (el != NULL)
 	{
-		dprintf(2, "[%2d] cmd : %8s\tbuiltin y/n %d\t redir y/n %d\n", el->idx,
+		dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\t\tredir y/n %d\n", el->idx,
 			el->cmd, el->builtin, el->redir_or_not);
 		dprintf(2, "\tfd_in   = %2d\tin_file  : %s\n", el->fd_in, el->in_file);
 		dprintf(2, "\tfd_out  = %2d\tout_file : %s\n", el->fd_out, el->out_file);

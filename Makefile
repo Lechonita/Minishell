@@ -6,7 +6,7 @@ NAME = minishell
 
 ############################### Compiler #######################################
 
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
+FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
 CC = gcc
 
 ############################### LIBFT ##########################################
@@ -76,9 +76,7 @@ SRC += executor.c
 SRC += exec_utils.c
 SRC += cmd_utils.c
 SRC += init_exec.c
-SRC += simple_cmd.c
-SRC += simple_cmd_utils.c
-SRC += init_cmd.c
+SRC += simple_cmd_exec.c
 
 #	Expander functions
 SRC += dollar_add_value.c
@@ -104,8 +102,11 @@ SRC += token_type.c
 SRC += token_type_bis.c
 
 #	Parser functions
-SRC += find_aim.c
+SRC += parser_job.c
 SRC += aim_cmd.c
+SRC += simple_cmd_utils.c
+SRC += in_out_simple_cmd.c
+SRC += cmd_lst.c
 
 #	Redirection functions
 SRC += path_name.c
@@ -113,6 +114,8 @@ SRC += handle_redir.c
 SRC += in_out.c
 SRC += in_out_utils.c
 SRC += handle_fd.c
+SRC += init_redir.c
+SRC += redir_utils.c
 
 #	Utils functions
 SRC += free_struct.c

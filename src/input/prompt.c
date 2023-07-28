@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/27 18:38:24 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/28 18:32:58 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ void	ft_readline(t_bigshell *data, char *env[])
 		add_history(input);
 		init_line(data, input);
 		find_tokens(data);
-		// if (redir_job(data) == 1)
-		// 	executor(data, env);
+		parser_job(data);
+		if (redir_job(data) == 1)
+			executor(data, env);
 		reset_prompt(data, input);
 	}
 	reset_prompt(data, input);

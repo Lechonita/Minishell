@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/26 17:09:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/07/28 18:38:53 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	redirection_here_doc(t_bigshell *data, t_redir *redir)
 {
 	redir->fd = open("minishell_here_doc", O_CREAT | O_WRONLY, 0644);
 	if (redir->fd < 0)
-		return (free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
+		return (ft_error(EXIT_FAILURE, W_HD_OPEN));
 	read_stdin_hd(redir);
 	close(redir->fd);
 	redir->fd = open("minishell_here_doc", O_RDONLY);
 	if (redir->fd < 0)
-		return (free_all(data), ft_exit(EXIT_FAILURE, W_HD_OPEN));
+		return (ft_error(EXIT_FAILURE, W_HD_OPEN));
 }
 
 int	redirection_less(t_bigshell *data, t_redir *redir)
@@ -72,7 +72,7 @@ int	redirection_less(t_bigshell *data, t_redir *redir)
 	{
 		redir->fd = open(redir->file, O_RDONLY);
 		if (redir->fd < 0)
-			return (free_all(data), ft_exit(errno, strerror(errno)), errno);
+			return (ft_error(errno, strerror(errno)), errno);
 	}
 	return (1);
 }
@@ -88,7 +88,7 @@ int	redirection_great(t_bigshell *data, t_redir *redir)
 	}
 	redir->fd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (redir->fd < 0)
-		return (free_all(data), ft_exit(errno, strerror(errno)), errno);
+		return (ft_error(errno, strerror(errno)), errno);
 	return (1);
 }
 
@@ -102,5 +102,5 @@ void	redirection_append(t_bigshell *data, t_redir *redir)
 	}
 	redir->fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (redir->fd < 0)
-		return (free_all(data), ft_exit(errno, strerror(errno)));
+		return (ft_error(errno, strerror(errno)));
 }

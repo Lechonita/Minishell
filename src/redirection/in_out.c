@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_out.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:51:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/27 11:26:01 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/28 16:28:18 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	redir_job(t_bigshell *data)
 	if (data->redir_or_not < 3)
 	{
 		data->in_out = init_redir(data);
-		// print_redir(data);
 		if (open_fd(data, data->in_out) == 0)
 			return (0);
 	}

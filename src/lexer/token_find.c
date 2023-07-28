@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_find.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:13:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/27 12:13:12 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/07/28 18:32:52 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,4 @@ void	find_tokens(t_bigshell *data)
 		free(value);
 		el = el->next;
 	}
-	parser_job(data);
 }
