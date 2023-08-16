@@ -54,13 +54,6 @@ example / error :
 	→ $ echo $ user
 		ca doit retourner: $ user
 
-	→ $ echo "salut "Bea""
-		ca doit retourner: salut Bea 
-	==> dans le cas ou ce sont les memes types de quotes
-		- ne pas depasser pipe ou newline
-		- scanner en partant par l'arriere pour trouver la fermeture
-		- ceux du milieu, les supprimer
-
 	→ $ '<'Makefile wc
 		ca doit retourner: <Makefile: command not found
 
