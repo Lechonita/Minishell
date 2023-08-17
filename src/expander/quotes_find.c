@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/16 17:09:33 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:17:32 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,35 @@ void	convert_quotes(t_line *line, int type)
 			find_quotes(tmp->next);
 	}
 }
+
+// void	convert_quotes(t_line *line, int type)
+// {
+// 	int		limiter;
+// 	int		last;
+// 	t_line	*tmp;
+
+// 	if (line && line->next)
+// 		tmp = line->next;
+// 	else
+// 		tmp = line;
+// 	limiter = find_limiter(tmp);
+// 	last = find_last_quote(tmp, type, limiter);
+// 	while (tmp && tmp->index <= limiter)
+// 	{
+// 		if (last == 0)
+// 			break ;
+// 		if (tmp->type == type && tmp->index == last)
+// 			break ;
+// 		else if (tmp->type == type && tmp->index != last)
+// 			tmp->type = BLANK;
+// 		else
+// 			tmp->type = WORD;
+// 		tmp = tmp->next;
+// 	}
+// 	print_t_line(line);
+// 	if (tmp->next)
+// 		find_quotes(tmp->next);
+// }
 
 void	find_quotes(t_line *line)
 {

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/24 11:57:34 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:02:24 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,16 @@ void	add_arg_to_cmd(t_bigshell *data)
 		{
 			while (tok->next->next && tok->next->next->aim == SIMPLE_CMD)
 			{
+				// printf("Le pb vient de la 2e boucle while de add arg to cmd\n");
 				tok->value = join_spac(tok->value, tok->next->next->value, " ");
+				// printf("tok->value = %s\n", tok->value);
+				// printf("Et mon tok->next->type == %d\n", tok->next->type);
 				if (tok->next->type == BLANK)
 					token_rm_next(tok);
 				if (tok->next->type == WORD)
 					token_rm_next(tok);
+				// if (tok->next->type == SQUOTE || tok->next->type == DQUOTE)
+				// 	token_rm_next(tok);
 				if (tok->next == NULL)
 					break ;
 			}

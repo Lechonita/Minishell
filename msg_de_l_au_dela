@@ -42,6 +42,12 @@ example / error :
 			→ arret du programme 
 			→ echo ne s'execute pas
 
+	→ $ echo "salut" Bea
+		ca donne => salut Bea
+		il faut regarder dans aim_cmd.c, la fonction add_arg_to_cmd => la boucle while tourne a l'infini
+
+		Même problème qu'avec celui ci-dessous
+
 	→ $ echo "$"path ET echo '$'path
 		ca donne => $path
 	
@@ -50,9 +56,6 @@ example / error :
 
 	→ $ echo "'$USER'"
 		ca doit retourner: 'jrouillo'
-	
-	→ $ echo $ user
-		ca doit retourner: $ user
 
 	→ $ '<'Makefile wc
 		ca doit retourner: <Makefile: command not found
@@ -60,7 +63,7 @@ example / error :
 	→ Lorsqu'une variable a été unset et qu'on utilise echo $ pour la voir dans le terminal,
 		il faut renvoyer un retour à la ligne
 
-TO DO JESS => gérer le cas où on unset la variable PWD et OLDPWD
+TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD
 
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
