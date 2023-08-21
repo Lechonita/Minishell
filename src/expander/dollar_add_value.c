@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:28:20 by lechon            #+#    #+#             */
-/*   Updated: 2023/07/25 14:17:14 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:52:07 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,12 @@ t_line	*line_replace_node(t_line *line, char value)
 void	add_var(t_line *line, char *value, int idx, char *var)
 {
 	t_line	*tmp;
-	int		index;
 	int		i;
 	int		j;
 
 	if (!line || !value || !var)
 		return ;
 	tmp = line->next;
-	index = idx;
 	i = -1;
 	j = 0;
 	while (value[++i])
@@ -78,5 +76,5 @@ void	add_var(t_line *line, char *value, int idx, char *var)
 			tmp = line_add_node(tmp, value[i], idx);
 		idx++;
 	}
-	rm_var_excess(line, index, var);
+	print_t_line(line);
 }

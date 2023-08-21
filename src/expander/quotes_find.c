@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/17 17:17:32 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:15:40 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,66 +70,32 @@ int	closing_quote_exists(t_line *line, int type)
 
 void	convert_quotes(t_line *line, int type)
 {
-	int		close;
-	int		limiter;
 	int		last;
 	t_line	*tmp;
+	t_line	*prev;
 
-	if (line && line->next)
-		tmp = line->next;
-	else
-		tmp = line;
-	close = closing_quote_exists(tmp, type);
-	// if (close == 0)
-	// 	interpret_open_quotes(tmp, type);
-	if (close == 1)
+	if (!line || !type)
+		return ;
+	tmp = line->next;
+	prev = line;
+	if (closing_quote_exists(tmp, type) == 1)
 	{
-		limiter = find_limiter(tmp);
-		last = find_last_quote(tmp, type, limiter);
-		while (tmp && tmp->index <= limiter)
+		last = find_last_quote(tmp, type, find_limiter(tmp));
+		while (tmp && tmp->index <= find_limiter(tmp))
 		{
 			if (tmp->type == type && tmp->index == last)
 				break ;
 			else if (tmp->type == type && tmp->index != last)
-				tmp->type = BLANK;
+				tmp = line_rm_next(prev);
 			else
 				tmp->type = WORD;
+			prev = tmp;
 			tmp = tmp->next;
 		}
-		print_t_line(line);
-		if (tmp->next)
+		if (tmp && tmp->next)
 			find_quotes(tmp->next);
 	}
 }
-
-// void	convert_quotes(t_line *line, int type)
-// {
-// 	int		limiter;
-// 	int		last;
-// 	t_line	*tmp;
-
-// 	if (line && line->next)
-// 		tmp = line->next;
-// 	else
-// 		tmp = line;
-// 	limiter = find_limiter(tmp);
-// 	last = find_last_quote(tmp, type, limiter);
-// 	while (tmp && tmp->index <= limiter)
-// 	{
-// 		if (last == 0)
-// 			break ;
-// 		if (tmp->type == type && tmp->index == last)
-// 			break ;
-// 		else if (tmp->type == type && tmp->index != last)
-// 			tmp->type = BLANK;
-// 		else
-// 			tmp->type = WORD;
-// 		tmp = tmp->next;
-// 	}
-// 	print_t_line(line);
-// 	if (tmp->next)
-// 		find_quotes(tmp->next);
-// }
 
 void	find_quotes(t_line *line)
 {

@@ -46,10 +46,10 @@ example / error :
 		ca donne => salut Bea
 		il faut regarder dans aim_cmd.c, la fonction add_arg_to_cmd => la boucle while tourne a l'infini
 
-		Même problème qu'avec celui ci-dessous
-
 	→ $ echo "$"path ET echo '$'path
 		ca donne => $path
+		- avec double quotes, ca resort "path" tout seul
+		- avec single quotes, ca tourne en boucle infini
 
 	→ $ echo "'$USER'"
 		ca doit retourner: 'jrouillo'
@@ -57,8 +57,9 @@ example / error :
 	→ $ '<'Makefile wc
 		ca doit retourner: <Makefile: command not found
 
-	→ Lorsqu'une variable a été unset et qu'on utilise echo $ pour la voir dans le terminal,
-		il faut renvoyer un retour à la ligne
+	→ Gestion plusieurs $ cassé :(
+		echo $USER et $PATH
+		ca ne fonctionne plus => check fonction rm_excess_var, dans dollar_expansion.c
 
 TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD
 

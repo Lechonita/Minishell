@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/21 12:56:54 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:33:14 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 				tmp->type = WORD;
 			if (tmp->next && (tmp->dq == 1 || (tmp->dq == 0 && tmp->sq == 0)))
 				do_expansion(data, tmp, tmp->index);
+			if (tmp->sq == 1)
+				tmp->type = WORD;
 		}
 		tmp = tmp->next;
 	}
