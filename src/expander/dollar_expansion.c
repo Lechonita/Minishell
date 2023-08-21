@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/27 16:59:30 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:55:18 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,14 @@ void	var_not_found(t_line **line, char *var)
 	if (!line || !(*line) || !var)
 		return ;
 	tmp = *line;
-	len = get_var_len(tmp);
-	while (tmp && len > 0)
+	len = ft_strlen(var);
+	while (tmp && len >= 0)
 	{
 		tmp->type = BLANK;
 		tmp->c = 11;
 		tmp = tmp->next;
 		len--;
 	}
-	print_t_line(*line);
 }
 
 void	compare_var(t_bigshell *data, t_line *line, char *var, int index)

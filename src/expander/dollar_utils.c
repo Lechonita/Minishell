@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:02:22 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/27 16:49:07 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:52:18 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*get_var(t_line *line)
 	t_line	*tmp;
 	char	*var;
 
-	if (!line || !line->next)
+	if (!line)
 		return (NULL);
 	tmp = line;
 	var = malloc(sizeof(char) * (get_var_len(tmp) + 1));
