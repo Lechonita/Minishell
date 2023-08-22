@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:48:15 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/26 17:09:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/22 13:40:53 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,17 @@ int	executor(t_bigshell *data, char *env[])
 	pid_t		last_pid;
 
 	nb_pro = -1;
-	data->exec = ft_calloc(1, sizeof(t_exec));
-	init_exec(data);
-	if (data->exec->nb_cmd == 1)
+	dprintf(2, "\033[3;90m in executor nb_cmd = %d\033[0m\n", g_global.nb_cmd);
+	// data->exec = ft_calloc(1, sizeof(t_exec));
+	// init_exec(data);
+	if (g_global.nb_cmd == 1 && data->simple_cmd->cmd == NULL)
+		return (0);
+	if (g_global.nb_cmd == 1)
 		exec_simple_cmd(data, env);
 	else
 	{
 		open_pipe(data);
-		while (++nb_pro < data->exec->nb_cmd)
+		while (++nb_pro < g_global.nb_cmd)
 			last_pid = execute_pipex(data, env, nb_pro);
 		close_pipe(data);
 		ft_waitpid(last_pid);

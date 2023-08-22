@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:57:52 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/28 18:26:59 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/22 10:47:17 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	count_cmd_by_grp(t_token *token, int group)
 	count = 0;
 	while (tok != NULL)
 	{
-		if ((tok->aim == SIMPLE_CMD  || tok->aim == BUILTIN)
+		if ((tok->aim == SIMPLE_CMD || tok->aim == BUILTIN)
 			&& tok->group == group)
 			count++;
 		tok = tok->next;
@@ -62,7 +62,7 @@ static void	merge_cmd(t_token *token)
 	int		group;
 	int		count;
 	t_token	*tmp;
-	
+
 	tmp = token;
 	group = 0;
 	while (group < g_global.nb_cmd)
@@ -104,7 +104,7 @@ void	add_cmd_to_cmd(t_bigshell *data)
 {
 	t_token			*tok;
 	t_simple_cmd	*simple_cmd;
-	
+
 	simple_cmd = data->simple_cmd;
 	while (simple_cmd != NULL)
 	{

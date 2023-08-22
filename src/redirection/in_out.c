@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_out.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:51:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/28 16:28:18 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/22 10:26:19 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	is_redirection(t_bigshell *data)
 		return (0);
 }
 
-int	open_fd(t_bigshell *data, t_redir *redir)
+int	open_fd(t_redir *redir)
 {
 	t_redir	*el;
 
@@ -51,16 +51,16 @@ int	open_fd(t_bigshell *data, t_redir *redir)
 	while (el != NULL)
 	{
 		if (el->type == DLESS)
-			redirection_here_doc(data, el);
+			redirection_here_doc(el);
 		else if (el->type == LESS)
 		{
-			if (redirection_less(data, el) == 0)
+			if (redirection_less(el) == 0)
 				return (0);
 		}
 		else if (el->type == DGREAT)
-			redirection_append(data, el);
+			redirection_append(el);
 		else if (el->type == GREAT)
-			if (redirection_great(data, el) == 0)
+			if (redirection_great(el) == 0)
 				return (0);
 		el = el->next;
 	}
@@ -73,7 +73,7 @@ int	redir_job(t_bigshell *data)
 	if (data->redir_or_not < 3)
 	{
 		data->in_out = init_redir(data);
-		if (open_fd(data, data->in_out) == 0)
+		if (open_fd(data->in_out) == 0)
 			return (0);
 	}
 	return (1);

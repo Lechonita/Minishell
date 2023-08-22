@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_out_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:48:37 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/28 18:18:22 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/22 10:49:46 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ t_redir	*last_redir_in_cmd(t_redir *redir, int type, int type2)
 	t_redir	*lst;
 
 	if (type == GREAT && type2 == DGREAT)
-		count = count_file_in_cmd(redir, GREAT)
-			+ count_file_in_cmd(redir, DGREAT);
+		count = nb_red_in_cmd(redir, GREAT)
+			+ nb_red_in_cmd(redir, DGREAT);
 	else if (type == LESS && type2 == DLESS)
-		count = count_file_in_cmd(redir, LESS)
-			+ count_file_in_cmd(redir, DLESS);
+		count = nb_red_in_cmd(redir, LESS)
+			+ nb_red_in_cmd(redir, DLESS);
 	lst = redir;
 	while (lst != NULL && count > 0)
 	{

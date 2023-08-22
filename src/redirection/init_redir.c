@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:21:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/28 18:18:27 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/22 10:45:22 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	count_file_in_cmd(t_redir *redir, int type)
+int	nb_red_in_cmd(t_redir *redir, int type)
 {
 	t_redir	*el;
 	int		count;
@@ -28,16 +28,16 @@ int	count_file_in_cmd(t_redir *redir, int type)
 	return (count);
 }
 
-static int	is_redir_in_cmd(t_redir *redir)
+static int	is_redir_in_cmd(t_redir *red)
 {	
-	if ((count_file_in_cmd(redir, LESS) == 0 && count_file_in_cmd(redir, DLESS) == 0)
-		&& (count_file_in_cmd(redir, GREAT) > 0 || count_file_in_cmd(redir, DGREAT) > 0))
+	if ((nb_red_in_cmd(red, LESS) == 0 && nb_red_in_cmd(red, DLESS) == 0)
+		&& (nb_red_in_cmd(red, GREAT) > 0 || nb_red_in_cmd(red, DGREAT) > 0))
 		return (1);
-	else if ((count_file_in_cmd(redir, LESS) > 0 || count_file_in_cmd(redir, DLESS) > 0)
-		&& (count_file_in_cmd(redir, GREAT) == 0 && count_file_in_cmd(redir, DGREAT) == 0))
+	else if ((nb_red_in_cmd(red, LESS) > 0 || nb_red_in_cmd(red, DLESS) > 0)
+		&& (nb_red_in_cmd(red, GREAT) == 0 && nb_red_in_cmd(red, DGREAT) == 0))
 		return (2);
-	else if (count_file_in_cmd(redir, LESS) == 0 && count_file_in_cmd(redir, DLESS) == 0
-		&& count_file_in_cmd(redir, GREAT) == 0 && count_file_in_cmd(redir, DGREAT) == 0)
+	else if (nb_red_in_cmd(red, LESS) == 0 && nb_red_in_cmd(red, DLESS) == 0
+		&& nb_red_in_cmd(red, GREAT) == 0 && nb_red_in_cmd(red, DGREAT) == 0)
 		return (3);
 	else
 		return (0);
@@ -54,7 +54,7 @@ void	add_redir_to_cmd(t_bigshell *data)
 	{
 		cmd->redir = init_redir_in_cmd(&tok, cmd->idx);
 		cmd->redir_or_not = is_redir_in_cmd(cmd->redir);
-		open_fd(data, cmd->redir);
+		open_fd(cmd->redir);
 		cmd = cmd->next;
 	}
 }

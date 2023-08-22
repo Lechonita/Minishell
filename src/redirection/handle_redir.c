@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/28 18:38:53 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/22 10:23:43 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,20 @@ static void	read_stdin_hd(t_redir *redir)
 	return ;
 }
 
-void	redirection_here_doc(t_bigshell *data, t_redir *redir)
+int	redirection_here_doc(t_redir *redir)
 {
 	redir->fd = open("minishell_here_doc", O_CREAT | O_WRONLY, 0644);
 	if (redir->fd < 0)
-		return (ft_error(EXIT_FAILURE, W_HD_OPEN));
+		return (ft_error(errno, strerror(errno)), errno);
 	read_stdin_hd(redir);
 	close(redir->fd);
 	redir->fd = open("minishell_here_doc", O_RDONLY);
 	if (redir->fd < 0)
-		return (ft_error(EXIT_FAILURE, W_HD_OPEN));
+		return (ft_error(errno, strerror(errno)), errno);
+	return (1);
 }
 
-int	redirection_less(t_bigshell *data, t_redir *redir)
+int	redirection_less(t_redir *redir)
 {
 	if (access(redir->file, F_OK) < 0)
 	{
@@ -77,7 +78,7 @@ int	redirection_less(t_bigshell *data, t_redir *redir)
 	return (1);
 }
 
-int	redirection_great(t_bigshell *data, t_redir *redir)
+int	redirection_great(t_redir *redir)
 {
 	if (access(redir->file, F_OK) == 0 && access(redir->file, W_OK) < 0)
 	{
@@ -92,15 +93,17 @@ int	redirection_great(t_bigshell *data, t_redir *redir)
 	return (1);
 }
 
-void	redirection_append(t_bigshell *data, t_redir *redir)
+int	redirection_append(t_redir *redir)
 {
 	if (access(redir->file, F_OK) == 0 && access(redir->file, W_OK) < 0)
 	{
 		msg_not_found(PERM_DENIED, redir->file);
 		g_global.exit_status = 1;
 		redir->fd = 0;
+		return (0);
 	}
 	redir->fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (redir->fd < 0)
-		return (ft_error(errno, strerror(errno)));
+		return (ft_error(errno, strerror(errno)), errno);
+	return (1);
 }

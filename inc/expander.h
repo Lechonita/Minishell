@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/20 16:19:24 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/22 10:28:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include "minishell.h"
 
 /* DOLLAR ADD VALUE */
-t_line *line_new_var(t_line *line, t_line *after, char c, int index);
+t_line	*line_new_var(t_line *line, t_line *after, char c, int index);
 t_line	*line_add_node(t_line *line, char value, int index);
-t_line *line_replace_node(t_line *line, char value, int index);
+t_line	*line_replace_node(t_line *line, char value, int index);
 void	add_var(t_line *line, char *value, int idx, char *var);
 
 /* DOLLAR EXPANSION */
-void    rm_var_excess(t_line *line, int index, char *var);
+void	rm_var_excess(t_line *line, int index, char *var);
 void	var_not_found(t_line **line, char *var);
 void	compare_var(t_bigshell *data, t_line *line, char *var, int index);
 void	rm_dollar(t_line *line);

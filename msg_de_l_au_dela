@@ -17,8 +17,8 @@ echo 1 > out12 2 <Makefile in2 >>out13
 
 → ls | < 1 cat
 
-→ 
-→ 
+→ go install github.com/arsham/rainbow@latest
+→ https://github.com/arsham/rainbow#installation
 → 
 
 

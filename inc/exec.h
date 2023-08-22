@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:38:19 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/21 14:02:23 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/22 13:40:23 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	init_exec(t_bigshell *data);
 
 /* EXEC */
 pid_t	execute_pipex(t_bigshell *data, char *env[], int pcss);
-// pid_t	exec_simple_cmd(t_bigshell *data, char *env[]);
-void	exec_simple_cmd(t_bigshell *data, char *env[]);
+int		exec_simple_cmd(t_bigshell *data, char *env[]);
 int		executor(t_bigshell *data, char *env[]);
 
 int		ft_waitpid(pid_t last_pid);

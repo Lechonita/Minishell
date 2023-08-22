@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:37:35 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/28 18:05:44 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/22 10:49:46 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 
 # include "minishell.h"
 
-int				open_fd(t_bigshell *data, t_redir *redir);
-
-
+int				open_fd(t_redir *redir);
 void			close_fd_in_cmd(t_redir *redir, int idx, int type, int type2);
 
-int				count_file_in_cmd(t_redir *redir, int type);
+int				nb_red_in_cmd(t_redir *redir, int type);
 t_redir			*last_redir_in_cmd(t_redir *redir, int type, int type2);
 
 /* FIND AIM */
