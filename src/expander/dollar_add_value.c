@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:28:20 by lechon            #+#    #+#             */
-/*   Updated: 2023/08/21 16:52:07 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:58:57 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_line	*line_new_var(t_line *line, t_line *after, char c, int index)
 	new = malloc(sizeof(*new));
 	if (!new)
 		return (NULL);
-	new->index = index + 1;
+	new->index = index;
 	new->type = WORD;
 	if (line)
 	{
@@ -54,6 +54,18 @@ t_line	*line_replace_node(t_line *line, char value)
 	return (line);
 }
 
+void	line_addmiddle(t_line *line, char c, int index)
+{
+	t_line	*last;
+
+	if (!line)
+		return ;
+	last = line;
+	while (last && last->index != index - 1)
+		last = last->next;
+	last->next = line_new_var(last, last->next, c, index);
+}
+
 void	add_var(t_line *line, char *value, int idx, char *var)
 {
 	t_line	*tmp;
@@ -62,19 +74,22 @@ void	add_var(t_line *line, char *value, int idx, char *var)
 
 	if (!line || !value || !var)
 		return ;
-	tmp = line->next;
+	tmp = line;
+	print_t_line(line);
 	i = -1;
 	j = 0;
 	while (value[++i])
 	{
-		if (var[j] && tmp->c == var[j] && j == 0)
+		if (var[j] && tmp->c == var[j])
 		{
 			tmp = line_replace_node(tmp, value[i]);
+			tmp = tmp->next;
 			j++;
 		}
 		else
-			tmp = line_add_node(tmp, value[i], idx);
+			line_addmiddle(line, value[i], idx);
 		idx++;
 	}
+	align_line_index(line, idx - 1);
 	print_t_line(line);
 }

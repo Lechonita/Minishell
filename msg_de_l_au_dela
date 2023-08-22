@@ -10,16 +10,13 @@ yo mate !! how are you??
 < files/no_right << files/write_o < files/all_rights ls -l >files/read_o >>files/read_write >files/exec_o.c 
 
 to do list :
-	→ handle { } in parser
 	→ check if all grammar is ok in lexer/parser/tokener 
-	→ $? print the exit status of the last command executed (ret)
 	→ gérer les redirection avant l'exec
 	→ gérer les open/close de fd avant l'exec
 
 
 to do expansion :
 	→ cmd="ls -l" puis $cmd affiche le resultat de ls -l
-	→ echo $?
 	→ "$cmd" doit afficher "ls -lra: command not found"
 	→ export bout="s -l" puis faire l$bout -ra : ca doit afficher le resultat de "ls -l -ra"
 example / error :
@@ -42,6 +39,13 @@ example / error :
 			→ arret du programme 
 			→ echo ne s'execute pas
 
+
+	→ $ '<'Makefile wc
+		ca doit retourner: <Makefile: command not found
+
+
+TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD
+
 	→ $ echo "salut" Bea
 		ca donne => salut Bea
 		il faut regarder dans aim_cmd.c, la fonction add_arg_to_cmd => la boucle while tourne a l'infini
@@ -51,17 +55,8 @@ example / error :
 		- avec double quotes, ca resort "path" tout seul
 		- avec single quotes, ca tourne en boucle infini
 
-	→ $ echo "'$USER'"
-		ca doit retourner: 'jrouillo'
+	→ Attention, echo '"$USER"' doit renvoyer "$USER"
 
-	→ $ '<'Makefile wc
-		ca doit retourner: <Makefile: command not found
-
-	→ Gestion plusieurs $ cassé :(
-		echo $USER et $PATH
-		ca ne fonctionne plus => check fonction rm_excess_var, dans dollar_expansion.c
-
-TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD
 
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
