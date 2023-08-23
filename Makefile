@@ -163,7 +163,7 @@ endef
 
 ############################### Rules ##########################################
 
-all: $(NAME) #art_bis
+all: $(NAME) art
 
 $(LIBFT):
 	@make --no-print-directory all -C $(LIBFT_DIR)
@@ -180,27 +180,17 @@ $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline -lncurses
 	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
 
-art_bis:
-	@echo "	 	 ________________________________________________________   \n \
-			/\                                                       \	\n \
-			\_|                                                      |	\n \
-			  |                ▙▗▌▗    ▗ ▞▀▖▌     ▜▜                 |	\n \
-			  |                ▌▘▌▄ ▛▀▖▄ ▚▄ ▛▀▖▞▀▖▐▐                 |	\n \
-			  |                ▌ ▌▐ ▌ ▌▐ ▖ ▌▌ ▌▛▀ ▐▐                 |	\n \
-			  |                ▘ ▘▀▘▘ ▘▀▘▝▀ ▘ ▘▝▀▘ ▘▘                |	\n \
-			  |                                                      |	\n \
-			  |   ___________________________________________________|_	\n \
-			   \_/_____________________________________________________/  \t★ Lechon & BeBig ★ \n" #| lolcat
+art:
+	@./banner.sh
 
 norm:
 	@norminette src/*/*.c
 	@norminette inc/*.h
-#	@norminette libft/*/*.[ch]
 
-leaks: $(NAME) #art_bis #fclean $(NAME)
+leaks: $(NAME) art
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
-	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./.readline_supp -q  ./$(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./.readline_supp -q ./$(NAME)
 # --gen-suppressions=all --gen-suppressions=all --log-file="valou"
 
 clean:
