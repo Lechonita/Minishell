@@ -55,11 +55,6 @@ TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD
 		- avec double quotes, ca resort "path" tout seul
 		- avec single quotes, ca tourne en boucle infini
 
-	→ Attention, echo '"$USER"' doit renvoyer "$USER"
-		Si les double sont a l'intérieur des single, alors il n'y a pas d'expansion
-		Si les single sont à l'intérieur des double, alors il y a expansion
-
-
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
 		$ echo ${PATH{   OU   echo ${PATH
