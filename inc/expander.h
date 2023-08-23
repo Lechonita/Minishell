@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/22 17:58:06 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:42:31 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 t_line	*line_new_var(t_line *line, t_line *after, char c, int index);
 t_line	*line_add_node(t_line *line, char value, int index);
 t_line	*line_replace_node(t_line *line, char value);
-void	add_var(t_line *line, char *value, int idx, char *var);
+t_line	*add_var(t_line *line, char *value, int idx, char *var);
 
 /* DOLLAR EXPANSION */
 t_line	*line_rm_next(t_line *prev);
-void	var_not_found(t_bigshell *data, t_line **line, char *var);
-void	compare_var(t_bigshell *data, t_line *line, char *var, int index);
+t_line	*var_not_found(t_bigshell *data, t_line **line, char *var, int index);
+t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index);
 t_line	*find_prev(t_bigshell *data, int index);
-void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index);
+t_line	*dollar_expand(t_bigshell *data, t_line *line, char *var, int index);
 
 /* DOLLAR UTILS */
 void	align_line_index(t_line *line, int start);
@@ -35,7 +35,7 @@ char	*get_var_bis(t_line *line, char *var);
 char	*get_var(t_line *line);
 
 /* DOLLAR */
-void	do_expansion(t_bigshell *data, t_line *line, int index);
+t_line	*do_expansion(t_bigshell *data, t_line *line, int index);
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line);
 
 /* QUOTES FIND */

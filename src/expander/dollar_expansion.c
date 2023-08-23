@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/22 17:58:45 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:09:10 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ t_line	*line_rm_next(t_line *prev)
 		return (NULL);
 	tmp = prev->next;
 	prev->next = prev->next->next;
-	free(tmp);
+	if (tmp)
+		free(tmp);
 	return (prev->next);
 }
 
-void	var_not_found(t_bigshell *data, t_line **line, char *var)
+t_line	*var_not_found(t_bigshell *data, t_line **line, char *var, int index)
 {
 	t_line	*tmp;
 	t_line	*prev;
 	int		len;
 
 	if (!data || !line || !(*line) || !var)
-		return ;
+		return (NULL);
 	tmp = *line;
 	prev = find_prev(data, tmp->index);
 	len = ft_strlen(var);
@@ -42,16 +43,18 @@ void	var_not_found(t_bigshell *data, t_line **line, char *var)
 		tmp = line_rm_next(prev);
 		len--;
 	}
-	align_line_index(*line, 0);
+	align_line_index(data->line, 0);
+	return (find_prev(data, index));
 }
 
-void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
+t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 {
+	t_line	*res;
 	t_env	*env;
 	int		flag;
 
 	if (!data || !line || !var)
-		return ;
+		return (NULL);
 	env = data->env;
 	flag = 1;
 	while (env)
@@ -60,14 +63,16 @@ void	compare_var(t_bigshell *data, t_line *line, char *var, int index)
 			&& (ft_strlen(env->name) == ft_strlen(var))
 			&& env->to_export == FALSE)
 		{
-			add_var(line, env->value, index, var);
+			res = add_var(line, env->value, index, var);
 			flag = 0;
 			break ;
 		}
 		env = env->next;
 	}
 	if (flag == 1)
-		var_not_found(data, &line, var);
+		res = var_not_found(data, &line, var, index);
+	align_line_index(data->line, index);
+	return (res);
 }
 
 t_line	*find_prev(t_bigshell *data, int index)
@@ -86,14 +91,16 @@ t_line	*find_prev(t_bigshell *data, int index)
 	return (tmp);
 }
 
-void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
+t_line	*dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
 {
 	t_line	*prev;
+	t_line	*tmp;
 
 	if (!data || !line || !var)
-		return ;
-	prev = find_prev(data, line->index);
-	line = line_rm_next(prev);
+		return (NULL);
+	tmp = line;
+	prev = find_prev(data, tmp->index);
+	tmp = line_rm_next(prev);
 	align_line_index(data->line, 0);
-	compare_var(data, line, var, index);
+	return (compare_var(data, tmp, var, index));
 }

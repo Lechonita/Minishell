@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/22 18:02:26 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:09:09 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,54 @@
 /* A traiter :
 	- echo "'$PATH'" ==> output la valeur de PATH, sans guillemets
 	- si la valeur x ($x) n'existe pas dans t_env, alors ce n'est pas une erreur
-	mais une valeur NULL. Ex : si a n'a pas ete initialise :
+	mais une valeur NULL. Ex : si a n'a pas été initialisé :
 	echo "'$a'" ==> '' */
 
 /* Step by step :
 	1/ Je sais que je suis sur un dollar sign
-	2/ Je veux regarder les caracteres qui se trouvent apres le dollar sign,
-		jusqu'a la fermeture de l'acolade ou le prochain espace et je le store.
-	3/ Comparer la chaine de caractere avec les names de t_env
-		- Si y en a un pareil, alors rajouter data->env->value en creant un
+	2/ Je veux regarder les caractères qui se trouvent apres le dollar sign,
+		jusqu'au prochain espace / newline et je le store.
+	3/ Comparer la chaîne de caractères avec les names de t_env
+		- Si y en a un pareil, alors rajouter data->env->value en créant un
 			maillon t_line pour chaque caractere de data->env->value.
-			Attention a bien retirer le $ et les acolades si y en a.
-		- Si aucun name ne correspond et qu'on est dans des guillemets,
-			ne rien faire.
-		- Si aucun name ne correspond et qu'on n'est pas dans des guillemets,
-			afficher un retour a la ligne. */
+			Attention a bien retirer le $.
+		- Si aucun name ne correspond, afficher un retour a la ligne. */
 
-void	do_expansion(t_bigshell *data, t_line *line, int index)
+int	single_quote_position(t_line *line)
+{
+	t_line	*tmp;
+
+	if (!line)
+		return (0);
+	tmp = line;
+	if (tmp->sq == 1)
+	{
+		while (tmp)
+		{
+			if (tmp->type != WORD)
+				return (tmp->type);
+			tmp = tmp->next;
+		}
+	}
+	return (0);
+}
+
+t_line	*do_expansion(t_bigshell *data, t_line *line, int index)
 {
 	char	*var;
 	t_line	*tmp;
 
 	if (!line || !line->next)
-		return ;
+		return (NULL);
 	tmp = line;
 	var = get_var(tmp->next);
 	if (!var)
-		return (free(var));
-	if ((tmp->dq == 0 && tmp->sq == 0) || tmp-> dq == 1)
-	{
-		dollar_expand(data, tmp, var, index);
-		align_line_index(line, index);
-	}
-	free(var);
+		return (free(var), NULL);
+	if ((tmp->dq == 0 && tmp->sq == 0)
+		|| (tmp-> dq == 1 && tmp->sq == 0)
+		|| (tmp->sq == 1 && single_quote_position(tmp) == DQUOTE))
+		tmp = dollar_expand(data, tmp, var, index);
+	return (free(var), tmp);
 }
 
 void	do_dollar_ret(t_line *line)
@@ -75,7 +90,7 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 {
 	t_line	*tmp;
 
-	if (!line)
+	if (!data || !line)
 		return ;
 	tmp = line;
 	while (tmp)
@@ -87,8 +102,9 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 			if (tmp->sq == 1 || !tmp->next || tmp->next->type == BLANK
 				|| tmp->next->type == NEW_LINE)
 				tmp->type = WORD;
-			if (tmp->next && (tmp->dq == 1 || (tmp->dq == 0 && tmp->sq == 0)))
-				do_expansion(data, tmp, tmp->index);
+			if (tmp->next && (tmp->dq == 1
+					|| (tmp->dq == 0 && tmp->sq == 0)))
+				tmp = do_expansion(data, tmp, tmp->index);
 		}
 		tmp = tmp->next;
 	}
