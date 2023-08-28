@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/28 13:22:35 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:36:54 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	same_aim(t_bigshell *data)
 	{
 		if (tok->aim == tok->next->aim && tok->aim != REDIR)
 		{
-			tok->value = free_strjoin(tok->value, tok->next->value);
+			tok->value = freejoin(tok->value, tok->next->value);
 			token_rm_next(tok);
 		}
 		else
@@ -34,7 +34,7 @@ static char	*join_spac(char *s1, char *s2, char *to_add)
 	char	*tmp;
 	char	*str;
 
-	tmp = free_strjoin(s1, to_add);
+	tmp = freejoin(s1, to_add);
 	str = ft_strjoin(tmp, s2);
 	free(tmp);
 	return (str);
@@ -52,7 +52,7 @@ void	add_arg_to_cmd(t_bigshell *data)
 		{
 			while (tok->next->next && tok->next->next->aim == SIMPLE_CMD)
 			{
-				tok->value = join_spac(tok->value, tok->next->next->value, " ");
+				tok->value = def_tok_value(tok->value, tok->next->next->value);
 				if (tok->next->type == BLANK
 					|| (tok->next->type == SQUOTE || tok->next->type == DQUOTE))
 					token_rm_next(tok);
@@ -64,8 +64,6 @@ void	add_arg_to_cmd(t_bigshell *data)
 		}
 		tok = tok->next;
 	}
-	// print_t_line(data->line);
-	// print_t_token(data);
 }
 
 void	check_builtin(t_bigshell *data)

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/28 14:05:23 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:38:03 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 			&& (ft_strlen(env->name) == ft_strlen(var))
 			&& env->to_export == FALSE)
 		{
-			res = add_var(line, env->value, index, var);
+			res = add_var(data, line, env->value, var);
 			flag = 0;
 			break ;
 		}
@@ -82,28 +82,11 @@ t_line	*find_prev(t_bigshell *data, int index)
 	if (!data)
 		return (NULL);
 	tmp = data->line;
-	// printf("Dans find_prev, j'ai un tmp index de %d\n", tmp->index);
 	while (tmp)
 	{
-		// printf("tmp = -%c- et tmp index = %d\n", tmp->c, tmp->index);
 		if (tmp->index == index - 1)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	// printf("Et je sors de la boucle ?\n");
 	return (tmp);
-}
-
-t_line	*dollar_expand(t_bigshell *data, t_line *line, char *var, int index)
-{
-	t_line	*prev;
-	t_line	*tmp;
-
-	if (!data || !line || !var)
-		return (NULL);
-	tmp = line;
-	prev = find_prev(data, tmp->index);
-	tmp = line_rm_next(prev);
-	align_line_index(data->line, 0);
-	return (compare_var(data, tmp, var, index));
 }

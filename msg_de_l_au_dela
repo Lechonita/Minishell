@@ -67,7 +67,9 @@ TESTS QUOTES ET DOLLAR :
 → $ echo "$USER" et '$PWD'
 → $ echo '$USER' et "$PWD"
 → $ echo "$USER et '$PWD'"
-
+→ $ echo "$"USER
+→ $ echo '$'$USER
+→ $ echo " salut $"PATH
 
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait

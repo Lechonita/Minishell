@@ -105,6 +105,7 @@ SRC += token_type_bis.c
 #	Parser functions
 SRC += find_aim.c
 SRC += aim_cmd.c
+SRC += aim_utils.c
 
 #	Redirection functions
 SRC += path_name.c

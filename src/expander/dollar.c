@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/28 15:13:36 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:06:21 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_line	*do_expansion(t_bigshell *data, t_line *line, int index)
 	if ((tmp->dq == 0 && tmp->sq == 0)
 		|| (tmp-> dq == 1 && tmp->sq == 0)
 		|| (tmp->sq == 1 && single_quote_position(tmp) == DQUOTE))
-		tmp = dollar_expand(data, tmp, var, index);
+		tmp = compare_var(data, tmp, var, index);
 	return (free(var), tmp);
 }
 
@@ -123,8 +123,8 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 				|| tmp->next->type == DQUOTE)
 				tmp->type = WORD;
 			flag = is_between_quotes(data, tmp);
-			if (flag == 0 && tmp->next && (tmp->dq == 1
-					|| (tmp->dq == 0 && tmp->sq == 0)))
+			if (flag == 0 && tmp->next && tmp->next->type == WORD
+				&& (tmp->dq == 1 || (tmp->dq == 0 && tmp->sq == 0)))
 				tmp = do_expansion(data, tmp, tmp->index);
 		}
 		flag = 0;

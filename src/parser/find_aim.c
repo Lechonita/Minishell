@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/17 16:45:07 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:03:04 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,13 @@ void	rm_blank(t_bigshell *data)
 
 void	parser_job(t_bigshell *data)
 {
+	// print_t_line(data->line);
 	aim_redir(data);
 	aim_pipe(data);
 	aim_cmd(data);
+	// print_t_token(data);
 	check_builtin(data);
 	check_double_redir(data);
 	rm_blank(data);
+	print_t_token(data);
 }

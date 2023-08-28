@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   aim_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 16:38:06 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/28 17:30:53 by jrouillo         ###   ########.fr       */
+/*   Created: 2023/08/28 17:20:03 by jrouillo          #+#    #+#             */
+/*   Updated: 2023/08/28 17:37:01 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	*freejoin(char *to_free, char *buf)
+int	last_is_dollar(char *str)
 {
-	char	*tmp;
+	int	i;
 
-	tmp = ft_strjoin(to_free, buf);
-	return (free(to_free), tmp);
-}
-
-void	init_minishell(t_bigshell *data, char *env[])
-{
-	set_signal();
-	init_env(data, env);
-}
-
-int	main(int ac, char *av[], char *env[])
-{
-	t_bigshell	*data;
-
-	data = ft_calloc(1, sizeof(t_bigshell));
-	init_minishell(data, env);
-	if (ac == 2)
-		printf("%s\n", av[1]);
-	ft_readline(data, env);
-	free_all(data);
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i + 1])
+		i++;
+	if (str[i] == '$')
+		return (1);
 	return (0);
+}
+
+char	*def_tok_value(char *value, char *next_value)
+{
+	if (!value || !next_value)
+		return (NULL);
+	if (last_is_dollar(value) == 1)
+		return (freejoin(value, next_value));
+	return (join_spac(value, next_value, " "));
 }

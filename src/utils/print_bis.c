@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/25 18:16:47 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:43:26 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ void	print_t_line(t_line *line)
 void	print_t_token(t_bigshell *data)
 {
 	t_token		*el;
-	const char	*aim_str[] = {
-		"REDIR",
-		"CMD",
-		"BUILTIN",
-		"PIPEX",
-	};
+	// const char	*aim_str[] = {
+	// 	"REDIR",
+	// 	"CMD",
+	// 	"BUILTIN",
+	// 	"PIPEX",
+	// };
 
 	el = data->token;
 	printf("__________________TOKEN________________________\n");
@@ -83,7 +83,8 @@ void	print_t_token(t_bigshell *data)
 		printf("[%2d] ", el->index);
 		printf("tok %2d ", el->type);
 		printf(": %20s ", el->value);
-		printf("→ %2d %8s\n", el->aim, aim_str[el->aim - 20]);
+		printf("→ %2d\n", el->aim);
+		// printf("%8s\n", aim_str[el->aim - 20]);
 		el = el->next;
 	}
 }

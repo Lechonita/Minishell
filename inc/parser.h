@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:37:35 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/10 13:44:10 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:35:38 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,9 @@ void	parser_job(t_bigshell *data);
 void	same_aim(t_bigshell *data);
 void	add_arg_to_cmd(t_bigshell *data);
 void	check_builtin(t_bigshell *data);
+
+/* AIM UTILS */
+int		last_is_dollar(char *str);
+char	*def_tok_value(char *value, char *next_value);
 
 #endif

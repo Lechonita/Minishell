@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:28:20 by lechon            #+#    #+#             */
-/*   Updated: 2023/08/23 17:03:44 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:38:39 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,27 +66,29 @@ void	line_addmiddle(t_line *line, char c, int index)
 	last->next = line_new_var(last, last->next, c, index);
 }
 
-t_line	*add_var(t_line *line, char *value, int idx, char *var)
+t_line	*add_var(t_bigshell *data, t_line *line, char *value, char *var)
 {
 	t_line	*tmp;
+	int		idx;
 	int		i;
 	int		j;
 
 	if (!line || !value || !var)
 		return (NULL);
-	tmp = line;
+	tmp = line_rm_next(find_prev(data, line->index));
+	idx = tmp->index - 1;
 	i = -1;
 	j = 0;
 	while (value[++i])
 	{
-		if (var[j] && tmp->c == var[j])
+		if ((var[j] && tmp->c == var[j]))
 		{
 			tmp = line_replace_node(tmp, value[i]);
 			tmp = tmp->next;
 			j++;
 		}
 		else
-			line_addmiddle(line, value[i], idx);
+			line_addmiddle(line, value[i], idx + 1);
 		idx++;
 	}
 	align_line_index(line, idx - 1);
