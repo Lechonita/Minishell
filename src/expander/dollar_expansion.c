@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/23 17:09:10 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 14:05:23 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,15 @@ t_line	*find_prev(t_bigshell *data, int index)
 	if (!data)
 		return (NULL);
 	tmp = data->line;
+	// printf("Dans find_prev, j'ai un tmp index de %d\n", tmp->index);
 	while (tmp)
 	{
+		// printf("tmp = -%c- et tmp index = %d\n", tmp->c, tmp->index);
 		if (tmp->index == index - 1)
 			return (tmp);
 		tmp = tmp->next;
 	}
+	// printf("Et je sors de la boucle ?\n");
 	return (tmp);
 }
 

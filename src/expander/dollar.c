@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/23 17:09:09 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:13:36 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,23 @@ t_line	*do_expansion(t_bigshell *data, t_line *line, int index)
 	return (free(var), tmp);
 }
 
+int	is_between_quotes(t_bigshell *data, t_line *line)
+{
+	t_line	*tmp;
+	t_line	*prev;
+
+	if (!line)
+		return (0);
+	tmp = line;
+	prev = find_prev(data, tmp->index);
+	if (prev->type == DQUOTE && tmp->next->type == DQUOTE)
+	{
+		tmp->type = WORD;
+		return (1);
+	}
+	return (0);
+}
+
 void	do_dollar_ret(t_line *line)
 {
 	t_line	*tmp;
@@ -89,10 +106,12 @@ void	do_dollar_ret(t_line *line)
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 {
 	t_line	*tmp;
+	int		flag;
 
 	if (!data || !line)
 		return ;
 	tmp = line;
+	flag = 0;
 	while (tmp)
 	{
 		if (tmp->c == '$')
@@ -100,12 +119,15 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 			if (tmp->next && tmp->next->c == '?')
 				do_dollar_ret(tmp->next);
 			if (tmp->sq == 1 || !tmp->next || tmp->next->type == BLANK
-				|| tmp->next->type == NEW_LINE)
+				|| tmp->next->type == NEW_LINE || tmp->next->type == SQUOTE
+				|| tmp->next->type == DQUOTE)
 				tmp->type = WORD;
-			if (tmp->next && (tmp->dq == 1
+			flag = is_between_quotes(data, tmp);
+			if (flag == 0 && tmp->next && (tmp->dq == 1
 					|| (tmp->dq == 0 && tmp->sq == 0)))
 				tmp = do_expansion(data, tmp, tmp->index);
 		}
+		flag = 0;
 		tmp = tmp->next;
 	}
 }

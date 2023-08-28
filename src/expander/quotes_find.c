@@ -6,17 +6,12 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/21 16:15:40 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:02:09 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
-
-	// check guillemets
-	// check l'ordre des guillemets si plusieurs
-	// 	=> des '' a l'interieur des "" n'ont aucun effet
-	// check serie de mots
 
 int	find_last_quote(t_line *line, int type, int limiter)
 {
@@ -70,26 +65,19 @@ int	closing_quote_exists(t_line *line, int type)
 
 void	convert_quotes(t_line *line, int type)
 {
-	int		last;
 	t_line	*tmp;
-	t_line	*prev;
 
 	if (!line || !type)
 		return ;
 	tmp = line->next;
-	prev = line;
 	if (closing_quote_exists(tmp, type) == 1)
 	{
-		last = find_last_quote(tmp, type, find_limiter(tmp));
 		while (tmp && tmp->index <= find_limiter(tmp))
 		{
-			if (tmp->type == type && tmp->index == last)
+			if (tmp->type == type)
 				break ;
-			else if (tmp->type == type && tmp->index != last)
-				tmp = line_rm_next(prev);
 			else
 				tmp->type = WORD;
-			prev = tmp;
 			tmp = tmp->next;
 		}
 		if (tmp && tmp->next)
@@ -119,4 +107,5 @@ void	find_quotes(t_line *line)
 		else
 			el = el->next;
 	}
+	align_line_index(line, 0);
 }

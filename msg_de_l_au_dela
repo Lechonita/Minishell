@@ -46,14 +46,28 @@ example / error :
 
 TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD
 
-	→ $ echo "salut" Bea
-		ca donne => salut Bea
-		il faut regarder dans aim_cmd.c, la fonction add_arg_to_cmd => la boucle while tourne a l'infini
-
 	→ $ echo "$"path ET echo '$'path
 		ca donne => $path
-		- avec double quotes, ca resort "path" tout seul
-		- avec single quotes, ca tourne en boucle infini
+
+TESTS QUOTES ET DOLLAR :
+→ $ echo 'hello world'
+→ $ echo "hello world"
+→ $ echo 'hello''world'
+→ $ echo "hello""world"
+→ $ echo "hello" 'world' "et Bea"
+→ $ echo "salut" Bea '"$USER"'
+→ $ echo $USER
+→ $ echo "$USER"
+→ $ echo '$USER'
+→ $ echo "'$USER'"
+→ $ echo '"$USER"'
+→ $ echo $USER et "$PWD"
+→ $ echo "$USER et $PWD"
+→ $ echo '$USER et $PWD'
+→ $ echo "$USER" et '$PWD'
+→ $ echo '$USER' et "$PWD"
+→ $ echo "$USER et '$PWD'"
+
 
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
