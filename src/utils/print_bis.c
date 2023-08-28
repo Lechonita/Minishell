@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/28 18:08:13 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/28 12:07:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,14 @@ void	print_t_token(t_bigshell *data)
 	};
 
 	el = data->token;
-	printf("__________________TOKEN________________________\n");
+	dprintf(2, "__________________TOKEN________________________\n");
 	while (el)
 	{
-		printf("[%2d] grp  n°%2d ", el->index, el->group);
-		printf("tok %2d ", el->type);
-		printf(": %20s ", el->value);
-		printf("→ %2d %8s\n", el->aim, aim_str[el->aim - 20]);
+		dprintf(2, "[%2d] grp  n°%2d ", el->index, el->group);
+		dprintf(2, "tok %2d ", el->type);
+		dprintf(2, ": %20s ", el->value);
+		dprintf(2, "→ %2d ", el->aim);
+		dprintf(2, "%8s\n", aim_str[el->aim - 20]);
 		el = el->next;
 	}
 }

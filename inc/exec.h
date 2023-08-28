@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:38:19 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/22 13:40:23 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/28 13:42:00 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_cmd	*init_cmd(t_bigshell *data);
 void	init_exec(t_bigshell *data);
 
 /* EXEC */
-pid_t	execute_pipex(t_bigshell *data, char *env[], int pcss);
+void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[]);
+pid_t	exec_cmd(t_bigshell *data, t_simple_cmd *cmd, char *env[], int end[2]);
 int		exec_simple_cmd(t_bigshell *data, char *env[]);
 int		executor(t_bigshell *data, char *env[]);
 

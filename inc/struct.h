@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/27 11:52:23 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/28 18:12:16 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_simple_cmd
 	char				**cmd_arg;
 	int					fd_in;
 	int					fd_out;
+	int					fd[2];
 	char				*in_file;
 	char				*out_file;
 	int					idx;

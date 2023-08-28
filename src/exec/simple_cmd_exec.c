@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/22 13:40:05 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/28 17:49:36 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,8 @@ static void	handle_dup_simp_cmd(t_simple_cmd *simple_cmd, int red)
 	if ((simple_cmd->fd_in < 3 && (red == 0 || red == 2))
 		|| (simple_cmd->fd_out < 3 && (red == 0 || red == 1)))
 		return ;
-	if (red == 1)
-		dup2(simple_cmd->fd_out, STDOUT_FILENO);
-	else if (red == 2)
-		dup2(simple_cmd->fd_in, STDIN_FILENO);
-	else if (red == 0)
-	{
-		dup2(simple_cmd->fd_out, STDOUT_FILENO);
-		dup2(simple_cmd->fd_in, STDIN_FILENO);
-	}
+	dup2(simple_cmd->fd_out, STDOUT_FILENO);
+	dup2(simple_cmd->fd_in, STDIN_FILENO);
 	if (simple_cmd->fd_in)
 		close(simple_cmd->fd_in);
 	if (simple_cmd->fd_out)
@@ -43,13 +36,11 @@ int	find_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 	return (EXIT_FAILURE);
 }
 
-void	handle_simple_cmd(t_bigshell *data, char *env[])
+void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 {
-	t_simple_cmd	*simple_cmd;
-	int				ret;
+	int	ret;
 
 	ret = 0;
-	simple_cmd = data->simple_cmd;
 	handle_dup_simp_cmd(simple_cmd, simple_cmd->redir_or_not);
 	if (simple_cmd->builtin != 0)
 		ret = exec_builtin_cmd(data, simple_cmd->cmd, simple_cmd->cmd_arg);
@@ -78,7 +69,7 @@ int	exec_simple_cmd(t_bigshell *data, char *env[])
 	if (pid < 0)
 		return (ft_error(errno, strerror(errno)), errno);
 	else if (pid == 0)
-		handle_simple_cmd(data, env);
+		single_cmd(data, cmd, env);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		g_global.exit_status = WEXITSTATUS(status);

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/08/22 11:22:01 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/28 13:45:43 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	ft_readline(t_bigshell *data, char *env[])
 		init_line(data, input);
 		find_tokens(data);
 		parser_job(data);
-		dprintf(2, "\033[3;34m after parser nb_cmd = %d\033[0m\n", g_global.nb_cmd);
-		if (redir_job(data) == 1)
-			executor(data, env);
+		executor(data, env);
 		reset_prompt(data, input);
 	}
 	reset_prompt(data, input);

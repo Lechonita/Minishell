@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/22 11:30:38 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/28 12:06:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ void	add_arg_to_cmd(t_bigshell *data)
 	tok = data->token;
 	while (tok != NULL && tok->next != NULL)
 	{
-		if (tok->aim == SIMPLE_CMD && tok->next->type == BLANK)
+		if (tok->aim == SIMPLE_CMD && (tok->next->type == BLANK
+				|| tok->next->type == DQUOTE || tok->next->type == SQUOTE))
 		{
 			while (tok->next->next && tok->next->next->aim == SIMPLE_CMD)
 			{
 				tok->value = join_spac(tok->value, tok->next->next->value, " ");
-				if (tok->next->type == BLANK)
+				if (tok->next->type == BLANK || tok->next->type == DQUOTE
+					|| tok->next->type == SQUOTE)
 					token_rm_next(tok);
 				if (tok->next->type == WORD)
 					token_rm_next(tok);

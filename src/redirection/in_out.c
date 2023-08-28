@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:51:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/22 10:26:19 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/28 12:19:54 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ int	count_file(t_bigshell *data, int type)
 	return (count);
 }
 
-static int	is_redirection(t_bigshell *data)
-{	
-	if ((count_file(data, LESS) == 0 && count_file(data, DLESS) == 0)
-		&& (count_file(data, GREAT) > 0 || count_file(data, DGREAT) > 0))
-		return (1);
-	else if ((count_file(data, LESS) > 0 || count_file(data, DLESS) > 0)
-		&& (count_file(data, GREAT) == 0 && count_file(data, DGREAT) == 0))
-		return (2);
-	else if (count_file(data, LESS) == 0 && count_file(data, DLESS) == 0
-		&& count_file(data, GREAT) == 0 && count_file(data, DGREAT) == 0)
-		return (3);
-	else
-		return (0);
-}
+// static int	is_redirection(t_bigshell *data)
+// {	
+// 	if ((count_file(data, LESS) == 0 && count_file(data, DLESS) == 0)
+// 		&& (count_file(data, GREAT) > 0 || count_file(data, DGREAT) > 0))
+// 		return (1);
+// 	else if ((count_file(data, LESS) > 0 || count_file(data, DLESS) > 0)
+// 		&& (count_file(data, GREAT) == 0 && count_file(data, DGREAT) == 0))
+// 		return (2);
+// 	else if (count_file(data, LESS) == 0 && count_file(data, DLESS) == 0
+// 		&& count_file(data, GREAT) == 0 && count_file(data, DGREAT) == 0)
+// 		return (3);
+// 	else
+// 		return (0);
+// }
 
 int	open_fd(t_redir *redir)
 {
@@ -67,14 +67,14 @@ int	open_fd(t_redir *redir)
 	return (1);
 }
 
-int	redir_job(t_bigshell *data)
-{
-	data->redir_or_not = is_redirection(data);
-	if (data->redir_or_not < 3)
-	{
-		data->in_out = init_redir(data);
-		if (open_fd(data->in_out) == 0)
-			return (0);
-	}
-	return (1);
-}
+// int	redir_job(t_bigshell *data)
+// {
+// 	data->redir_or_not = is_redirection(data);
+// 	if (data->redir_or_not < 3)
+// 	{
+// 		data->in_out = init_redir(data);
+// 		if (open_fd(data->in_out) == 0)
+// 			return (0);
+// 	}
+// 	return (1);
+// }
