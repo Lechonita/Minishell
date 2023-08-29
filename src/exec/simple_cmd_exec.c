@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/28 17:49:36 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/29 15:54:15 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void	handle_dup_simp_cmd(t_simple_cmd *simple_cmd, int red)
+static void	handle_dup_simp_cmd(t_simple_cmd *simple_cmd)
 {
-	if ((simple_cmd->fd_in < 3 && (red == 0 || red == 2))
-		|| (simple_cmd->fd_out < 3 && (red == 0 || red == 1)))
+	dprintf(2, "\033[1;32m dans dup simp cmd\033[0m \n");
+	if ((simple_cmd->fd_in < 3 && simple_cmd->in_file != NULL)
+		|| (simple_cmd->fd_out < 3 && simple_cmd->out_file != NULL))
 		return ;
-	dup2(simple_cmd->fd_out, STDOUT_FILENO);
-	dup2(simple_cmd->fd_in, STDIN_FILENO);
+	if (simple_cmd->fd_out >2 && dup2(simple_cmd->fd_out, STDOUT_FILENO) < 0)
+		dprintf(2, "\033[1;31m error out \033[0m");
+	if (simple_cmd->fd_in >2 && dup2(simple_cmd->fd_in, STDIN_FILENO) < 0)
+		dprintf(2, "\033[1;31m error in \033[0m]");
 	if (simple_cmd->fd_in)
 		close(simple_cmd->fd_in);
 	if (simple_cmd->fd_out)
@@ -41,7 +44,7 @@ void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 	int	ret;
 
 	ret = 0;
-	handle_dup_simp_cmd(simple_cmd, simple_cmd->redir_or_not);
+	handle_dup_simp_cmd(simple_cmd);
 	if (simple_cmd->builtin != 0)
 		ret = exec_builtin_cmd(data, simple_cmd->cmd, simple_cmd->cmd_arg);
 	else if (simple_cmd->cmd_arg[0][0] != '\0')

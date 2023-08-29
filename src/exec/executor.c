@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:48:15 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/28 18:12:43 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/29 17:23:23 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_waitpid(pid_t last_pid)
 // 	return (pid);
 // }
 
-pid_t	exec_cmd(t_bigshell *data, t_simple_cmd *cmd, char *env[], int end[2])
+pid_t	exec_cmd(t_bigshell *data, t_simple_cmd *cmd, char *env[], int end[2], int start[2])
 {
 	pid_t	pid;
 	int		nb_cmd;
@@ -96,22 +96,17 @@ pid_t	exec_cmd(t_bigshell *data, t_simple_cmd *cmd, char *env[], int end[2])
 		return (free_all(data), ft_exit(errno, strerror(errno)), pid);
 	else if (pid == 0)
 	{
-		if (cmd->idx > 0 && cmd->fd_in > 2)
-			dup2(cmd->fd_in, STDIN_FILENO);
-		else if (cmd->idx > 0 && !cmd->fd_in && !cmd->in_file)
+		dprintf(2, "\033[1;33m [%d] cmd : %7s \033[0m", cmd->idx, cmd->cmd);
+		if (cmd->idx == 0)
 		{
-			dup2(end[0], STDIN_FILENO);
-			dprintf(2, "\033[1;32m je suis la aussi [%d] cmd = %10s\033[0m\n", cmd->idx, cmd->cmd);
+			
 		}
-		close(end[0]);
-		if (cmd->idx < nb_cmd - 1 && cmd->fd_out > 2)
-			dup2(cmd->fd_out, STDOUT_FILENO);
-		else if (cmd->idx < nb_cmd - 1 && !cmd->fd_out && !cmd->out_file)
+		else if (cmd->idx == nb_cmd - 1)
 		{
-			dup2(end[1], STDOUT_FILENO);
-			dprintf(2, "\033[1;31m je suis al [%d] cmd = %10s\033[0m\n", cmd->idx, cmd->cmd);
 		}
-		close(end[1]);
+		else
+		{
+		}
 		if (cmd->idx > 0)
 			close(cmd->fd_in);
 		if (cmd->idx < nb_cmd - 1)
@@ -125,15 +120,25 @@ void	exec_multiple_cmd(t_bigshell *data, char *env[])
 {
 	t_simple_cmd	*cmd;
 	pid_t			last_pid;
+	int				end[2];
+	int				start[2];
 
 	cmd = data->simple_cmd;
 	while (cmd)
 	{
 		if (cmd->next)
-			pipe(cmd->fd);
-		last_pid = exec_cmd(data, cmd, env, cmd->fd);
-		close(cmd->fd[0]);
-		close(cmd->fd[1]);
+			pipe(start);
+		if (!cmd->next->fd_in)
+			pipe(end);
+		if (cmd->idx == 0)
+		{
+			
+		}
+		last_pid = exec_cmd(data, cmd, env, start, end);
+		close(start[0]);
+		close(start[1]);
+		close(end[1]);
+		close(end[0]);
 		if (cmd->fd_in)
 			close(cmd->fd_in);
 		if (cmd->fd_out)

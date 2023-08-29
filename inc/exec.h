@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:38:19 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/28 13:42:00 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/29 10:20:36 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_exec(t_bigshell *data);
 
 /* EXEC */
 void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[]);
-pid_t	exec_cmd(t_bigshell *data, t_simple_cmd *cmd, char *env[], int end[2]);
+// pid_t	exec_cmd(t_bigshell *data, t_simple_cmd *cmd, char *env[], int end[2]);
 int		exec_simple_cmd(t_bigshell *data, char *env[]);
 int		executor(t_bigshell *data, char *env[]);
 

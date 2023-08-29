@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/28 18:12:16 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/29 14:38:59 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ typedef struct s_simple_cmd
 	char				**cmd_arg;
 	int					fd_in;
 	int					fd_out;
-	int					fd[2];
 	char				*in_file;
 	char				*out_file;
 	int					idx;
