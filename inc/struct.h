@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/29 14:38:59 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/29 17:32:16 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_simple_cmd
 	int					redir_or_not;
 	t_redir				*redir;
 	struct s_simple_cmd	*next;
+	struct s_simple_cmd	*prev;
 }	t_simple_cmd;
 
 typedef struct s_token

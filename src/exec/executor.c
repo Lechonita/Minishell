@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:48:15 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/29 17:23:23 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/29 18:04:56 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,19 @@ pid_t	exec_cmd(t_bigshell *data, t_simple_cmd *cmd, char *env[], int end[2], int
 		return (free_all(data), ft_exit(errno, strerror(errno)), pid);
 	else if (pid == 0)
 	{
-		dprintf(2, "\033[1;33m [%d] cmd : %7s \033[0m", cmd->idx, cmd->cmd);
-		if (cmd->idx == 0)
+		dprintf(2, "\033[1;33m [%d] cmd : %7s \033[0m\n", cmd->idx, cmd->cmd);
+		if (cmd->prev)
 		{
-			
+			dprintf(2, "\033[1;33m if not first \033[0m\n");
+			dup2(cmd->fd_in, STDIN_FILENO);
 		}
-		else if (cmd->idx == nb_cmd - 1)
+		if (cmd->next)
 		{
+			dprintf(2, "\033[1;33m if not next \033[0m\n");
+			dup2(start[0], STDIN_FILENO);
+			close(cmd->next->fd_in);
 		}
-		else
-		{
-		}
+		close(start[0]);
 		if (cmd->idx > 0)
 			close(cmd->fd_in);
 		if (cmd->idx < nb_cmd - 1)
@@ -126,19 +128,21 @@ void	exec_multiple_cmd(t_bigshell *data, char *env[])
 	cmd = data->simple_cmd;
 	while (cmd)
 	{
-		if (cmd->next)
+		if (cmd->prev && !cmd->prev->fd_out)
 			pipe(start);
-		if (!cmd->next->fd_in)
+		if (cmd->next && !cmd->next->fd_in)
 			pipe(end);
-		if (cmd->idx == 0)
-		{
-			
-		}
 		last_pid = exec_cmd(data, cmd, env, start, end);
-		close(start[0]);
-		close(start[1]);
-		close(end[1]);
-		close(end[0]);
+		if (cmd->prev && !cmd->prev->fd_out)
+		{
+			close(start[0]);
+			cmd->prev->fd_out = start[1];
+		}
+		if (cmd->next && !cmd->next->fd_in)
+		{
+			close(end[1]);
+			cmd->next->fd_in = end[0];
+		}
 		if (cmd->fd_in)
 			close(cmd->fd_in);
 		if (cmd->fd_out)
