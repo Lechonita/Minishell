@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/28 17:06:21 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:55:53 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ t_line	*do_expansion(t_bigshell *data, t_line *line, int index)
 	var = get_var(tmp->next);
 	if (!var)
 		return (free(var), NULL);
-	if ((tmp->dq == 0 && tmp->sq == 0)
+	if (is_blank(line->next->c) > 0)
+		tmp = line;
+	else if ((tmp->dq == 0 && tmp->sq == 0)
 		|| (tmp-> dq == 1 && tmp->sq == 0)
 		|| (tmp->sq == 1 && single_quote_position(tmp) == DQUOTE))
 		tmp = compare_var(data, tmp, var, index);

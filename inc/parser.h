@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:37:35 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/28 17:35:38 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:50:42 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ void	parser_job(t_bigshell *data);
 
 /* AIM CMD */
 void	same_aim(t_bigshell *data);
+char	*def_tok_value(char *value, char *next, char *nextnext);
 void	add_arg_to_cmd(t_bigshell *data);
 void	check_builtin(t_bigshell *data);
 
 /* AIM UTILS */
+char	*join_spac(char *s1, char *s2, char *to_add);
 int		last_is_dollar(char *str);
-char	*def_tok_value(char *value, char *next_value);
 
 #endif

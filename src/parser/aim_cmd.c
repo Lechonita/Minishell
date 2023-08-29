@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   aim_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/28 17:36:54 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:01:02 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "../inc/parser.h"
 
 void	same_aim(t_bigshell *data)
 {
@@ -29,15 +30,17 @@ void	same_aim(t_bigshell *data)
 	}
 }
 
-static char	*join_spac(char *s1, char *s2, char *to_add)
+char	*def_tok_value(char *value, char *next, char *nextnext)
 {
-	char	*tmp;
-	char	*str;
-
-	tmp = freejoin(s1, to_add);
-	str = ft_strjoin(tmp, s2);
-	free(tmp);
-	return (str);
+	if (!value && !next && !nextnext)
+		return (NULL);
+	else if (!value)
+		return (nextnext);
+	else if (!nextnext)
+		return (value);
+	if (last_is_dollar(value) == 1 && is_blank(next[0]) == 0)
+		return (freejoin(value, nextnext));
+	return (join_spac(value, nextnext, " "));
 }
 
 void	add_arg_to_cmd(t_bigshell *data)
@@ -52,7 +55,8 @@ void	add_arg_to_cmd(t_bigshell *data)
 		{
 			while (tok->next->next && tok->next->next->aim == SIMPLE_CMD)
 			{
-				tok->value = def_tok_value(tok->value, tok->next->next->value);
+				tok->value = def_tok_value(tok->value, tok->next->value,
+						tok->next->next->value);
 				if (tok->next->type == BLANK
 					|| (tok->next->type == SQUOTE || tok->next->type == DQUOTE))
 					token_rm_next(tok);

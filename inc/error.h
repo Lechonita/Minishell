@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/26 14:40:15 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/29 13:31:01 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define PERM_DENIED "Minishell: Permission denied: "
 # define FILE_NOT_FOUND "Minishell: No such file or directory: "
 # define W_LST_TOK "\t Failure in creating token lst\n"
+# define W_LST_LINE "\t Failure in creating line lst\n"
 # define W_LST_CMD "\t Failure in creating cmds lst\n"
 # define W_LST_RED "\t Failure in creating redirection lst\n"
 # define W_LST_CMD_DUP "\t Failure in duplicate cmd name\n"

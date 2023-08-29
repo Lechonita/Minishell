@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/28 15:27:26 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:30:25 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,11 @@ void	init_line(t_bigshell *data, char *line)
 	while (line[i])
 	{
 		if (i == 0)
+		{
 			data->line = line_new(NULL, line[i], i);
+			if (!data->line)
+				ft_exit(EXIT_FAILURE, W_LST_LINE);
+		}
 		else
 			line_addback(data->line, line_new(data->line, line[i], i));
 		i++;
