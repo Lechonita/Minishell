@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aim_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/29 15:01:02 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/30 12:05:06 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*def_tok_value(char *value, char *next, char *nextnext)
 		return (value);
 	if (last_is_dollar(value) == 1 && is_blank(next[0]) == 0)
 		return (freejoin(value, nextnext));
-	return (join_spac(value, nextnext, " "));
+	return (join_space(value, nextnext, " "));
 }
 
 void	add_arg_to_cmd(t_bigshell *data)

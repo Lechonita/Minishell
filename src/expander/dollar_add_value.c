@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:28:20 by lechon            #+#    #+#             */
-/*   Updated: 2023/08/28 16:38:39 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:35:23 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_line	*line_new_var(t_line *line, t_line *after, char c, int index)
 {
 	t_line	*new;
 
-	new = malloc(sizeof(*new));
+	new = malloc(sizeof(t_line));
 	if (!new)
 		return (NULL);
 	new->index = index;
@@ -66,7 +66,7 @@ void	line_addmiddle(t_line *line, char c, int index)
 	last->next = line_new_var(last, last->next, c, index);
 }
 
-t_line	*add_var(t_bigshell *data, t_line *line, char *value, char *var)
+t_line	*add_var(t_line *line, char *value, char *var)
 {
 	t_line	*tmp;
 	int		idx;
@@ -75,7 +75,7 @@ t_line	*add_var(t_bigshell *data, t_line *line, char *value, char *var)
 
 	if (!line || !value || !var)
 		return (NULL);
-	tmp = line_rm_next(find_prev(data, line->index));
+	tmp = line;
 	idx = tmp->index - 1;
 	i = -1;
 	j = 0;
@@ -88,9 +88,8 @@ t_line	*add_var(t_bigshell *data, t_line *line, char *value, char *var)
 			j++;
 		}
 		else
-			line_addmiddle(line, value[i], idx + 1);
+			line_addmiddle(line->next, value[i], idx + 1);
 		idx++;
 	}
-	align_line_index(line, idx - 1);
-	return (line);
+	return (line->next);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:37:35 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/29 13:50:42 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/30 12:05:06 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	add_arg_to_cmd(t_bigshell *data);
 void	check_builtin(t_bigshell *data);
 
 /* AIM UTILS */
-char	*join_spac(char *s1, char *s2, char *to_add);
+char	*join_space(char *s1, char *s2, char *to_add);
 int		last_is_dollar(char *str);
 
 #endif

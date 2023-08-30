@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/28 16:38:06 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:35:33 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 t_line	*line_new_var(t_line *line, t_line *after, char c, int index);
 t_line	*line_add_node(t_line *line, char value, int index);
 t_line	*line_replace_node(t_line *line, char value);
-t_line	*add_var(t_bigshell *data, t_line *line, char *value, char *var);
+t_line	*add_var(t_line *line, char *value, char *var);
 
 /* DOLLAR EXPANSION */
 t_line	*line_rm_next(t_line *prev);

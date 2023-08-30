@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/29 14:55:52 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/30 14:35:17 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 			&& (ft_strlen(env->name) == ft_strlen(var))
 			&& env->to_export == FALSE)
 		{
-			res = add_var(data, line, env->value, var);
+			line = line_rm_next(find_prev(data, line->index));
+			res = add_var(line, env->value, var);
 			flag = 0;
 			break ;
 		}
@@ -71,7 +72,7 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 	}
 	if (flag == 1)
 		res = var_not_found(data, &line, var, index);
-	align_line_index(data->line, index);
+	align_line_index(data->line, index - 1);
 	return (res);
 }
 

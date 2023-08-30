@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   aim_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:20:03 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/29 13:16:44 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/30 12:05:06 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/parser.h"
 
-char	*join_spac(char *s1, char *s2, char *to_add)
+char	*join_space(char *s1, char *s2, char *to_add)
 {
 	char	*tmp;
 	char	*str;
