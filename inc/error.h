@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/25 17:01:07 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:48:41 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define PERM_DENIED "Minishell: Permission denied: "
 # define FILE_NOT_FOUND "Minishell: No such file or directory: "
 # define W_LST_TOK "\t Failure in creating token lst\n"
+# define W_LST_LINE "\t Failure in creating line lst\n"
 # define W_LST_CMD "\t Failure in creating cmds lst\n"
 # define W_LST_RED "\t Failure in creating redirection lst\n"
 # define W_LST_CMD_DUP "\t Failure in duplicate cmd name\n"
@@ -31,7 +32,9 @@
 # define W_SPLIT_CMD "\t Failure in split commands\n"
 # define W_EXIT_ARG "Minishell: exit: too many arguments\n"
 # define W_EXIT_ARG_NUM ": numeric argument required\n"
-# define W_MALLOC "\t Failure in malloc\n"
+# define HOME_NOT_SET "Minishell: HOME not set\n"
+# define OLDPWD_NOT_SET "Minishell: OLDPWD not set\n"
+# define W_CD_ARG "Minishell: cd: too many arguments\n"
 
 // # define W_ENV "\t Environment error\n"
 // # define W_JOIN_PATH "\t Failure in joining path with / \n"

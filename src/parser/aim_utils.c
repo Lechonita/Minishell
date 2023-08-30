@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_type.c                                       :+:      :+:    :+:   */
+/*   aim_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 13:52:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/29 14:45:17 by lechon           ###   ########.fr       */
+/*   Created: 2023/08/28 17:20:03 by jrouillo          #+#    #+#             */
+/*   Updated: 2023/08/29 13:16:44 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/lexer.h"
+#include "../inc/parser.h"
 
-int	is_dollar(char c)
+char	*join_spac(char *s1, char *s2, char *to_add)
 {
-	if (c == '$')
-		return (DOLLAR);
-	return (0);
+	char	*tmp;
+	char	*str;
+
+	tmp = freejoin(s1, to_add);
+	str = ft_strjoin(tmp, s2);
+	free(tmp);
+	return (str);
 }
 
-int	is_blank(char c)
+int	last_is_dollar(char *str)
 {
-	if (c == ' ' || c == '\t')
-		return (BLANK);
-	return (0);
-}
+	int	i;
 
-int	is_single_quote(char c)
-{
-	if (c == '\'')
-		return (SQUOTE);
-	return (0);
-}
-
-int	is_double_quote(char c)
-{
-	if (c == '\"')
-		return (DQUOTE);
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i + 1])
+		i++;
+	if (str[i] == '$')
+		return (1);
 	return (0);
 }

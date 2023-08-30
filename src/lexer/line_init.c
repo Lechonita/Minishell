@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/25 13:59:30 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:52:54 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,16 @@ void	init_line(t_bigshell *data, char *line)
 	while (line[i])
 	{
 		if (i == 0)
+		{
 			data->line = line_new(NULL, line[i], i);
+			if (!data->line)
+				ft_exit(EXIT_FAILURE, W_LST_LINE);
+		}
 		else
 			line_addback(data->line, line_new(data->line, line[i], i));
 		i++;
 	}
 	tmp = data->line;
-	// new_var(tmp); // gestion des cmd=123 => rajouter la var dans t_env;
 	flag_double_quotes(tmp);
 	flag_single_quotes(tmp);
 	find_quotes(tmp);

@@ -6,19 +6,51 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/10 13:51:40 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:02:09 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
 
-	// check guillemets
-	// check l'ordre des guillemets si plusieurs
-	// 	=> des '' a l'interieur des "" n'ont aucun effet
-	// check serie de mots
+int	find_last_quote(t_line *line, int type, int limiter)
+{
+	t_line	*tmp;
+	int		i;
 
-int	find_closing_quote(t_line *line, int type)
+	if (!line)
+		return (-1);
+	tmp = line;
+	i = 0;
+	while (tmp && tmp->index <= limiter)
+	{
+		if (tmp->type == type)
+			i = tmp->index;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+int	find_limiter(t_line *line)
+{
+	t_line	*tmp;
+	int		i;
+
+	if (!line)
+		return (-1);
+	tmp = line;
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->type == PIPE || tmp->type == NEW_LINE)
+			break ;
+		i = tmp->index;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+int	closing_quote_exists(t_line *line, int type)
 {
 	if (!line || !type)
 		return (-1);
@@ -33,29 +65,22 @@ int	find_closing_quote(t_line *line, int type)
 
 void	convert_quotes(t_line *line, int type)
 {
-	int		close;
 	t_line	*tmp;
 
-	if (line && line->next)
-		tmp = line->next;
-	else
-		tmp = line;
-	close = find_closing_quote(tmp, type);
-	if (close == 0)
-		interpret_open_quotes(tmp, type);
-	if (close == 1)
+	if (!line || !type)
+		return ;
+	tmp = line->next;
+	if (closing_quote_exists(tmp, type) == 1)
 	{
-		while (tmp)
+		while (tmp && tmp->index <= find_limiter(tmp))
 		{
 			if (tmp->type == type)
 				break ;
-			// if (type == DQUOTE && tmp->c == '$')
-			// 	tmp = do_expansion(tmp);
-			// else
+			else
 				tmp->type = WORD;
 			tmp = tmp->next;
 		}
-		if (tmp->next)
+		if (tmp && tmp->next)
 			find_quotes(tmp->next);
 	}
 }
@@ -82,4 +107,5 @@ void	find_quotes(t_line *line)
 		else
 			el = el->next;
 	}
+	align_line_index(line, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:02:22 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/07/24 12:07:09 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:52:18 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	align_line_index(t_line *line, int index)
 	}
 }
 
-char	*get_var_bis(t_line *line, char *var, int acolade)
+char	*get_var_bis(t_line *line, char *var)
 {
 	int		i;
 
@@ -40,13 +40,8 @@ char	*get_var_bis(t_line *line, char *var, int acolade)
 	{
 		if (line->c == 34 || line->c == 39)
 			break ;
-		if (acolade == 0 && (line->c == ' ' || line->c == '\t'))
+		if (line->c == ' ' || line->c == '\t')
 			break ;
-		if (acolade == 1 && line->c == '}')
-		{
-			var[i++] = line->c;
-			break ;
-		}
 		var[i++] = line->c;
 		line = line->next;
 	}
@@ -54,7 +49,7 @@ char	*get_var_bis(t_line *line, char *var, int acolade)
 	return (var);
 }
 
-int	get_var_len(t_line *line, int acolade)
+int	get_var_len(t_line *line)
 {
 	t_line	*tmp;
 	int		i;
@@ -65,12 +60,7 @@ int	get_var_len(t_line *line, int acolade)
 	i = 0;
 	while (tmp)
 	{
-		if (acolade == 1 && tmp->c == '}')
-		{
-			i++;
-			break ;
-		}
-		if (acolade == 0 && tmp->type == BLANK)
+		if (tmp->type == BLANK)
 			break ;
 		else
 			i++;
@@ -79,41 +69,17 @@ int	get_var_len(t_line *line, int acolade)
 	return (i);
 }
 
-int	find_closing_bracket(t_line *line)
-{
-	t_line	*tmp;
-
-	if (!line)
-		return (1);
-	tmp = line;
-	while (tmp)
-	{
-		if (tmp->c == '}')
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
-
 char	*get_var(t_line *line)
 {
 	t_line	*tmp;
 	char	*var;
-	int		acolade;
 
-	if (!line || !line->next)
+	if (!line)
 		return (NULL);
 	tmp = line;
-	acolade = 0;
-	if (tmp->c == '{')
-	{
-		if (find_closing_bracket(tmp) == 1)
-			return (NULL);
-		acolade = 1;
-	}
-	var = malloc(sizeof(char) * (get_var_len(tmp, acolade) + 1));
+	var = malloc(sizeof(char) * (get_var_len(tmp) + 1));
 	if (!var)
 		return (NULL);
-	var = get_var_bis(tmp, var, acolade);
+	var = get_var_bis(tmp, var);
 	return (var);
 }

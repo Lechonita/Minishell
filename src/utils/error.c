@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/07/26 17:09:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/30 16:55:57 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	error_cd(char *str)
+{
+	char	*res;
+
+	res = malloc(sizeof(char) * (43 + ft_strlen(str)));
+	if (!res)
+		return ;
+	res = ft_strjoin("Minishell: cd: ", str);
+	res = freejoin(res, ": No such file or directory\n");
+	ft_putstr_fd(res, 2);
+	free(res);
+}
 
 void	error_execve(t_bigshell *data)
 {
@@ -27,7 +40,7 @@ int	msg_not_found(char *msg, char *str)
 	char	*line;
 
 	tmp = ft_strjoin(msg, str);
-	line = free_strjoin(tmp, "\n");
+	line = freejoin(tmp, "\n");
 	ft_putstr_fd(line, 2);
 	free(line);
 	return (127);

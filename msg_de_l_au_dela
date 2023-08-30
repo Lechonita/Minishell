@@ -32,16 +32,13 @@ echo 1 > out12 2 <Makefile in2 >>out13
 < files/no_right << files/write_o < files/all_rights ls -l >files/read_o >>files/read_write >files/exec_o.c 
 
 to do list :
-	→ handle { } in parser
 	→ check if all grammar is ok in lexer/parser/tokener 
-	→ $? print the exit status of the last command executed (ret)
 	→ gérer les redirection avant l'exec
 	→ gérer les open/close de fd avant l'exec
 
 
 to do expansion :
 	→ cmd="ls -l" puis $cmd affiche le resultat de ls -l
-	→ echo $?
 	→ "$cmd" doit afficher "ls -lra: command not found"
 	→ export bout="s -l" puis faire l$bout -ra : ca doit afficher le resultat de "ls -l -ra"
 example / error :
@@ -50,6 +47,7 @@ example / error :
 	bash: syntax error near unexpected token `newline'
 
 	→ $ e'c'"h"o salut
+	  $ e"c"""h"o" salut
 	salut
 
 	echo 1 > out12 2 3 << 1 << 2 << 3 < in < in2 >>out13
@@ -64,29 +62,45 @@ example / error :
 			→ arret du programme 
 			→ echo ne s'execute pas
 
+
+	→ $ '<'Makefile wc
+		ca doit retourner: <Makefile: command not found
+
+
+TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD
+
 	→ $ echo "$"path ET echo '$'path
 		ca donne => $path
-	
-	→ $ echo '$path'
-		ca donne $path
 
-	→ par contre $ echo "$path"
-		ca donne bien la valeur de path
-	
-	→ $ echo $popo (popo n'existe pas)
-		ca doit retourner un retour a la ligne
-
-	→ $ echo "'$USER'"
-		ca doit retourner 'jrouillo'
-	
-	→ $ echo $ user
-		ca doit retourner - $ user -
-
+TESTS QUOTES ET DOLLAR :
+→ $ echo 'hello world'
+→ $ echo "hello world"
+→ $ echo 'hello''world'
+→ $ echo "hello""world"
+→ $ echo "hello" 'world' "et Bea"
+→ $ echo "salut" Bea '"$USER"'
+→ $ echo $USER
+→ $ echo "$USER"
+→ $ echo '$USER'
+→ $ echo "'$USER'"
+→ $ echo '"$USER"'
+→ $ echo $USER et "$PWD"
+→ $ echo "$USER et $PWD"
+→ $ echo '$USER et $PWD'
+→ $ echo "$USER" et '$PWD'
+→ $ echo '$USER' et "$PWD"
+→ $ echo "$USER et '$PWD'"
+→ $ echo "$"USER
+→ $ echo '$'USER
+→ $ echo " salut $"USER
+→ $ echo $ salut
+→ $ echo salut $
+→ $ echo "hello" world & $USER
 
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
-		$ echo ${PATH{  OU   echo ${PATH
-			ca renvoie PATH
+		$ echo ${PATH{   OU   echo ${PATH
+			ca renvoie: PATH
 
 
 ~~~~~~~~~~~~~~~~~~ BANNER STYLE ~~~~~~~~~~~~~~~~~~

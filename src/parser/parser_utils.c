@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aim_cmd.c                                          :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 16:35:39 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:54:58 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	same_aim(t_bigshell *data)
 	t_token	*tok;
 
 	tok = data->token;
-	while (tok != NULL && tok->next != NULL)
+	while (tok->next != NULL)
 	{
 		if (tok->aim == tok->next->aim && tok->aim != REDIR)
 		{
@@ -47,14 +47,12 @@ void	add_arg_to_cmd(t_bigshell *data)
 	tok = data->token;
 	while (tok != NULL && tok->next != NULL)
 	{
-		if (tok->aim == SIMPLE_CMD && (tok->next->type == BLANK
-				|| tok->next->type == DQUOTE || tok->next->type == SQUOTE))
+		if (tok->aim == SIMPLE_CMD && tok->next->type == BLANK)
 		{
 			while (tok->next->next && tok->next->next->aim == SIMPLE_CMD)
 			{
 				tok->value = join_spac(tok->value, tok->next->next->value, " ");
-				if (tok->next->type == BLANK || tok->next->type == DQUOTE
-					|| tok->next->type == SQUOTE)
+				if (tok->next->type == BLANK)
 					token_rm_next(tok);
 				if (tok->next->type == WORD)
 					token_rm_next(tok);
@@ -93,10 +91,7 @@ void	check_double_redir(t_bigshell *data)
 	while (tok != NULL)
 	{
 		if (ft_strncmp(tok->value, "<<", 2) == 0)
-		{
 			tok->type = DLESS;
-			g_global.heredoc = 1;
-		}
 		else if (ft_strncmp(tok->value, ">>", 2) == 0)
 			tok->type = DGREAT;
 		tok = tok->next;

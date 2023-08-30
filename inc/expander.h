@@ -6,9 +6,12 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/22 10:28:47 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:49:53 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+
 
 #ifndef EXPANDER_H
 # define EXPANDER_H
@@ -18,28 +21,26 @@
 /* DOLLAR ADD VALUE */
 t_line	*line_new_var(t_line *line, t_line *after, char c, int index);
 t_line	*line_add_node(t_line *line, char value, int index);
-t_line	*line_replace_node(t_line *line, char value, int index);
-void	add_var(t_line *line, char *value, int idx, char *var);
+t_line	*line_replace_node(t_line *line, char value);
+t_line	*add_var(t_bigshell *data, t_line *line, char *value, char *var);
 
 /* DOLLAR EXPANSION */
-void	rm_var_excess(t_line *line, int index, char *var);
-void	var_not_found(t_line **line, char *var);
-void	compare_var(t_bigshell *data, t_line *line, char *var, int index);
-void	rm_dollar(t_line *line);
-void	dollar_expand(t_bigshell *data, t_line *line, char *var, int index);
+t_line	*line_rm_next(t_line *prev);
+t_line	*var_not_found(t_bigshell *data, t_line **line, char *var, int index);
+t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index);
+t_line	*find_prev(t_bigshell *data, int index);
+t_line	*dollar_expand(t_bigshell *data, t_line *line, char *var, int index);
 
 /* DOLLAR UTILS */
 void	align_line_index(t_line *line, int start);
-int		get_var_len(t_line *line, int acolade);
-char	*get_var_bis(t_line *line, char *var, int acolade);
+int		get_var_len(t_line *line);
+char	*get_var_bis(t_line *line, char *var);
 char	*get_var(t_line *line);
 
 /* DOLLAR */
-void	do_expansion(t_bigshell *data, t_line *line, int index);
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line);
 
 /* QUOTES FIND */
-int		find_closing_quote(t_line *line, int type);
 void	convert_quotes(t_line *line, int type);
 void	find_quotes(t_line *line);
 

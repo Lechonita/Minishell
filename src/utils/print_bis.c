@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 16:38:47 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:57:04 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void	print_t_line(t_line *line)
 	printf("___________________LINE______________________\n");
 	while (el != NULL)
 	{
-		printf("[%2d] type : %2d %8s [c] %c\n", el->index, el->type,
+		printf("[%2d] type : %2d %8s [c] %c   ", el->index, el->type,
 			tokentype_str[el->type - 1], el->c);
+		printf("[dq] %2d   ", el->dq);
+		printf("[sq] %2d \n", el->sq);
 		el = el->next;
 	}
 	printf("\n");
@@ -46,22 +48,22 @@ void	print_t_line(t_line *line)
 void	print_t_token(t_bigshell *data)
 {
 	t_token		*el;
-	const char	*aim_str[] = {
-		"REDIR",
-		"CMD",
-		"BUILTIN",
-		"PIPEX",
-	};
+	// const char	*aim_str[] = {
+	// 	"REDIR",
+	// 	"CMD",
+	// 	"BUILTIN",
+	// 	"PIPEX",
+	// };
 
 	el = data->token;
 	dprintf(2, "__________________TOKEN________________________\n");
 	while (el)
 	{
-		dprintf(2, "[%2d] grp  n°%2d ", el->index, el->group);
-		dprintf(2, "tok %2d ", el->type);
-		dprintf(2, ": %20s ", el->value);
-		dprintf(2, "→ %2d ", el->aim);
-		dprintf(2, "%8s\n", aim_str[el->aim - 20]);
+		printf("[%2d] ", el->index);
+		printf("tok %2d ", el->type);
+		printf(": %20s ", el->value);
+		printf("→ %2d\n", el->aim);
+		// printf("%8s\n", aim_str[el->aim - 20]);
 		el = el->next;
 	}
 }
