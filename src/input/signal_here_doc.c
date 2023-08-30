@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_here_doc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/28 17:30:53 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:30 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	print_ctrl_d_hd(char *limiter, int count)
 	nb = ft_itoa(count);
 	tmp = ft_strjoin("bash: warning: here-document at line ", nb);
 	free(nb);
-	tmp2 = freejoin(tmp, " delimited by end-of-file (wanted `");
-	tmp = freejoin(tmp2, limiter);
-	msg = freejoin(tmp, "')\n");
+	tmp2 = free_strjoin(tmp, " delimited by end-of-file (wanted `");
+	tmp = free_strjoin(tmp2, limiter);
+	msg = free_strjoin(tmp, "')\n");
 	ft_putstr_fd(msg, 2);
 	free(msg);
 }

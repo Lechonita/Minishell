@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/29 14:55:53 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:05:02 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	do_dollar_ret(t_line *line)
 	if (!line)
 		return ;
 	tmp = line;
-	ret = ft_itoa(g_exit_status);
+	ret = ft_itoa(g_global.exit_status);
 	tmp->c = ret[0];
 	if (ret[1])
 		tmp = line_add_node(tmp, ret[1], tmp->index);

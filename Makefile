@@ -79,6 +79,7 @@ SRC += simple_cmd_exec.c
 #	Expander functions
 SRC += dollar_add_value.c
 SRC += dollar_expansion.c
+SRC += dollar_quotes.c
 SRC += dollar_utils.c
 SRC += dollar.c
 SRC += quotes_find.c
@@ -91,11 +92,11 @@ SRC += signal.c
 SRC += signal_here_doc.c
 
 #	Lexer functions
+SRC += find_token_type.c
 SRC += flag_quotes.c
 SRC += line_init.c
 SRC += token_find.c
 SRC += token_init.c
-SRC += find_token_type.c
 SRC += token_type.c
 SRC += token_type_bis.c
 
@@ -104,6 +105,7 @@ SRC += parser_job.c
 SRC += parser_utils.c
 SRC += init_simple_cmd.c
 SRC += handle_cmd.c
+SRC += aim_utils.c
 
 #	Redirection functions
 SRC += handle_redir.c

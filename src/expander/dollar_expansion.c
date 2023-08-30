@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/29 14:55:52 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:02:42 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
-
 
 t_line	*line_rm_next(t_line *prev)
 {

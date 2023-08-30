@@ -6,11 +6,13 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:38:06 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 16:51:38 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:00:12 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+t_global	g_global;
 
 char	*free_strjoin(char *to_free, char *buf)
 {

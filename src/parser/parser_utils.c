@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 16:54:58 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:07:29 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ void	same_aim(t_bigshell *data)
 	}
 }
 
-static char	*join_spac(char *s1, char *s2, char *to_add)
-{
-	char	*tmp;
-	char	*str;
+// static char	*join_spac(char *s1, char *s2, char *to_add)
+// {
+// 	char	*tmp;
+// 	char	*str;
 
-	tmp = free_strjoin(s1, to_add);
-	str = ft_strjoin(tmp, s2);
-	free(tmp);
-	return (str);
-}
+// 	tmp = free_strjoin(s1, to_add);
+// 	str = ft_strjoin(tmp, s2);
+// 	free(tmp);
+// 	return (str);
+// }
 
 void	add_arg_to_cmd(t_bigshell *data)
 {

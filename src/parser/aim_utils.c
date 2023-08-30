@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aim_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:20:03 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/29 13:16:44 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:35 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*join_spac(char *s1, char *s2, char *to_add)
 	char	*tmp;
 	char	*str;
 
-	tmp = freejoin(s1, to_add);
+	tmp = free_strjoin(s1, to_add);
 	str = ft_strjoin(tmp, s2);
 	free(tmp);
 	return (str);

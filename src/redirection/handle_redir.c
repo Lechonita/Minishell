@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 16:55:12 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:48 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	read_stdin_hd(t_redir *redir)
 			&& ft_strncmp(tmp, redir->file, ft_strlen(redir->file)) == 0)
 			break ;
 		// add_history(tmp);
-		tmp = freejoin(tmp, "\n");
+		tmp = free_strjoin(tmp, "\n");
 		ft_putstr_fd(tmp, redir->fd);
 		free(tmp);
 		count++;

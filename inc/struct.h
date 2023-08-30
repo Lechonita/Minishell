@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 16:06:07 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:35:29 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,6 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_cmd
-{
-	char			*cmd;
-	char			**cmd_arg;
-	int				fd_in;
-	int				fd_out;
-	char			*in_file;
-	char			*out_file;
-	int				idx_cmd;
-	int				builtin;
-	struct s_cmd	*next;
-}			t_cmd;
-
 typedef struct s_redir
 {
 	int				type;
@@ -84,18 +71,6 @@ typedef struct s_redir
 	int				with_cmd_nb;
 	struct s_redir	*next;
 }	t_redir;
-
-typedef struct s_exec
-{
-	int				fd_in;
-	int				fd_out;
-	int				nb_cmd;
-	char			*in_file;
-	char			*out_file;
-	int				fd[FOPEN_MAX][2];
-	int				here_doc;
-	t_cmd			*cmd;
-}	t_exec;
 
 typedef struct s_simple_cmd
 {
@@ -129,7 +104,6 @@ typedef struct s_bigshell
 	t_line			*line;
 	t_token			*token;
 	t_redir			*in_out;
-	t_exec			*exec;
 	t_simple_cmd	*simple_cmd;
 }	t_bigshell;
 

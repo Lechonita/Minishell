@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:45 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 16:52:11 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:15:20 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	error_arg_exit(char *arg)
 	char	*line;
 
 	tmp = ft_strjoin("Minishell: exit: ", arg);
-	line = freejoin(tmp, ": numeric argument required\n");
+	line = free_strjoin(tmp, ": numeric argument required\n");
 	ft_putstr_fd(line, STDERR_FILENO);
 	free(line);
 	return (255);
