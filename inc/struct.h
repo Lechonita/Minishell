@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/29 17:32:16 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/30 16:06:07 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ typedef struct s_simple_cmd
 	char				*out_file;
 	int					idx;
 	int					builtin;
-	int					redir_or_not;
 	t_redir				*redir;
 	struct s_simple_cmd	*next;
 	struct s_simple_cmd	*prev;
@@ -126,7 +125,6 @@ typedef struct s_token
 typedef struct s_bigshell
 {
 	char			**env_paths;
-	int				redir_or_not;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;

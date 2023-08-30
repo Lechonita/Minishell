@@ -6,13 +6,13 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/28 12:06:25 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:22:00 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	aim_redir(t_bigshell *data)
+static void	aim_redir(t_bigshell *data)
 {
 	t_token	*tok;
 
@@ -31,7 +31,7 @@ void	aim_redir(t_bigshell *data)
 	}
 }
 
-void	aim_pipe(t_bigshell *data)
+static void	aim_pipe(t_bigshell *data)
 {
 	t_token	*tok;
 
@@ -44,7 +44,7 @@ void	aim_pipe(t_bigshell *data)
 	}
 }
 
-void	aim_cmd(t_bigshell *data)
+static void	aim_cmd(t_bigshell *data)
 {
 	t_token	*tok;
 
@@ -59,7 +59,7 @@ void	aim_cmd(t_bigshell *data)
 	add_arg_to_cmd(data);
 }
 
-void	rm_blank(t_bigshell *data)
+static void	rm_blank(t_bigshell *data)
 {
 	t_token	*tok;
 
@@ -83,10 +83,4 @@ void	parser_job(t_bigshell *data)
 	check_double_redir(data);
 	rm_blank(data);
 	token_group(data->token);
-	data->simple_cmd = init_simple_cmd();
-	add_redir_to_cmd(data);
-	add_in_out_to_cmd(data);
-	merge_token_cmd(data);
-	add_cmd_to_cmd(data);
-	print_simple_cmd(data);
 }

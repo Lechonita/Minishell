@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:37:35 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/22 10:49:46 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:24:24 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,7 @@
 
 # include "minishell.h"
 
-int				open_fd(t_redir *redir);
-void			close_fd_in_cmd(t_redir *redir, int idx, int type, int type2);
-
-int				nb_red_in_cmd(t_redir *redir, int type);
-t_redir			*last_redir_in_cmd(t_redir *redir, int type, int type2);
-
 /* FIND AIM */
-void			aim_redir(t_bigshell *data);
-void			aim_pipe(t_bigshell *data);
-void			aim_cmd(t_bigshell *data);
-void			rm_blank(t_bigshell *data);
 void			parser_job(t_bigshell *data);
 
 /* AIM CMD */
@@ -36,9 +26,10 @@ void			check_builtin(t_bigshell *data);
 
 /* SIMPLE CMD */
 t_simple_cmd	*init_simple_cmd(void);
-void			add_redir_to_cmd(t_bigshell *data);
-void			add_in_out_to_cmd(t_bigshell *data);
-void			add_cmd_to_cmd(t_bigshell *data);
+void			add_redir(t_bigshell *data);
+void			add_io(t_bigshell *data);
+void			add_cmd_to_lst(t_bigshell *data);
 void			merge_token_cmd(t_bigshell *data);
+int				nb_red_in_cmd(t_redir *redir, int type);
 
 #endif

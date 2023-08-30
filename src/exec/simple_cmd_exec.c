@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/29 15:54:15 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/30 15:38:02 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void	handle_dup_simp_cmd(t_simple_cmd *simple_cmd)
+static void	handle_dup(t_simple_cmd *simple_cmd)
 {
-	dprintf(2, "\033[1;32m dans dup simp cmd\033[0m \n");
 	if ((simple_cmd->fd_in < 3 && simple_cmd->in_file != NULL)
 		|| (simple_cmd->fd_out < 3 && simple_cmd->out_file != NULL))
 		return ;
-	if (simple_cmd->fd_out >2 && dup2(simple_cmd->fd_out, STDOUT_FILENO) < 0)
+	if (simple_cmd->fd_out > 2 && dup2(simple_cmd->fd_out, STDOUT_FILENO) < 0)
 		dprintf(2, "\033[1;31m error out \033[0m");
-	if (simple_cmd->fd_in >2 && dup2(simple_cmd->fd_in, STDIN_FILENO) < 0)
+	if (simple_cmd->fd_in > 2 && dup2(simple_cmd->fd_in, STDIN_FILENO) < 0)
 		dprintf(2, "\033[1;31m error in \033[0m]");
 	if (simple_cmd->fd_in)
 		close(simple_cmd->fd_in);
@@ -28,7 +27,7 @@ static void	handle_dup_simp_cmd(t_simple_cmd *simple_cmd)
 		close(simple_cmd->fd_out);
 }
 
-int	find_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
+static int	find_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 {
 	simple_cmd->cmd = find_path_to_cmd(data, simple_cmd->cmd_arg[0],
 			simple_cmd->cmd);
@@ -44,7 +43,7 @@ void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 	int	ret;
 
 	ret = 0;
-	handle_dup_simp_cmd(simple_cmd);
+	handle_dup(simple_cmd);
 	if (simple_cmd->builtin != 0)
 		ret = exec_builtin_cmd(data, simple_cmd->cmd, simple_cmd->cmd_arg);
 	else if (simple_cmd->cmd_arg[0][0] != '\0')

@@ -6,44 +6,81 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:21:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/22 10:45:22 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:16:48 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	nb_red_in_cmd(t_redir *redir, int type)
+static void	add_back(t_redir **lst, t_redir *new)
 {
-	t_redir	*el;
-	int		count;
+	t_redir	*last;
 
-	el = redir;
-	count = 0;
-	while (el != NULL)
+	if (!*lst || !lst)
 	{
-		if (el->type == type)
-			count++;
-		el = el->next;
+		*lst = new;
+		return ;
 	}
-	return (count);
+	last = (*lst);
+	while (last -> next != NULL)
+		last = last -> next;
+	last -> next = new;
 }
 
-static int	is_redir_in_cmd(t_redir *red)
-{	
-	if ((nb_red_in_cmd(red, LESS) == 0 && nb_red_in_cmd(red, DLESS) == 0)
-		&& (nb_red_in_cmd(red, GREAT) > 0 || nb_red_in_cmd(red, DGREAT) > 0))
-		return (1);
-	else if ((nb_red_in_cmd(red, LESS) > 0 || nb_red_in_cmd(red, DLESS) > 0)
-		&& (nb_red_in_cmd(red, GREAT) == 0 && nb_red_in_cmd(red, DGREAT) == 0))
-		return (2);
-	else if (nb_red_in_cmd(red, LESS) == 0 && nb_red_in_cmd(red, DLESS) == 0
-		&& nb_red_in_cmd(red, GREAT) == 0 && nb_red_in_cmd(red, DGREAT) == 0)
-		return (3);
+static int	type_redir(char *type)
+{
+	if (ft_strncmp(type, ">>", 2) == 0)
+		return (DGREAT);
+	else if (ft_strncmp(type, "<<", 2) == 0)
+		return (DLESS);
+	else if (ft_strncmp(type, "<", 1) == 0)
+		return (LESS);
+	else if (ft_strncmp(type, ">", 1) == 0)
+		return (GREAT);
 	else
 		return (0);
 }
 
-void	add_redir_to_cmd(t_bigshell *data)
+static t_redir	*new_lst(int idx, char *type, char *file)
+{
+	t_redir	*new;
+
+	new = ft_calloc(1, sizeof(t_redir));
+	new -> type = type_redir(type);
+	new -> file = ft_strdup(file);
+	if (new->file == NULL)
+		return (ft_error(EXIT_FAILURE, W_LST_RED_FIL), NULL);
+	new -> idx = idx;
+	new -> with_cmd_nb = idx;
+	new -> next = NULL;
+	return (new);
+}
+
+static t_redir	*init_redir(t_token **token, int grp)
+{
+	t_redir		*redir;
+	t_token		*el;
+	int			i;
+
+	redir = NULL;
+	el = *token;
+	i = 0;
+	while (el != NULL)
+	{
+		if (i == 0 && (el->type == LESS || el->type == DLESS
+				|| el->type == GREAT || el->type == DGREAT) && el->group == grp)
+			redir = new_lst(i++, el->value, el->next->value);
+		else if (i > 0 && (el->type == LESS || el->type == DLESS
+				|| el->type == GREAT || el->type == DGREAT) && el->group == grp)
+			add_back(&redir, new_lst(i++, el->value, el->next->value));
+		else if (el->group != grp)
+			el = el->next;
+		el = el->next;
+	}
+	return (redir);
+}
+
+void	add_redir(t_bigshell *data)
 {
 	t_token			*tok;
 	t_simple_cmd	*cmd;
@@ -52,8 +89,7 @@ void	add_redir_to_cmd(t_bigshell *data)
 	cmd = data->simple_cmd;
 	while (cmd != NULL)
 	{
-		cmd->redir = init_redir_in_cmd(&tok, cmd->idx);
-		cmd->redir_or_not = is_redir_in_cmd(cmd->redir);
+		cmd->redir = init_redir(&tok, cmd->idx);
 		open_fd(cmd->redir);
 		cmd = cmd->next;
 	}

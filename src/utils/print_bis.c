@@ -6,31 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/28 12:07:15 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:38:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	print_cmd_lst(t_bigshell *data)
-{
-	t_cmd	*el;
-	int		j;
-
-	el = data->exec->cmd;
-	while (el != NULL)
-	{
-		dprintf(2, "cmd n°%d → %s \tbuiltin %d\n", el->idx_cmd,
-			el->cmd_arg[0], el->builtin);
-		j = 0;
-		while (el->cmd_arg[j])
-		{
-			dprintf(2, "\t args [%d] → %s\n", j, el->cmd_arg[j]);
-			j++;
-		}
-		el = el->next;
-	}
-}
 
 void	print_t_line(t_line *line)
 {
@@ -86,6 +66,24 @@ void	print_t_token(t_bigshell *data)
 	}
 }
 
+void	print_simple_cmd(t_bigshell *data)
+{
+	t_simple_cmd		*el;
+
+	el = data->simple_cmd;
+	printf("__________________SIMPLE_________________________\n");
+	while (el != NULL)
+	{
+		dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\n", el->idx,
+			el->cmd, el->builtin);
+		dprintf(2, "\tfd_in   = %2d\tin_file  : %s\n", el->fd_in, el->in_file);
+		dprintf(2, "\tfd_out  = %2d\tout_file : %s\n", el->fd_out, el->out_file);
+		el = el->next;
+	}
+	printf("_________________________________________________\n");
+}
+
+/*
 void	print_redir(t_bigshell *data)
 {
 	t_redir		*el;
@@ -116,63 +114,4 @@ void	print_redir(t_bigshell *data)
 		el = el->next;
 	}
 }
-
-void	print_exec(t_bigshell *data)
-{
-	t_exec	*el;
-
-	el = data->exec;
-	printf("__________________EXEC_________________________\n");
-	dprintf(2, "fd_in    = %d\tfd_out   = %d\n", el->fd_in, el->fd_out);
-	dprintf(2, "nb_cmd   = %d\theredoc  = %d\tno/redir =%d\n", el->nb_cmd,
-		el->here_doc, data->redir_or_not);
-	dprintf(2, "in_file  : %s\nout_file : %s\n", el->in_file, el->out_file);
-	print_cmd_lst(data);
-	printf("_______________________________________________\n");
-}
-
-
-void	print_simple_cmd(t_bigshell *data)
-{
-	t_simple_cmd		*el;
-	// t_redir				*tmp;
-	// const char			*toktype[] = {
-	// 	"WORD",
-	// 	"DQUOTE",
-	// 	"SQUOTE",
-	// 	"\n",
-	// 	"BLANK",
-	// 	"$",
-	// 	"|",
-	// 	">",
-	// 	">>",
-	// 	"<",
-	// 	"<<",
-	// 	"&",
-	// 	"; () {}",
-	// 	"NOTOKEN",
-	// };
-
-	el = data->simple_cmd;
-	printf("__________________SIMPLE_________________________\n");
-	while (el != NULL)
-	{
-		dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\t\tredir y/n %d\n", el->idx,
-			el->cmd, el->builtin, el->redir_or_not);
-		dprintf(2, "\tfd_in   = %2d\tin_file  : %s\n", el->fd_in, el->in_file);
-		dprintf(2, "\tfd_out  = %2d\tout_file : %s\n", el->fd_out, el->out_file);
-		// tmp = el->redir;
-		// printf("\t\t______________REDIR______________\n");
-		// while (tmp)
-		// {
-		// 	printf("\t[%2d] %2d %2s ", tmp->idx, tmp->type,
-		// 		toktype[tmp->type - 1]);
-		// 	printf(": %15s → fd %d\n", tmp->file, tmp->fd);
-		// 	tmp = tmp->next;
-		// }
-		el = el->next;
-	}
-	printf("_________________________________________________\n");
-
-
-}
+*/

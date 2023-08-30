@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:57:52 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/22 10:47:17 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 15:26:38 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	merge_token_cmd(t_bigshell *data)
 	merge_cmd(data->token);
 }
 
-void	add_cmd_to_cmd(t_bigshell *data)
+void	add_cmd_to_lst(t_bigshell *data)
 {
 	t_token			*tok;
 	t_simple_cmd	*simple_cmd;

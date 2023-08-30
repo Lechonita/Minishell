@@ -73,9 +73,6 @@ SRC += handle_export.c
 
 # 	Exec functions
 SRC += executor.c
-SRC += exec_utils.c
-SRC += cmd_utils.c
-SRC += init_exec.c
 SRC += simple_cmd_exec.c
 
 #	Expander functions
@@ -103,19 +100,15 @@ SRC += token_type_bis.c
 
 #	Parser functions
 SRC += parser_job.c
-SRC += aim_cmd.c
-SRC += simple_cmd_utils.c
-SRC += in_out_simple_cmd.c
-SRC += cmd_lst.c
+SRC += parser_utils.c
+SRC += init_simple_cmd.c
+SRC += handle_cmd.c
 
 #	Redirection functions
-SRC += path_name.c
 SRC += handle_redir.c
-SRC += in_out.c
-SRC += in_out_utils.c
-SRC += handle_fd.c
 SRC += init_redir.c
 SRC += redir_utils.c
+SRC += io_in_simple_cmd.c
 
 #	Utils functions
 SRC += free_struct.c

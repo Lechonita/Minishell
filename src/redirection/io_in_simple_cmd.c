@@ -6,13 +6,13 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:48:37 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/22 10:49:46 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:24:24 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_redir	*last_redir_in_cmd(t_redir *redir, int type, int type2)
+static t_redir	*last_redir(t_redir *redir, int type, int type2)
 {
 	int		count;
 	t_redir	*lst;
@@ -35,43 +35,59 @@ t_redir	*last_redir_in_cmd(t_redir *redir, int type, int type2)
 	return (NULL);
 }
 
-void	fd_in_file_in_cmd(t_simple_cmd *cmd)
+static void	close_fd(t_redir *redir, int idx, int type, int type2)
+{
+	t_redir	*el;
+	int		i;
+
+	i = 0;
+	el = redir;
+	while (el != NULL && i < idx)
+	{
+		if (el->fd && (el->type == type || el->type == type2))
+			close(el->fd);
+		i++;
+		el = el->next;
+	}
+}
+
+static void	in_file(t_simple_cmd *cmd)
 {
 	t_redir	*redir_last;
 
-	redir_last = last_redir_in_cmd(cmd->redir, LESS, DLESS);
+	redir_last = last_redir(cmd->redir, LESS, DLESS);
 	if (redir_last)
 	{
 		cmd->fd_in = redir_last->fd;
 		cmd->in_file = redir_last->file;
-		close_fd_in_cmd(cmd->redir, redir_last->idx, DLESS, LESS);
+		close_fd(cmd->redir, redir_last->idx, DLESS, LESS);
 	}
 	return ;
 }
 
-void	fd_out_file_in_cmd(t_simple_cmd *cmd)
+static void	out_file(t_simple_cmd *cmd)
 {
 	t_redir	*redir_last;
 
-	redir_last = last_redir_in_cmd(cmd->redir, GREAT, DGREAT);
+	redir_last = last_redir(cmd->redir, GREAT, DGREAT);
 	if (redir_last)
 	{
 		cmd->fd_out = redir_last->fd;
 		cmd->out_file = redir_last->file;
-		close_fd_in_cmd(cmd->redir, redir_last->idx, DGREAT, GREAT);
+		close_fd(cmd->redir, redir_last->idx, DGREAT, GREAT);
 	}
 	return ;
 }
 
-void	add_in_out_to_cmd(t_bigshell *data)
+void	add_io(t_bigshell *data)
 {
 	t_simple_cmd	*cmd;
 
 	cmd = data->simple_cmd;
 	while (cmd != NULL)
 	{
-		fd_in_file_in_cmd(cmd);
-		fd_out_file_in_cmd(cmd);
+		in_file(cmd);
+		out_file(cmd);
 		cmd = cmd->next;
 	}
 }
