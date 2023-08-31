@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/29 14:55:53 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:49:42 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,28 @@ int	single_quote_position(t_line *line)
 	return (0);
 }
 
+void	do_dollar_ret(t_line *line)
+{
+	t_line	*tmp;
+	char	*ret;
+
+	if (!line)
+		return ;
+	tmp = line;
+	ret = ft_itoa(g_exit_status);
+	tmp->c = ret[0];
+	tmp->type = WORD;
+	tmp = line_rm_next(tmp);
+	if (ret[1])
+		tmp = line_add_node(tmp, ret[1], tmp->index);
+	if (ft_strlen(ret) == 3 && ret[2])
+	{
+		tmp = tmp->next;
+		tmp = line_add_node(tmp, ret[2], tmp->index);
+	}
+	free(ret);
+}
+
 t_line	*do_expansion(t_bigshell *data, t_line *line, int index)
 {
 	char	*var;
@@ -59,7 +81,9 @@ t_line	*do_expansion(t_bigshell *data, t_line *line, int index)
 	var = get_var(tmp->next);
 	if (!var)
 		return (free(var), NULL);
-	if (is_blank(line->next->c) > 0)
+	if (line->next->c == '?')
+		do_dollar_ret(tmp);
+	else if (is_blank(line->next->c) > 0)
 		tmp = line;
 	else if ((tmp->dq == 0 && tmp->sq == 0)
 		|| (tmp-> dq == 1 && tmp->sq == 0)
@@ -85,26 +109,6 @@ int	is_between_quotes(t_bigshell *data, t_line *line)
 	return (0);
 }
 
-void	do_dollar_ret(t_line *line)
-{
-	t_line	*tmp;
-	char	*ret;
-
-	if (!line)
-		return ;
-	tmp = line;
-	ret = ft_itoa(g_exit_status);
-	tmp->c = ret[0];
-	if (ret[1])
-		tmp = line_add_node(tmp, ret[1], tmp->index);
-	if (ft_strlen(ret) == 3 && ret[2])
-	{
-		tmp = tmp->next;
-		tmp = line_add_node(tmp, ret[2], tmp->index);
-	}
-	free(ret);
-}
-
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 {
 	t_line	*tmp;
@@ -118,8 +122,6 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 	{
 		if (tmp->c == '$')
 		{
-			if (tmp->next && tmp->next->c == '?')
-				do_dollar_ret(tmp->next);
 			if (tmp->sq == 1 || !tmp->next || tmp->next->type == BLANK
 				|| tmp->next->type == NEW_LINE || tmp->next->type == SQUOTE
 				|| tmp->next->type == DQUOTE)

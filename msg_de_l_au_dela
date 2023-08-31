@@ -72,7 +72,11 @@ TESTS QUOTES ET DOLLAR :
 → $ echo " salut $"USER
 → $ echo $ salut
 → $ echo salut $
-→ $ echo "hello" world & $USER
+→ $ echo $?
+→ $ echo $?ok
+→ $ echo $? ok
+→ $ echo "la valeur de retour est $?" mais aussi $?
+
 
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
