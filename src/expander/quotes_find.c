@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/28 15:02:09 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:11:25 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,6 @@ int	find_last_quote(t_line *line, int type, int limiter)
 	{
 		if (tmp->type == type)
 			i = tmp->index;
-		tmp = tmp->next;
-	}
-	return (i);
-}
-
-int	find_limiter(t_line *line)
-{
-	t_line	*tmp;
-	int		i;
-
-	if (!line)
-		return (-1);
-	tmp = line;
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->type == PIPE || tmp->type == NEW_LINE)
-			break ;
-		i = tmp->index;
 		tmp = tmp->next;
 	}
 	return (i);
@@ -72,7 +53,7 @@ void	convert_quotes(t_line *line, int type)
 	tmp = line->next;
 	if (closing_quote_exists(tmp, type) == 1)
 	{
-		while (tmp && tmp->index <= find_limiter(tmp))
+		while (tmp)
 		{
 			if (tmp->type == type)
 				break ;

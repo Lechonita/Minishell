@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/27 16:40:31 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:32:13 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ static int	update_pwd(t_bigshell *data)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-	{
-		perror("Minishell: cd");
-		return (EXIT_FAILURE);
-	}
+		return (perror("Minishell: cd"), EXIT_FAILURE);
+	if (!get_env_value(data, "OLDPWD"))
+		env_addback(&data->env, env_new_cd(data, "OLDPWD", get_env_value(data, "PWD")));
 	if (get_env_value(data, "PWD"))
 	{
 		if (set_env_value(data, "OLDPWD", get_env_value(data, "PWD")) == 1)

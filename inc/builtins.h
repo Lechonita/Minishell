@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:39:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/07/27 16:41:16 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:30:37 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUILTINS_H
 
 # include "minishell.h"
+
+t_env	*env_new_cd(t_bigshell *data, char *name, char *value);
 
 int		exec_builtin_cmd(t_bigshell *data, char *cmd, char **args);
 int		exec_builtin_no_fork(t_bigshell *data, char *cmd, char **args);

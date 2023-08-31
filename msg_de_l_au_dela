@@ -69,9 +69,6 @@ example / error :
 
 TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD
 
-	→ $ echo "$"path ET echo '$'path
-		ca donne => $path
-
 TESTS QUOTES ET DOLLAR :
 → $ echo 'hello world'
 → $ echo "hello world"
@@ -99,12 +96,53 @@ TESTS QUOTES ET DOLLAR :
 → $ echo $?ok
 → $ echo $? ok
 → $ echo "la valeur de retour est $?" mais aussi $?
+→ $ echo "cat lol.c | cat > lol.c"
+→ $ echo "a" | echo "b"
 
 
 POUR INFO :
 	→ Comme on ne doit pas gerer les guillemets ou acolades ouvertes, lorsqu'on fait
 		$ echo ${PATH{   OU   echo ${PATH
 			ca renvoie: PATH
+
+
+!!! ATTENTION !!!
+
+>> SEGFAULT / CRASH <<
+	→ $ $?
+	Comportement attendu => 2: command not found
+
+	→ double ENTER sur une ligne de commande vide = segfault
+
+	→ echo "a" | echo "b" = segfault
+		Segfault vient de la fonction init_redir dans init_redir.c
+	
+	→ Entrer une commande, faire ctrl+C puis taper ENTER => segfault
+		Il faut vider le buffer et rendre le prompt
+
+
+>> COMPORTEMENTS ANORMAUX <<
+	→ Lorsqu'il y a qlq chose d'écrit dans le terminal et qu'on fait ctrl+\, il ne doit rien se passer
+
+	→ Lorsqu'on unset PATH et qu'on fait un ls ou wc, normalement ca doit retourner "bash: ls: No such file or directory"
+		Dans notre Minishell, ca continue a fonctionner normalement
+
+	→ Dans le terminal : 'echo lol'
+		Normalement ca doit retourner : echo lol: command not found
+		Dans notre Monishell, ca retourne : lol
+
+	→ Je n'arrive pas a faire fonctionner le export
+
+	→ Builtin PWD :
+		- "pwd ." doit retourner le chemin actuel dans le terminal
+			actuellement, on ne revoie rien
+		- idem pour "pwd .."
+		- idem pour "pwd lol"
+		En fait ca doit toujours retourner le chemin meme s'il y a des arguments?
+		Attention, "pwd |grep a" doit fonctionner. Donc si pas de a dans le chemin actuel, ca n'affiche rien.
+
+
+
 
 
 ~~~~~~~~~~~~~~~~~~ BANNER STYLE ~~~~~~~~~~~~~~~~~~
