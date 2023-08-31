@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/31 16:00:14 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/31 16:21:07 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	same_aim(t_bigshell *data)
 	{
 		if (tok->aim == tok->next->aim && tok->aim != REDIR)
 		{
-			tok->value = freejoin(tok->value, tok->next->value);
+			tok->value = free_strjoin(tok->value, tok->next->value);
 			token_rm_next(tok);
 		}
 		else
@@ -39,8 +39,8 @@ char	*def_tok_value(char *value, char *next, char *nextnext)
 	else if (!nextnext)
 		return (value);
 	if (last_is_dollar(value) == 1 && is_blank(next[0]) == 0)
-		return (freejoin(value, nextnext));
-	return (join_spac(value, nextnext, " "));
+		return (free_strjoin(value, nextnext));
+	return (join_space(value, nextnext, " "));
 }
 
 void	add_arg_to_cmd(t_bigshell *data)
