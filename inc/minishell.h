@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/28 17:30:53 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:36:04 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,38 @@
 # include "redirection.h"
 
 /* GLOBAL VARIABLE */
-extern int	g_exit_status;
+
+typedef struct s_global
+{
+	int	exit_status;
+	int	heredoc;
+	int	nb_cmd;
+}				t_global;
+
+extern t_global	g_global;
 
 /* MAIN */
 void	ft_readline(t_bigshell *data, char *env[]);
-// int		ft_readline(t_bigshell *data, char *env[]);
 
 /***********************************************************/
 /*                          UTILS                          */
 /***********************************************************/
 
-char	*freejoin(char *to_free, char *buf);
+char	*free_strjoin(char *to_free, char *buf);
 
 /* FREE STRUCT*/
 void	free_strs(char **strs);
 void	ft_free_line(t_line **line);
 void	ft_free_env(t_env **env);
 void	ft_free_token(t_token **token);
-void	ft_free_cmd(t_cmd **cmd);
-void	ft_free_exec(t_exec **exec);
 void	ft_free_history(t_bigshell *data);
 void	ft_free_redirection(t_redir **redir);
+void	ft_free_simple_cmd(t_simple_cmd **simple_cmd);
 void	free_all(t_bigshell *data);
 
 /* PRINT ERROR */
 void	error_cd(char *str);
+int		ft_error(int err_no, char *msg);
 void	ft_exit(int err_no, char *msg);
 void	error_execve(t_bigshell *data);
 int		msg_not_found(char *msg, char *str);
@@ -58,12 +65,11 @@ void	error_not_found(t_bigshell *data, char *msg, char *str);
 
 /* PRINT FUNCTION */
 void	print_strs(char **strs);
-void	print_cmd_lst(t_bigshell *data);
 void	print_t_line(t_line *line);
 void	print_t_token(t_bigshell *data);
 void	print_redir(t_bigshell *data);
-void	print_exec(t_bigshell *data);
 void	display_env_struct(t_bigshell *data);
 void	print_history_lst(t_bigshell *data);
+void	print_simple_cmd(t_bigshell *data);
 
 #endif

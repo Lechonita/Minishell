@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct_bis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:13:36 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 12:25:44 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:36:27 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,27 @@ void	free_strs(char **strs)
 	}
 }
 
-void	ft_free_cmd(t_cmd **cmd)
+void	ft_free_simple_cmd(t_simple_cmd **simple_cmd)
 {
-	t_cmd	*tmp;
+	t_simple_cmd	*tmp;
 
-	if (!cmd || !(*cmd))
+	if (!simple_cmd || !(*simple_cmd))
 		return ;
-	while (*cmd)
+	while (*simple_cmd)
 	{
-		tmp = (*cmd)->next;
-		if ((*cmd)->cmd)
-			free((*cmd)->cmd);
-		if ((*cmd)->cmd_arg)
-			free_strs((*cmd)->cmd_arg);
-		free((*cmd));
-		(*cmd) = tmp;
+		tmp = (*simple_cmd)->next;
+		if ((*simple_cmd)->cmd)
+			free((*simple_cmd)->cmd);
+		if ((*simple_cmd)->cmd_arg)
+			free_strs((*simple_cmd)->cmd_arg);
+		if ((*simple_cmd)->redir)
+			ft_free_redirection(&(*simple_cmd)->redir);
+		if ((*simple_cmd)->fd_in)
+			close((*simple_cmd)->fd_in);
+		if ((*simple_cmd)->fd_out)
+			close((*simple_cmd)->fd_out);
+		free((*simple_cmd));
+		(*simple_cmd) = tmp;
 	}
-	*cmd = NULL;
-}
-
-void	ft_free_exec(t_exec **exec)
-{
-	if (!exec || !(*exec))
-		return ;
-	if ((*exec)->fd_in)
-		close((*exec)->fd_in);
-	if ((*exec)->fd_out)
-		close((*exec)->fd_out);
-	if ((*exec)->cmd)
-		ft_free_cmd(&(*exec)->cmd);
-	if ((*exec)->here_doc != 0)
-		unlink("minishell_here_doc");
-	free((*exec));
-	*exec = NULL;
+	(*simple_cmd) = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/31 15:49:42 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:59:18 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,26 @@ int	is_between_quotes(t_bigshell *data, t_line *line)
 		return (1);
 	}
 	return (0);
+}
+
+void	do_dollar_ret(t_line *line)
+{
+	t_line	*tmp;
+	char	*ret;
+
+	if (!line)
+		return ;
+	tmp = line;
+	ret = ft_itoa(g_exit_status);
+	tmp->c = ret[0];
+	if (ret[1])
+		tmp = line_add_node(tmp, ret[1], tmp->index);
+	if (ft_strlen(ret) == 3 && ret[2])
+	{
+		tmp = tmp->next;
+		tmp = line_add_node(tmp, ret[2], tmp->index);
+	}
+	free(ret);
 }
 
 void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)

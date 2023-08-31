@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:45 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/28 17:30:53 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:15:20 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	error_arg_exit(char *arg)
 	char	*line;
 
 	tmp = ft_strjoin("Minishell: exit: ", arg);
-	line = freejoin(tmp, ": numeric argument required\n");
+	line = free_strjoin(tmp, ": numeric argument required\n");
 	ft_putstr_fd(line, STDERR_FILENO);
 	free(line);
 	return (255);
@@ -38,7 +38,7 @@ static int	is_str_digit(char *str)
 	return (1);
 }
 
-static void	determine_g_exit_status(t_bigshell *data, char **args)
+static void	determine_exit_status(t_bigshell *data, char **args)
 {
 	int	exit_code;
 
@@ -57,6 +57,6 @@ int	exit_shell(char **args, t_bigshell *data)
 	ft_putendl_fd("exit by MiniShell", STDERR_FILENO);
 	if (args[1] && args[2])
 		return (ft_putstr_fd(W_EXIT_ARG, STDERR_FILENO), EXIT_FAILURE);
-	determine_g_exit_status(data, args);
+	determine_exit_status(data, args);
 	return (EXIT_SUCCESS);
 }

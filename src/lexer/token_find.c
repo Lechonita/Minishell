@@ -3,15 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   token_find.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:13:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/29 13:38:57 by lechon           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:27:31 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/lexer.h"
+
+void	token_group(t_token *tok)
+{
+	t_token	*el;
+	int		grp;
+
+	el = tok;
+	grp = 0;
+	while (el != NULL)
+	{
+		if (el->type == PIPE)
+			grp++;
+		el->group = grp;
+		el = el->next;
+	}
+	g_global.nb_cmd = grp + 1;
+}
 
 int	token_size(t_line *current)
 {
@@ -70,5 +87,4 @@ void	find_tokens(t_bigshell *data)
 		free(value);
 		el = el->next;
 	}
-	parser_job(data);
 }

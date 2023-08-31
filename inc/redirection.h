@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:35:23 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/14 17:15:55 by Bea              ###   ########.fr       */
+/*   Updated: 2023/08/30 16:15:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,12 @@
 
 # include "minishell.h"
 
-void	redirection_here_doc(t_bigshell *data, t_redir *redir);
-int		redirection_less(t_bigshell *data, t_redir *redir);
-int		redirection_great(t_bigshell *data, t_redir *redir);
-void	redirection_append(t_bigshell *data, t_redir *redir);
+int	count_file(t_bigshell *data, int type);
+int	open_fd(t_redir *redir);
 
-int		count_file(t_bigshell *data, int type);
-
-t_redir	*init_redir(t_bigshell *data);
-int		redir_job(t_bigshell *data);
-
-void	handle_dup(t_bigshell *data, int pcss);
+int	redirection_here_doc(t_redir *redir);
+int	redirection_less(t_redir *redir);
+int	redirection_great(t_redir *redir);
+int	redirection_append(t_redir *redir);
 
 #endif

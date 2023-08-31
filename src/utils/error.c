@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/08/28 17:30:53 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:44 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	error_cd(char *str)
 	if (!res)
 		return ;
 	res = ft_strjoin("Minishell: cd: ", str);
-	res = freejoin(res, ": No such file or directory\n");
+	res = free_strjoin(res, ": No such file or directory\n");
 	ft_putstr_fd(res, 2);
 	free(res);
 }
@@ -40,7 +40,7 @@ int	msg_not_found(char *msg, char *str)
 	char	*line;
 
 	tmp = ft_strjoin(msg, str);
-	line = freejoin(tmp, "\n");
+	line = free_strjoin(tmp, "\n");
 	ft_putstr_fd(line, 2);
 	free(line);
 	return (127);
@@ -58,4 +58,12 @@ void	ft_exit(int err_no, char *msg)
 	if (msg)
 		ft_putstr_fd(msg, 2);
 	exit(err_no);
+}
+
+int	ft_error(int err_no, char *msg)
+{
+	if (msg)
+		ft_putstr_fd(msg, 2);
+	g_global.exit_status = err_no;
+	return (EXIT_FAILURE);
 }

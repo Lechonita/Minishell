@@ -74,14 +74,12 @@ SRC += handle_export.c
 
 # 	Exec functions
 SRC += executor.c
-SRC += exec_utils.c
-SRC += cmd_utils.c
-SRC += init_exec.c
-SRC += simple_cmd.c
+SRC += simple_cmd_exec.c
 
 #	Expander functions
 SRC += dollar_add_value.c
 SRC += dollar_expansion.c
+SRC += dollar_quotes.c
 SRC += dollar_utils.c
 SRC += dollar.c
 SRC += quotes_find.c
@@ -94,25 +92,26 @@ SRC += signal.c
 SRC += signal_here_doc.c
 
 #	Lexer functions
+SRC += find_token_type.c
 SRC += flag_quotes.c
 SRC += line_init.c
 SRC += token_find.c
 SRC += token_init.c
-SRC += find_token_type.c
 SRC += token_type.c
 SRC += token_type_bis.c
 
 #	Parser functions
-SRC += find_aim.c
-SRC += aim_cmd.c
+SRC += parser_job.c
+SRC += parser_utils.c
+SRC += init_simple_cmd.c
+SRC += handle_cmd.c
 SRC += aim_utils.c
 
 #	Redirection functions
-SRC += path_name.c
 SRC += handle_redir.c
-SRC += in_out.c
-SRC += in_out_utils.c
-SRC += handle_fd.c
+SRC += init_redir.c
+SRC += redir_utils.c
+SRC += io_in_simple_cmd.c
 
 #	Utils functions
 SRC += free_struct.c
@@ -160,7 +159,7 @@ endef
 
 ############################### Rules ##########################################
 
-all: $(NAME) #art_bis
+all: $(NAME) art
 
 $(LIBFT):
 	@make --no-print-directory all -C $(LIBFT_DIR)
@@ -177,27 +176,17 @@ $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) $(INCLUDES) -o $(NAME) -lreadline -lncurses
 	@echo "\n	⤳$(GREEN) Created $(NAME) ✨\n$(DEF_COLOR)"
 
-art_bis:
-	@echo "	 	 ________________________________________________________   \n \
-			/\                                                       \	\n \
-			\_|                                                      |	\n \
-			  |                ▙▗▌▗    ▗ ▞▀▖▌     ▜▜                 |	\n \
-			  |                ▌▘▌▄ ▛▀▖▄ ▚▄ ▛▀▖▞▀▖▐▐                 |	\n \
-			  |                ▌ ▌▐ ▌ ▌▐ ▖ ▌▌ ▌▛▀ ▐▐                 |	\n \
-			  |                ▘ ▘▀▘▘ ▘▀▘▝▀ ▘ ▘▝▀▘ ▘▘                |	\n \
-			  |                                                      |	\n \
-			  |   ___________________________________________________|_	\n \
-			   \_/_____________________________________________________/  \t★ Lechon & BeBig ★ \n" #| lolcat
+art:
+	@./banner.sh
 
 norm:
 	@norminette src/*/*.c
 	@norminette inc/*.h
-#	@norminette libft/*/*.[ch]
 
-leaks: $(NAME) #art_bis #fclean $(NAME)
+leaks: $(NAME) art
 	@printf "$(GREY)Checking leaks with valgrind...\n$(END)"
 	@sleep 0.5
-	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./.readline_supp -q  ./$(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./.readline_supp -q ./$(NAME)
 # --gen-suppressions=all --gen-suppressions=all --log-file="valou"
 
 clean:
