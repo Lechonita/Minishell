@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/08/30 17:36:20 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 14:46:54 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,14 @@ void	free_all(t_bigshell *data)
 		return ;
 	if (data->env_paths)
 		free_strs(data->env_paths);
-	if (data->simple_cmd)
-		ft_free_simple_cmd(&data->simple_cmd);
-	if (data->token)
-		ft_free_token(&data->token);
-	if (data->in_out)
-		ft_free_redirection(&data->in_out);
 	if (data->line)
 		ft_free_line(&data->line);
+	if (data->token)
+		ft_free_token(&data->token);
 	if (data->env)
 		ft_free_env(&data->env);
+	if (data->simple_cmd)
+		ft_free_simple_cmd(&data->simple_cmd);
 	rl_clear_history();
 	if (data != NULL)
 		free(data);

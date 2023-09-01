@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:48:15 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 16:11:25 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 16:16:27 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,23 @@ void	exec_multiple_cmd(t_bigshell *data, char *env[])
 {
 	t_simple_cmd	*cmd;
 	pid_t			last_pid;
-	int				end[2];
 
 	cmd = data->simple_cmd;
 	while (cmd)
 	{
 		if (cmd->next && !cmd->next->fd_in)
 		{
-			pipe(end);
-			cmd->next->fd_in = end[0];
+			pipe(cmd->end);
+			cmd->next->fd_in = cmd->end[0];
 			if (!cmd->fd_out)
-				cmd->fd_out = end[1];
+				cmd->fd_out = cmd->end[1];
 		}
 		last_pid = exec_cmd(data, cmd, env);
 		if (cmd->fd_in)
 			close(cmd->fd_in);
 		if (cmd->fd_out)
 			close(cmd->fd_out);
-		if (cmd->next)
-			cmd = cmd->next;
-		else
-			break ;
+		cmd = cmd->next;
 	}
 	ft_waitpid(last_pid);
 }

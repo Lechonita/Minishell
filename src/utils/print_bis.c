@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/01 12:17:54 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 15:14:07 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,19 @@ void	print_simple_cmd(t_bigshell *data)
 	t_simple_cmd		*el;
 
 	el = data->simple_cmd;
-	printf("__________________SIMPLE_________________________\n");
+	dprintf(2, "__________________SIMPLE_________________________\n");
 	while (el != NULL)
 	{
-		dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\n", el->idx,
-			el->cmd, el->builtin);
-		dprintf(2, "\tfd_in   = %2d\tin_file  : %s\n", el->fd_in, el->in_file);
-		dprintf(2, "\tfd_out  = %2d\tout_file : %s\n", el->fd_out, el->out_file);
+		dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\n\tfd_in   = %2d\tin_file  : %s\n\tfd_out  = %2d\tout_file : %s\n",
+			el->idx, el->cmd, el->builtin, el->fd_in, el->in_file,
+			el->fd_out, el->out_file);
+		// dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\n", el->idx,
+		// 	el->cmd, el->builtin);
+		// dprintf(2, "\tfd_in   = %2d\tin_file  : %s\n", el->fd_in, el->in_file);
+		// dprintf(2, "\tfd_out  = %2d\tout_file : %s\n", el->fd_out, el->out_file);
 		el = el->next;
 	}
-	printf("_________________________________________________\n");
+	dprintf(2, "_________________________________________________\n");
 }
 
 /*

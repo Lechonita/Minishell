@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/01 12:11:12 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 14:57:00 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_simple_cmd
 	char				**cmd_arg;
 	int					fd_in;
 	int					fd_out;
+	int					end[2];
 	char				*in_file;
 	char				*out_file;
 	int					idx;
@@ -104,7 +105,6 @@ typedef struct s_bigshell
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;
-	t_redir			*in_out;
 	t_simple_cmd	*simple_cmd;
 }	t_bigshell;
 

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:13:36 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 17:36:27 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 15:35:21 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	ft_free_simple_cmd(t_simple_cmd **simple_cmd)
 			close((*simple_cmd)->fd_in);
 		if ((*simple_cmd)->fd_out)
 			close((*simple_cmd)->fd_out);
+		if ((*simple_cmd)->end[0])
+			close((*simple_cmd)->end[0]);
+		if ((*simple_cmd)->end[1])
+			close((*simple_cmd)->end[1]);
 		free((*simple_cmd));
 		(*simple_cmd) = tmp;
 	}
