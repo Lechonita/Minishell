@@ -109,20 +109,10 @@ POUR INFO :
 !!! ATTENTION !!!
 
 >> SEGFAULT / CRASH <<
-	→ $ $?
-	Comportement attendu => 2: command not found
-
-	→ double ENTER sur une ligne de commande vide = segfault
-
-	→ echo "a" | echo "b" = segfault
-		Segfault vient de la fonction init_redir dans init_redir.c
-	
-	→ Entrer une commande, faire ctrl+C puis taper ENTER => segfault
-		Il faut vider le buffer et rendre le prompt
+	→
 
 
 >> COMPORTEMENTS ANORMAUX <<
-	→ Lorsqu'il y a qlq chose d'écrit dans le terminal et qu'on fait ctrl+\, il ne doit rien se passer
 
 	→ Lorsqu'on unset PATH et qu'on fait un ls ou wc, normalement ca doit retourner "bash: ls: No such file or directory"
 		Dans notre Minishell, ca continue a fonctionner normalement
@@ -133,16 +123,9 @@ POUR INFO :
 
 	→ Je n'arrive pas a faire fonctionner le export
 
-	→ Builtin PWD :
-		- "pwd ." doit retourner le chemin actuel dans le terminal
-			actuellement, on ne revoie rien
-		- idem pour "pwd .."
-		- idem pour "pwd lol"
-		En fait ca doit toujours retourner le chemin meme s'il y a des arguments?
-		Attention, "pwd |grep a" doit fonctionner. Donc si pas de a dans le chemin actuel, ca n'affiche rien.
-
-
-
+	→ Builtin CD :
+		Lorsque PWD est unset et qu'on fait un cd pour changer de directory, le PWD ne revient pas alors que
+		ca doit s'afficher si on fait :	echo $PWD (le OLDPWD doit bien rester vide)
 
 
 ~~~~~~~~~~~~~~~~~~ BANNER STYLE ~~~~~~~~~~~~~~~~~~

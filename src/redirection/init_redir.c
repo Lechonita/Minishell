@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:21:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/31 19:22:26 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/01 11:10:01 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static t_redir	*init_redir(t_token **token, int grp)
 		else if (i > 0 && (el->type == LESS || el->type == DLESS
 				|| el->type == GREAT || el->type == DGREAT) && el->group == grp)
 			add_back(&redir, new_lst(i++, el->value, el->next->value));
-		else if (el->group != grp)
+		else if (el->group != grp && el->next != NULL)
 			el = el->next;
 		el = el->next;
 	}

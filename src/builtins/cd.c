@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/31 18:32:13 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/01 12:47:19 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static int	update_pwd(t_bigshell *data)
 	if (!cwd)
 		return (perror("Minishell: cd"), EXIT_FAILURE);
 	if (!get_env_value(data, "OLDPWD"))
-		env_addback(&data->env, env_new_cd(data, "OLDPWD", get_env_value(data, "PWD")));
+		env_addback(&data->env, env_new_cd(data, "OLDPWD",
+				get_env_value(data, "PWD")));
 	if (get_env_value(data, "PWD"))
 	{
 		if (set_env_value(data, "OLDPWD", get_env_value(data, "PWD")) == 1)
@@ -68,20 +69,13 @@ static int	update_pwd(t_bigshell *data)
 	}
 	else
 	{
+		printf("Je rentre dans les export cd\n");
 		do_export_cd(data, "PWD", cwd);
 		do_export_cd(data, "OLDPWD", NULL);
 	}
-	// {
-	// 	env_addback(&data->env, env_new_cd(data, "PWD", cwd));
-	// 	env_addback(&data->env, env_new_cd(data, "OLDPWD", NULL));
-	// }
 	if (set_env_value(data, "PWD", cwd) == 1)
-	{
-		free(cwd);
-		return (EXIT_FAILURE);
-	}
-	free(cwd);
-	return (EXIT_SUCCESS);
+		return (free(cwd), EXIT_FAILURE);
+	return (free(cwd), EXIT_SUCCESS);
 }
 
 static char	*get_dir(t_bigshell *data, char **args)

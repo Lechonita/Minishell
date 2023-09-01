@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/31 16:21:07 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/01 11:14:49 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	same_aim(t_bigshell *data)
 	t_token	*tok;
 
 	tok = data->token;
-	while (tok->next != NULL)
+	while (tok && tok->next != NULL)
 	{
 		if (tok->aim == tok->next->aim && tok->aim != REDIR)
 		{
