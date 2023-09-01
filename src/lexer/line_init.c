@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/31 19:11:35 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/01 10:12:07 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,4 @@ void	init_line(t_bigshell *data, char *line)
 	find_quotes(tmp);
 	find_dollar_dollar_bill(data, tmp);
 	check_for_export(data, tmp, line);
-	print_t_line(data->line);
 }

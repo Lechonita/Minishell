@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/31 16:21:07 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/01 11:29:53 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	same_aim(t_bigshell *data)
 	t_token	*tok;
 
 	tok = data->token;
-	while (tok->next != NULL)
+	while (tok && tok->next != NULL)
 	{
 		if (tok->aim == tok->next->aim && tok->aim != REDIR)
 		{
@@ -58,7 +58,7 @@ void	add_arg_to_cmd(t_bigshell *data)
 				tok->value = def_tok_value(tok->value, tok->next->value,
 						tok->next->next->value);
 				if (tok->next->type == BLANK
-					|| (tok->next->type == SQUOTE || tok->next->type == DQUOTE))
+					|| tok->next->type == SQUOTE || tok->next->type == DQUOTE)
 					token_rm_next(tok);
 				if (tok->next->type == WORD)
 					token_rm_next(tok);

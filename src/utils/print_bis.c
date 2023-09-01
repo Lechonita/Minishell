@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 17:19:59 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 12:17:54 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	print_t_token(t_bigshell *data)
 		printf("[%2d] ", el->index);
 		printf("tok %2d ", el->type);
 		printf(": %20s ", el->value);
-		printf("→ %2d\n", el->aim);
+		printf("→ %2d ", el->aim);
+		printf("~flag quotes %d~\n", el->quote_flag);
 		el = el->next;
 	}
 }

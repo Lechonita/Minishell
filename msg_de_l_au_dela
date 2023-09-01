@@ -17,11 +17,6 @@ echo 1 > out12 2 <Makefile in2 >>out13
 
 → ls | < 1 cat
 
-→ go install github.com/arsham/rainbow@latest
-→ https://github.com/arsham/rainbow#installation
-→ 
-
-
 < Makefile cat | wc -l | head -77 | tail -5 | ls -l >> out_file
 < Makefile cat | head -7 | taili -5 >> out_file
 < Makefile cat | wc -l > out_file
@@ -30,12 +25,6 @@ echo 1 > out12 2 <Makefile in2 >>out13
 <Makefile << fin <src/main.c head -15 | echo hello 15 >out_file >> files/out_file
 
 < files/no_right << files/write_o < files/all_rights ls -l >files/read_o >>files/read_write >files/exec_o.c 
-
-to do list :
-	→ check if all grammar is ok in lexer/parser/tokener 
-	→ gérer les redirection avant l'exec
-	→ gérer les open/close de fd avant l'exec
-
 
 to do expansion :
 	→ cmd="ls -l" puis $cmd affiche le resultat de ls -l
@@ -47,7 +36,7 @@ example / error :
 	bash: syntax error near unexpected token `newline'
 
 	→ $ e'c'"h"o salut
-	  $ e"c"""h"o" salut
+    $ e"c"""h"o" salut
 	salut
 
 	echo 1 > out12 2 3 << 1 << 2 << 3 < in < in2 >>out13
@@ -112,34 +101,13 @@ POUR INFO :
 	→ $ $?
 	Comportement attendu => 2: command not found
 
-	→ double ENTER sur une ligne de commande vide = segfault
-
-	→ echo "a" | echo "b" = segfault
-		Segfault vient de la fonction init_redir dans init_redir.c
-	
-	→ Entrer une commande, faire ctrl+C puis taper ENTER => segfault
-		Il faut vider le buffer et rendre le prompt
-
-
->> COMPORTEMENTS ANORMAUX <<
-	→ Lorsqu'il y a qlq chose d'écrit dans le terminal et qu'on fait ctrl+\, il ne doit rien se passer
+>> COMPORTEMENTS ANORMAUX <<r
 
 	→ Lorsqu'on unset PATH et qu'on fait un ls ou wc, normalement ca doit retourner "bash: ls: No such file or directory"
 		Dans notre Minishell, ca continue a fonctionner normalement
 
-	→ Dans le terminal : 'echo lol'
-		Normalement ca doit retourner : echo lol: command not found
-		Dans notre Monishell, ca retourne : lol
-
 	→ Je n'arrive pas a faire fonctionner le export
 
-	→ Builtin PWD :
-		- "pwd ." doit retourner le chemin actuel dans le terminal
-			actuellement, on ne revoie rien
-		- idem pour "pwd .."
-		- idem pour "pwd lol"
-		En fait ca doit toujours retourner le chemin meme s'il y a des arguments?
-		Attention, "pwd |grep a" doit fonctionner. Donc si pas de a dans le chemin actuel, ca n'affiche rien.
 
 
 
@@ -147,25 +115,25 @@ POUR INFO :
 
 ~~~~~~~~~~~~~~~~~~ BANNER STYLE ~~~~~~~~~~~~~~~~~~
 
-toilet -f small 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
-toilet -f script 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
-toilet -f circle 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
-toilet -f future 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
-toilet -f pagga 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
-toilet -f smblock 'MiniShell' | boxes -d spring -a hcvc | lolcat >> out_file
+toilet -f small 'MiniShell' | boxes -d spring -a hcvc >> out_file
+toilet -f script 'MiniShell' | boxes -d spring -a hcvc >> out_file
+toilet -f circle 'MiniShell' | boxes -d spring -a hcvc >> out_file
+toilet -f future 'MiniShell' | boxes -d spring -a hcvc >> out_file
+toilet -f pagga 'MiniShell' | boxes -d spring -a hcvc >> out_file
+toilet -f smblock 'MiniShell' | boxes -d spring -a hcvc >> out_file
 
 
-toilet -f future 'MiniShell' | boxes -d parchment -a hcvc | lolcat 
-toilet -f future 'MiniShell' | boxes -d parchment -a hcvc -s 60x10 | lolcat 
-toilet -f future 'MiniShell' | boxes -d parchment -a hcvc -s 50x10 | lolcat 
+toilet -f future 'MiniShell' | boxes -d parchment -a hcvc 
+toilet -f future 'MiniShell' | boxes -d parchment -a hcvc -s 60x10 
+toilet -f future 'MiniShell' | boxes -d parchment -a hcvc -s 50x10 
 
 
-toilet -f small 'MiniShell' | boxes -d spring -a hcvc | lolcat 
-toilet -f script 'MiniShell' | boxes -d spring -a hcvc | lolcat 
-toilet -f circle 'MiniShell' | boxes -d spring -a hcvc | lolcat 
-toilet -f future 'MiniShell' | boxes -d spring -a hcvc | lolcat 
-toilet -f pagga 'MiniShell' | boxes -d spring -a hcvc | lolcat 
-toilet -f smblock 'MiniShell' | boxes -d spring -a hcvc | lolcat 
+toilet -f small 'MiniShell' | boxes -d spring -a hcvc
+toilet -f script 'MiniShell' | boxes -d spring -a hcvc
+toilet -f circle 'MiniShell' | boxes -d spring -a hcvc
+toilet -f future 'MiniShell' | boxes -d spring -a hcvc
+toilet -f pagga 'MiniShell' | boxes -d spring -a hcvc
+toilet -f smblock 'MiniShell' | boxes -d spring -a hcvc
 
 
 toilet -f small 'MiniShell' | boxes -d parchment -a hcvc | lolcat > out_file

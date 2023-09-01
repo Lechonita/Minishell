@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 17:35:29 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 12:11:12 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_token
 	int				group;
 	int				type;
 	int				aim;
+	int				quote_flag;
 	char			*value;
 	struct s_token	*next;
 }	t_token;

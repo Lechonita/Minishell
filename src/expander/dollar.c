@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/31 16:13:45 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/01 11:13:46 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	is_between_quotes(t_bigshell *data, t_line *line)
 		return (0);
 	tmp = line;
 	prev = find_prev(data, tmp->index);
-	if (prev->type == DQUOTE && tmp->next->type == DQUOTE)
+	if (prev && prev->type == DQUOTE && tmp->next->type == DQUOTE)
 	{
 		tmp->type = WORD;
 		return (1);

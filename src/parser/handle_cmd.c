@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_lst.c                                          :+:      :+:    :+:   */
+/*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:57:52 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 15:26:38 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 12:26:30 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,10 @@ void	add_cmd_to_lst(t_bigshell *data)
 				simple_cmd->cmd = ft_strdup(tok->value);
 				if (!simple_cmd->cmd)
 					ft_error(EXIT_FAILURE, W_LST_CMD_DUP);
-				simple_cmd->cmd_arg = ft_split(tok->value, ' ');
+				if (tok->quote_flag == 0)
+					simple_cmd->cmd_arg = ft_split(tok->value, ' ');
+				else
+					simple_cmd->cmd_arg = ft_split(tok->value, '\n');
 				if (!simple_cmd->cmd_arg)
 					ft_error(EXIT_FAILURE, W_SPLIT_CMD);
 				if (tok->aim == BUILTIN)

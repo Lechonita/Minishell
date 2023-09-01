@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:17:32 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 16:54:17 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 12:16:06 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	token_addback(t_token *token, t_token *new)
 
 /* Fonction qui cree un maillon t_token pour ajouter a la
 	liste chainee. */
-static t_token	*token_new(char *value, int type, int idx)
+static t_token	*token_new(char *value, t_line *current_line, int idx)
 {
 	t_token		*new;
 
@@ -59,9 +59,15 @@ static t_token	*token_new(char *value, int type, int idx)
 		return (NULL);
 	new->index = idx;
 	new->group = 0;
-	new->type = type;
+	new->type = current_line->type;
 	new->aim = 0;
 	new->value = ft_strdup(value);
+	if (current_line->sq == 1)
+		new->quote_flag = 1;
+	else if (current_line->dq == 1)
+		new->quote_flag = 2;
+	else if (current_line->dq == 0 && current_line->sq == 0)
+		new->quote_flag = 0;
 	new->next = NULL;
 	return (new);
 }
@@ -70,10 +76,10 @@ void	create_token(t_bigshell *data, t_line *current, char *value, int pos)
 {
 	if (current->index == 0)
 	{
-		data->token = token_new(value, current->type, pos);
+		data->token = token_new(value, current, pos);
 		if (!data->token)
 			ft_exit(EXIT_FAILURE, W_LST_TOK);
 	}
 	else
-		token_addback(data->token, token_new(value, current->type, pos));
+		token_addback(data->token, token_new(value, current, pos));
 }
