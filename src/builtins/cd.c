@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/01 12:47:19 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/01 20:07:57 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ static int	update_pwd(t_bigshell *data)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return (perror("Minishell: cd"), EXIT_FAILURE);
-	if (!get_env_value(data, "OLDPWD"))
-		env_addback(&data->env, env_new_cd(data, "OLDPWD",
-				get_env_value(data, "PWD")));
 	if (get_env_value(data, "PWD"))
 	{
 		if (set_env_value(data, "OLDPWD", get_env_value(data, "PWD")) == 1)
@@ -69,7 +66,6 @@ static int	update_pwd(t_bigshell *data)
 	}
 	else
 	{
-		printf("Je rentre dans les export cd\n");
 		do_export_cd(data, "PWD", cwd);
 		do_export_cd(data, "OLDPWD", NULL);
 	}
