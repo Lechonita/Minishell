@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/01 11:29:53 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/01 14:23:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	same_aim(t_bigshell *data)
 	t_token	*tok;
 
 	tok = data->token;
-	while (tok && tok->next != NULL)
+	while (tok && tok && tok->next != NULL)
 	{
 		if (tok->aim == tok->next->aim && tok->aim != REDIR)
 		{

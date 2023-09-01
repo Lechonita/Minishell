@@ -98,19 +98,19 @@ POUR INFO :
 !!! ATTENTION !!!
 
 >> SEGFAULT / CRASH <<
-	→ $ $?
-	Comportement attendu => 2: command not found
+	→
 
->> COMPORTEMENTS ANORMAUX <<r
+
+>> COMPORTEMENTS ANORMAUX <<
 
 	→ Lorsqu'on unset PATH et qu'on fait un ls ou wc, normalement ca doit retourner "bash: ls: No such file or directory"
 		Dans notre Minishell, ca continue a fonctionner normalement
 
 	→ Je n'arrive pas a faire fonctionner le export
 
-
-
-
+	→ Builtin CD :
+		Lorsque PWD est unset et qu'on fait un cd pour changer de directory, le PWD ne revient pas alors que
+		ca doit s'afficher si on fait :	echo $PWD (le OLDPWD doit bien rester vide)
 
 
 ~~~~~~~~~~~~~~~~~~ BANNER STYLE ~~~~~~~~~~~~~~~~~~

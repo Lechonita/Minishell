@@ -58,8 +58,8 @@ SRC += main.c
 
 #	Builtins functions
 SRC += builtins.c
-SRC += cd_utils.c
 SRC += cd.c
+SRC += cd_utils.c
 SRC += echo.c
 SRC += env.c
 SRC += exit.c 

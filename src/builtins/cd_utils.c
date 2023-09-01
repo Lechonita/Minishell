@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:49:49 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/31 18:25:16 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/01 12:47:34 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,30 @@ void	do_export_cd(t_bigshell *data, char *name, char *value)
 {
 	t_env	*env;
 
-	if (!data)
+	if (!data || !name)
 		return ;
+	printf("  Je rentre dans export cd avec name=%s & value=%s\n", name, value);
 	env = data->env;
 	while (env)
 	{
 		if (ft_strcmp(env->name, name) == 0)
-		{
-			env->value = value;
-			env->to_export = FALSE;
-		}
+			env->value = ft_strdup(value);
 		env = env->next;
 	}
 }
+
+// int	get_export_value(t_bigshell *data, char *name)
+// {
+// 	t_env	*env;
+
+// 	if (!data || !name)
+// 		return (TRUE);
+// 	env = data->env;
+// 	while (env)
+// 	{
+// 		if (ft_strcmp(env->name, name) == 0 && env->to_export == FALSE)
+// 			return (FALSE);
+// 		env = env->next;
+// 	}
+// 	return (TRUE);
+// }
