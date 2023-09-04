@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/01 14:57:00 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/04 17:41:31 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # include <readline/readline.h>	//readline
 # include <readline/history.h>	//readline
 
-# define PROMPT "$ "
-// # define PROMPT "🔥 "
+// # define PROMPT "$ "
+# define PROMPT "🔥 "
 # define TRUE 1
 # define FALSE 0
 

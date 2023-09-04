@@ -13,6 +13,8 @@ echo 1 > out12 2 <Makefile in2 >>out13
 
 → ls -l | pwd
 
+→ export | wc
+
 → > 1 cat | wc -w
 
 → ls | < 1 cat
