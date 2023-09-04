@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_job.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/01 11:24:57 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:32:42 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	rm_blank(t_bigshell *data)
 
 void	parser_job(t_bigshell *data)
 {
+	// print_t_line(data->line);
+	// if (! er token est un quote passer au quote dápres)
 	aim_redir(data);
 	aim_pipe(data);
 	aim_cmd(data);

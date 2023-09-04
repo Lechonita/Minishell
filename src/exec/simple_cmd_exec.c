@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/01 16:15:58 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/04 16:52:03 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static void	handle_fds(t_bigshell *data, t_simple_cmd *simple_cmd)
 	}
 }
 
-// close_fd(data);
-
 static int	find_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 {
 	simple_cmd->cmd = find_path_to_cmd(data, simple_cmd->cmd_arg[0],
@@ -74,6 +72,8 @@ void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 	handle_fds(data, simple_cmd);
 	if (simple_cmd->builtin != 0)
 		ret = exec_builtin_cmd(data, simple_cmd->cmd, simple_cmd->cmd_arg);
+	else if (simple_cmd->cmd == NULL)
+		ret = 0;
 	else if (simple_cmd->cmd_arg[0][0] != '\0')
 		ret = find_cmd(data, simple_cmd, env);
 	free_all(data);

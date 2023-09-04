@@ -3,85 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   all_rights                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/29 15:00:57 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/04 16:08:16 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	aim_redir(t_bigshell *data)
+char	**whileloop_del_var(char **arr, char **rtn, char *str)
 {
-	t_token	*tok;
+	int	i;
+	int	j;
 
-	tok = data->token;
-	while (tok != NULL)
+	i = 0;
+	j = 0;
+	while (arr[i] != NULL)
 	{
-		if ((tok->type == LESS || tok->type == GREAT) && !tok->aim)
+		if (!(ft_strncmp(arr[i], str, equal_sign(arr[i]) - 1) == 0
+				&& str[equal_sign(arr[i])] == '\0'
+				&& arr[i][ft_strlen(str)] == '='))
 		{
-			tok->aim = REDIR;
-			if (tok->next != NULL && (tok->next->type == WORD
-					|| tok->next->type == INTEGER))
-				tok->next->aim = REDIR;
-			else if (tok->next->next != NULL && (tok->next->next->type == WORD
-					|| tok->next->next->type == INTEGER))
-				tok->next->next->aim = REDIR;
-		}
-		tok = tok->next;
+			rtn[j] = ft_strdup(arr[i]);
+			if (rtn[j] == NULL)
+			{
+				free_arr(rtn);
+				return (rtn);
+			}
+			j++;
+		}	
+		i++;
 	}
+	return (rtn);
 }
 
-void	aim_pipe(t_bigshell *data)
+char	**del_var(char **arr, char *str)
 {
-	t_token	*tok;
+	char	**rtn;
+	size_t	i;
 
-	tok = data->token;
-	while (tok != NULL)
+	i = 0;
+	while (arr[i] != NULL)
+		i++;
+	rtn = ft_calloc(sizeof(char *), i + 1);
+	if (!rtn)
+		return (NULL);
+	rtn = whileloop_del_var(arr, rtn, str);
+	return (rtn);
+}
+
+
+int	mini_unset(t_tools *tools, t_simple_cmds *simple_cmd)
+{
+	char	**tmp;
+
+	if (unset_error(simple_cmd) == 1)
+		return (EXIT_FAILURE);
+	else
 	{
-		if (tok->type == PIPE && !tok->aim)
-			tok->aim = PIPEX;
-		tok = tok->next;
+		tmp = del_var(tools->envp, simple_cmd->str[1]);
+		free_arr(tools->envp);
+		tools->envp = tmp;
 	}
+	return (EXIT_SUCCESS);
 }
 
-void	aim_cmd(t_bigshell *data)
-{
-	t_token	*tok;
-
-	tok = data->token;
-	while (tok != NULL)
-	{
-		if ((tok->type == WORD || tok->type == INTEGER) && !tok->aim)
-			tok->aim = SIMPLE_CMD;
-		tok = tok->next;
-	}
-	same_aim(data);
-	add_arg_to_cmd(data);
-}
-
-void	rm_blank(t_bigshell *data)
-{
-	t_token	*tok;
-
-	if (!data->token || !data->token->next)
-		return ;
-	tok = data->token;
-	while (tok != NULL && tok->next != NULL)
-	{
-		if (tok->next->type == BLANK)
-			token_rm_next(tok);
-		tok = tok->next;
-	}
-}
-
-void	parser_job(t_bigshell *data)
-{
-	aim_redir(data);
-	aim_pipe(data);
-	aim_cmd(data);
-	check_builtin(data);
-	rm_blank(data);
-}
       3       3      21
+
+/*
+
+// int	unset_error(t_simple_cmds *simple_cmd)
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	if (!simple_cmd->str[1])
+// 	{
+// 		ft_putendl_fd("minishell: unset: not enough arguments", STDERR_FILENO);
+// 		return (EXIT_FAILURE);
+// 	}
+// 	while (simple_cmd->str[1][i])
+// 	{
+// 		if (simple_cmd->str[1][i++] == '/')
+// 		{
+// 			ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
+// 			ft_putstr_fd(simple_cmd->str[1], STDERR_FILENO);
+// 			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+// 			return (EXIT_FAILURE);
+// 		}
+// 	}
+// 	if (equal_sign(simple_cmd->str[1]) != 0)
+// 	{
+// 		ft_putendl_fd("minishell: unset: not a valid identifier",
+// 			STDERR_FILENO);
+// 		return (EXIT_FAILURE);
+// 	}
+// 	return (EXIT_SUCCESS);
+// }
+
+*/

@@ -1,6 +1,6 @@
 yo mate !! how are you??
 
-<Makefile head -10 >>out >out1 | ls -l >out2 | <banner.sh cat >>out3 | head -15 | tail -5 >> out_file
+<Makefile head -10 >>out >out1 | ls -l >out2 | <banner.sh >>out3 | head -15 | tail -5 >> out_file
 
 <Makefile head -10 >>out >out1 | wc >out2 | <banner.sh cat >>out3 | head -15 | tail -5 >> out_file
 
