@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/04 18:02:16 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:59:18 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,18 @@ void	print_declare_env(t_bigshell *data)
 void	do_export(t_bigshell *data, char **args)
 {
 	int		i;
-	int		len;
-	t_env	*env;
+	t_env	*el;
 
 	i = 1;
-	len = 0;
-	env = data->env;
-	while (env->next)
-	{
-		len++;
-		dprintf(2, "[%d] \n", env->index);
-		env = env->next;
-	}
-	dprintf(2, "len = %d\n", len);
 	while (args[i])
 	{
-		dprintf(2, "args[%d] => %s\n", i, args[i]);
-		env_addback(&data->env, env_new(args[i], len - 1, TRUE));
+		el = data->env;
+		while (el)
+		{
+			if (ft_strncmp(el->name, args[i], ft_strlen(el->name)) == 0)
+				el->to_export = FALSE;
+			el = el->next;
+		}
 		i++;
 	}
 	return ;
@@ -93,21 +88,27 @@ int	export_var(char **args, t_bigshell *data)
 }
 
 /*
+
+
 void	do_export(t_bigshell *data, char **args)
 {
 	int		i;
-	t_env	*el;
+	int		len;
+	t_env	*env;
 
 	i = 1;
+	len = 0;
+	env = data->env;
+	while (env->next)
+	{
+		len++;
+		env = env->next;
+	}
+	dprintf(2, "len = %d\n", len);
 	while (args[i])
 	{
-		el = data->env;
-		while (el)
-		{
-			if (ft_strcmp(el->name, args[i]) == 0)
-				el->to_export = FALSE;
-			el = el->next;
-		}
+		dprintf(2, "args[%d] → %s\n", i, args[i]);
+		env_addback(&data->env, env_new(args[i], len - 1, TRUE));
 		i++;
 	}
 	return ;

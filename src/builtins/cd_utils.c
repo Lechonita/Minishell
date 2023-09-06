@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:49:49 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/01 20:06:41 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:35:20 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,72 @@ void	do_export_cd(t_bigshell *data, char *name, char *value)
 		env = env->next;
 	}
 }
+
+int	set_env_value(t_bigshell *data, char *name, char *value)
+{
+	t_env	*env;
+
+	if (!data || !name || !value)
+		return (EXIT_FAILURE);
+	env = data->env;
+	while (env)
+	{
+		if (ft_strcmp(env->name, name) == 0)
+		{
+			if (ft_strcmp(env->value, value) == 0)
+				return (EXIT_SUCCESS);
+			free(env->value);
+			env->value = ft_strdup(value);
+			return (EXIT_SUCCESS);
+		}
+		env = env->next;
+	}
+	return (EXIT_FAILURE);
+}
+
+char	*get_env_value(t_bigshell *data, char *name)
+{
+	t_env	*env;
+
+	if (!data || !name)
+		return (NULL);
+	env = data->env;
+	while (env)
+	{
+		if (ft_strcmp(env->name, name) == 0)
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+int	update_pwd(t_bigshell *data)
+{
+	char	*cwd;
+	char	*tmp;
+
+	cwd = getcwd(NULL, 0);
+	dprintf(2, "\033[3;33mcurent wd = %s\033[0m\n", cwd);
+	if (!cwd)
+		ft_error(errno, strerror(errno));
+	tmp = get_env_value(data, "PWD");
+	dprintf(2, "\033[3;36mancien wd = %s\033[0m\n", tmp);
+	if (tmp)
+	{
+		if (set_env_value(data, "OLDPWD", tmp) == 1)
+			return (EXIT_FAILURE);
+	}
+	else
+	{
+		do_export_cd(data, "PWD", cwd);
+		do_export_cd(data, "OLDPWD", NULL);
+	}
+	if (set_env_value(data, "PWD", cwd) == 1)
+		return (free(cwd), EXIT_FAILURE);
+	return (free(cwd), EXIT_SUCCESS);
+}
+
+
 
 // int	get_export_value(t_bigshell *data, char *name)
 // {

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/04 18:04:59 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/06 17:33:40 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,12 @@ t_env	*env_new(char *env, int idx, int to_export)
 	if (!new)
 		return (NULL);
 	new->name = get_env_name(env);
-	dprintf(2, "name => %8s", new->name);
 	if (to_export == TRUE)
 		new->value = get_env_for_export(env);
 	else
 		new->value = ft_strdup(getenv(new->name));
-	dprintf(2, " %s\n", new->value);
 	new->index = idx;
-	dprintf(2, "index = %2d ", new->index);
 	new->to_export = to_export;
-	dprintf(2, "to_export = %d\n", new->to_export);
 	new->next = NULL;
 	return (new);
 }
@@ -95,4 +91,5 @@ void	init_env(t_bigshell *data, char **env)
 			env_addback(&data->env, env_new(env[i], i, FALSE));
 	}
 	get_path(data);
+	set_env_value(data, "OLDPWD", get_env_value(data, "PWD"));
 }

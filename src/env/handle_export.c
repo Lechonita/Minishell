@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/25 17:44:59 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:44:44 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,24 @@ int	export_size(char *input, int equal, int direction)
 	return (start);
 }
 
+void	remove_quotes(char *str)
+{
+	int	len;
+	int	i;
+	int	j;
+
+	len = ft_strlen(str);
+	i = 0;
+	j = 0;
+	while (i < len)
+	{
+		if (str[i] != '\"' && str[i] != '\'')
+			str[j++] = str[i];
+		i++;
+	}
+	str[j] = '\0';
+}
+
 void	add_to_env(t_bigshell *data, int equal, char *input)
 {
 	char	*str;
@@ -87,7 +105,7 @@ void	add_to_env(t_bigshell *data, int equal, char *input)
 	t_env	*tmp;
 
 	start = export_size(input, equal, -1);
-	end = export_size(input, equal, 1);
+	end = export_size(input, equal, 1) + 1;
 	env_size = 0;
 	tmp = data->env;
 	while (tmp)
@@ -96,6 +114,8 @@ void	add_to_env(t_bigshell *data, int equal, char *input)
 		tmp = tmp->next;
 	}
 	str = ft_substr(input, start, end - start);
+	if (ft_strchr(str, '\"') != NULL || ft_strchr(str, '\'') != NULL)
+		remove_quotes(str);
 	env_addback(&data->env, env_new(str, env_size, TRUE));
 	free(str);
 }

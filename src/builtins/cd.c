@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/01 20:07:57 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:34:28 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,64 +14,19 @@
 
 /* Fonctions autorisées : chdir, getcwd, opendir, readdir, closedir*/
 
-static int	set_env_value(t_bigshell *data, char *name, char *value)
+static int	error_cd(char *str)
 {
-	t_env	*env;
+	char	*res;
 
-	if (!data || !name || !value)
+	res = malloc(sizeof(char) * (43 + ft_strlen(str)));
+	if (!res)
 		return (EXIT_FAILURE);
-	env = data->env;
-	while (env)
-	{
-		if (ft_strcmp(env->name, name) == 0)
-		{
-			if (ft_strcmp(env->value, value) == 0)
-				return (EXIT_SUCCESS);
-			free(env->value);
-			env->value = ft_strdup(value);
-			return (EXIT_SUCCESS);
-		}
-		env = env->next;
-	}
+	res = ft_strjoin("Minishell: cd: ", str);
+	res = free_strjoin(res, ": No such file or directory\n");
+	ft_putstr_fd(res, 2);
+	free(res);
+	g_global.exit_status = EXIT_FAILURE;
 	return (EXIT_FAILURE);
-}
-
-static char	*get_env_value(t_bigshell *data, char *name)
-{
-	t_env	*env;
-
-	if (!data || !name)
-		return (NULL);
-	env = data->env;
-	while (env)
-	{
-		if (ft_strcmp(env->name, name) == 0)
-			return (env->value);
-		env = env->next;
-	}
-	return (NULL);
-}
-
-static int	update_pwd(t_bigshell *data)
-{
-	char	*cwd;
-
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (perror("Minishell: cd"), EXIT_FAILURE);
-	if (get_env_value(data, "PWD"))
-	{
-		if (set_env_value(data, "OLDPWD", get_env_value(data, "PWD")) == 1)
-			return (EXIT_FAILURE);
-	}
-	else
-	{
-		do_export_cd(data, "PWD", cwd);
-		do_export_cd(data, "OLDPWD", NULL);
-	}
-	if (set_env_value(data, "PWD", cwd) == 1)
-		return (free(cwd), EXIT_FAILURE);
-	return (free(cwd), EXIT_SUCCESS);
 }
 
 static char	*get_dir(t_bigshell *data, char **args)
@@ -82,18 +37,15 @@ static char	*get_dir(t_bigshell *data, char **args)
 	{
 		dir = get_env_value(data, "HOME");
 		if (!dir)
-			ft_putstr_fd(HOME_NOT_SET, 2);
+			ft_error(EXIT_FAILURE, HOME_NOT_SET);
 	}
 	else if (args[1] && ft_strcmp(args[1], "-") == 0)
 	{
 		if (args[2])
-		{
-			ft_putstr_fd(W_CD_ARG, 2);
-			return (NULL);
-		}
+			return (ft_error(EXIT_FAILURE, W_CD_ARG), NULL);
 		dir = get_env_value(data, "OLDPWD");
 		if (!dir)
-			ft_putstr_fd(OLDPWD_NOT_SET, 2);
+			ft_error(EXIT_FAILURE, OLDPWD_NOT_SET);
 	}
 	else
 		dir = args[1];
@@ -108,10 +60,7 @@ int	change_directory(char **args, t_bigshell *data)
 	if (!dir || !data)
 		return (EXIT_FAILURE);
 	if (chdir(dir) == -1)
-	{
-		error_cd(dir);
-		return (EXIT_FAILURE);
-	}
+		return (error_cd(dir), EXIT_FAILURE);
 	if (args[1] && ft_strcmp(args[1], "-") == 0)
 		ft_putstr_fd(ft_strjoin(dir, "\n"), STDOUT_FILENO);
 	if (update_pwd(data) == 0)

@@ -6,24 +6,11 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/08/30 17:17:44 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/06 16:28:55 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	error_cd(char *str)
-{
-	char	*res;
-
-	res = malloc(sizeof(char) * (43 + ft_strlen(str)));
-	if (!res)
-		return ;
-	res = ft_strjoin("Minishell: cd: ", str);
-	res = free_strjoin(res, ": No such file or directory\n");
-	ft_putstr_fd(res, 2);
-	free(res);
-}
 
 void	error_execve(t_bigshell *data)
 {

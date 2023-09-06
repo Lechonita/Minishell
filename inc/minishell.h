@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 17:36:04 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/06 16:31:17 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	ft_free_simple_cmd(t_simple_cmd **simple_cmd);
 void	free_all(t_bigshell *data);
 
 /* PRINT ERROR */
-void	error_cd(char *str);
 int		ft_error(int err_no, char *msg);
 void	ft_exit(int err_no, char *msg);
 void	error_execve(t_bigshell *data);

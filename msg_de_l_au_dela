@@ -1,32 +1,30 @@
 yo mate !! how are you??
 
-<Makefile head -10 >>out >out1 | ls -l >out2 | <banner.sh >>out3 | head -15 | tail -5 >> out_file
-
-<Makefile head -10 >>out >out1 | wc >out2 | <banner.sh cat >>out3 | head -15 | tail -5 >> out_file
-
-<Makefile head -10 >>out >out1 | wc >out2 | <banner.sh cat >>out3 | echo 1 >out4 bonjour <Makefile in2 >>out41 | tail -5 >> out_file
-echo 1 > out12 2 <Makefile in2 >>out13
-
 → << fin wc > out
 
-→ pwd >out
-
-→ ls -l | pwd
-
-→ export | wc
-
-→ > 1 cat | wc -w
-
-→ ls | < 1 cat
-
-< Makefile cat | wc -l | head -77 | tail -5 | ls -l >> out_file
-< Makefile cat | head -7 | taili -5 >> out_file
-< Makefile cat | wc -l > out_file
-< Makefile cat | head -42 | echo hello world  > out_file
 
 <Makefile << fin <src/main.c head -15 | echo hello 15 >out_file >> files/out_file
 
 < files/no_right << files/write_o < files/all_rights ls -l >files/read_o >>files/read_write >files/exec_o.c 
+
+🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+
+🟢 
+export TEST=bonjour
+export TEST1="1+2 +3 +9 +85" 
+export TEST2='toi=moi'
+
+unset TEST TEST1 TEST2
+
+🔴
+export TEST=bonjour TEST1="1+2 +3 +9 +85" TEST2='toi=moi'
+
+🔴
+export | wc
+
+🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
 to do expansion :
 	→ cmd="ls -l" puis $cmd affiche le resultat de ls -l
