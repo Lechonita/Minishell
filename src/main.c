@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:38:06 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 17:00:12 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/06 21:13:38 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char *av[], char *env[])
 	init_minishell(data, env);
 	if (ac == 2)
 		printf("%s\n", av[1]);
-	ft_readline(data, env);
+	ft_readline(data, data->env_paths);
 	free_all(data);
 	return (0);
 }

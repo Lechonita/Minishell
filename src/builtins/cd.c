@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/06 17:34:28 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/06 21:38:13 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,17 @@ static char	*get_dir(t_bigshell *data, char **args)
 int	change_directory(char **args, t_bigshell *data)
 {
 	char	*dir;
+	char	*tmp;
 
 	dir = get_dir(data, args);
 	if (!dir || !data)
 		return (EXIT_FAILURE);
 	if (chdir(dir) == -1)
 		return (error_cd(dir), EXIT_FAILURE);
+	tmp = ft_strjoin(dir, "\n");
 	if (args[1] && ft_strcmp(args[1], "-") == 0)
-		ft_putstr_fd(ft_strjoin(dir, "\n"), STDOUT_FILENO);
+		ft_putstr_fd(tmp, STDOUT_FILENO);
+	free(tmp);
 	if (update_pwd(data) == 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

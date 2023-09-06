@@ -103,9 +103,6 @@ POUR INFO :
 
 >> COMPORTEMENTS ANORMAUX <<
 
-	→ Lorsqu'on unset PATH et qu'on fait un ls ou wc, normalement ca doit retourner "bash: ls: No such file or directory"
-		Dans notre Minishell, ca continue a fonctionner normalement
-
 	→ Je n'arrive pas a faire fonctionner le export
 
 	→ Builtin CD :

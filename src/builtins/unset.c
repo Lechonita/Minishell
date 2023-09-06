@@ -3,73 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:45:03 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/06 18:11:43 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/06 21:30:18 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	emv_rm_next(t_env *env_to_rm)
+static void free_el(t_env *el)
 {
-	t_env	*tmp;
-
-	if (!env_to_rm || !env_to_rm->next)
+	if (!el)
 		return ;
-	tmp = env_to_rm->next;
-	env_to_rm->next = env_to_rm->next->next;
-	if (tmp->name)
-		free(tmp->name);
-	if (tmp->value)
-		free(tmp->value);
-	free(tmp);
+	if (el->name)
+		free(el->name);
+	if (el->value)
+		free(el->value);
+	free(el);
 }
 
-static void	rm_env_el(t_bigshell *data, int idx)
+static void	rm_env_el(t_env **env, char *to_remove)
 {
 	t_env	*el;
+	t_env	*prev;
 
-	el = data->env;
-	dprintf(2, "rm_env_el: idx = %d\n", idx);
-	if (el->index == idx)
+	prev = *env;
+	if (ft_strcmp((*env)->name, to_remove) == 0)
 	{
-		data->env = el->next;
-		free(el->name);
-		free(el->value);
-		free(el);
+		el = *env;
+		*env = (*env)->next;
+		free_el(el);
 		return ;
 	}
-	while (el && el->next && el->next->next)
+	el  = (*env)->next;
+	while (el && ft_strcmp(el->name, to_remove))
 	{
-		dprintf(2, "rm_env_el: el->index = %d\n", el->index);
-		if (el->next && el->next->index == idx)
-			emv_rm_next(el);
+		prev = el;
 		el = el->next;
+	}
+	if (el)
+	{
+		prev->next = el->next;
+		free_el(el);
 	}
 }
 
 int	unset_var(char **args, t_bigshell *data)
 {
 	int		i;
-	t_env	*el;
 
 	i = 1;
 	while (args[i])
 	{
-		el = data->env;
-		while (el && el->next && el->next->next)
+		if (ft_strcmp(args[i], "PATH") == 0)
 		{
-			if (ft_strcmp(el->name, args[i]) == 0)
-				rm_env_el(data, el->index);
-			dprintf(2, "unset_var: [%d] %s\n", el->index, el->name);
-			if (el)
-				el = el->next;
-			else
-				break ;
+			free_strs(data->env_paths);
+			data->env_paths = NULL;
 		}
-		i++;
+		rm_env_el(&data->env, args[i++]);
 	}
 	return (EXIT_SUCCESS);
 }
