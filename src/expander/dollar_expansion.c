@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/31 15:58:11 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/07 16:08:18 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ t_line	*line_rm_next(t_line *prev)
 	if (tmp)
 		free(tmp);
 	return (prev->next);
+}
+
+t_line	*find_prev(t_bigshell *data, int index)
+{
+	t_line	*tmp;
+
+	if (!data)
+		return (NULL);
+	tmp = data->line;
+	while (tmp)
+	{
+		if (tmp->index == index - 1)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (tmp);
 }
 
 t_line	*var_not_found(t_bigshell *data, t_line **line, char *var, int index)
@@ -58,9 +74,8 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 	flag = 1;
 	while (env)
 	{
-		if (ft_strncmp(env->name, var, ft_strlen(env->name)) == 0
-			&& (ft_strlen(env->name) == ft_strlen(var))
-			&& env->to_export == FALSE)
+		if (ft_strlen(env->name) == ft_strlen(var)
+			&& ft_strcmp(env->name, var) == 0 && env->to_export == FALSE)
 		{
 			line = line_rm_next(find_prev(data, line->index));
 			res = add_var(line, env->value, var);
@@ -73,20 +88,4 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 		res = var_not_found(data, &line, var, index);
 	align_line_index(data->line, index - 1);
 	return (res);
-}
-
-t_line	*find_prev(t_bigshell *data, int index)
-{
-	t_line	*tmp;
-
-	if (!data)
-		return (NULL);
-	tmp = data->line;
-	while (tmp)
-	{
-		if (tmp->index == index - 1)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (tmp);
 }

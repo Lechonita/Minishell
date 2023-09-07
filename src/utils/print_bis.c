@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/01 15:14:07 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/07 14:44:01 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,6 @@ void	print_simple_cmd(t_bigshell *data)
 		dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\n\tfd_in   = %2d\tin_file  : %s\n\tfd_out  = %2d\tout_file : %s\n",
 			el->idx, el->cmd, el->builtin, el->fd_in, el->in_file,
 			el->fd_out, el->out_file);
-		// dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\n", el->idx,
-		// 	el->cmd, el->builtin);
-		// dprintf(2, "\tfd_in   = %2d\tin_file  : %s\n", el->fd_in, el->in_file);
-		// dprintf(2, "\tfd_out  = %2d\tout_file : %s\n", el->fd_out, el->out_file);
 		el = el->next;
 	}
 	dprintf(2, "_________________________________________________\n");

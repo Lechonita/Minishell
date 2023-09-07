@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 15:50:31 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/07 18:10:39 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ int		is_word(char c);
 int		determine_type(char c);
 
 /* FLAG QUOTES */
-void	flag_double_quotes(t_line *line);
-void	flag_single_quotes(t_line *line);
+void	delete_quotes(t_bigshell *data, t_line *line);
+int		flag_double_quotes(t_line *line);
+int		flag_single_quotes(t_line *line);
 
 /* FIND TOKENS */
 void	token_rm_next(t_token *tok);

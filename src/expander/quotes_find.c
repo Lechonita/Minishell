@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:02:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/31 19:11:25 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/07 16:37:49 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
 
-int	find_last_quote(t_line *line, int type, int limiter)
-{
-	t_line	*tmp;
-	int		i;
+// int	find_last_quote(t_line *line, int type, int limiter)
+// {
+// 	t_line	*tmp;
+// 	int		i;
 
-	if (!line)
-		return (-1);
-	tmp = line;
-	i = 0;
-	while (tmp && tmp->index <= limiter)
-	{
-		if (tmp->type == type)
-			i = tmp->index;
-		tmp = tmp->next;
-	}
-	return (i);
-}
+// 	if (!line)
+// 		return (-1);
+// 	tmp = line;
+// 	i = 0;
+// 	while (tmp && tmp->index <= limiter)
+// 	{
+// 		if (tmp->type == type)
+// 			i = tmp->index;
+// 		tmp = tmp->next;
+// 	}
+// 	return (i);
+// }
 
 int	closing_quote_exists(t_line *line, int type)
 {

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/04 14:32:42 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/07 16:39:51 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ void	rm_blank(t_bigshell *data)
 
 void	parser_job(t_bigshell *data)
 {
-	// print_t_line(data->line);
-	// if (! er token est un quote passer au quote dápres)
 	aim_redir(data);
 	aim_pipe(data);
+	// print_t_token(data);
 	aim_cmd(data);
+	// print_t_token(data);
 	check_builtin(data);
 	check_double_redir(data);
 	rm_blank(data);

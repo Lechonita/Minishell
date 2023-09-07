@@ -3,79 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:49:49 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/06 22:19:48 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/07 14:28:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// static int	find_next_index(t_bigshell *data)
-// {
-// 	t_env	*env;
-// 	int		i;
-
-// 	if (!data)
-// 		return (-1);
-// 	env = data->env;
-// 	i = 0;
-// 	while (env)
-// 	{
-// 		i++;
-// 		env = env->next;
-// 	}
-// 	return (i);
-// }
-
-// t_env	*env_new_cd(t_bigshell *data, char *name, char *value)
-// {
-// 	t_env	*new;
-
-// 	new = malloc(sizeof(t_env));
-// 	if (!new)
-// 		return (NULL);
-// 	new->name = name;
-// 	new->value = value;
-// 	new->index = find_next_index(data);
-// 	new->to_export = FALSE;
-// 	new->next = NULL;
-// 	return (new);
-// }
-
-void	do_export_cd(t_bigshell *data, char *name, char *value)
-{
-	t_env	*env;
-
-	if (!data || !name)
-		return ;
-	env = data->env;
-	dprintf(2, "\033[3;37mname = %s\033[0m\n", name);
-	dprintf(2, "\033[3;37mvalue = %s\033[0m\n", value);
-	while (env)
-	{
-		dprintf(2, "\033[3;37mname = %s cmp %d\033[0m\n", name, ft_strcmp(env->name, name));
-		if (ft_strcmp(env->name, name) == 0 && value)
-			env->value = ft_strdup(value);
-		else if (ft_strcmp(env->name, name) == 0 && !value)
-			env->value = NULL;
-		env = env->next;
-	}
-}
-
 int	set_env_value(t_bigshell *data, char *name, char *value)
 {
 	t_env	*env;
 
-	if (!data || !name || !value)
+	if (!data || !name)
 		return (EXIT_FAILURE);
 	env = data->env;
 	while (env)
 	{
 		if (ft_strcmp(env->name, name) == 0)
 		{
-			if (ft_strcmp(env->value, value) == 0)
+			if (value && ft_strcmp(env->value, value) == 0)
 				return (EXIT_SUCCESS);
 			free(env->value);
 			env->value = ft_strdup(value);
@@ -102,46 +50,44 @@ char	*get_env_value(t_bigshell *data, char *name)
 	return (NULL);
 }
 
-int	update_pwd(t_bigshell *data)
+void	export_pwd_after_unset(t_bigshell *data, char *new_pwd)
 {
-	char	*cwd;
-	char	*tmp;
+	int		len;
+	char	*new_env;
+	t_env	*env;
 
-	cwd = getcwd(NULL, 0);
-	dprintf(2, "\033[3;33mcurrent wd = %s\033[0m\n", cwd);
-	if (!cwd)
-		ft_error(errno, strerror(errno));
-	tmp = get_env_value(data, "PWD");
-	dprintf(2, "\033[3;36mancien tmp = %s\033[0m\n", tmp);
-	if (tmp)
+	len = 0;
+	env = data->env;
+	while (env)
 	{
-		if (set_env_value(data, "OLDPWD", tmp) == 1)
-			return (EXIT_FAILURE);
+		if (ft_strcmp(env->name, "OLDPWD") == 0)
+		{
+			free(env->value);
+			env->value = ft_strdup(" ");
+		}
+		len++;
+		env = env->next;
 	}
-	else
-	{
-		do_export_cd(data, "PWD", cwd);
-		do_export_cd(data, "OLDPWD", tmp);
-	}
-	if (set_env_value(data, "PWD", cwd) == 1)
-		return (free(cwd), EXIT_FAILURE);
-	return (free(cwd), EXIT_SUCCESS);
+	new_env = ft_strjoin("PWD=", new_pwd);
+	env_addback(&data->env, env_new(new_env, len, TRUE));
+	free(new_env);
+	return ;
 }
 
+int	update_pwd(t_bigshell *data)
+{
+	char	*new_pwd;
+	char	*new_oldpwd;
 
-
-// int	get_export_value(t_bigshell *data, char *name)
-// {
-// 	t_env	*env;
-
-// 	if (!data || !name)
-// 		return (TRUE);
-// 	env = data->env;
-// 	while (env)
-// 	{
-// 		if (ft_strcmp(env->name, name) == 0 && env->to_export == FALSE)
-// 			return (FALSE);
-// 		env = env->next;
-// 	}
-// 	return (TRUE);
-// }
+	new_pwd = getcwd(NULL, 0);
+	if (!new_pwd)
+		ft_error(errno, strerror(errno));
+	new_oldpwd = get_env_value(data, "PWD");
+	if (new_oldpwd && set_env_value(data, "OLDPWD", new_oldpwd) == 1)
+		return (free(new_pwd), EXIT_FAILURE);
+	if (new_oldpwd == NULL)
+		return (export_pwd_after_unset(data, new_pwd), free(new_pwd), 0);
+	if (set_env_value(data, "PWD", new_pwd) == 1)
+		return (free(new_pwd), EXIT_FAILURE);
+	return (free(new_pwd), EXIT_SUCCESS);
+}

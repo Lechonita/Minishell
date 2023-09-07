@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:39:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/06 17:20:17 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/07 14:47:36 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define BUILTINS_H
 
 # include "minishell.h"
-
-
 
 int		exec_builtin_cmd(t_bigshell *data, char *cmd, char **args);
 int		exec_builtin_no_fork(t_bigshell *data, char *cmd, char **args);

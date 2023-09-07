@@ -23,6 +23,13 @@ export TEST=bonjour TEST1="1+2 +3 +9 +85" TEST2='toi=moi'
 🔴
 export | wc
 
+
+🔴
+e'c'"h"o salut
+e"c"""h"o" salut
+
+
+
 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
@@ -35,9 +42,6 @@ example / error :
 	→ $ < ou << ou >> ou >
 	bash: syntax error near unexpected token `newline'
 
-	→ $ e'c'"h"o salut
-    $ e"c"""h"o" salut
-	salut
 
 	echo 1 > out12 2 3 << 1 << 2 << 3 < in < in2 >>out13
 	echo 1 > out12 2 <Makefile in2 >>out13
