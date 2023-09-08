@@ -6,7 +6,7 @@ NAME = minishell
 
 ############################### Compiler #######################################
 
-FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
+FLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address 
 CC = gcc
 
 ############################### LIBFT ##########################################
@@ -82,8 +82,6 @@ SRC += dollar_expansion.c
 SRC += dollar_quotes.c
 SRC += dollar_utils.c
 SRC += dollar.c
-SRC += quotes_find.c
-SRC += quotes_position.c
 
 #	Input functions
 SRC += prompt.c
@@ -94,6 +92,7 @@ SRC += signal_here_doc.c
 SRC += find_token_type.c
 SRC += flag_quotes.c
 SRC += line_init.c
+SRC += quote_del.c
 SRC += token_find.c
 SRC += token_init.c
 SRC += token_type.c

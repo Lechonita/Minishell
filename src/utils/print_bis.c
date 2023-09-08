@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/07 14:44:01 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:27:58 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	print_t_line(t_line *line)
 		printf("[%2d] type : %2d %8s [c] %c   ", el->index, el->type,
 			tokentype_str[el->type - 1], el->c);
 		printf("[dq] %2d   ", el->dq);
-		printf("[sq] %2d \n", el->sq);
+		printf("[sq] %2d   ", el->sq);
+		printf("⚑ %d \n", el->quote_flag);
 		el = el->next;
 	}
 	printf("\n");

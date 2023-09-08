@@ -6,87 +6,70 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:37:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/07 18:28:54 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:29:39 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/lexer.h"
 
-static void	rm_line_el(t_line **line, int to_remove)
+int	closing_quote_exists(t_line *line, int type)
 {
-	t_line	*el;
-	t_line	*prev;
-
-	prev = *line;
-	dprintf(2, "index to remove [%d]\n", to_remove);
-	if (((*line)->index) == to_remove)
+	if (!line || !type)
+		return (-1);
+	while (line)
 	{
-		el = *line;
-		*line = (*line)->next;
-		free(el);
-		el = NULL;
-		return ;
+		if (line->type == type)
+			return (1);
+		line = line->next;
 	}
-	el = (*line)->next;
-	while (el != NULL && el->index != to_remove)
-	{
-		prev = el;
-		el = el->next;
-	}
-	if (el)
-	{
-		prev->next = el->next;
-		free(el);
-		el = NULL;
-	}
-	// update_idx(*line);
+	return (0);
 }
 
-int	is_word_between_quotes(t_line *line, int start, int end)
+void	convert_quotes(t_line *line, int type)
 {
-	t_line	*el;
+	t_line	*tmp;
 
-	el = line;
-	while (el && el->index <= start)
-		el = el->next;
-	while (el && el->index < end)
-	{
-		if (el->type != WORD && el->type != SPACE)
-			return (FALSE);
-		el = el->next;
-	}
-	return (TRUE);
-}
-
-void	delete_quotes(t_bigshell *data, t_line *line)
-{
-	t_line	*el;
-	int		start;
-	int		end;
-
-	el = line;
-	print_t_line(data->line);
-	if (flag_double_quotes(el) == 0 && flag_single_quotes(el) == 0)
+	if (!line || !type)
 		return ;
-	while (el)
+	tmp = line->next;
+	if (closing_quote_exists(tmp, type) == 1)
 	{
-		if (el->dq != 0)
+		while (tmp)
 		{
-			start = el->index;
-			while (el->dq != 2)
-				el = el->next;
-			end = el->index;
-			dprintf(2, "start [%d] end [%d]\n", start, end);
-			if (is_word_between_quotes(line, start, end))
-			{
-				rm_line_el(&line, start);
-				rm_line_el(&line, end);
-			}
+			if (tmp->type == type)
+				break ;
+			else
+				tmp->type = WORD;
+			tmp = tmp->next;
 		}
-		el = el->next;
+		if (tmp && tmp->next)
+			find_quotes(tmp->next);
 	}
-	print_t_line(data->line);
+}
+
+void	find_quotes(t_line *line)
+{
+	t_line	*el;
+
+	if (!line)
+		return ;
+	el = line;
+	while (el != NULL)
+	{
+		if (el->sq == 1)
+		{
+			convert_quotes(el, SQUOTE);
+			break ;
+		}
+		else if (el->dq == 1)
+		{
+			convert_quotes(el, DQUOTE);
+			break ;
+		}
+		else
+			el = el->next;
+	}
+	align_line_index(line, 0);
 }
 
 /* Ces fonctions remplissent les valeurs t_line->sq et t_line->dq

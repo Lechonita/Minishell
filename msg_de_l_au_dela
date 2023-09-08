@@ -17,17 +17,16 @@ export TEST2='toi=moi'
 
 unset TEST TEST1 TEST2
 
+e'c'"h"o salut
+e"c"""h"o" salut
+"echo" salut
+"echo salut"
+
 🔴
 export TEST=bonjour TEST1="1+2 +3 +9 +85" TEST2='toi=moi'
 
 🔴
 export | wc
-
-
-🔴
-e'c'"h"o salut
-e"c"""h"o" salut
-
 
 
 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
@@ -44,7 +43,7 @@ example / error :
 
 
 	echo 1 > out12 2 3 << 1 << 2 << 3 < in < in2 >>out13
-	echo 1 > out12 2 <Makefile in2 >>out13
+
 
 	→ $ echo 1 > out1 2 3 > /dev/stdout << 1 << 2 << 3 < in < in2
 		→ ouvrir tous les heredocs
@@ -54,10 +53,6 @@ example / error :
 			→ erreur sur <in bash: in: No such file or directory
 			→ arret du programme 
 			→ echo ne s'execute pas
-
-
-	→ $ '<'Makefile wc
-		ca doit retourner: <Makefile: command not found
 
 
 TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD

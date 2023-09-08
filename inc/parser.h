@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:37:35 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/07 14:47:59 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:00:22 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void			token_group(t_token *tok);
 void			same_aim(t_bigshell *data);
 void			add_arg_to_cmd(t_bigshell *data);
 void			check_builtin(t_bigshell *data);
+void			check_double_redir(t_bigshell *data);
 
 /* SIMPLE CMD */
 t_simple_cmd	*init_simple_cmd(void);

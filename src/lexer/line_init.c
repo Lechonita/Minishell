@@ -6,40 +6,47 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/07 18:10:44 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:32:06 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../inc/lexer.h"
 
-/* Fonction qui retourne le dernier maillon de la liste t_line. */
-
-t_line	*line_last(t_line	*line)
+static void	update_idx(t_line *line)
 {
-	while (line && line->next)
-		line = line->next;
-	return (line);
+	int		i;
+	t_line	*el;
+
+	i = 0;
+	el = line;
+	while (el)
+	{
+		el->index = i++;
+		el = el->next;
+	}
+	flag_double_quotes(line);
+	flag_single_quotes(line);
+	find_quotes(line);
 }
 
-/* Fonction qui ajoute un maillon a la fin de la liste t_line. */
-
-void	line_addback(t_line *line, t_line *new)
+static void	line_addback(t_line **line, t_line *new)
 {
 	t_line	*last;
 
 	if (!new)
 		return ;
-	if (!line)
+	if (!*line || !line)
 	{
-		line = new;
+		*line = new;
 		return ;
 	}
-	last = line_last(line);
+	last = (*line);
+	while (last->next)
+		last = last->next;
 	last->next = new;
 }
 
-int	find_next_index(t_line *line)
+static int	find_next_index(t_line *line)
 {
 	while (line && line->next)
 		line = line->next;
@@ -62,6 +69,7 @@ t_line	*line_new(t_line *line, char c, int i)
 	new->type = determine_type(c);
 	new->dq = 0;
 	new->sq = 0;
+	new->quote_flag = 0;
 	new->c = c;
 	new->next = NULL;
 	return (new);
@@ -75,28 +83,26 @@ t_line	*line_new(t_line *line, char c, int i)
 void	init_line(t_bigshell *data, char *line)
 {
 	int		i;
-	t_line	*tmp;
+	t_line	*new;
 
 	if (!data || !line)
 		return ;
 	i = 0;
 	while (line[i])
 	{
-		if (i == 0)
-		{
-			data->line = line_new(NULL, line[i], i);
-			if (!data->line)
-				ft_exit(EXIT_FAILURE, W_LST_LINE);
-		}
-		else
-			line_addback(data->line, line_new(data->line, line[i], i));
+		new = line_new(data->line, line[i], i);
+		if (!new)
+			ft_exit(EXIT_FAILURE, W_LST_LINE);
+		line_addback(&data->line, new);
 		i++;
 	}
-	tmp = data->line;
-	flag_double_quotes(tmp);
-	flag_single_quotes(tmp);
-	find_quotes(tmp);
-	find_dollar_dollar_bill(data, tmp);
-	check_for_export(data, tmp, line);
-	delete_quotes(data, tmp);
+	flag_double_quotes(data->line);
+	flag_single_quotes(data->line);
+	find_quotes(data->line);
+	find_dollar_dollar_bill(data, data->line);
+	check_for_export(data, data->line, line);
+	delete_squotes(data->line);
+	delete_dquotes(data->line);
+	rm_line_el(&data->line);
+	update_idx(data->line);
 }
