@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/01 14:22:21 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:33:15 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,15 @@ void	do_dollar_ret(t_line *line)
 	ret = ft_itoa(g_global.exit_status);
 	tmp->c = ret[0];
 	tmp->type = WORD;
-	tmp = line_rm_next(tmp);
 	if (ret[1])
-		tmp = line_add_node(tmp, ret[1], tmp->index);
-	if (ft_strlen(ret) == 3 && ret[2])
 	{
 		tmp = tmp->next;
-		tmp = line_add_node(tmp, ret[2], tmp->index);
+		tmp = line_replace_node(tmp, ret[1]);
 	}
+	else
+		tmp->next->quote_flag = 1;
+	if (ft_strlen(ret) == 3 && ret[2])
+		line_addmiddle(line->next, ret[2], tmp->index + 1);
 	free(ret);
 }
 
