@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/09/06 16:28:55 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 14:33:31 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	msg_not_found(char *msg, char *str)
 	line = free_strjoin(tmp, "\n");
 	ft_putstr_fd(line, 2);
 	free(line);
+	g_global.exit_status = 127;
 	return (127);
 }
 
