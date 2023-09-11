@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/07 14:47:25 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 10:42:17 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ t_line	*line_replace_node(t_line *line, char value);
 t_line	*add_var(t_line *line, char *value, char *var);
 
 /* DOLLAR EXPANSION */
+void	remove_rest(t_line *line, int value, int var);
 t_line	*line_rm_next(t_line *prev);
+t_line	*find_prev(t_bigshell *data, int index);
 t_line	*var_not_found(t_bigshell *data, t_line **line, char *var, int index);
 t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index);
-t_line	*find_prev(t_bigshell *data, int index);
-t_line	*dollar_expand(t_bigshell *data, t_line *line, char *var, int index);
 
 /* DOLLAR UTILS */
 void	align_line_index(t_line *line, int start);

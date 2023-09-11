@@ -3,15 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/07 16:08:18 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 10:45:04 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/expander.h"
+
+void	remove_rest(t_line *line, int value, int var)
+{
+	t_line	*tmp;
+
+	if (!line || var < value)
+		return ;
+	tmp = line;
+	while (tmp && value < var)
+	{
+		tmp->quote_flag = 1;
+		tmp = tmp->next;
+		value++;
+	}
+}
 
 t_line	*line_rm_next(t_line *prev)
 {

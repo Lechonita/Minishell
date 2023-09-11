@@ -55,8 +55,6 @@ example / error :
 			→ echo ne s'execute pas
 
 
-TO DO JESS => pour cd, gérer le cas où on unset la variable PWD et OLDPWD
-
 TESTS QUOTES ET DOLLAR :
 → $ echo 'hello world'
 → $ echo "hello world"
@@ -97,7 +95,7 @@ POUR INFO :
 !!! ATTENTION !!!
 
 >> SEGFAULT / CRASH <<
-	→ 
+	→ Lorsquíl y entre une tabulation,on fait entrer
 
 
 >> COMPORTEMENTS ANORMAUX <<
@@ -108,47 +106,6 @@ POUR INFO :
 		Lorsque PWD est unset et qu'on fait un cd pour changer de directory, le PWD ne revient pas alors que
 		ca doit s'afficher si on fait :	echo $PWD (le OLDPWD doit bien rester vide)
 
-
-~ MESSAGE DE DÉFAITE DE JESS ~
-
-Béa,
-
-C'est dans le plus grand des regrets que je t'annonce mon incapacité à gérer à temps le PWD / OLDPWD une fois
-qu'il a été unset :(
-(je t'avoue surtout que là, je n'arrive même plus à réfléchir correctement)
-C'est la fonction update_pwd qui est à revoir.
-
-J'ai essayé plein de solutions différentes qui m'ont mené à des leaks ou à des segfault, mais surtout
-à des résultats pires que ce qu'on avait avant !
-
-Je n'ai donc (presque) rien gardé de ce que j'ai fait depuis ton départ :
-
->> Le unset est resté inchangé (il n'y a pas la suppression de env->value lorsqu'il s'agit de PWD / OLDPWD).
-
->> Je n'ai pas laissé le PWD et OLDPWD que nous avions parlé de rajouter dans la structure principale. Je n'arrivais même
-pas à les utiliser pour le pwd (mais à voir s'ils ne seront pas utiles pour le pwd).
-
->> Dans la gestion du $ (fonction compare_var, dans le fichier dollar_expansion.c), j'ai laissé la condition "env->to_export == FALSE".
-	Je pense que cette condition sera amenée à être fausse car on ne pourra pas se baser sur le env->to_export pour afficher PWD avec echo.
-	Pour rappel, lorsqu'on unset une variable (admettons PWD), elle disparait définitivement de env mais peut toujours apparaître avec un echo
-	une fois qu'on a utilisé au moins une fois le cd. En gros, le cd redonne une nouvelle valeur à PWD.
-	Je pense donc que le flag env->to_export nous permettra de définitivement ne plus faire impriner PWD dans env, mais on n'aura toujours besoin
-	d'afficher PWD avec un echo.
-
-En fait je n'ai rien laissé parce que sans un truc qui fonctionne correctement, ce ne sont que des points qui auraient bloqué tout le reste.
-Surtout si je laissais ca comme ca.
-
-Je suis hyper tentée de ramener mon PC avec moi pour bosser dans le train demain matin, voire un moment dans la semaine.
-Ca me tracasse cette histoire et ca m'embête de te laisser ca.
-
-
-Dans tous les cas, n'hésite pas à me joindre sur Discord si tu as une question ou besoin de quelque chose !
-
-
-J'espère que tu as passé un bon weekend (j'imagine que tu liras ca lundi, dans le tout nouveau campus !).
-Des bisous,
-
-Jess
 
 
 ~~~~~~~~~~~~~~~~~~ BANNER STYLE ~~~~~~~~~~~~~~~~~~

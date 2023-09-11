@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:28:20 by lechon            #+#    #+#             */
-/*   Updated: 2023/08/30 14:35:23 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:50:42 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ t_line	*add_var(t_line *line, char *value, char *var)
 			line_addmiddle(line->next, value[i], idx + 1);
 		idx++;
 	}
+	remove_rest(tmp, ft_strlen(value), ft_strlen(var));
 	return (line->next);
 }
