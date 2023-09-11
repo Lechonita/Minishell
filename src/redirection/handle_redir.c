@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/11 16:00:13 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:34:42 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	redirection_here_doc(t_redir *redir)
 	redir->fd = open("minishell_here_doc", O_RDONLY);
 	if (redir->fd < 0)
 		return (ft_error(errno, strerror(errno)), errno);
+	g_global.heredoc = 1;
 	return (1);
 }
 
