@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/08 15:01:16 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:16:46 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 
 // # define PROMPT "$ "
 # define PROMPT "🔥 "
-# define TRUE 1
-# define FALSE 0
+# define TRUE 0
+# define FALSE 1
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ

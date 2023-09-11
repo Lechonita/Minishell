@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parser_job.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 11:02:28 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:17:13 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	aim_pipe(t_bigshell *data)
+{
+	t_token	*tok;
+
+	tok = data->token;
+	while (tok != NULL)
+	{
+		if (tok->type == PIPE && !tok->aim)
+			tok->aim = PIPEX;
+		tok = tok->next;
+	}
+}
 
 void	aim_redir(t_bigshell *data)
 {
@@ -24,24 +37,15 @@ void	aim_redir(t_bigshell *data)
 			tok->aim = REDIR;
 			if (tok->next != NULL && tok->next->type == WORD)
 				tok->next->aim = REDIR;
-			else if (tok->next->next != NULL && tok->next->next->type == WORD)
+			else if (tok->next && tok->next->next
+				&& tok->next->next->type == WORD)
 				tok->next->next->aim = REDIR;
+			else
+				ft_error(2, W_REDIR_ONE);
 		}
 		tok = tok->next;
 	}
-}
-
-void	aim_pipe(t_bigshell *data)
-{
-	t_token	*tok;
-
-	tok = data->token;
-	while (tok != NULL)
-	{
-		if (tok->type == PIPE && !tok->aim)
-			tok->aim = PIPEX;
-		tok = tok->next;
-	}
+	check_double_redir(data);
 }
 
 void	aim_cmd(t_bigshell *data)
@@ -60,6 +64,7 @@ void	aim_cmd(t_bigshell *data)
 	}
 	same_aim(data);
 	add_arg_to_cmd(data);
+	check_builtin(data);
 }
 
 void	rm_blank(t_bigshell *data)
@@ -79,11 +84,9 @@ void	rm_blank(t_bigshell *data)
 
 void	parser_job(t_bigshell *data)
 {
-	aim_redir(data);
 	aim_pipe(data);
-	aim_cmd(data);
-	check_builtin(data);
-	check_double_redir(data);
-	rm_blank(data);
 	token_group(data->token);
+	aim_redir(data);
+	aim_cmd(data);
+	rm_blank(data);
 }
