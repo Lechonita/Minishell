@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:35:23 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 16:15:47 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:08:02 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "minishell.h"
 
-int	count_file(t_bigshell *data, int type);
 int	open_fd(t_redir *redir);
 
 int	redirection_here_doc(t_redir *redir);

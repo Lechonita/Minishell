@@ -71,6 +71,7 @@ SRC += unset.c
 SRC += env_init.c
 SRC += path_handle.c
 SRC += handle_export.c
+SRC += export_utils.c
 
 # 	Exec functions
 SRC += executor.c

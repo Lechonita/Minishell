@@ -6,11 +6,27 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/11 11:09:41 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:22:17 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	count_equal(char *input)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (input[i])
+	{
+		if (input[i] == '=')
+			count++;
+		i++;
+	}
+	return (count);
+}
 
 int	is_word_near_equal(t_line *line, int eq_is_here, int direction)
 {
@@ -30,52 +46,6 @@ int	is_word_near_equal(t_line *line, int eq_is_here, int direction)
 		count++;
 	}
 	return (FALSE);
-}
-
-int	add_len_in_quotes(char *input, int open_quote)
-{
-	int	size;
-	int	i;
-
-	size = 0;
-	i = open_quote;
-	while (input[i] && input[i] != '\n')
-	{
-		if (is_single_quote(input[i]) || is_double_quote(input[i]))
-			break ;
-		size++;
-		i++;
-	}
-	return (size);
-}
-
-int	export_size(char *input, int equal, int direction)
-{
-	int		start;
-	int		end;
-
-	start = equal - 1;
-	end = equal + 1;
-	while (start > 0)
-	{
-		if (ft_isalnum(input[start]) && input[start - 1] != ' ')
-			start--;
-		else
-			break ;
-	}
-	while (input[end + 1])
-	{
-		if (ft_isalnum(input[end]) && !is_single_quote(input[end])
-			&& !is_double_quote(input[end]) && input[end + 1] != ' ')
-			end++;
-		else if (is_single_quote(input[end]) || is_double_quote(input[end]))
-			end += add_len_in_quotes(input, end + 1);
-		else
-			break ;
-	}
-	if (direction > 0)
-		return (end);
-	return (start);
 }
 
 void	remove_quotes(char *str)
@@ -104,8 +74,8 @@ static void	add_to_env(t_bigshell *data, int equal, char *input)
 	int		env_size;
 	t_env	*tmp;
 
-	start = export_size(input, equal, -1);
-	end = export_size(input, equal, 1) + 1;
+	start = start_pos(input, equal);
+	end = end_pos(input, equal) + 1;
 	env_size = 0;
 	tmp = data->env;
 	while (tmp)
@@ -123,14 +93,22 @@ static void	add_to_env(t_bigshell *data, int equal, char *input)
 void	check_for_export(t_bigshell *data, t_line *line, char *input)
 {
 	int	equal_is_here;
+	int	nb_of_equal;
 
 	equal_is_here = 0;
-	print_t_line(data->line);
-	while (input[equal_is_here] && input[equal_is_here] != '=')
-		equal_is_here++;
-	if (equal_is_here == ft_strlen(input))
+	nb_of_equal = count_equal(input);
+	if (nb_of_equal == 0)
 		return ;
-	if (is_word_near_equal(line, equal_is_here, 1)
-		&& is_word_near_equal(line, equal_is_here, -1))
-		add_to_env(data, equal_is_here, input);
+	while (nb_of_equal-- > 0)
+	{
+		while (input[equal_is_here] && input[equal_is_here] != '=')
+			equal_is_here++;
+		if (equal_is_here == ft_strlen(input))
+			return ;
+		if (is_word_near_equal(line, equal_is_here, 1)
+			&& is_word_near_equal(line, equal_is_here, -1))
+			add_to_env(data, equal_is_here, input);
+		equal_is_here = end_pos(input, equal_is_here) + 1;
+	}
+
 }

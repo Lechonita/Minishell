@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/08 15:32:06 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:38:05 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	init_line(t_bigshell *data, char *line)
 	{
 		new = line_new(data->line, line[i], i);
 		if (!new)
-			ft_exit(EXIT_FAILURE, W_LST_LINE);
+			ft_error(EXIT_FAILURE, W_LST_LINE);
 		line_addback(&data->line, new);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 10:34:43 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:27:21 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,36 +80,9 @@ void	do_export(t_bigshell *data, char **args)
 
 int	export_var(char **args, t_bigshell *data)
 {
-	print_strs(args);
 	if (args[1] == NULL)
 		print_declare_env(data);
 	else
 		do_export(data, args);
 	return (EXIT_SUCCESS);
 }
-
-/*
-void	do_export(t_bigshell *data, char **args)
-{
-	int		i;
-	int		len;
-	t_env	*env;
-
-	i = 1;
-	len = 0;
-	env = data->env;
-	while (env->next)
-	{
-		len++;
-		env = env->next;
-	}
-	dprintf(2, "len = %d\n", len);
-	while (args[i])
-	{
-		dprintf(2, "args[%d] → %s\n", i, args[i]);
-		env_addback(&data->env, env_new(args[i], len - 1, TRUE));
-		i++;
-	}
-	return ;
-}
-*/
