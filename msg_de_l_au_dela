@@ -23,11 +23,10 @@ e"c"""h"o" salut
 "echo salut"
 
 🔴
-export TEST=bonjour TEST1="1+2 +3 +9 +85" TEST2='toi=moi'
+export TEST1="1+2 +3 +9 +85" TEST2='toi=moi' TEST=bonjour
 
 🔴
-export | wc
-
+export | wc  → parce que ne passe pas dans la fork
 
 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥

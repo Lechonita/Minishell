@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_add_value.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:28:20 by lechon            #+#    #+#             */
-/*   Updated: 2023/08/30 14:35:23 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:18:00 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_line	*line_new_var(t_line *line, t_line *after, char c, int index)
 		new->sq = 0;
 	}
 	new->c = c;
+	new->quote_flag = 0;
 	new->next = after;
 	return (new);
 }

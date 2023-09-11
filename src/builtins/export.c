@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/07 14:26:24 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 10:34:43 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	do_export(t_bigshell *data, char **args)
 
 int	export_var(char **args, t_bigshell *data)
 {
+	print_strs(args);
 	if (args[1] == NULL)
 		print_declare_env(data);
 	else
