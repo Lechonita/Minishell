@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:48:15 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 14:11:35 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/11 22:44:52 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	exec_multiple_cmd(t_bigshell *data, char *env[])
 
 int	executor(t_bigshell *data, char *env[])
 {
+	// set_signal_child();
 	if (g_global.nb_cmd == 1 && data->simple_cmd->cmd == NULL)
 		return (0);
 	if (g_global.nb_cmd == 1)

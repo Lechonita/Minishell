@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:45 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 17:15:20 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 21:20:32 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	determine_exit_status(t_bigshell *data, char **args)
 {
 	int	exit_code;
 
-	if (!args[1])
+	if (args == NULL || (args && !args[1]))
 		exit_code = 0;
 	else if (is_str_digit(args[1]))
 		exit_code = ft_atoi(args[1]);
@@ -55,7 +55,7 @@ static void	determine_exit_status(t_bigshell *data, char **args)
 int	exit_shell(char **args, t_bigshell *data)
 {
 	ft_putendl_fd("exit by MiniShell", STDERR_FILENO);
-	if (args[1] && args[2])
+	if (args && args[1] && args[2])
 		return (ft_putstr_fd(W_EXIT_ARG, STDERR_FILENO), EXIT_FAILURE);
 	determine_exit_status(data, args);
 	return (EXIT_SUCCESS);

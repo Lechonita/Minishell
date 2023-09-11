@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:38:06 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/06 21:13:38 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/11 22:01:13 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*free_strjoin(char *to_free, char *buf)
 
 void	init_minishell(t_bigshell *data, char *env[])
 {
-	set_signal();
+	locate_shell(data, 1);
 	init_env(data, env);
 	g_global.exit_status = 0;
 	g_global.nb_cmd = 0;
@@ -41,5 +41,5 @@ int	main(int ac, char *av[], char *env[])
 		printf("%s\n", av[1]);
 	ft_readline(data, data->env_paths);
 	free_all(data);
-	return (0);
+	return (g_global.exit_status);
 }
