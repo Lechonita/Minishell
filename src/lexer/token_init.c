@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:17:32 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/08 15:21:00 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 10:27:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ static t_token	*token_new(char *value, t_line *current_line, int idx)
 	new->type = current_line->type;
 	new->aim = 0;
 	new->value = ft_strdup(value);
-	if (current_line->sq == 1)
+	if (current_line->sq != 0)
 		new->quote_flag = 1;
-	else if (current_line->dq == 1)
+	if (current_line->dq != 0)
 		new->quote_flag = 2;
-	else if (current_line->dq == 0 && current_line->sq == 0)
+	if (current_line->dq == 0 && current_line->sq == 0)
 		new->quote_flag = 0;
 	new->next = NULL;
 	return (new);

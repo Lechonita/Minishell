@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/07 14:38:49 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 11:01:20 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	print_env(t_bigshell *data, char *cmd, char **args)
 	while (el)
 	{
 		printf("[%2d] ", el->index);
-		if (el->to_export == FALSE)
+		// if (el->to_export == FALSE)
 			printf("%s=%s\n", el->name, el->value);
 		el = el->next;
 	}

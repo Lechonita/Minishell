@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/06 15:44:44 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 11:09:41 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	remove_quotes(char *str)
 	str[j] = '\0';
 }
 
-void	add_to_env(t_bigshell *data, int equal, char *input)
+static void	add_to_env(t_bigshell *data, int equal, char *input)
 {
 	char	*str;
 	int		start;
@@ -125,6 +125,7 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 	int	equal_is_here;
 
 	equal_is_here = 0;
+	print_t_line(data->line);
 	while (input[equal_is_here] && input[equal_is_here] != '=')
 		equal_is_here++;
 	if (equal_is_here == ft_strlen(input))
