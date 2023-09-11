@@ -15,6 +15,8 @@ export TEST=bonjour
 export TEST1="1+2 +3 +9 +85" 
 export TEST2='toi=moi'
 
+export TEST1="1+2 +3 +9 +85" TEST2='toi=moi' TEST=bonjour
+
 unset TEST TEST1 TEST2
 
 e'c'"h"o salut
@@ -22,11 +24,10 @@ e"c"""h"o" salut
 "echo" salut
 "echo salut"
 
-🔴
-export TEST1="1+2 +3 +9 +85" TEST2='toi=moi' TEST=bonjour
+🦧 
+export | wc  → parce que ne passe pas dans la fork
 
 🔴
-export | wc  → parce que ne passe pas dans la fork
 
 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
