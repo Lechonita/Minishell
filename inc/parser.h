@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:37:35 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/08 15:00:22 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:06:01 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			check_double_redir(t_bigshell *data);
 
 /* SIMPLE CMD */
 t_simple_cmd	*init_simple_cmd(void);
-void			add_redir(t_bigshell *data);
+int				add_redir(t_bigshell *data);
 void			add_io(t_bigshell *data);
 void			add_cmd_to_lst(t_bigshell *data);
 void			merge_token_cmd(t_bigshell *data);

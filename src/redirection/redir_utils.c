@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:22:30 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 16:16:39 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:04:01 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int	open_fd(t_redir *redir)
 		else if (el->type == LESS)
 		{
 			if (redirection_less(el) == 0)
-				return (0);
+				return (FALSE);
 		}
 		else if (el->type == DGREAT)
 			redirection_append(el);
 		else if (el->type == GREAT)
 			if (redirection_great(el) == 0)
-				return (0);
+				return (FALSE);
 		el = el->next;
 	}
-	return (1);
+	return (TRUE);
 }

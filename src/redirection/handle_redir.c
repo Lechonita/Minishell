@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/08/30 17:17:48 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:00:13 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	read_stdin_hd(t_redir *redir)
 	count = 0;
 	while (1)
 	{
-		// set_signal_here_doc();
 		tmp = readline("> ");
 		if (tmp == NULL)
 		{
@@ -30,7 +29,6 @@ static void	read_stdin_hd(t_redir *redir)
 		if (ft_strlen(tmp) == ft_strlen(redir->file)
 			&& ft_strncmp(tmp, redir->file, ft_strlen(redir->file)) == 0)
 			break ;
-		// add_history(tmp);
 		tmp = free_strjoin(tmp, "\n");
 		ft_putstr_fd(tmp, redir->fd);
 		free(tmp);

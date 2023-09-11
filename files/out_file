@@ -125,4 +125,5 @@ int	mini_export(t_tools *tools, t_simple_cmds *simple_cmd)
 		}
 	}
 	return (EXIT_SUCCESS);
-}
+}hello 15
+hello 15

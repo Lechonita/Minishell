@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:21:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 15:12:10 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:06:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static t_redir	*init_redir(t_token **token, int grp)
 	return (redir);
 }
 
-void	add_redir(t_bigshell *data)
+int	add_redir(t_bigshell *data)
 {
 	t_token			*tok;
 	t_simple_cmd	*cmd;
@@ -90,7 +90,9 @@ void	add_redir(t_bigshell *data)
 	while (cmd != NULL)
 	{
 		cmd->redir = init_redir(&tok, cmd->idx);
-		open_fd(cmd->redir);
+		if (open_fd(cmd->redir) == FALSE)
+			return (FALSE);
 		cmd = cmd->next;
 	}
+	return (TRUE);
 }

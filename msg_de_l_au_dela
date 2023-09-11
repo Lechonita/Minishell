@@ -3,6 +3,10 @@ yo mate !! how are you??
 → << fin wc > out
 
 
+dprintf(2, "\033[3;31m\tmerge token cmd\033[0m\n");
+dprintf(2, "\033[3;31m____________________________\033[0m\n");
+
+
 <Makefile << fin <src/main.c head -15 | echo hello 15 >out_file >> files/out_file
 
 < files/no_right << files/write_o < files/all_rights ls -l >files/read_o >>files/read_write >files/exec_o.c 
@@ -42,7 +46,7 @@ example / error :
 	bash: syntax error near unexpected token `newline'
 
 
-	echo 1 > out12 2 3 << 1 << 2 << 3 < in < in2 >>out13
+echo 10 > out12 11 12 <<1 << 2 <<3 < in < in2 >>out13
 
 
 	→ $ echo 1 > out1 2 3 > /dev/stdout << 1 << 2 << 3 < in < in2
