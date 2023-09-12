@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 10:36:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 15:41:22 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define W_CD_ARG "Minishell: cd: too many arguments\n"
 # define W_BUILT_ENV "\t Env: too many arguments - not in subject scope \n"
 # define W_REDIR_ONE "Minishell: syntax error near unexpected token `newline'\n"
+# define W_PIPE "Minishell: syntax error near unexpected token `pipe'\n"
+# define IS_DIRECTORY ": Is a directory\n"
 # define W_HD_CTRL_D "warning: here-document delimited by end-of-file (wanted `"
 
 // # define W_ENV "\t Environment error\n"

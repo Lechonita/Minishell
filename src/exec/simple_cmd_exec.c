@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 14:44:16 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 15:40:25 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ static int	find_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 			simple_cmd->cmd);
 	if (simple_cmd->cmd == NULL)
 		return (msg_not_found(CMD_NOT_FOUND, simple_cmd->cmd_arg[0]));
-	if (execve(simple_cmd->cmd, simple_cmd->cmd_arg, env) == -1)
-		error_execve(data);
+	if (simple_cmd->cmd[0] == '/' && (!simple_cmd->cmd[1]
+			|| simple_cmd->cmd[1] == ' ' || simple_cmd->cmd[1] == '/'
+			|| simple_cmd->cmd[1] == '.'))
+		return (is_directory(simple_cmd->cmd, IS_DIRECTORY));
+	execve(simple_cmd->cmd, simple_cmd->cmd_arg, env);
+	error_execve(data);
 	return (EXIT_FAILURE);
 }
 

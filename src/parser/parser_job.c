@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_job.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 15:17:13 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 14:43:53 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ void	aim_cmd(t_bigshell *data)
 	{
 		if ((tok->value[0] == '!' || tok->value[0] == ':')
 			&& !tok->value[1])
+		{
 			tok->aim = BLANK;
+			if (tok->value[0] == '!')
+				g_global.exit_status = 1;
+		}
 		if (tok->type == WORD && !tok->aim)
 			tok->aim = SIMPLE_CMD;
 		tok = tok->next;

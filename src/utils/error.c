@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/09/12 14:41:01 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 15:41:48 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@ int	msg_not_found(char *msg, char *str)
 	free(line);
 	g_global.exit_status = 127;
 	return (127);
+}
+
+int	is_directory(char *msg, char *str)
+{
+	char	*line;
+
+	line = ft_strjoin("Minishell: ", msg);
+	line = free_strjoin(line, str);
+	ft_putstr_fd(line, 2);
+	free(line);
+	g_global.exit_status = 126;
+	return (126);
 }
 
 void	error_not_found(t_bigshell *data, char *msg, char *str)

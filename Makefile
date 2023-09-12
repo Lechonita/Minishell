@@ -6,8 +6,8 @@ NAME = minishell
 
 ############################### Compiler #######################################
 
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
-CC = gcc
+FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
+CC = cc
 
 ############################### LIBFT ##########################################
 
