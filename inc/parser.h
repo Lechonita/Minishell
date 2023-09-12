@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:37:35 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 11:52:33 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 22:19:31 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,10 @@
 # include "minishell.h"
 
 /* FIND AIM */
-void			parser_job(t_bigshell *data);
-
-/* AIM CMD */
-void			same_aim(t_bigshell *data);
+int				parser_job(t_bigshell *data);
 char			*def_tok_value(char *value, char *next, char *nextnext);
-void			add_arg_to_cmd(t_bigshell *data);
-void			check_builtin(t_bigshell *data);
-
-/* AIM UTILS */
 char			*join_space(char *s1, char *s2, char *to_add);
 int				last_is_dollar(char *str);
-// void			check_pipe(t_token *tok);
 void			token_group(t_token *tok);
 void			same_aim(t_bigshell *data);
 void			add_arg_to_cmd(t_bigshell *data);

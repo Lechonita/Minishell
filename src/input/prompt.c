@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/12 20:55:33 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/12 22:21:13 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ void	ft_readline(t_bigshell *data)
 		add_history(input);
 		init_line(data, input);
 		find_tokens(data);
-		parser_job(data);
-		if (simple_cmd_lst(data) == TRUE)
+		if (parser_job(data) == TRUE && simple_cmd_lst(data) == TRUE)
 		{
 			// print_simple_cmd(data);
 			executor(data, data->env_cpy);

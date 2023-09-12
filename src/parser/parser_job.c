@@ -6,7 +6,7 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 20:55:59 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/12 22:26:40 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ void	aim_pipe(t_bigshell *data)
 	}
 }
 
-void	aim_redir(t_bigshell *data)
+static int	aim_redir(t_bigshell *data)
 {
 	t_token	*tok;
 
 	tok = data->token;
+	print_t_token(data);
 	while (tok != NULL)
 	{
+		dprintf(2, "tok->value = %s\n", tok->value);
 		if ((tok->type == LESS || tok->type == GREAT) && !tok->aim)
 		{
 			tok->aim = REDIR;
@@ -41,11 +43,12 @@ void	aim_redir(t_bigshell *data)
 				&& tok->next->next->type == WORD)
 				tok->next->next->aim = REDIR;
 			else
-				ft_error(2, W_REDIR_ONE);
+				return (ft_error(2, W_REDIR_ONE), FALSE);
 		}
 		tok = tok->next;
 	}
 	check_double_redir(data);
+	return (TRUE);
 }
 
 void	aim_cmd(t_bigshell *data)
@@ -55,8 +58,8 @@ void	aim_cmd(t_bigshell *data)
 	tok = data->token;
 	while (tok != NULL)
 	{
-		if ((tok->value[0] == '!' || tok->value[0] == ':')
-			&& !tok->value[1])
+		if ((tok->value[0] == '!' || tok->value[0] == ':'
+			|| tok->value[0] == '#') && !tok->value[1])
 		{
 			tok->aim = BLANK;
 			if (tok->value[0] == '!')
@@ -86,11 +89,13 @@ void	rm_blank(t_bigshell *data)
 	}
 }
 
-void	parser_job(t_bigshell *data)
+int	parser_job(t_bigshell *data)
 {
 	aim_pipe(data);
 	token_group(data->token);
-	aim_redir(data);
+	if (aim_redir(data) == FALSE)
+		return (FALSE);
 	aim_cmd(data);
 	rm_blank(data);
+	return (TRUE);
 }
