@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/12 17:07:44 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 21:14:09 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	*find_path_to_cmd(t_bigshell *data, char *cmd, char *path)
 	if (ft_strchr(cmd, '/') != NULL)
 	{
 		command = handle_good_path(data, cmd);
+		free(path);
 		return (ft_strdup(command));
 	}
 	while (data->env_paths[++i])

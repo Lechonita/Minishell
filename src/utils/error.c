@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/09/12 18:31:35 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 21:25:19 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	error_execve(t_bigshell *data)
+void	error_execve(t_bigshell *data, char *msg)
 {
+	char	*tmp;
+	
 	if (errno == EACCES)
 	{
-		// dprintf(2, "\033[1;31merror_execve %d - %s\033[0m\n", errno, strerror(errno));
+		tmp = ft_strjoin("Minishell: ", msg);
+		tmp = free_strjoin(tmp, ": Permission denied\n");
+		ft_putstr_fd(tmp, 2);
+		free(tmp);
 		free_all(data);
-		ft_exit(errno, strerror(errno));
-		return ;
+		g_global.exit_status = 126;
+		exit(g_global.exit_status) ;
 	}
 	else
 	{
-		// dprintf(2, "\033[1;31merror_execve %d - %s\033[0m\n", errno, strerror(errno));
 		free_all(data);
 		ft_exit(EXIT_FAILURE, W_EXECVE);
 	}
@@ -34,7 +38,6 @@ int	msg_not_found(char *msg, char *str)
 	char	*tmp;
 	char	*line;
 
-	// dprintf(2, "\033[1;37mMSG not found \033[0m");
 	tmp = ft_strjoin(msg, str);
 	line = free_strjoin(tmp, "\n");
 	ft_putstr_fd(line, 2);

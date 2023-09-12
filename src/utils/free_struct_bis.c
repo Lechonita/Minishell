@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct_bis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:13:36 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 17:26:24 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 21:02:16 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_strs(char **strs)
 	int	i;
 
 	i = 0;
-	if (strs != NULL && strs[i] != NULL)
+	if (strs != NULL)
 	{
 		while (strs[i])
 		{
@@ -41,8 +41,7 @@ void	ft_free_simple_cmd(t_simple_cmd **simple_cmd)
 		tmp = (*simple_cmd)->next;
 		if ((*simple_cmd)->cmd_arg)
 			free_strs((*simple_cmd)->cmd_arg);
-		if ((*simple_cmd)->cmd != NULL)
-			free((*simple_cmd)->cmd);
+		free((*simple_cmd)->cmd);
 		if ((*simple_cmd)->redir)
 			ft_free_redirection(&(*simple_cmd)->redir);
 		if ((*simple_cmd)->fd_in)
