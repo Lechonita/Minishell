@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/07 14:18:33 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 15:23:43 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static char	*get_env_name(char	*env)
 	int		pos_equal;
 
 	pos_equal = 0;
+	dprintf(2, "\033[1;39menv name %s\033[0m\n", env);
 	while (env[pos_equal] != '=')
 		pos_equal++;
 	name = ft_strndup(env, pos_equal);
@@ -60,10 +61,10 @@ t_env	*env_new(char *env, int idx, int to_export)
 {
 	t_env	*new;
 
-	new = malloc(sizeof(t_env));
-	if (!new)
-		return (NULL);
+	new = ft_calloc(1, sizeof(t_env));
+	dprintf(2, "\033[1;39menv_new \033[0m");
 	new->name = get_env_name(env);
+	dprintf(2, "\033[1;39mname %s\033[0m\n", new->name);
 	if (to_export == TRUE)
 		new->value = get_env_for_export(env);
 	else

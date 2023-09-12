@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/11 14:32:39 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 14:44:16 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static int	find_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 			simple_cmd->cmd);
 	if (simple_cmd->cmd == NULL)
 		return (msg_not_found(CMD_NOT_FOUND, simple_cmd->cmd_arg[0]));
-	execve(simple_cmd->cmd, simple_cmd->cmd_arg, env);
-	error_execve(data);
+	if (execve(simple_cmd->cmd, simple_cmd->cmd_arg, env) == -1)
+		error_execve(data);
 	return (EXIT_FAILURE);
 }
 
@@ -76,6 +76,7 @@ void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 		ret = 0;
 	else if (simple_cmd->cmd_arg[0][0] != '\0')
 		ret = find_cmd(data, simple_cmd, env);
+	dprintf(2, "\033[1;38msingle cmd ret=%3d \033[0m", ret);
 	free_all(data);
 	exit(ret);
 }

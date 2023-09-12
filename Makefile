@@ -6,7 +6,7 @@ NAME = minishell
 
 ############################### Compiler #######################################
 
-FLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address 
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
 CC = gcc
 
 ############################### LIBFT ##########################################
@@ -207,7 +207,7 @@ re: fclean all
 ############################### Color ##########################################
 
 END=\033[0m
-RED=\033[5;31m
+RED=\033[1;31m
 LRED=\033[38;5;124m
 GREEN=\033[1;32m #\033[1;5;32m
 LGREEN=\033[38;5;22m

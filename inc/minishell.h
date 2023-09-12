@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/11 21:59:46 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/12 15:29:49 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_global
 extern t_global	g_global;
 
 /* MAIN */
-void	ft_readline(t_bigshell *data, char *env[]);
+void	ft_readline(t_bigshell *data);
 
 /***********************************************************/
 /*                          UTILS                          */
@@ -46,6 +46,7 @@ void	ft_readline(t_bigshell *data, char *env[]);
 char	*free_strjoin(char *to_free, char *buf);
 
 /* FREE STRUCT*/
+void	reset_prompt(t_bigshell *data, char *input);
 void	free_strs(char **strs);
 void	ft_free_line(t_line **line);
 void	ft_free_env(t_env **env);

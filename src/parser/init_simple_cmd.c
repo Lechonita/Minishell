@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:47:10 by Bea               #+#    #+#             */
-/*   Updated: 2023/08/30 17:27:36 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 12:19:18 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ static t_simple_cmd	*new_lst(int index)
 	t_simple_cmd	*new;
 
 	new = ft_calloc(1, sizeof(t_simple_cmd));
+	new -> cmd = NULL;
+	new -> cmd_arg = NULL;
 	new -> idx = index;
+	new -> redir = NULL;
+	new->in_file = NULL;
+	new->out_file = NULL;
 	new -> next = NULL;
 	new -> prev = NULL;
 	return (new);

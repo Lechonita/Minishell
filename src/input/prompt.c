@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/11 22:40:40 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/12 15:28:57 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	reset_prompt(t_bigshell *data, char *input)
 {
+	dprintf(2, "\033[1;36mreset prompt \033[0m");
 	if (input != NULL)
 		free(input);
 	if (data->line != NULL)
@@ -22,6 +23,8 @@ void	reset_prompt(t_bigshell *data, char *input)
 		ft_free_token(&data->token);
 	if (data->simple_cmd)
 		ft_free_simple_cmd(&data->simple_cmd);
+	if (g_global.heredoc == 1)
+		unlink("minishell_here_doc");
 }
 
 static int	simple_cmd_lst(t_bigshell *data)
@@ -35,7 +38,7 @@ static int	simple_cmd_lst(t_bigshell *data)
 	return (TRUE);
 }
 
-void	ft_readline(t_bigshell *data, char *env[])
+void	ft_readline(t_bigshell *data)
 {
 	char	*input;
 
@@ -46,7 +49,6 @@ void	ft_readline(t_bigshell *data, char *env[])
 			input = readline(PROMPT);
 		if (input == NULL || !ft_strcmp(input, "exit"))
 			exit_shell(NULL, data);
-		set_signal_off();
 		add_history(input);
 		init_line(data, input);
 		find_tokens(data);
@@ -54,7 +56,7 @@ void	ft_readline(t_bigshell *data, char *env[])
 		if (simple_cmd_lst(data) == TRUE)
 		{
 			// print_simple_cmd(data);
-			executor(data, env);
+			executor(data, data->env_cpy);
 		}
 		reset_prompt(data, input);
 

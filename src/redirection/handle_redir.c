@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/11 22:43:22 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/12 11:43:54 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,23 @@
 
 static void	read_stdin_hd(t_redir *redir)
 {
-	int		count;
 	char	*tmp;
 
-	count = 0;
-	// set_signal_here_doc();
+	set_signal_here_doc();
 	while (1)
 	{
-		set_signal();
+		dprintf(2, "\033[1;31mexit satus [%d]\033[0m\n", g_global.exit_status);
 		if (g_global.exit_status == 130)
 			return ;
 		tmp = readline("> ");
-		set_signal_off();
 		if (tmp == NULL)
-			return (ctrl_d_here_doc(tmp, redir->file, count));
+			return (ctrl_d_here_doc(tmp, redir->file));
 		if (ft_strlen(tmp) == ft_strlen(redir->file)
 			&& ft_strncmp(tmp, redir->file, ft_strlen(redir->file)) == 0)
-			break ;
-		tmp = free_strjoin(tmp, "\n");
-		ft_putstr_fd(tmp, redir->fd);
+			return (free(tmp));
+		ft_putendl_fd(tmp, redir->fd);
 		free(tmp);
-		count++;
 	}
-	free(tmp);
-	return ;
 }
 
 int	redirection_here_doc(t_redir *redir)
@@ -46,6 +39,7 @@ int	redirection_here_doc(t_redir *redir)
 	if (redir->fd < 0)
 		return (ft_error(errno, strerror(errno)), errno);
 	read_stdin_hd(redir);
+	dprintf(2, "\033[1;32mexit satus [%d]\033[0m\n", g_global.exit_status);
 	close(redir->fd);
 	redir->fd = open("minishell_here_doc", O_RDONLY);
 	if (redir->fd < 0)

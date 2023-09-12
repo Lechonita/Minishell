@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:13:36 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/01 15:35:21 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 14:36:24 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	free_strs(char **strs)
 	int	i;
 
 	i = 0;
-	if (strs != NULL)
+	if (strs != NULL && strs[i] != NULL)
 	{
+		dprintf(2, "\033[1;33mfree_strs\033[0m\n");
 		while (strs[i])
 		{
 			free(strs[i]);
@@ -38,6 +39,7 @@ void	ft_free_simple_cmd(t_simple_cmd **simple_cmd)
 		return ;
 	while (*simple_cmd)
 	{
+		dprintf(2, "\033[1;32mfree simple cmd \033[0m");
 		tmp = (*simple_cmd)->next;
 		if ((*simple_cmd)->cmd)
 			free((*simple_cmd)->cmd);
