@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:47:10 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 12:19:18 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:59:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,11 @@ static t_simple_cmd	*new_lst(int index)
 	t_simple_cmd	*new;
 
 	new = ft_calloc(1, sizeof(t_simple_cmd));
-	new -> cmd = NULL;
-	new -> cmd_arg = NULL;
 	new -> idx = index;
-	new -> redir = NULL;
-	new->in_file = NULL;
-	new->out_file = NULL;
 	new -> next = NULL;
 	new -> prev = NULL;
+	dprintf(2, "new_lst: %d\n", index);
+	dprintf(2, "new_lst: %d builtin %d\n", index, new->builtin);
 	return (new);
 }
 
@@ -59,7 +56,11 @@ t_simple_cmd	*init_simple_cmd(void)
 	while (index < g_global.nb_cmd)
 	{
 		if (index == 0)
+		{
 			simple_cmd = new_lst(index);
+			if (!simple_cmd)
+				ft_error(EXIT_FAILURE, W_LST_CMD);
+		}
 		else
 			add_back(&simple_cmd, new_lst(index));
 		index++;

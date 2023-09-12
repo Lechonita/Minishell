@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct_bis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:13:36 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 15:39:11 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:26:24 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	free_strs(char **strs)
 	i = 0;
 	if (strs != NULL && strs[i] != NULL)
 	{
-		dprintf(2, "\033[1;33mfree_strs\033[0m\n");
 		while (strs[i])
 		{
 			free(strs[i]);
@@ -39,12 +38,11 @@ void	ft_free_simple_cmd(t_simple_cmd **simple_cmd)
 		return ;
 	while (*simple_cmd)
 	{
-		dprintf(2, "\033[1;32mfree simple cmd \033[0m");
 		tmp = (*simple_cmd)->next;
-		if ((*simple_cmd)->cmd)
-			free((*simple_cmd)->cmd);
 		if ((*simple_cmd)->cmd_arg)
 			free_strs((*simple_cmd)->cmd_arg);
+		if ((*simple_cmd)->cmd != NULL)
+			free((*simple_cmd)->cmd);
 		if ((*simple_cmd)->redir)
 			ft_free_redirection(&(*simple_cmd)->redir);
 		if ((*simple_cmd)->fd_in)

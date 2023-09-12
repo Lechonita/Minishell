@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/12 12:05:43 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:31:19 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ t_line	*line_new(t_line *line, char c, int i)
 {
 	t_line	*new;
 
-	new = malloc(sizeof(t_line));
-	if (!new)
-		return (NULL);
+	new = ft_calloc(1, sizeof(t_line));
 	if (i == -1 && line)
 		i = find_next_index(line) + 1;
 	new->index = i;
@@ -99,8 +97,8 @@ void	init_line(t_bigshell *data, char *line)
 	flag_double_quotes(data->line);
 	flag_single_quotes(data->line);
 	find_quotes(data->line);
-	verify_pipes(data, 0, 0);
 	find_dollar_dollar_bill(data, data->line);
+	verify_pipes(data, 0, 0);
 	check_for_export(data, data->line, line);
 	delete_squotes(data->line);
 	delete_dquotes(data->line);

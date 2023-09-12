@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:57:52 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 15:57:36 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 18:00:27 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	add_cmd_to_lst(t_bigshell *data)
 				if (!simple_cmd->cmd_arg)
 					ft_error(EXIT_FAILURE, W_SPLIT_CMD);
 				if (tok->aim == BUILTIN)
-					simple_cmd->builtin = TRUE;
+					simple_cmd->builtin = 1;
 			}
 			tok = tok->next;
 		}

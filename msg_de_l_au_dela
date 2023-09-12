@@ -1,7 +1,4 @@
 yo mate !! how are you??
-
-
-
 → << fin wc > out
 
 dprintf(2, "\033[3;31m\tmerge token cmd\033[0m\n");

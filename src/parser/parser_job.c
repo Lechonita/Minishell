@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_job.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 14:43:53 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:53:30 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ void	parser_job(t_bigshell *data)
 	aim_redir(data);
 	aim_cmd(data);
 	rm_blank(data);
+	print_t_token(data);
 }

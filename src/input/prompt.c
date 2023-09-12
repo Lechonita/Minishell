@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/12 15:42:13 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:48:23 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	reset_prompt(t_bigshell *data, char *input)
 {
-	dprintf(2, "\033[1;36mreset prompt \033[0m");
 	if (input != NULL)
 		free(input);
 	if (data->line != NULL)
@@ -55,7 +54,7 @@ void	ft_readline(t_bigshell *data)
 		parser_job(data);
 		if (simple_cmd_lst(data) == TRUE)
 		{
-			// print_simple_cmd(data);
+			print_simple_cmd(data);
 			executor(data, data->env_cpy);
 		}
 		reset_prompt(data, input);

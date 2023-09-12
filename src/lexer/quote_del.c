@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:33:16 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/08 14:46:08 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:46:26 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	delete_squotes(t_line *line)
 			while (el->sq != 2)
 				el = el->next;
 			end = el->index;
-			if (is_word_between_quotes(line, start, end))
+			if (is_word_between_quotes(line, start, end) == TRUE)
 				flag_quote_to_remove(line, start, end);
 		}
 		if (el && el->next)
@@ -116,7 +116,8 @@ void	delete_dquotes(t_line *line)
 			while (el->dq != 2)
 				el = el->next;
 			end = el->index;
-			if (is_word_between_quotes(line, start, end))
+			dprintf(2, "start %d | end %d\n", start, end);
+			if (is_word_between_quotes(line, start, end) == TRUE)
 				flag_quote_to_remove(line, start, end);
 		}
 		if (el && el->next)
