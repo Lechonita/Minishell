@@ -6,53 +6,59 @@
 /*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/20 16:49:02 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/11 22:44:34 by Bea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/input.h"
 
-void	catch_ctrl_d(t_bigshell *data, char *input)
-{
-	char	tmp[256];
-
-	tmp[0] = 0;
-	if (!data)
-		return ;
-	if (read(STDIN_FILENO, tmp, 0) == 0)
-	{
-		free(input);
-		ft_putstr_fd("exit\n", 2);
-		free_all(data);
-		exit(EXIT_SUCCESS);
-	}
-}
-
 void	ft_sig_int(int sig)
 {
-	if (sig == SIGINT)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+	g_global.exit_status = 130;
+	ft_putstr_fd("\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	(void)sig;
+}
+
+void	ignore_sigquit(void)
+{
+	struct sigaction	act;
+
+	ft_memset(&act, 0, sizeof(act));
+	act.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &act, NULL);
 }
 
 void	set_signal(void)
 {
-	struct sigaction	sa_int;
-	struct sigaction	sa_quit;
+	struct sigaction	act;
 
-	sigemptyset(&sa_int.sa_mask);
-	sa_int.sa_flags = SA_RESTART;
-	sa_int.sa_handler = &ft_sig_int;
-	sigemptyset(&sa_quit.sa_mask);
-	sa_quit.sa_flags = SA_RESTART;
-	sa_quit.sa_handler = SIG_IGN;
-	sigaction(SIGINT, &sa_int, NULL);
-	sigaction(SIGQUIT, &sa_quit, NULL);
+	ignore_sigquit();
+	ft_memset(&act, 0, sizeof(act));
+	act.sa_handler = &ft_sig_int;
+	sigaction(SIGINT, &act, NULL);
+}
+
+
+void	signal_print_newline(int signal)
+{
+	(void)signal;
+	rl_on_new_line();
+	g_global.exit_status = 130;
+}
+
+
+void	set_signal_off(void)
+{
+	struct sigaction	act;
+
+	ft_memset(&act, 0, sizeof(act));
+	act.sa_handler = &signal_print_newline;
+	sigaction(SIGINT, &act, NULL);
+	sigaction(SIGQUIT, &act, NULL);
 }
 
 /*
@@ -61,4 +67,55 @@ pour le SIGINT: CTRL + C
 	rl_on_new_line();		regenerate the prompt on a newline
 	rl_replace_line("", 0); clear the previous text
 	rl_redisplay();			redisplay the prompt on a newline
+*/
+
+/*
+void	ft_sig_int(int sig)
+{
+	g_global.exit_status = 130;
+	ft_putstr_fd("\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	(void)sig;
+}
+
+void	ignore_sigquit(void)
+{
+	struct sigaction	act;
+
+	ft_memset(&act, 0, sizeof(act));
+	act.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &act, NULL);
+}
+
+void	set_signal(void)
+{
+	struct sigaction	act;
+
+	ignore_sigquit();
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = SA_RESTART;
+	act.sa_handler = &ft_sig_int;
+	sigaction(SIGINT, &act, NULL);
+	signal(SIGTSTP, SIG_IGN);
+}
+
+void	ft_sig_int_child(int sig)
+{
+	g_global.exit_status = 130;
+	(void)sig;
+}
+
+void	set_signal_child(void)
+{
+	struct sigaction	act;
+
+	ignore_sigquit();
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = SA_RESTART;
+	act.sa_handler = &ft_sig_int_child;
+	sigaction(SIGINT, &act, NULL);
+	signal(SIGTSTP, SIG_IGN);
+}
 */

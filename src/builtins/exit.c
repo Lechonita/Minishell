@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:45 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 10:03:37 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 14:48:56 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	determine_exit_status(t_bigshell *data, char **args)
 {
 	int	exit_code;
 
-	if (!args[1])
+	if (args == NULL || (args && !args[1]))
 		exit_code = 0;
 	else if (is_str_digit(args[1]))
 		exit_code = ft_atoi(args[1]);
@@ -55,7 +55,7 @@ static void	determine_exit_status(t_bigshell *data, char **args)
 int	exit_shell(char **args, t_bigshell *data)
 {
 	ft_putendl_fd("exit by MiniShell", STDERR_FILENO);
-	if (args[1] && args[2])
+	if (args && args[1] && args[2])
 		return (ft_putstr_fd(W_EXIT_ARG, STDERR_FILENO), EXIT_FAILURE);
 	determine_exit_status(data, args);
 	return (EXIT_SUCCESS);

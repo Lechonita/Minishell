@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/12 14:44:57 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 14:48:27 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ void	ft_readline(t_bigshell *data, char *env[])
 
 	while (1)
 	{
+		set_signal();
 		if (isatty(STDIN_FILENO))
 			input = readline(PROMPT);
-		if (input == NULL)
-			catch_ctrl_d(data, input);
+		if (input == NULL || !ft_strcmp(input, "exit"))
+			exit_shell(NULL, data);
+		set_signal_off();
 		add_history(input);
 		init_line(data, input);
 		find_tokens(data);
