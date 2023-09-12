@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_simple_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:47:10 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 17:59:32 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 18:31:24 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ static t_simple_cmd	*new_lst(int index)
 	new -> idx = index;
 	new -> next = NULL;
 	new -> prev = NULL;
-	dprintf(2, "new_lst: %d\n", index);
-	dprintf(2, "new_lst: %d builtin %d\n", index, new->builtin);
 	return (new);
 }
 

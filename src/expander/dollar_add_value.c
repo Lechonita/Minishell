@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:28:20 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/11 15:33:26 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:58:27 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	line_addmiddle(t_line *line, char c, int index)
 {
 	t_line	*last;
 
+	// printf("Entering line addmiddle\n");
 	if (!line)
 		return ;
 	last = line;
@@ -74,16 +75,23 @@ t_line	*add_var(t_line *line, char *value, char *var)
 	int		i;
 	int		j;
 
+	// printf("Entering add var\n");
+	// printf("value = %s\n", value);
+	// printf("var = %s\n", var);
 	if (!line || !value || !var)
 		return (NULL);
+	// printf("Entering add var deux\n");
 	tmp = line;
 	idx = tmp->index - 1;
 	i = -1;
 	j = 0;
 	while (value[++i])
 	{
+		// printf("==================\n");
+		// printf("value[%d] = -%c-\n", i, value[i]);
 		if ((var[j] && tmp->c == var[j]))
 		{
+			// printf("On rentre dans le if\n");
 			tmp = line_replace_node(tmp, value[i]);
 			tmp = tmp->next;
 			j++;
@@ -93,5 +101,7 @@ t_line	*add_var(t_line *line, char *value, char *var)
 		idx++;
 	}
 	remove_rest(tmp, ft_strlen(value), ft_strlen(var));
+	print_t_line(line);
+	// printf("line next = -%c-\n", line->next->c);
 	return (line->next);
 }

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/11 10:45:04 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:58:17 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_line	*find_prev(t_bigshell *data, int index)
 	if (!data)
 		return (NULL);
 	tmp = data->line;
+	if (index == 0)
+		return (NULL);
 	while (tmp)
 	{
 		if (tmp->index == index - 1)
@@ -83,6 +85,7 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 	t_env	*env;
 	int		flag;
 
+	// printf("Entering compare var\n");
 	if (!data || !line || !var)
 		return (NULL);
 	env = data->env;
@@ -92,7 +95,9 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 		if (ft_strlen(env->name) == ft_strlen(var)
 			&& ft_strcmp(env->name, var) == 0 && env->to_export == FALSE)
 		{
-			line = line_rm_next(find_prev(data, line->index));
+			// printf("line = -%c-\n", line->c);
+			if (find_prev(data, line->index))
+				line = line_rm_next(find_prev(data, line->index));
 			res = add_var(line, env->value, var);
 			flag = 0;
 			break ;

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:20:05 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/11 15:33:15 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:58:32 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_line	*do_expansion(t_bigshell *data, t_line *line, int index)
 	char	*var;
 	t_line	*tmp;
 
+	// printf("Entering do_expansion\n");
 	if (!line || !line->next)
 		return (NULL);
 	tmp = line;
@@ -115,6 +116,7 @@ void	find_dollar_dollar_bill(t_bigshell *data, t_line *line)
 	t_line	*tmp;
 	int		flag;
 
+	// printf("Entering find dollar dollar bill\n");
 	if (!data || !line)
 		return ;
 	tmp = line;

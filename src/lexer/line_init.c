@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/12 17:31:19 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 18:58:38 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	init_line(t_bigshell *data, char *line)
 	flag_double_quotes(data->line);
 	flag_single_quotes(data->line);
 	find_quotes(data->line);
+	// printf("Avant dollar dollar bill\n");
+	// print_t_line(data->line);
 	find_dollar_dollar_bill(data, data->line);
 	verify_pipes(data, 0, 0);
 	check_for_export(data, data->line, line);

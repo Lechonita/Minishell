@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_del.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:33:16 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 17:46:26 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 18:31:27 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ void	delete_dquotes(t_line *line)
 			while (el->dq != 2)
 				el = el->next;
 			end = el->index;
-			dprintf(2, "start %d | end %d\n", start, end);
 			if (is_word_between_quotes(line, start, end) == TRUE)
 				flag_quote_to_remove(line, start, end);
 		}

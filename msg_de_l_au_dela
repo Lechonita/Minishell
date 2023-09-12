@@ -89,16 +89,16 @@ POUR INFO :
 !!! ATTENTION !!!
 
 >> SEGFAULT / CRASH <<
-	→ Lorsquíl y entre une tabulation,on fait entrer
+	
+	→ $lol   OU    $PATH => regarder add var / add_linemiddle
+
+	→ le leak ./Makefile
 
 
 >> COMPORTEMENTS ANORMAUX <<
 
-	→ Je n'arrive pas a faire fonctionner le export
-
-	→ Builtin CD :
-		Lorsque PWD est unset et qu'on fait un cd pour changer de directory, le PWD ne revient pas alors que
-		ca doit s'afficher si on fait :	echo $PWD (le OLDPWD doit bien rester vide)
+	→ export | wc   OU    export | grep lol
+	→ 
 
 
 

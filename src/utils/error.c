@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/09/12 16:37:03 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 18:31:35 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	error_execve(t_bigshell *data)
 {
 	if (errno == EACCES)
 	{
-		dprintf(2, "\033[1;31merror_execve %d - %s\033[0m\n", errno, strerror(errno));
+		// dprintf(2, "\033[1;31merror_execve %d - %s\033[0m\n", errno, strerror(errno));
 		free_all(data);
 		ft_exit(errno, strerror(errno));
 		return ;
 	}
 	else
 	{
-		dprintf(2, "\033[1;31merror_execve %d - %s\033[0m\n", errno, strerror(errno));
+		// dprintf(2, "\033[1;31merror_execve %d - %s\033[0m\n", errno, strerror(errno));
 		free_all(data);
 		ft_exit(EXIT_FAILURE, W_EXECVE);
 	}
@@ -34,7 +34,7 @@ int	msg_not_found(char *msg, char *str)
 	char	*tmp;
 	char	*line;
 
-	dprintf(2, "\033[1;37mMSG not found \033[0m");
+	// dprintf(2, "\033[1;37mMSG not found \033[0m");
 	tmp = ft_strjoin(msg, str);
 	line = free_strjoin(tmp, "\n");
 	ft_putstr_fd(line, 2);
