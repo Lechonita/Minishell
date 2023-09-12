@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 11:52:04 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 14:50:51 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define W_CD_ARG "Minishell: cd: too many arguments\n"
 # define W_BUILT_ENV "\t Env: too many arguments - not in subject scope \n"
 # define W_REDIR_ONE "Minishell: syntax error near unexpected token `newline'\n"
-# define W_PIPE "Minishell: syntax error near unexpected token: pipe\n"
+# define W_PIPE "Minishell: syntax error near unexpected token `pipe'\n"
 # define IS_DIRECTORY ": Is a directory\n"
 
 // # define W_ENV "\t Environment error\n"
