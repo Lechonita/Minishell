@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aim_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:20:03 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/31 15:59:57 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/12 11:52:21 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,31 @@ int	last_is_dollar(char *str)
 		return (1);
 	return (0);
 }
+
+// void	check_pipe(t_token *tok)
+// {
+// 	t_token	*tmp;
+// 	int		flag;
+
+// 	if (!tok)
+// 		return ;
+// 	tmp = tok;
+// 	flag = 0;
+// 	while (tmp)
+// 	{
+// 		if (flag == 1 && tmp->value[0] == '|')
+// 			flag = 2;
+// 		if (flag == 0 && tmp->value[0] == '|')
+// 			flag = 1;
+// 		if (tmp->value[0] == '|' && tmp->value[1] == '|')
+// 		{
+// 			flag = 2;
+// 			break ;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// 	if (flag == 1)
+// 		ft_error(2, W_SINGLE_PIPE);
+// 	else if (flag == 2)
+// 		ft_error(2, W_DOUBLE_PIPE);
+// }

@@ -3,15 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   token_find.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:13:39 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/08 15:02:48 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 14:44:45 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include "../inc/lexer.h"
+
+void	verify_pipes(t_bigshell *data, int counter, int i)
+{
+	t_line	*tmp;
+
+	if (!data || !data->line)
+		return ;
+	tmp = data->line;
+	while (tmp)
+	{
+		if (tmp->c == '|')
+		{
+			if (i == 0 || counter == i - 1)
+			{
+				ft_free_line(&data->line);
+				ft_error(2, W_PIPE);
+				break ;
+			}
+			counter = i;
+		}
+		if (tmp->type != BLANK)
+			i++;
+		tmp = tmp->next;
+	}
+}
 
 void	token_group(t_token *tok)
 {

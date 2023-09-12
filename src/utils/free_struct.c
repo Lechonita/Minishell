@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/01 14:46:54 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:32:29 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	free_all(t_bigshell *data)
 		ft_free_env(&data->env);
 	if (data->simple_cmd)
 		ft_free_simple_cmd(&data->simple_cmd);
+	if (g_global.heredoc == 1)
+		unlink("minishell_here_doc");
 	rl_clear_history();
 	if (data != NULL)
 		free(data);
@@ -109,6 +111,4 @@ void	free_all(t_bigshell *data)
 }
 
 /*
-	if (data->exec->here_doc == 1)
-		unlink("minishell_here_doc");
 */

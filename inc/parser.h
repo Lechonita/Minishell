@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:37:35 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/08 15:00:22 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/12 11:52:33 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void			check_builtin(t_bigshell *data);
 /* AIM UTILS */
 char			*join_space(char *s1, char *s2, char *to_add);
 int				last_is_dollar(char *str);
+// void			check_pipe(t_token *tok);
 void			token_group(t_token *tok);
 void			same_aim(t_bigshell *data);
 void			add_arg_to_cmd(t_bigshell *data);
@@ -35,7 +36,7 @@ void			check_double_redir(t_bigshell *data);
 
 /* SIMPLE CMD */
 t_simple_cmd	*init_simple_cmd(void);
-void			add_redir(t_bigshell *data);
+int				add_redir(t_bigshell *data);
 void			add_io(t_bigshell *data);
 void			add_cmd_to_lst(t_bigshell *data);
 void			merge_token_cmd(t_bigshell *data);

@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/09/11 16:33:00 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:45:09 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	is_directory(char *msg, char *str)
 
 void	error_not_found(t_bigshell *data, char *msg, char *str)
 {
-	printf("and i go through error not found\n");
 	msg_not_found(msg, str);
 	free_all(data);
 	exit(127);

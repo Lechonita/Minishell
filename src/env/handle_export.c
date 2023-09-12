@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/11 12:22:17 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:25:00 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,4 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 			add_to_env(data, equal_is_here, input);
 		equal_is_here = end_pos(input, equal_is_here) + 1;
 	}
-
 }

@@ -1,8 +1,13 @@
 yo mate !! how are you??
 
+
+
 → << fin wc > out
 
+dprintf(2, "\033[3;31m\tmerge token cmd\033[0m\n");
+dprintf(2, "\033[3;31m____________________________\033[0m\n");
 
+echo 10 > out12 11 12 <<1 << 2 <<3 < in < in2 >>out13
 <Makefile << fin <src/main.c head -15 | echo hello 15 >out_file >> files/out_file
 
 < files/no_right << files/write_o < files/all_rights ls -l >files/read_o >>files/read_write >files/exec_o.c 
@@ -15,6 +20,8 @@ export TEST=bonjour
 export TEST1="1+2 +3 +9 +85" 
 export TEST2='toi=moi'
 
+export TEST1="1+2 +3 +9 +85" TEST2='toi=moi' TEST=bonjour
+
 unset TEST TEST1 TEST2
 
 e'c'"h"o salut
@@ -22,11 +29,12 @@ e"c"""h"o" salut
 "echo" salut
 "echo salut"
 
-🔴
-export TEST1="1+2 +3 +9 +85" TEST2='toi=moi' TEST=bonjour
+🦧 
+export | wc  → parce que ne passe pas dans la fork
 
 🔴
-export | wc  → parce que ne passe pas dans la fork
+echo 10 > out1 11 12 > /dev/stdout << 1 << 2 <Makefile
+→ /dev/stdout est ignore car il est ouvert en dernier
 
 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
@@ -37,22 +45,12 @@ to do expansion :
 	→ export bout="s -l" puis faire l$bout -ra : ca doit afficher le resultat de "ls -l -ra"
 example / error :
 	→ cmd=321 echo yes => le cmd=321 n'est pas pris en compte quand autre commande derriere
-	→ $ < ou << ou >> ou >
-	bash: syntax error near unexpected token `newline'
 
+🔴
+echo 10 > out12 11 12 <<1 << 2 <<3 < in < in2 >>out13
 
-	echo 1 > out12 2 3 << 1 << 2 << 3 < in < in2 >>out13
-
-
-	→ $ echo 1 > out1 2 3 > /dev/stdout << 1 << 2 << 3 < in < in2
-		→ ouvrir tous les heredocs
-		→ /dev/stdout est ignore car il est ouvert en dernier
-		→ out1 est bien cree mais il est vide
-		→ in et in2 n'existent pas 
-			→ erreur sur <in bash: in: No such file or directory
-			→ arret du programme 
-			→ echo ne s'execute pas
-
+🟢
+echo 10 > out12 11 12 <<1 << 2 <<3 <Makefile >>out13
 
 TESTS QUOTES ET DOLLAR :
 → $ echo 'hello world'
