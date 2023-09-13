@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 15:19:21 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:42:03 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ static void	close_fd_redir(t_simple_cmd *simple_cmd)
 	}
 }
 
-static void	handle_fds(t_bigshell *data, t_simple_cmd *simple_cmd)
+static int	handle_fds(t_bigshell *data, t_simple_cmd *simple_cmd)
 {
 	t_simple_cmd	*el;
 
 	el = data->simple_cmd;
 	if ((simple_cmd->fd_in < 3 && simple_cmd->in_file != NULL)
 		|| (simple_cmd->fd_out < 3 && simple_cmd->out_file != NULL))
-		return ;
+		return (TRUE);
 	if (simple_cmd->fd_out > 2 && dup2(simple_cmd->fd_out, STDOUT_FILENO) < 0)
-		dprintf(2, "\033[1;31m error out \033[0m");
+		return (ft_error(errno, strerror(errno)), EXIT_FAILURE);
 	if (simple_cmd->fd_in > 2 && dup2(simple_cmd->fd_in, STDIN_FILENO) < 0)
-		dprintf(2, "\033[1;31m error in \033[0m]");
+		return (ft_error(errno, strerror(errno)), EXIT_FAILURE);
 	while (el)
 	{
 		if (el->fd_in > 2)
@@ -51,6 +51,7 @@ static void	handle_fds(t_bigshell *data, t_simple_cmd *simple_cmd)
 			close_fd_redir(el);
 		el = el->next;
 	}
+	return (TRUE);
 }
 
 static int	find_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
@@ -73,13 +74,17 @@ void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 	int	ret;
 
 	ret = 0;
-	handle_fds(data, simple_cmd);
-	if (simple_cmd->builtin != 0)
-		ret = exec_builtin_cmd(data, simple_cmd->cmd, simple_cmd->cmd_arg);
-	else if (simple_cmd->cmd == NULL)
-		ret = 0;
-	else if (simple_cmd->cmd_arg[0][0] != '\0')
-		ret = find_cmd(data, simple_cmd, env);
+	if (handle_fds(data, simple_cmd) == TRUE)
+	{
+		if (simple_cmd->builtin != 0)
+			ret = exec_builtin(data, simple_cmd->cmd, simple_cmd->cmd_arg);
+		else if (simple_cmd->cmd == NULL)
+			ret = 0;
+		else if (simple_cmd->cmd_arg[0][0] != '\0')
+			ret = find_cmd(data, simple_cmd, env);
+	}
+	else
+		ret = EXIT_FAILURE;
 	free_all(data);
 	exit(ret);
 }
@@ -91,16 +96,9 @@ int	exec_simple_cmd(t_bigshell *data, char *env[])
 	t_simple_cmd	*cmd;
 
 	cmd = data->simple_cmd;
-	if (!ft_strcmp(cmd->cmd_arg[0], "exit")
-			|| !ft_strcmp(cmd->cmd_arg[0], "cd")
-			|| !ft_strcmp(cmd->cmd_arg[0], "export")
-			|| !ft_strcmp(cmd->cmd_arg[0], "unset")
-			|| !ft_strcmp(cmd->cmd_arg[0], "echo")
-			|| !ft_strcmp(cmd->cmd_arg[0], "env")
-			|| !ft_strcmp(cmd->cmd_arg[0], "pwd"))
+	if (cmd->builtin == 1)
 	{
-		g_global.exit_status = exec_builtin_cmd(data, cmd->cmd,
-				cmd->cmd_arg);
+		g_global.exit_status = exec_builtin(data, cmd->cmd, cmd->cmd_arg);
 		return (1);
 	}
 	pid = fork();

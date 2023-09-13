@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:33:54 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 15:16:22 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:06:40 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "minishell.h"
 
-void		free_readline(t_bigshell *data, char *input);
 t_bigshell	*locate_shell(t_bigshell *data, int status);
+void		free_readline(t_bigshell *data, char *input);
 
 /* SIGNAL HANDLING */
 void		ctrl_d_here_doc(char *input, char *limiter);

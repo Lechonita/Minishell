@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/09/13 14:42:37 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:55:23 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	error_execve(t_bigshell *data, char *msg)
 	else
 	{
 		free_all(data);
-		ft_exit(EXIT_FAILURE, W_EXECVE);
+		ft_putendl_fd(W_EXECVE, 2);
+		g_global.exit_status = errno;
+		exit(g_global.exit_status);
 	}
 }
 
@@ -63,14 +65,6 @@ void	error_not_found(t_bigshell *data, char *msg, char *str)
 	msg_not_found(msg, str);
 	free_all(data);
 	g_global.exit_status = 127;
-	exit(g_global.exit_status);
-}
-
-void	ft_exit(int err_no, char *msg)
-{
-	if (msg)
-		ft_putendl_fd(msg, 2);
-	g_global.exit_status = err_no;
 	exit(g_global.exit_status);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 16:49:15 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 17:08:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_bigshell
 {
 	char			**env_cpy;
 	char			**env_paths;
+	int				fd_hd;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;

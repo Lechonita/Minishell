@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_job.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 14:41:46 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:57:22 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,6 @@ void	aim_cmd(t_bigshell *data)
 	same_aim(data);
 	add_arg_to_cmd(data);
 	check_builtin(data);
-}
-
-void	rm_blank(t_bigshell *data)
-{
-	t_token	*tok;
-
-	if (!data->token || !data->token->next)
-		return ;
-	tok = data->token;
-	while (tok != NULL && tok->next != NULL)
-	{
-		if (tok->next->type == BLANK)
-			token_rm_next(tok);
-		tok = tok->next;
-	}
 }
 
 int	parser_job(t_bigshell *data)

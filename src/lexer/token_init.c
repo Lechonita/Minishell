@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:17:32 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 10:27:15 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:47:28 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	create_token(t_bigshell *data, t_line *current, char *value, int pos)
 
 	new = token_new(value, current, pos);
 	if (!new)
-		ft_exit(EXIT_FAILURE, W_LST_TOK);
+		ft_error(EXIT_FAILURE, W_LST_TOK);
 	token_addback(&data->token, new);
 }

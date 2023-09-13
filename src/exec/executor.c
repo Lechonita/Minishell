@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:48:15 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 15:38:24 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:49:20 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ pid_t	exec_cmd(t_bigshell *data, t_simple_cmd *cmd, char *env[])
 
 	pid = fork();
 	if (pid < 0)
-		return (free_all(data), ft_exit(errno, strerror(errno)), pid);
+		return (ft_error(errno, strerror(errno)), pid);
 	else if (pid == 0)
 		single_cmd(data, cmd, env);
 	return (pid);

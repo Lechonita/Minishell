@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 14:02:22 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:01:11 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,11 @@ int		flag_double_quotes(t_line *line);
 int		flag_single_quotes(t_line *line);
 
 /* FIND TOKENS */
-void	verify_pipes(t_bigshell *data, int counter, int i);
-void	token_rm_next(t_token *tok);
-void	create_token(t_bigshell *data, t_line *current, char *value, int pos);
-void	find_tokens(t_bigshell *data);
-
-/* EXPORT PREP */
 void	check_for_export(t_bigshell *data, t_line *line, char *input);
+void	create_token(t_bigshell *data, t_line *current, char *value, int pos);
+void	verify_pipes(t_bigshell *data, int counter, int i);
+void	find_tokens(t_bigshell *data);
+void	token_rm_next(t_token *tok);
 
 #endif
 

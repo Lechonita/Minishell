@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:34:26 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/12 21:14:09 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/13 16:46:59 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*find_path_to_cmd(t_bigshell *data, char *cmd, char *path)
 }
 
 /* fonction qui sépare les différents chemin de la variable $PATH */
-void	get_path(t_bigshell *data)
+int	get_path(t_bigshell *data)
 {
 	t_env	*tmp;
 
@@ -74,9 +74,9 @@ void	get_path(t_bigshell *data)
 		{
 			data->env_paths = ft_split(tmp->value, ':');
 			if (!data->env_paths)
-				return (free_all(data), ft_exit(EXIT_FAILURE, W_SPLIT_ENV));
+				return (ft_error(EXIT_FAILURE, W_SPLIT_ENV), FALSE);
 		}
 		tmp = tmp->next;
 	}
-	return ;
+	return (TRUE);
 }

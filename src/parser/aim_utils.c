@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aim_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:20:03 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/12 11:52:21 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:57:20 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,17 @@ int	last_is_dollar(char *str)
 	return (0);
 }
 
-// void	check_pipe(t_token *tok)
-// {
-// 	t_token	*tmp;
-// 	int		flag;
+void	rm_blank(t_bigshell *data)
+{
+	t_token	*tok;
 
-// 	if (!tok)
-// 		return ;
-// 	tmp = tok;
-// 	flag = 0;
-// 	while (tmp)
-// 	{
-// 		if (flag == 1 && tmp->value[0] == '|')
-// 			flag = 2;
-// 		if (flag == 0 && tmp->value[0] == '|')
-// 			flag = 1;
-// 		if (tmp->value[0] == '|' && tmp->value[1] == '|')
-// 		{
-// 			flag = 2;
-// 			break ;
-// 		}
-// 		tmp = tmp->next;
-// 	}
-// 	if (flag == 1)
-// 		ft_error(2, W_SINGLE_PIPE);
-// 	else if (flag == 2)
-// 		ft_error(2, W_DOUBLE_PIPE);
-// }
+	if (!data->token || !data->token->next)
+		return ;
+	tok = data->token;
+	while (tok != NULL && tok->next != NULL)
+	{
+		if (tok->next->type == BLANK)
+			token_rm_next(tok);
+		tok = tok->next;
+	}
+}

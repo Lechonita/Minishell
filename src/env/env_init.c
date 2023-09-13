@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/12 15:55:33 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:48:18 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	init_env(t_bigshell *data, char **env)
 	{
 		new = env_new(env[i], i, FALSE);
 		if (!new)
-			ft_exit(EXIT_FAILURE, W_NO_ENV);
+			ft_error(EXIT_FAILURE, W_NO_ENV);
 		env_addback(&data->env, new);
 	}
 	get_path(data);

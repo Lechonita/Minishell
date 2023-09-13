@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 14:13:21 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:00:12 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,5 @@
 # define W_HD_CTRL_D "warning: here-document delimited by end-of-file (wanted `"
 # define W_POINT "Minihsell: .: filename argument required\n"
 # define W_POINT_POINT "Minihsell: ..: command not found\n"
-
-// # define W_ENV "\t Environment error\n"
-// # define W_JOIN_PATH "\t Failure in joining path with / \n"
-// # define W_ENV_PATH "env PATH is empty\n"
-// # define W_SPLIT_ENV "\t Failure in split environment\n"
-
-// # define W_STRDUP "\t Failure in duplicate str\n "
 
 #endif

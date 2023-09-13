@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 13:25:42 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:09:26 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ t_bigshell	*locate_shell(t_bigshell *data, int status)
 void	ft_sig_int_hd(int sig)
 {
 	g_global.exit_status = 130;
-	// close(STDIN_FILENO);
+
+	rl_replace_line("", 0);
+	rl_redisplay();
 	(void)sig;
 }
 
@@ -49,7 +51,7 @@ void	set_signal_here_doc(void)
 	struct sigaction	act_quit;
 
 	sigemptyset(&act.sa_mask);
-	act.sa_flags = SA_RESTART;
+	act.sa_flags = 0;
 	act.sa_handler = &ft_sig_int_hd;
 	sigaction(SIGINT, &act, NULL);
 	ft_memset(&act_quit, 0, sizeof(act_quit));

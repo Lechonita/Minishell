@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:21:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 16:06:15 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 18:56:04 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	add_redir(t_bigshell *data)
 	while (cmd != NULL)
 	{
 		cmd->redir = init_redir(&tok, cmd->idx);
-		if (open_fd(cmd->redir) == FALSE)
+		if (open_fd(data, cmd->redir) == FALSE)
 			return (FALSE);
 		cmd = cmd->next;
 	}

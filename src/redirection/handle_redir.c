@@ -6,41 +6,42 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 09:42:35 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:06:29 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void	read_stdin_hd(t_redir *redir)
+static void	read_stdin_hd(t_bigshell *data, t_redir *redir)
 {
 	char	*tmp;
 
 	set_signal_here_doc();
 	while (1)
 	{
-		dprintf(2, "\033[1;31mexit status [%d] read stdin\033[0m\n", g_global.exit_status);
 		if (g_global.exit_status == 130)
-			return ;
+		{
+			close(data->fd_hd);
+			break ;
+		}
 		tmp = readline("> ");
 		if (tmp == NULL)
 			return (ctrl_d_here_doc(tmp, redir->file));
 		if (ft_strlen(tmp) == ft_strlen(redir->file)
 			&& ft_strncmp(tmp, redir->file, ft_strlen(redir->file)) == 0)
-			return (free(tmp));
-		ft_putendl_fd(tmp, redir->fd);
+			return (close(data->fd_hd), free(tmp));
+		ft_putendl_fd(tmp, data->fd_hd);
 		free(tmp);
 	}
 }
 
-int	redirection_here_doc(t_redir *redir)
+int	redirection_here_doc(t_bigshell *data, t_redir *redir)
 {
-	redir->fd = open("minishell_here_doc", O_CREAT | O_WRONLY, 0644);
-	if (redir->fd < 0)
+	data->fd_hd = open("minishell_here_doc", O_CREAT | O_WRONLY, 0644);
+	if (data->fd_hd < 0)
 		return (ft_error(errno, strerror(errno)), errno);
-	read_stdin_hd(redir);
-	dprintf(2, "\033[1;32mexit status [%d] red hd\033[0m\n", g_global.exit_status);
-	close(redir->fd);
+	read_stdin_hd(data, redir);
+	close(data->fd_hd);
 	redir->fd = open("minishell_here_doc", O_RDONLY);
 	if (redir->fd < 0)
 		return (ft_error(errno, strerror(errno)), errno);
