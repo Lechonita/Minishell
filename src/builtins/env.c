@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 15:00:40 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:55:22 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	print_env(t_bigshell *data, char *cmd, char **args)
 	el = data->env;
 	while (el)
 	{
-		printf("%s=%s\n", el->name, el->value);
+		if (el->to_export == FALSE)
+			printf("%s=%s\n", el->name, el->value);
 		el = el->next;
 	}
 	return (EXIT_SUCCESS);

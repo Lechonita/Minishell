@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 17:47:03 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:30:22 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,10 @@ static void	add_to_env(t_bigshell *data, int equal, char *input)
 	str = ft_substr(input, start, end - start);
 	if (ft_strchr(str, '\"') != NULL || ft_strchr(str, '\'') != NULL)
 		remove_quotes(str);
+	unset_existing(data, str);
 	env_addback(&data->env, env_new(str, env_size, TRUE));
-	free(str);
+	if (str)
+		free(str);
 }
 
 void	check_for_export(t_bigshell *data, t_line *line, char *input)
@@ -98,7 +100,11 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 	equal_is_here = 0;
 	nb_of_equal = count_equal(input);
 	if (nb_of_equal == 0)
+	{
+		if (is_export(line) == TRUE)
+			add_to_env(data, equal_is_here, input);
 		return ;
+	}
 	while (nb_of_equal-- > 0)
 	{
 		while (input[equal_is_here] && input[equal_is_here] != '=')

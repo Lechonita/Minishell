@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/13 16:48:18 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 21:00:06 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ static char	*get_env_name(char	*env)
 	int		pos_equal;
 
 	pos_equal = 0;
-	while (env[pos_equal] != '=')
+	while (env[pos_equal] && env[pos_equal] != '=')
 		pos_equal++;
-	name = ft_strndup(env, pos_equal);
+	if (pos_equal == ft_strlen(env))
+		name = ft_strdup(env);
+	else
+		name = ft_strndup(env, pos_equal);
 	return (name);
 }
 
@@ -48,10 +51,10 @@ static char	*get_env_for_export(char *env)
 	int		pos_equal;
 
 	pos_equal = 0;
-	while (env[pos_equal] != '=')
+	while (env[pos_equal] && env[pos_equal] != '=')
 		pos_equal++;
 	if (ft_strlen(env) == pos_equal)
-		return (env);
+		return (NULL);
 	value = ft_strdup(env + pos_equal + 1);
 	return (value);
 }
@@ -62,12 +65,18 @@ t_env	*env_new(char *env, int idx, int to_export)
 
 	new = ft_calloc(1, sizeof(t_env));
 	new->name = get_env_name(env);
+	new->to_export = to_export;
 	if (to_export == TRUE)
+	{
 		new->value = get_env_for_export(env);
+		if (new->value == NULL)
+			new->to_export = 2;
+		else
+			new->to_export = FALSE;
+	}
 	else
 		new->value = ft_strdup(getenv(new->name));
 	new->index = idx;
-	new->to_export = to_export;
 	new->next = NULL;
 	return (new);
 }

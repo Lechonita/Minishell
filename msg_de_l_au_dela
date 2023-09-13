@@ -89,20 +89,25 @@ POUR INFO :
 !!! ATTENTION !!!
 
 >> SEGFAULT / CRASH <<
-	
-	→ $lol   OU    $PATH => regarder add var / add_linemiddle
 
-	→ le leak ./Makefile
+	→ Segfault dans le cas où on a essayé de créer avec export une valeur qui existe déjà, lorsqu'on refait
+		"export" pour afficher la liste, ca tourne à l'infini.
+		Le problème vient de la fonction alphabetical_sort_env, dans le fichier export.c.
+		Plus précisément dans la deuxième boucle (while (tmp)), qui reste bloquée sur la valeur qui a été
+		supprimée ou celle qui la remplace.
 
 
 >> COMPORTEMENTS ANORMAUX <<
 
-	→ export | wc   OU    export | grep lol
-
 	→ echo $lol | echrsfh | $PATH
 		les messages d'erreur s'affichent les uns sur les autres
 
+	→ echo > /dev/full   => doit renvoyer un message d'erreur
+	 "bash: echo: write error: No space left on device" parce que write ne peut pas ecrire dans dev/full
 
+	→ ctrl+C dans here_doc
+
+	
 
 ~~~~~~~~~~~~~~~~~~ BANNER STYLE ~~~~~~~~~~~~~~~~~~
 
