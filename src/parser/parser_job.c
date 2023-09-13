@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_job.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 11:41:50 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 22:26:40 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/13 10:46:15 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ static int	aim_redir(t_bigshell *data)
 	t_token	*tok;
 
 	tok = data->token;
-	print_t_token(data);
 	while (tok != NULL)
 	{
-		dprintf(2, "tok->value = %s\n", tok->value);
 		if ((tok->type == LESS || tok->type == GREAT) && !tok->aim)
 		{
 			tok->aim = REDIR;
@@ -59,7 +57,7 @@ void	aim_cmd(t_bigshell *data)
 	while (tok != NULL)
 	{
 		if ((tok->value[0] == '!' || tok->value[0] == ':'
-			|| tok->value[0] == '#') && !tok->value[1])
+				|| tok->value[0] == '#') && !tok->value[1])
 		{
 			tok->aim = BLANK;
 			if (tok->value[0] == '!')

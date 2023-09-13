@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:21:34 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/12 17:28:03 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 10:46:46 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_free_line(t_line **line)
 	while (*line)
 	{
 		tmp = (*line)->next;
+		// printf("line juste avant de free = -%c-\n", (*line)->c);
 		free(*line);
 		(*line) = tmp;
 	}

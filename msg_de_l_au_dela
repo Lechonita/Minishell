@@ -98,7 +98,9 @@ POUR INFO :
 >> COMPORTEMENTS ANORMAUX <<
 
 	→ export | wc   OU    export | grep lol
-	→ 
+
+	→ echo $lol | echrsfh | $PATH
+		les messages d'erreur s'affichent les uns sur les autres
 
 
 

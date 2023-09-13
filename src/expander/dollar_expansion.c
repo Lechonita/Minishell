@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:32:42 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/12 18:58:17 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:30:35 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,15 @@ t_line	*line_rm_next(t_line *prev)
 
 	if (!prev || !prev->next)
 		return (NULL);
-	tmp = prev->next;
-	prev->next = prev->next->next;
-	if (tmp)
-		free(tmp);
+	if (prev->c == '$')
+		prev->quote_flag = 1;
+	else
+	{
+		tmp = prev->next;
+		prev->next = prev->next->next;
+		if (tmp)
+			free(tmp);
+	}
 	return (prev->next);
 }
 
@@ -49,7 +54,7 @@ t_line	*find_prev(t_bigshell *data, int index)
 		return (NULL);
 	tmp = data->line;
 	if (index == 0)
-		return (NULL);
+		return (tmp);
 	while (tmp)
 	{
 		if (tmp->index == index - 1)
@@ -62,21 +67,22 @@ t_line	*find_prev(t_bigshell *data, int index)
 t_line	*var_not_found(t_bigshell *data, t_line **line, char *var, int index)
 {
 	t_line	*tmp;
-	t_line	*prev;
 	int		len;
 
 	if (!data || !line || !(*line) || !var)
 		return (NULL);
 	tmp = *line;
-	prev = find_prev(data, tmp->index);
 	len = ft_strlen(var);
+	if (index == 0)
+		len += 1;
 	while (tmp && len >= 0)
 	{
-		tmp = line_rm_next(prev);
+		tmp->quote_flag = 1;
+		tmp = tmp->next;
 		len--;
 	}
 	align_line_index(data->line, 0);
-	return (find_prev(data, index));
+	return (*line);
 }
 
 t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
@@ -85,7 +91,6 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 	t_env	*env;
 	int		flag;
 
-	// printf("Entering compare var\n");
 	if (!data || !line || !var)
 		return (NULL);
 	env = data->env;
@@ -95,9 +100,7 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index)
 		if (ft_strlen(env->name) == ft_strlen(var)
 			&& ft_strcmp(env->name, var) == 0 && env->to_export == FALSE)
 		{
-			// printf("line = -%c-\n", line->c);
-			if (find_prev(data, line->index))
-				line = line_rm_next(find_prev(data, line->index));
+			line = line_rm_next(find_prev(data, line->index));
 			res = add_var(line, env->value, var);
 			flag = 0;
 			break ;
