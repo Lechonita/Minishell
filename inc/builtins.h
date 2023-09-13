@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:39:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 14:28:24 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 14:59:28 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "minishell.h"
 
 int		exec_builtin_cmd(t_bigshell *data, char *cmd, char **args);
-int		exec_builtin_no_fork(t_bigshell *data, char *cmd, char **args);
 
 char	*get_env_value(t_bigshell *data, char *name);
 int		set_env_value(t_bigshell *data, char *name, char *value);

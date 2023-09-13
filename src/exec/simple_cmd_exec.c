@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 21:18:02 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/13 15:19:21 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,15 @@ int	exec_simple_cmd(t_bigshell *data, char *env[])
 	t_simple_cmd	*cmd;
 
 	cmd = data->simple_cmd;
-	if (!ft_strcmp(cmd->cmd_arg[0], "exit") || !ft_strcmp(cmd->cmd_arg[0], "cd")
-		|| !ft_strcmp(cmd->cmd_arg[0], "export")
-		|| !ft_strcmp(cmd->cmd_arg[0], "unset"))
+	if (!ft_strcmp(cmd->cmd_arg[0], "exit")
+			|| !ft_strcmp(cmd->cmd_arg[0], "cd")
+			|| !ft_strcmp(cmd->cmd_arg[0], "export")
+			|| !ft_strcmp(cmd->cmd_arg[0], "unset")
+			|| !ft_strcmp(cmd->cmd_arg[0], "echo")
+			|| !ft_strcmp(cmd->cmd_arg[0], "env")
+			|| !ft_strcmp(cmd->cmd_arg[0], "pwd"))
 	{
-		g_global.exit_status = exec_builtin_no_fork(data, cmd->cmd,
+		g_global.exit_status = exec_builtin_cmd(data, cmd->cmd,
 				cmd->cmd_arg);
 		return (1);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:40 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 15:24:17 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:00:40 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	print_env(t_bigshell *data, char *cmd, char **args)
 	el = data->env;
 	while (el)
 	{
-		printf("[%2d] ", el->index);
 		printf("%s=%s\n", el->name, el->value);
 		el = el->next;
 	}
