@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:31:27 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/11 12:06:47 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:31:55 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,9 @@ int		end_pos(char *input, int equal);
 /* SEARCH GOOD PATH */
 void	get_path(t_bigshell *data);
 char	*find_path_to_cmd(t_bigshell *data, char *cmd, char *path);
+
+/* EXPORT UTILS */
+void	unset_existing(t_bigshell *data, char *str);
+int		is_export(t_line *line);
 
 #endif

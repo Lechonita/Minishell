@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:02:22 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/08/21 12:52:18 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:40:17 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ void	align_line_index(t_line *line, int index)
 	}
 }
 
+int	char_ok(char c)
+{
+	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90)
+		|| (c >= 97 && c <= 122) || c == 95)
+		return (TRUE);
+	return (FALSE);
+}
+
 char	*get_var_bis(t_line *line, char *var)
 {
 	int		i;
@@ -38,7 +46,7 @@ char	*get_var_bis(t_line *line, char *var)
 	i = 0;
 	while (line)
 	{
-		if (line->c == 34 || line->c == 39)
+		if (char_ok(line->c) == FALSE)
 			break ;
 		if (line->c == ' ' || line->c == '\t')
 			break ;
@@ -60,7 +68,7 @@ int	get_var_len(t_line *line)
 	i = 0;
 	while (tmp)
 	{
-		if (tmp->type == BLANK)
+		if (char_ok(line->c) == FALSE || tmp->c == BLANK)
 			break ;
 		else
 			i++;

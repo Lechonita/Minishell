@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:35:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 10:56:51 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:40:04 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_line	*compare_var(t_bigshell *data, t_line *line, char *var, int index);
 /* DOLLAR UTILS */
 void	align_line_index(t_line *line, int start);
 int		get_var_len(t_line *line);
+int		char_ok(char c);
 char	*get_var_bis(t_line *line, char *var);
 char	*get_var(t_line *line);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 14:02:22 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:34:58 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ enum e_tokentype
 	LESS,
 	DLESS,
 	AMPERSAND,
-	SEPARATOR,
+	// SEPARATOR,
 	NOTOKEN,
 };
 # endif
@@ -62,7 +62,7 @@ int		is_newline(char c);
 int		is_ampersand(char c);
 int		is_pipe(char c);
 int		is_redir(char c);
-int		is_separator(char c);
+// int		is_separator(char c);
 int		is_word(char c);
 int		determine_type(char c);
 

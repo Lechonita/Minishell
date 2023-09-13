@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:45:03 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/07 13:03:45 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:42:56 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	update_idx(t_env *env)
 	}
 }
 
-static void	rm_env_el(t_env **env, char *to_remove)
+void	rm_env_el(t_env **env, char *to_remove)
 {
 	t_env	*el;
 	t_env	*prev;
