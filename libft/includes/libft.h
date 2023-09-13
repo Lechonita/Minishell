@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:48:27 by bebigel           #+#    #+#             */
-/*   Updated: 2023/07/18 19:33:29 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/13 13:34:14 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <ctype.h>
 # include <stdint.h>
+# include <stddef.h>
 
 typedef struct s_list
 {

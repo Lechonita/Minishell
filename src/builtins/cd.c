@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:18 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/07 12:30:33 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 14:34:55 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ static int	error_cd(char *str)
 {
 	char	*res;
 
-	res = malloc(sizeof(char) * (43 + ft_strlen(str)));
-	if (!res)
-		return (EXIT_FAILURE);
 	res = ft_strjoin("Minishell: cd: ", str);
 	res = free_strjoin(res, ": No such file or directory\n");
-	ft_putstr_fd(res, 2);
+	ft_putstr_fd(res, STDERR_FILENO);
 	free(res);
 	g_global.exit_status = EXIT_FAILURE;
 	return (EXIT_FAILURE);
