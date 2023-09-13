@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 11:11:12 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 13:25:42 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_bigshell	*locate_shell(t_bigshell *data, int status)
 void	ft_sig_int_hd(int sig)
 {
 	g_global.exit_status = 130;
+	// close(STDIN_FILENO);
 	(void)sig;
 }
 

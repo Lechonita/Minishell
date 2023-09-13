@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:30 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/01 12:42:48 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 14:30:10 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	print_input(char **args, int i)
 	}
 }
 
-int	print_echo(char *cmd, char **args)
+int	print_echo(t_bigshell *data, char *cmd, char **args)
 {
 	int	i;
 	int	j;
@@ -33,7 +33,7 @@ int	print_echo(char *cmd, char **args)
 	n_nb = 0;
 	(void)cmd;
 	if (ft_strncmp(args[0], "echo", ft_strlen(args[0])) != 0)
-		return (msg_not_found(CMD_NOT_FOUND, args[0]));
+		error_not_found(data, CMD_NOT_FOUND, args[0]);
 	while (args[i] && args[i][0] == '-' && args[i][1] == 'n')
 	{
 		j = 1;

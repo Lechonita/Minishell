@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:47:50 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 15:41:22 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:13:21 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,15 @@
 # define W_CD_ARG "Minishell: cd: too many arguments\n"
 # define W_BUILT_ENV "\t Env: too many arguments - not in subject scope \n"
 # define W_REDIR_ONE "Minishell: syntax error near unexpected token `newline'\n"
+# define W_REDIR_TWOG "Minishell: syntax error near unexpected token `>'\n"
+# define W_REDIR_TWOL "Minishell: syntax error near unexpected token `<'\n"
+# define W_REDIR_THREEG "Minishell: syntax error near unexpected token `>>'\n"
+# define W_REDIR_THREEL "Minishell: syntax error near unexpected token `<<'\n"
 # define W_PIPE "Minishell: syntax error near unexpected token `pipe'\n"
 # define IS_DIRECTORY ": Is a directory\n"
 # define W_HD_CTRL_D "warning: here-document delimited by end-of-file (wanted `"
+# define W_POINT "Minihsell: .: filename argument required\n"
+# define W_POINT_POINT "Minihsell: ..: command not found\n"
 
 // # define W_ENV "\t Environment error\n"
 // # define W_JOIN_PATH "\t Failure in joining path with / \n"

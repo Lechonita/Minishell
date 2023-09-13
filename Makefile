@@ -95,6 +95,7 @@ SRC += signal.c
 SRC += signal_here_doc.c
 
 #	Lexer functions
+SRC += check_caracter.c
 SRC += find_token_type.c
 SRC += flag_quotes.c
 SRC += line_init.c

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 11:38:32 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 17:08:06 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 14:27:52 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	exec_builtin_cmd(t_bigshell *data, char *cmd, char **args)
 {
 	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
-		print_echo(NULL, args);
+		print_echo(data, NULL, args);
 	else if (ft_strncmp(cmd, "env", ft_strlen("env")) == 0)
 		print_env(data, cmd, args);
 	else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)

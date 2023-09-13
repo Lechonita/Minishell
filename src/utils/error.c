@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bea <Bea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:19:56 by user              #+#    #+#             */
-/*   Updated: 2023/09/12 21:25:19 by Bea              ###   ########.fr       */
+/*   Updated: 2023/09/13 14:22:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_execve(t_bigshell *data, char *msg)
 {
 	char	*tmp;
-	
+
 	if (errno == EACCES)
 	{
 		tmp = ft_strjoin("Minishell: ", msg);
@@ -24,7 +24,7 @@ void	error_execve(t_bigshell *data, char *msg)
 		free(tmp);
 		free_all(data);
 		g_global.exit_status = 126;
-		exit(g_global.exit_status) ;
+		exit(g_global.exit_status);
 	}
 	else
 	{
@@ -43,7 +43,7 @@ int	msg_not_found(char *msg, char *str)
 	ft_putstr_fd(line, 2);
 	free(line);
 	g_global.exit_status = 127;
-	return (127);
+	return (g_global.exit_status);
 }
 
 int	is_directory(char *msg, char *str)
@@ -55,24 +55,22 @@ int	is_directory(char *msg, char *str)
 	ft_putstr_fd(line, 2);
 	free(line);
 	g_global.exit_status = 126;
-	return (126);
+	return (g_global.exit_status);
 }
 
 void	error_not_found(t_bigshell *data, char *msg, char *str)
 {
 	msg_not_found(msg, str);
 	free_all(data);
-	exit(127);
+	g_global.exit_status = 127;
+	exit(g_global.exit_status);
 }
 
 void	ft_exit(int err_no, char *msg)
 {
 	if (msg)
 		ft_putendl_fd(msg, 2);
-	if (err_no == 13)
-		g_global.exit_status = 126;
-	else
-		g_global.exit_status = err_no;
+	g_global.exit_status = err_no;
 	exit(g_global.exit_status);
 }
 

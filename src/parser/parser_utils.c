@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:47:49 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 17:56:16 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 09:12:57 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	check_builtin(t_bigshell *data)
 			|| ft_strncmp(tok->value, "env", ft_strlen("env")) == 0
 			|| ft_strncmp(tok->value, "exit", ft_strlen("exit")) == 0)
 			tok->aim = BUILTIN;
-
 		tok = tok->next;
 	}
 }

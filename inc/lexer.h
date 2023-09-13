@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 14:05:31 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:02:22 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ enum e_aim
 
 /* LINE INIT */
 t_line	*line_new(t_line *line, char c, int i);
-void	init_line(t_bigshell *data, char *line);
+int		init_line(t_bigshell *data, char *line);
+int		verify_caracter(t_bigshell *data, char *line);
 
 /* FIND TYPE */
 int		is_dollar(char c);

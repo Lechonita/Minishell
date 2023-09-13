@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:57:52 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/12 18:00:27 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 09:11:08 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,36 +98,4 @@ void	merge_token_cmd(t_bigshell *data)
 		tok = tok->next;
 	}
 	merge_cmd(data->token);
-}
-
-void	add_cmd_to_lst(t_bigshell *data)
-{
-	t_token			*tok;
-	t_simple_cmd	*simple_cmd;
-
-	simple_cmd = data->simple_cmd;
-	while (simple_cmd != NULL)
-	{
-		tok = data->token;
-		while (tok)
-		{
-			if ((tok->aim == SIMPLE_CMD || tok->aim == BUILTIN)
-				&& tok->group == simple_cmd->idx)
-			{
-				simple_cmd->cmd = ft_strdup(tok->value);
-				if (!simple_cmd->cmd)
-					ft_error(EXIT_FAILURE, W_LST_CMD_DUP);
-				if (tok->quote_flag == 0)
-					simple_cmd->cmd_arg = ft_split(tok->value, ' ');
-				else
-					simple_cmd->cmd_arg = ft_split(tok->value, '\n');
-				if (!simple_cmd->cmd_arg)
-					ft_error(EXIT_FAILURE, W_SPLIT_CMD);
-				if (tok->aim == BUILTIN)
-					simple_cmd->builtin = 1;
-			}
-			tok = tok->next;
-		}
-		simple_cmd = simple_cmd->next;
-	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/12 18:58:38 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:05:14 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,32 +78,31 @@ t_line	*line_new(t_line *line, char c, int i)
 	L'idee est de les typer un par un pour ensuite revenir les combiner
 	en tokens. */
 
-void	init_line(t_bigshell *data, char *line)
+int	init_line(t_bigshell *data, char *line)
 {
 	int		i;
 	t_line	*new;
 
 	if (!data || !line)
-		return ;
-	i = 0;
-	while (line[i])
+		return (FALSE);
+	i = -1;
+	while (line[++i])
 	{
 		new = line_new(data->line, line[i], i);
 		if (!new)
 			ft_error(EXIT_FAILURE, W_LST_LINE);
 		line_addback(&data->line, new);
-		i++;
 	}
 	flag_double_quotes(data->line);
 	flag_single_quotes(data->line);
 	find_quotes(data->line);
-	// printf("Avant dollar dollar bill\n");
-	// print_t_line(data->line);
 	find_dollar_dollar_bill(data, data->line);
-	verify_pipes(data, 0, 0);
+	if (verify_caracter(data, line) == FALSE)
+		return (FALSE);
 	check_for_export(data, data->line, line);
 	delete_squotes(data->line);
 	delete_dquotes(data->line);
 	rm_line_el(&data->line);
 	update_idx(data->line);
+	return (TRUE);
 }

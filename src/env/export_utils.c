@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:58 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/11 12:06:57 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 11:20:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	end_pos(char *input, int equal)
 	int		end;
 
 	end = equal + 1;
-	while (input[end + 1])
+	while (input[end] && input[end + 1])
 	{
 		if (ft_isalnum(input[end]) && !is_single_quote(input[end])
 			&& !is_double_quote(input[end]) && input[end + 1] != ' ')

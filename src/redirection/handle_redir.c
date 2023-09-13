@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 11:43:54 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/13 09:42:35 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	read_stdin_hd(t_redir *redir)
 	set_signal_here_doc();
 	while (1)
 	{
-		dprintf(2, "\033[1;31mexit satus [%d]\033[0m\n", g_global.exit_status);
+		dprintf(2, "\033[1;31mexit status [%d] read stdin\033[0m\n", g_global.exit_status);
 		if (g_global.exit_status == 130)
 			return ;
 		tmp = readline("> ");
@@ -39,7 +39,7 @@ int	redirection_here_doc(t_redir *redir)
 	if (redir->fd < 0)
 		return (ft_error(errno, strerror(errno)), errno);
 	read_stdin_hd(redir);
-	dprintf(2, "\033[1;32mexit satus [%d]\033[0m\n", g_global.exit_status);
+	dprintf(2, "\033[1;32mexit status [%d] red hd\033[0m\n", g_global.exit_status);
 	close(redir->fd);
 	redir->fd = open("minishell_here_doc", O_RDONLY);
 	if (redir->fd < 0)
