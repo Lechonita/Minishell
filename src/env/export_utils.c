@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:58 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 20:43:13 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:36:53 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	unset_existing(t_bigshell *data, char *str)
-{
-	t_env	*env;
-
-	if (!data || !str)
-		return ;
-	env = data->env;
-	while (env)
-	{
-		if (ft_strcmp(env->name, str) == 0)
-		{
-			rm_env_el(&env, str);
-			break ;
-		}
-		env = env->next;
-	}
-}
 
 static int	add_len_in_quotes(char *input, int open_quote)
 {
@@ -99,25 +81,17 @@ int	start_pos(char *input, int equal)
 	return (start);
 }
 
-int	is_export(t_line *line)
+int	is_export(char *line)
 {
-	t_line	*tmp;
-	int		i;
-	char	*res;
+	int	i;
 
-	if (!line)
-		return (FALSE);
-	tmp = line;
-	i = 0;
-	res = "export";
-	while (tmp && i < 6)
-	{
-		if (tmp->c != res[i])
+	i = -1;
+	while (line[++i] && i < 6)
+		if (line[i] != "export"[i])
 			return (FALSE);
-		tmp = tmp->next;
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		i++;
-	}
-	if (tmp)
-		return (TRUE);
-	return (FALSE);
+	if (ft_isalnum(line[i]) == 0)
+		return (FALSE);
+	return (TRUE);
 }

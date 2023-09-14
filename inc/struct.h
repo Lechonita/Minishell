@@ -6,30 +6,30 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:05:01 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 17:08:47 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 14:08:54 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# include "minishell.h"
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
-# include "minishell.h"
 
 # include <stdio.h>
+# include <errno.h>
+# include <fcntl.h>				//open
 # include <stdlib.h> 			//exit
 # include <unistd.h> 			//access, dup, dup2, execve, fork, pipe, unlink
-# include <sys/types.h> 		//wait, waitpid
-# include <sys/wait.h> 			//wait, waitpid
-# include <errno.h>
+# include <assert.h>
 # include <string.h>			//strerror
-# include <fcntl.h>				//open
 # include <stdint.h>
 # include <limits.h> 			// INT_MIN (-2147483648) INT_MAX (2147483647)
 # include <signal.h>			// signal
+# include <sys/wait.h> 			//wait, waitpid
 # include <sys/stat.h>			// TBD
-# include <assert.h>
+# include <sys/types.h> 		//wait, waitpid
 # include <sys/prctl.h>
 # include <readline/readline.h>	//readline
 # include <readline/history.h>	//readline
@@ -75,6 +75,7 @@ typedef struct s_redir
 
 typedef struct s_simple_cmd
 {
+	int					idx;
 	char				*cmd;
 	char				**cmd_arg;
 	int					fd_in;
@@ -82,7 +83,6 @@ typedef struct s_simple_cmd
 	int					end[2];
 	char				*in_file;
 	char				*out_file;
-	int					idx;
 	int					builtin;
 	t_redir				*redir;
 	struct s_simple_cmd	*next;
@@ -102,9 +102,9 @@ typedef struct s_token
 
 typedef struct s_bigshell
 {
+	int				fd_hd;
 	char			**env_cpy;
 	char			**env_paths;
-	int				fd_hd;
 	t_env			*env;
 	t_line			*line;
 	t_token			*token;

@@ -6,23 +6,22 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 16:01:41 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 14:07:27 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "struct.h"
-# include "builtins.h"
 # include "env.h"
+# include "exec.h"
 # include "error.h"
-# include "exec.h"
-# include "expander.h"
-# include "exec.h"
 # include "input.h"
 # include "lexer.h"
 # include "parser.h"
+# include "struct.h"
+# include "builtins.h"
+# include "expander.h"
 # include "redirection.h"
 
 /* GLOBAL VARIABLE */
@@ -46,9 +45,9 @@ void	ft_readline(t_bigshell *data);
 char	*free_strjoin(char *to_free, char *buf);
 
 /* FREE STRUCT*/
-void	free_all(t_bigshell *data);
 void	free_strs(char **strs);
 void	ft_free_env(t_env **env);
+void	free_all(t_bigshell *data);
 void	ft_free_line(t_line **line);
 void	ft_free_token(t_token **token);
 void	ft_free_history(t_bigshell *data);
@@ -68,8 +67,8 @@ void	print_strs(char **strs);
 void	print_t_line(t_line *line);
 void	print_redir(t_bigshell *data);
 void	print_t_token(t_bigshell *data);
-void	display_env_struct(t_bigshell *data);
-void	print_history_lst(t_bigshell *data);
 void	print_simple_cmd(t_bigshell *data);
+void	print_history_lst(t_bigshell *data);
+void	display_env_struct(t_bigshell *data);
 
 #endif

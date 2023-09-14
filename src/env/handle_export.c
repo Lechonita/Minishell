@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 20:30:22 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:55:46 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,27 +69,28 @@ void	remove_quotes(char *str)
 static void	add_to_env(t_bigshell *data, int equal, char *input)
 {
 	char	*str;
-	int		start;
-	int		end;
+	char	*name;
+	int		pos[2];
 	int		env_size;
 	t_env	*tmp;
 
-	start = start_pos(input, equal);
-	end = end_pos(input, equal) + 1;
 	env_size = 0;
+	pos[0] = start_pos(input, equal);
+	pos[1] = end_pos(input, equal) + 1;
+	str = ft_substr(input, pos[0], pos[1] - pos[0]);
+	if (ft_strchr(str, '\"') != NULL || ft_strchr(str, '\'') != NULL)
+		remove_quotes(str);
+	name = ft_substr(str, 0, ft_strchr(str, '=') - str);
+	unset_var(name, NULL, data);
 	tmp = data->env;
 	while (tmp)
 	{
 		env_size++;
 		tmp = tmp->next;
 	}
-	str = ft_substr(input, start, end - start);
-	if (ft_strchr(str, '\"') != NULL || ft_strchr(str, '\'') != NULL)
-		remove_quotes(str);
-	unset_existing(data, str);
 	env_addback(&data->env, env_new(str, env_size, TRUE));
-	if (str)
-		free(str);
+	free(str);
+	free(name);
 }
 
 void	check_for_export(t_bigshell *data, t_line *line, char *input)
@@ -101,7 +102,7 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 	nb_of_equal = count_equal(input);
 	if (nb_of_equal == 0)
 	{
-		if (is_export(line) == TRUE)
+		if (is_export(input) == TRUE)
 			add_to_env(data, equal_is_here, input);
 		return ;
 	}

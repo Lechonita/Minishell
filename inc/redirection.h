@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:35:23 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 16:57:39 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 14:01:30 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define REDIRECTION_H
 
 # include "minishell.h"
-
 
 int	redirection_less(t_redir *redir);
 int	redirection_great(t_redir *redir);

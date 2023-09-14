@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:45:03 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 20:42:56 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:33:44 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,16 @@ void	rm_env_el(t_env **env, char *to_remove)
 	update_idx(*env);
 }
 
-int	unset_var(char **args, t_bigshell *data)
+int	unset_var(char *cmd, char **args, t_bigshell *data)
 {
 	int		i;
 
 	i = 1;
+	if (cmd != NULL)
+	{
+		rm_env_el(&data->env, cmd);
+		return (EXIT_SUCCESS);
+	}
 	while (args[i])
 	{
 		if (ft_strcmp(args[i], "PATH") == 0)

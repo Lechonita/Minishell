@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 11:38:32 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 15:41:55 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 12:03:25 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	exec_builtin(t_bigshell *data, char *cmd, char **args)
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 		ret = export_var(args, data);
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
-		ret = unset_var(args, data);
+		ret = unset_var(NULL, args, data);
 	else
 		return (FALSE);
 	return (ret);

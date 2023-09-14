@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:36:43 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 20:59:54 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:02:52 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,32 @@ int		init_line(t_bigshell *data, char *line);
 int		verify_caracter(t_bigshell *data, char *line);
 
 /* FIND TYPE */
-int		is_dollar(char c);
+int		is_word(char c);
+int		is_pipe(char c);
+int		is_redir(char c);
 int		is_blank(char c);
-int		is_single_quote(char c);
-int		is_double_quote(char c);
+int		is_dollar(char c);
 int		is_integer(char c);
 int		is_newline(char c);
 int		is_ampersand(char c);
-int		is_pipe(char c);
-int		is_redir(char c);
-// int		is_separator(char c);
-int		is_word(char c);
 int		determine_type(char c);
+int		is_double_quote(char c);
+int		is_single_quote(char c);
+// int		is_separator(char c);
 
 /* FLAG QUOTES */
+void	rm_line_el(t_line **line);
 void	delete_squotes(t_line *line);
 void	delete_dquotes(t_line *line);
-void	rm_line_el(t_line **line);
 int		flag_double_quotes(t_line *line);
 int		flag_single_quotes(t_line *line);
 
 /* FIND TOKENS */
+void	token_rm_next(t_token *tok);
+void	find_tokens(t_bigshell *data);
+void	verify_pipes(t_bigshell *data, int counter, int i);
 void	check_for_export(t_bigshell *data, t_line *line, char *input);
 void	create_token(t_bigshell *data, t_line *current, char *value, int pos);
-void	verify_pipes(t_bigshell *data, int counter, int i);
-void	find_tokens(t_bigshell *data);
-void	token_rm_next(t_token *tok);
 
 #endif
 
