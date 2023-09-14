@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:17:42 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 19:06:29 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:52:52 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,30 @@
 static void	read_stdin_hd(t_bigshell *data, t_redir *redir)
 {
 	char	*tmp;
+	int		stdin_cpy;
 
+	stdin_cpy = dup(0);
 	set_signal_here_doc();
+	errno = 0;
 	while (1)
 	{
-		if (g_global.exit_status == 130)
+		tmp = readline("> ");
+		if (errno)
 		{
-			close(data->fd_hd);
+			free(tmp);
 			break ;
 		}
-		tmp = readline("> ");
 		if (tmp == NULL)
-			return (ctrl_d_here_doc(tmp, redir->file));
+			return (close(stdin_cpy), ctrl_d_here_doc(tmp, redir->file));
 		if (ft_strlen(tmp) == ft_strlen(redir->file)
 			&& ft_strncmp(tmp, redir->file, ft_strlen(redir->file)) == 0)
-			return (close(data->fd_hd), free(tmp));
+			return (close(stdin_cpy), close(data->fd_hd), free(tmp));
 		ft_putendl_fd(tmp, data->fd_hd);
 		free(tmp);
 	}
+	if (dup2(stdin_cpy, 0) < 0)
+		ft_error(errno, strerror(errno));
+	close(stdin_cpy);
 }
 
 int	redirection_here_doc(t_bigshell *data, t_redir *redir)
@@ -42,6 +48,8 @@ int	redirection_here_doc(t_bigshell *data, t_redir *redir)
 		return (ft_error(errno, strerror(errno)), errno);
 	read_stdin_hd(data, redir);
 	close(data->fd_hd);
+	if (g_global.exit_status == 130)
+		return (0);
 	redir->fd = open("minishell_here_doc", O_RDONLY);
 	if (redir->fd < 0)
 		return (ft_error(errno, strerror(errno)), errno);

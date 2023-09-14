@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:22:30 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 18:55:06 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:54:03 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	open_fd(t_bigshell *data, t_redir *redir)
 	while (el != NULL)
 	{
 		if (el->type == DLESS)
-			redirection_here_doc(data, el);
+		{
+			if (redirection_here_doc(data, el) == 0)
+				return (FALSE);
+		}
 		else if (el->type == LESS)
 		{
 			if (redirection_less(el) == 0)

@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/13 19:01:33 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:20:04 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void	ft_readline(t_bigshell *data)
 			input = readline(PROMPT);
 		if (input == NULL || !ft_strcmp(input, "exit"))
 			exit_shell(NULL, data);
-		add_history(input);
+		if (input[0] != '\0')
+			add_history(input);
 		if (init_line(data, input) == TRUE)
 		{
 			find_tokens(data);

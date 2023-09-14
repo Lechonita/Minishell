@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:47:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 14:12:40 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:39:32 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void	verify_pipes(t_bigshell *data, int counter, int i)
 int	verify_caracter(t_bigshell *data, char *line)
 {
 	verify_pipes(data, 0, 0);
-	verify_car(line, '&');
-	verify_car(line, ';');
+	if (verify_car(line, '&') == FALSE || verify_car(line, ';') == FALSE)
+		return (FALSE);
 	if (verify_point(line) == FALSE)
 		return (FALSE);
 	return (TRUE);

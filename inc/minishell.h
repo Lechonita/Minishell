@@ -6,20 +6,20 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/14 14:07:27 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 14:15:11 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "struct.h"
 # include "env.h"
 # include "exec.h"
 # include "error.h"
 # include "input.h"
 # include "lexer.h"
 # include "parser.h"
-# include "struct.h"
 # include "builtins.h"
 # include "expander.h"
 # include "redirection.h"

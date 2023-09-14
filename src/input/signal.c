@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/12 11:04:32 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:43:07 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,18 @@ void	set_signal(void)
 void	ft_sig_int_child(int sig)
 {
 	g_global.exit_status = 130;
+	ft_putstr_fd("\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
 	(void)sig;
 }
 
 void	ft_sig_quit_child(int signal)
 {
 	g_global.exit_status = 131;
+	ft_putstr_fd("Quit (core dumped)\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
 	(void)signal;
 }
 
@@ -62,6 +68,7 @@ void	set_signal_child(void)
 	sigemptyset(&act_quit.sa_mask);
 	act_quit.sa_flags = SA_RESTART;
 	act_quit.sa_handler = &ft_sig_quit_child;
+	sigaction(SIGQUIT, &act_quit, NULL);
 	signal(SIGTSTP, SIG_IGN);
 }
 

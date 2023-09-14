@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:23:53 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/14 14:01:21 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:34:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ t_bigshell	*locate_shell(t_bigshell *data, int status)
 void	ft_sig_int_hd(int sig)
 {
 	g_global.exit_status = 130;
+	close(0);
+	ft_putstr_fd("\n", 1);
+	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_redisplay();
 	(void)sig;
 }
 
