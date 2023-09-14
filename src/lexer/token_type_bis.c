@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 10:34:37 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 16:34:45 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:04:16 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ int	is_ampersand(char c)
 		return (AMPERSAND);
 	return (0);
 }
-
-// int	is_separator(char c)
-// {
-// 	if (c == '(' || c == ')' || c == '{' || c == '}' || c == ';')
-// 		return (SEPARATOR);
-// 	return (0);
-// }
 
 int	is_redir(char c)
 {

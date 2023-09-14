@@ -85,7 +85,6 @@ SRC += simple_cmd_exec.c
 #	Expander functions
 SRC += dollar_add_value.c
 SRC += dollar_expansion.c
-SRC += dollar_quotes.c
 SRC += dollar_utils.c
 SRC += dollar.c
 
@@ -194,6 +193,7 @@ leaks: $(NAME) art
 	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./.readline_supp -q ./$(NAME)
 # --gen-suppressions=all --gen-suppressions=all --log-file="valou"
 
+	if (!is_blank(c) && !is_dollar(c)
 clean:
 	@echo "$(HGREY)Removing .o object files...$(END)"
 	@make --no-print-directory clean -C $(LIBFT_DIR)
