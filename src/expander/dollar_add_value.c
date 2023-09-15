@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:28:20 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/13 10:54:27 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/15 14:56:06 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,14 @@ void	line_addmiddle(t_line *line, char c, int index)
 	if (!line)
 		return ;
 	last = line;
-	while (last && last->index != index - 1)
-		last = last->next;
-	last->next = line_new_var(last, last->next, c, index);
+	if (index == last->index)
+		last = line_new_var(last, last->next, c, index);
+	else
+	{
+		while (last && last->index != index - 1)
+			last = last->next;
+		last->next = line_new_var(last, last->next, c, index);
+	}
 }
 
 t_line	*add_var(t_line *line, char *value, char *var)
@@ -82,14 +87,14 @@ t_line	*add_var(t_line *line, char *value, char *var)
 	j = 0;
 	while (value[++i])
 	{
-		if ((var[j] && tmp->c == var[j]))
+		if ((var[j] && tmp && tmp->c == var[j]))
 		{
 			tmp = line_replace_node(tmp, value[i]);
 			tmp = tmp->next;
 			j++;
 		}
 		else
-			line_addmiddle(line->next, value[i], idx + 1);
+			line_addmiddle(line, value[i], idx + 1);
 		idx++;
 	}
 	remove_rest(tmp, ft_strlen(value), ft_strlen(var));
