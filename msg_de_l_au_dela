@@ -51,23 +51,12 @@ example / error :
 	→ cmd=321 echo yes => le cmd=321 n'est pas pris en compte quand autre commande derriere
 
 
-<< eof << end cat | << toto cat
-
-<< toto << eof cat | << end << tata cat
-
 🔥 << $USER cat
 
 🔥 << toto cat
 > $USER
 > toto
 
-echo "bonjour" > toto
-
-🔥 << hola > toto
-> bonjour
-> salut
-> hola
-🔥 cat toto
 
 $> export A=hey
 $> export A B=Hola D E C="Que Tal"
