@@ -39,29 +39,43 @@ echo 10 > out1 11 12 > /dev/stdout << 1 << 2 <Makefile
 
 >> SEGFAULT / CRASH <<
 
-	→ Segfault dans le cas où on a essayé de créer avec export une valeur qui existe déjà, lorsqu'on refait
-		"export" pour afficher la liste, ca tourne à l'infini.
-		Le problème vient de la fonction alphabetical_sort_env, dans le fichier export.c.
-		Plus précisément dans la deuxième boucle (while (tmp)), qui reste bloquée sur la valeur qui a été
-		supprimée ou celle qui la remplace.
 
 
 >> COMPORTEMENTS ANORMAUX <<
 
-	→ echo $lol | echrsfh | $PATH
-		les messages d'erreur s'affichent les uns sur les autres
-
 	→ echo > /dev/full   => doit renvoyer un message d'erreur
 	 "bash: echo: write error: No space left on device" parce que write ne peut pas ecrire dans dev/full
 
-	→ ctrl+C dans here_doc
 
-to do expansion :
-	→ cmd="ls -l" puis $cmd affiche le resultat de ls -l
-	→ "$cmd" doit afficher "ls -lra: command not found"
-	→ export bout="s -l" puis faire l$bout -ra : ca doit afficher le resultat de "ls -l -ra"
 example / error :
 	→ cmd=321 echo yes => le cmd=321 n'est pas pris en compte quand autre commande derriere
+
+
+<< eof << end cat | << toto cat
+
+<< toto << eof cat | << end << tata cat
+
+🔥 << $USER cat
+
+🔥 << toto cat
+> $USER
+> toto
+
+echo "bonjour" > toto
+
+🔥 << hola > toto
+> bonjour
+> salut
+> hola
+🔥 cat toto
+
+$> export A=hey
+$> export A B=Hola D E C="Que Tal"
+$> echo $PROUT$B$C > /tmp/a > /tmp/b > /tmp/c
+$> cat /tmp/a
+$> cat /tmp/b
+$> cat /tmp/c
+
 
 🔴
 echo 10 > out12 11 12 <<1 << 2 <<3 < in < in2 >>out13
