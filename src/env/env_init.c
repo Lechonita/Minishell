@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:51:01 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/14 15:56:06 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:16:25 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static char	*get_env_name(char	*env)
 
 static char	*get_env_for_export(char *env)
 {
-	char	*value;
-	int		pos_equal;
+	char		*value;
+	int			pos_equal;
 
 	pos_equal = 0;
 	while (env[pos_equal] && env[pos_equal] != '=')

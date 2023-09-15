@@ -6,11 +6,34 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:58 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/14 15:30:56 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:28:37 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+/* Comparer les noms des maillons t_env avec les valeurs des maillons t_env.
+	Si on trouve une valeur "$USER", alors il prendra la valeur du maillon
+	t_env qui possède le nom USER. */
+
+// void	check_for_expansion(t_bigshell *data)
+// {
+// 	t_env	*value;
+// 	t_env	*name;
+
+// 	value = data->env;
+// 	name = data->env;
+// 	while (value)
+// 	{
+// 		while (name)
+// 		{
+// 			if (!ft_strncmp(name->name, value->value, ft_strlen(value->value) - '$'))
+				
+// 			name = name->next;
+// 		}
+// 		value = value->next;
+// 	}
+// }
 
 static int	add_len_in_quotes(char *input, int open_quote)
 {
@@ -38,8 +61,9 @@ int	end_pos(char *input, int equal)
 	end = equal + 1;
 	while (input[end] && input[end + 1])
 	{
-		if (ft_isalnum(input[end]) && !is_single_quote(input[end])
-			&& !is_double_quote(input[end]) && input[end + 1] != ' ')
+		if ((ft_isalnum(input[end]) || input[end] == '$')
+			&& !is_single_quote(input[end]) && !is_double_quote(input[end])
+			&& input[end + 1] != ' ')
 			end++;
 		else if (is_single_quote(input[end]) || is_double_quote(input[end]))
 		{
