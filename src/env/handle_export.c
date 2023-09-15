@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/15 15:20:53 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:28:43 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	count_equal(char *input)
 			count++;
 		i++;
 	}
-	dprintf(2, "count = %d\n", count);
 	return (count);
 }
 
@@ -39,9 +38,11 @@ int	is_word_near_equal(t_line *line, int eq_is_here, int direction)
 	while (tmp)
 	{
 		if (direction > 0 && (tmp->type == WORD || tmp->type == SQUOTE
-				|| tmp->type == DQUOTE) && count == eq_is_here + 1)
+				|| tmp->type == DQUOTE || tmp->type == DOLLAR)
+			&& count == eq_is_here + 1)
 			return (TRUE);
-		else if (direction < 0 && tmp->type == WORD && count == eq_is_here - 1)
+		else if (direction < 0 && (tmp->type == WORD || tmp->type == DOLLAR)
+			&& count == eq_is_here - 1)
 			return (TRUE);
 		tmp = tmp->next;
 		count++;
@@ -99,13 +100,13 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 	int	equal_is_here;
 	int	nb_of_equal;
 
+	print_t_line(data->line);
 	equal_is_here = 0;
 	nb_of_equal = count_equal(input);
 	if (nb_of_equal == 0)
 	{
 		if (is_export(input) == TRUE)
-			add_to_env(data, equal_is_here, input);
-		return ;
+			return (add_to_env(data, equal_is_here, input));
 	}
 	while (nb_of_equal-- > 0 && ft_strncmp(input, "export ", 7) == 0)
 	{
@@ -120,4 +121,5 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 			add_to_env(data, equal_is_here, input);
 		equal_is_here = end_pos(input, equal_is_here) + 1;
 	}
+	// check_for_expansion(data);
 }
