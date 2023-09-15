@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:30 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 15:19:08 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/15 14:48:59 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void	print_input(char **args, int i)
+static void	print_input(char **args, int i, int fd_out)
 {
 	while (args[i])
 	{
-		printf("%s", args[i]);
+		ft_putstr_fd(args[i], fd_out);
 		if (args[i + 1])
 			printf(" ");
 		i++;
 	}
 }
 
-int	print_echo(t_bigshell *data, char *cmd, char **args)
+int	print_echo(t_bigshell *data, char *cmd, char **args, int fd_out)
 {
 	int	i;
 	int	j;
@@ -45,8 +45,8 @@ int	print_echo(t_bigshell *data, char *cmd, char **args)
 			break ;
 		i++;
 	}
-	print_input(args, i);
+	print_input(args, i, fd_out);
 	if (n_nb == 0)
-		printf("\n");
+		write(fd_out, "\n", 1);
 	return (EXIT_SUCCESS);
 }

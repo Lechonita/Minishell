@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/14 15:50:33 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:19:38 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	swap_env(t_env *el, t_env *tmp)
 	return ;
 }
 
-void	alphabetical_sort_env(t_bigshell *data)
+static void	alphabetical_sort_env(t_bigshell *data)
 {
 	t_env	*el;
 	t_env	*tmp;
@@ -50,32 +50,45 @@ void	alphabetical_sort_env(t_bigshell *data)
 	return ;
 }
 
-void	print_declare_env(t_bigshell *data)
+static char	*join_to_export(char *name, char *value)
 {
-	t_env	*el;
+	char	*tmp;
 
-	el = data->env;
-	alphabetical_sort_env(data);
-	while (el)
+	tmp = ft_strjoin("declare -x ", name);
+	if (value != NULL)
 	{
-		if (ft_strncmp(el->name, "_", 2) != 0
-			&& (el->to_export == FALSE || el->to_export == 2))
-		{
-			if (!el->value)
-				printf("declare -x %s\n", el->name);
-			else
-				printf("declare -x %s=\"%s\"\n", el->name, el->value);
-		}
-		el = el->next;
+		tmp = free_strjoin(tmp, "=\"");
+		tmp = free_strjoin(tmp, value);
+		tmp = free_strjoin(tmp, "\"");
 	}
-	return ;
+	return (tmp);
 }
 
 // "\'\"\\$ ,.:/[{]}+=-?&*^%#@!~"
 
-int	export_var(char **args, t_bigshell *data)
+int	export_var(char **args, t_bigshell *data, int fd_out)
 {
+	t_env	*el;
+	char	*var;
+
+	el = data->env;
 	if (args[1] == NULL)
-		print_declare_env(data);
+	{
+		alphabetical_sort_env(data);
+		while (el)
+		{
+			if (ft_strncmp(el->name, "_", 2) != 0
+				&& (el->to_export == FALSE || el->to_export == 2))
+			{
+				var = join_to_export(el->name, el->value);
+				if (!el->value)
+					ft_putendl_fd(var, fd_out);
+				else
+					ft_putendl_fd(var, fd_out);
+				free(var);
+			}
+			el = el->next;
+		}
+	}
 	return (EXIT_SUCCESS);
 }

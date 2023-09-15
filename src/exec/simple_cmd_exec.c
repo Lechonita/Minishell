@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/13 15:42:03 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/15 15:19:14 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 	if (handle_fds(data, simple_cmd) == TRUE)
 	{
 		if (simple_cmd->builtin != 0)
-			ret = exec_builtin(data, simple_cmd->cmd, simple_cmd->cmd_arg);
+			ret = exec_builtin(data, simple_cmd->cmd, simple_cmd->cmd_arg,
+					simple_cmd->fd_out);
 		else if (simple_cmd->cmd == NULL)
 			ret = 0;
 		else if (simple_cmd->cmd_arg[0][0] != '\0')
@@ -98,7 +99,8 @@ int	exec_simple_cmd(t_bigshell *data, char *env[])
 	cmd = data->simple_cmd;
 	if (cmd->builtin == 1)
 	{
-		g_global.exit_status = exec_builtin(data, cmd->cmd, cmd->cmd_arg);
+		g_global.exit_status = exec_builtin(data, cmd->cmd, cmd->cmd_arg,
+				cmd->fd_out);
 		return (1);
 	}
 	pid = fork();

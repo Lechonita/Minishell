@@ -6,13 +6,13 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:57 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 15:49:50 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/15 14:56:37 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	print_working_directory(t_bigshell *data)
+int	print_working_directory(t_bigshell *data, int fd_out)
 {
 	char	*cwd;
 	char	*dir;
@@ -24,10 +24,10 @@ int	print_working_directory(t_bigshell *data)
 		if (!cwd)
 			return (free_all(data),
 				ft_error(errno, strerror(errno)), EXIT_FAILURE);
-		printf("%s\n", cwd);
+		ft_putendl_fd(cwd, fd_out);
 		free(cwd);
 	}
 	else
-		printf("%s\n", dir);
+		ft_putendl_fd(dir, fd_out);
 	return (EXIT_SUCCESS);
 }

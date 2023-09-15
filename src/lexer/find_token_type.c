@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_token_type.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:13:59 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/14 15:40:03 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/15 14:46:47 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 int	is_word(char c)
 {
-	if (!is_blank(c) && !is_dollar(c)
-		&& !is_single_quote(c) && !is_double_quote(c) && !is_newline(c)
-		&& !is_ampersand(c) && !is_redir(c) && !is_pipe(c))
+	if (!is_blank(c) && !is_dollar(c) && !is_ampersand(c) && !is_single_quote(c)
+		&& !is_redir(c) && !is_pipe(c) && !is_double_quote(c) && !is_newline(c))
 		return (WORD);
 	return (0);
 }
