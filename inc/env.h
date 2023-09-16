@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:31:27 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/15 17:21:15 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:39:27 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ int		end_pos(char *input, int equal);
 int		start_pos(char *input, int equal);
 
 /* EXPORT UTILS */
-void	check_for_expansion(t_bigshell *data);
+void	check_for_expansion(t_bigshell *data, char *str);
 void	unset_existing(t_bigshell *data, char *str);
 int		is_export(char *line);
+
+/* EXPORT EXPANSION */
+void	compare_env_var(t_bigshell *data, char *var, char *name);
+char	*take_after_dollar(char *str);
+char	*find_value(char *str);
+char	*find_name(char *str);
 
 #endif

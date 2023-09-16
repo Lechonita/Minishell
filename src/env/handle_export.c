@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:37:34 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/15 17:29:50 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:32:56 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static void	add_to_env(t_bigshell *data, int equal, char *input)
 		tmp = tmp->next;
 	}
 	env_addback(&data->env, env_new(str, env_size, TRUE));
+	check_for_expansion(data, str);
 	free(str);
 	free(name);
 }
@@ -100,13 +101,13 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 	int	equal_is_here;
 	int	nb_of_equal;
 
-	print_t_line(data->line);
 	equal_is_here = 0;
 	nb_of_equal = count_equal(input);
 	if (nb_of_equal == 0)
 	{
 		if (is_export(input) == TRUE)
-			return (add_to_env(data, equal_is_here, input));
+			add_to_env(data, equal_is_here, input);
+		return ;
 	}
 	while (nb_of_equal-- > 0 && ft_strncmp(input, "export ", 7) == 0)
 	{
@@ -121,5 +122,4 @@ void	check_for_export(t_bigshell *data, t_line *line, char *input)
 			add_to_env(data, equal_is_here, input);
 		equal_is_here = end_pos(input, equal_is_here) + 1;
 	}
-	// check_for_expansion(data);
 }

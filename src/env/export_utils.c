@@ -3,37 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:58 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/15 17:28:37 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:38:09 by lechon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-/* Comparer les noms des maillons t_env avec les valeurs des maillons t_env.
-	Si on trouve une valeur "$USER", alors il prendra la valeur du maillon
-	t_env qui possède le nom USER. */
+void	check_for_expansion(t_bigshell *data, char *str)
+{
+	char	*name;
+	char	*value;
+	char	*var;
 
-// void	check_for_expansion(t_bigshell *data)
-// {
-// 	t_env	*value;
-// 	t_env	*name;
-
-// 	value = data->env;
-// 	name = data->env;
-// 	while (value)
-// 	{
-// 		while (name)
-// 		{
-// 			if (!ft_strncmp(name->name, value->value, ft_strlen(value->value) - '$'))
-				
-// 			name = name->next;
-// 		}
-// 		value = value->next;
-// 	}
-// }
+	value = find_value(str);
+	if (ft_strchr(value, '$') != NULL)
+	{
+		name = find_name(str);
+		var = take_after_dollar(value);
+		compare_env_var(data, var, name);
+		free(name);
+		free(var);
+	}
+	free(value);
+}
 
 static int	add_len_in_quotes(char *input, int open_quote)
 {
