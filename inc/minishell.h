@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:31 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/14 16:01:23 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:10:19 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ void	print_simple_cmd(t_bigshell *data);
 void	print_history_lst(t_bigshell *data);
 void	display_env_struct(t_bigshell *data);
 
+void	flag_export_quotes(t_bigshell *data);
 #endif
