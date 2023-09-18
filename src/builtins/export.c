@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/15 15:19:38 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/18 10:03:30 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ int	export_var(char **args, t_bigshell *data, int fd_out)
 				&& (el->to_export == FALSE || el->to_export == 2))
 			{
 				var = join_to_export(el->name, el->value);
-				if (!el->value)
-					ft_putendl_fd(var, fd_out);
-				else
-					ft_putendl_fd(var, fd_out);
+				ft_putendl_fd(var, fd_out);
 				free(var);
 			}
 			el = el->next;

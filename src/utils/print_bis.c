@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/14 16:03:35 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:46:08 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,24 @@ void	print_t_token(t_bigshell *data)
 		el = el->next;
 	}
 }
+*/
 
-void	print_simple_cmd(t_bigshell *data)
-{
-	t_simple_cmd		*el;
+// void	print_simple_cmd(t_bigshell *data)
+// {
+// 	t_simple_cmd		*el;
 
-	el = data->simple_cmd;
-	dprintf(2, "__________________SIMPLE_________________________\n");
-	while (el != NULL)
-	{
-		dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\n\tfd_in   = %2d\tin_file
-			  : %s\n\tfd_out  = %2d\tout_file : %s\n",
-			el->idx, el->cmd, el->builtin, el->fd_in, el->in_file,
-			el->fd_out, el->out_file);
-		el = el->next;
-	}
-	dprintf(2, "_________________________________________________\n");
-} */
+// 	el = data->simple_cmd;
+// 	dprintf(2, "__________________SIMPLE_________________________\n");
+// 	while (el != NULL)
+// 	{
+// 		dprintf(2, "[%2d] cmd : %8s\t\tbuiltin y/n %d\n\tfd_in   = %2d\tin_file
+// 			: %s\n\tfd_out  = %2d\tout_file : %s\n",
+// 			el->idx, el->cmd, el->builtin, el->fd_in, el->in_file,
+// 			el->fd_out, el->out_file);
+// 		el = el->next;
+// 	}
+// 	dprintf(2, "_________________________________________________\n");
+// }
 
 /*
 void	print_redir(t_bigshell *data)

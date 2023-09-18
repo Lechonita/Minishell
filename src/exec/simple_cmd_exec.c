@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/15 15:19:14 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/18 11:51:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static int	handle_fds(t_bigshell *data, t_simple_cmd *simple_cmd)
 
 static int	find_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 {
+	print_simple_cmd(data);
 	simple_cmd->cmd = find_path_to_cmd(data, simple_cmd->cmd_arg[0],
 			simple_cmd->cmd);
 	if (simple_cmd->cmd == NULL)
@@ -78,7 +79,7 @@ void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 	{
 		if (simple_cmd->builtin != 0)
 			ret = exec_builtin(data, simple_cmd->cmd, simple_cmd->cmd_arg,
-					simple_cmd->fd_out);
+					1);
 		else if (simple_cmd->cmd == NULL)
 			ret = 0;
 		else if (simple_cmd->cmd_arg[0][0] != '\0')
@@ -92,15 +93,18 @@ void	single_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 
 int	exec_simple_cmd(t_bigshell *data, char *env[])
 {
-	pid_t			pid;
 	int				status;
+	int				fd;
+	pid_t			pid;
 	t_simple_cmd	*cmd;
 
+	fd = STDOUT_FILENO;
 	cmd = data->simple_cmd;
 	if (cmd->builtin == 1)
 	{
-		g_global.exit_status = exec_builtin(data, cmd->cmd, cmd->cmd_arg,
-				cmd->fd_out);
+		if (cmd->out_file)
+			fd = cmd->fd_out;
+		g_global.exit_status = exec_builtin(data, cmd->cmd, cmd->cmd_arg, fd);
 		return (1);
 	}
 	pid = fork();
