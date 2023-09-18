@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/15 17:06:44 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:51:22 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ void	print_t_token(t_bigshell *data)
 		el = el->next;
 	}
 }
+*/
 
-void	print_simple_cmd(t_bigshell *data)
-{
-	t_simple_cmd		*el;
+// void	print_simple_cmd(t_bigshell *data)
+// {
+// 	t_simple_cmd		*el;
 
 	el = data->simple_cmd;
 	dprintf(2, "__________________SIMPLE_________________________\n");
