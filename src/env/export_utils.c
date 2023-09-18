@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:58 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/18 14:50:29 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:07:11 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,20 @@ char	*find_value(char *str)
 	while (str[++i])
 		res[j++] = str[i];
 	return (res);
+}
+
+int	name_exists(t_env *env, char *name)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->name, name, ft_strlen(tmp->name)) == 0)
+			return (TRUE);
+		tmp = tmp->next;
+	}
+	return (FALSE);
 }
 
 char	*find_name(char *str)

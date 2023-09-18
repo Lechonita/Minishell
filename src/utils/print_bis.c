@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:51:52 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/15 17:06:44 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:53:32 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,7 @@ void	print_redir(t_bigshell *data)
 	while (el)
 	{
 		printf("[%2d] %2d %2s ", el->idx, el->type, toktype[el->type - 1]);
-		printf(": %15s → fd %d & with cmd n°%d \n", el->file, el->fd,
-			el->with_cmd_nb);
+		printf(": %15s → fd %d\n", el->file, el->fd);
 		el = el->next;
 	}
 }

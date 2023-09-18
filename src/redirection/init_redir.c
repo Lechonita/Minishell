@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:21:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 18:56:04 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/18 14:53:14 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static t_redir	*new_lst(int idx, char *type, char *file)
 	if (new->file == NULL)
 		return (ft_error(EXIT_FAILURE, W_LST_RED_FIL), NULL);
 	new -> idx = idx;
-	new -> with_cmd_nb = idx;
 	new -> next = NULL;
 	return (new);
 }

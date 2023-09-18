@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:30 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/15 14:48:59 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/18 14:53:56 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	print_input(char **args, int i, int fd_out)
 	{
 		ft_putstr_fd(args[i], fd_out);
 		if (args[i + 1])
-			printf(" ");
+			ft_putstr_fd(" ", fd_out);
 		i++;
 	}
 }

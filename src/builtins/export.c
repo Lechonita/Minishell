@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/18 14:50:40 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:07:14 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,17 @@ static void	add_variables_in_env(t_bigshell *data, char **args)
 	char	*value;
 	size_t	i;
 
-	(void)data;
 	i = 0;
 	while (args[i] != NULL)
 	{
-		dprintf(2, "args[%zu] = %s\n", i, args[i]);
 		name = find_name(args[i]);
+		if (name_exists(data->env, name) == TRUE)
+			unset_var(name, &args[i], data);
 		value = find_value(args[i]);
 		var = init_var(data, name, value);
 		env_addback(&data->env, var);
-		free(name);
 		free(value);
+		free(name);
 		++i;
 	}
 }
