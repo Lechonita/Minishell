@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:40:11 by jrouillo          #+#    #+#             */
-/*   Updated: 2023/09/18 11:11:00 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:24:15 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	init_line(t_bigshell *data, char *line)
 	find_dollar_dollar_bill(data, data->line);
 	if (verify_caracter(data, line) == FALSE)
 		return (FALSE);
-	// check_for_export(data, data->line, line);
 	delete_squotes(data->line);
 	delete_dquotes(data->line);
 	rm_line_el(&data->line);

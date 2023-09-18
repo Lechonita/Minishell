@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:39:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/18 15:00:27 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:30:33 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ int		get_export_value(t_bigshell *data, char *name);
 int		exit_shell(char **args, t_bigshell *data);
 int		update_pwd(t_bigshell *data);
 
+/* EXPORT UTILS */
+t_env	*init_var(t_bigshell *data, char *name, char *value);
+char	*find_value(char *str);
+char	*find_name(char *str);
 int		name_exists(t_env *env, char *name);
 
 #endif
