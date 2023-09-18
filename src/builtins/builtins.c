@@ -6,7 +6,7 @@
 /*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 11:38:32 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/18 15:09:51 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:43:13 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	exec_builtin(t_bigshell *data, char *cmd, char **args, int fd_out)
 		ret = exit_shell(args, data);
 	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
 		ret = change_directory(args, data);
-	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
+	else if (ft_strncmp(cmd, "export ", ft_strlen("export ")) == 0)
 		ret = export_var(args, data, fd_out);
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
 		ret = unset_var(NULL, args, data);

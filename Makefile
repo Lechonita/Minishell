@@ -68,6 +68,7 @@ SRC += cd_utils.c
 SRC += echo.c
 SRC += env.c
 SRC += exit.c 
+SRC += export_utils.c
 SRC += export.c
 SRC += pwd.c
 SRC += unset.c
@@ -75,8 +76,6 @@ SRC += unset.c
 #	Env functions
 SRC += env_init.c
 SRC += export_expansion.c
-SRC += export_utils.c
-SRC += handle_export.c
 SRC += path_handle.c
 
 # 	Exec functions
