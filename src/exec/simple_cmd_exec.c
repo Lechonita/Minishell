@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:46:11 by bebigel           #+#    #+#             */
-/*   Updated: 2023/09/18 11:51:15 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/18 15:17:15 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static int	handle_fds(t_bigshell *data, t_simple_cmd *simple_cmd)
 
 static int	find_cmd(t_bigshell *data, t_simple_cmd *simple_cmd, char *env[])
 {
-	print_simple_cmd(data);
 	simple_cmd->cmd = find_path_to_cmd(data, simple_cmd->cmd_arg[0],
 			simple_cmd->cmd);
 	if (simple_cmd->cmd == NULL)

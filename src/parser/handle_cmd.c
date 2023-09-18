@@ -6,7 +6,7 @@
 /*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:57:52 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/13 09:11:08 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/18 16:20:11 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	join_cmds(t_token *token, int group, int count)
 		str = free_strjoin(str, tmp->value);
 		if (i < count - 1)
 			str = free_strjoin(str, " ");
+		// tmp->quote_flag = 
 		tmp = tmp->next;
 		i++;
 	}

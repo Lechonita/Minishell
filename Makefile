@@ -6,10 +6,10 @@ NAME = minishell
 
 ############################### Compiler #######################################
 
-FLAGS = -Wall -Wextra -Werror #-g3
+FLAGS = -Wall -Wextra -Werror -g3
 
 ifeq ($(debug), true)
-	FLAGS += -g3 -g3 -fsanitize=address,undefined
+	FLAGS += -g3 -fsanitize=address,undefined
 endif
 
 CC = cc

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:00:31 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/18 14:47:17 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:19:28 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	add_cmd_to_lst(t_bigshell *data)
 
 static int	simple_cmd_lst(t_bigshell *data)
 {
+	print_t_token(data);
 	data->simple_cmd = init_simple_cmd();
 	if (add_redir(data) == FALSE)
 		return (FALSE);
@@ -88,6 +89,7 @@ void	ft_readline(t_bigshell *data)
 		if (init_line(data, input) == TRUE)
 		{
 			find_tokens(data);
+			// print_t_token(data);
 			if (parser_job(data) == TRUE && simple_cmd_lst(data) == TRUE)
 				executor(data, data->env_cpy);
 		}

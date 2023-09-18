@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:45:03 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/18 15:03:19 by jrouillo         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:19:50 by bebigel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ int	unset_var(char *cmd, char **args, t_bigshell *data)
 	int		i;
 
 	i = 1;
-	dprintf(2, "je rentre dans unset var\n");
 	if (cmd != NULL)
 	{
-		dprintf(2, "je rentre dans la boucle cmd != NULL\n");
 		rm_env_el(&data->env, cmd);
 		return (EXIT_SUCCESS);
 	}
