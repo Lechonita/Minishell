@@ -46,9 +46,6 @@ echo 10 > out1 11 12 > /dev/stdout << 1 << 2 <Makefile
 	→ echo > /dev/full   => doit renvoyer un message d'erreur
 	 "bash: echo: write error: No space left on device" parce que write ne peut pas ecrire dans dev/full
 
-example / error :
-	→ cmd=321 echo yes => le cmd=321 n'est pas pris en compte quand autre commande derriere
-
 	→ export | grep lol ne fonctionne plus !
 
 	→ export :
@@ -67,9 +64,6 @@ example / error :
 🔥 << toto cat
 > $USER
 > toto
-
-
-$> export A B=Hola D E C="Que Tal"
 
 
 🔴

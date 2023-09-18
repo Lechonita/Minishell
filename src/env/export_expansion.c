@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lechon <lechon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:17:08 by lechon            #+#    #+#             */
-/*   Updated: 2023/09/16 18:39:23 by lechon           ###   ########.fr       */
+/*   Updated: 2023/09/18 11:00:11 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-/* Comparer les noms des maillons t_env avec les valeurs des maillons t_env.
-	Si on trouve une valeur "$USER", alors il prendra la valeur du maillon
-	t_env qui possède le nom USER. */
 
 /* Je regarde ce qu'il y a apres le = dans str.
 	Si je trouve un $, je prends tout ce qu'il y a derriere ce $ dans un var.
@@ -22,7 +18,7 @@
 	si var = le name de base (lol=$lol).
 	Si je trouve same same, expansion. Sinon, do nothing. */
 
-static void export_expansion(t_bigshell *data, t_env *e, char *name)
+static void export_expansion(t_bigshell *data, t_env *env, char *name)
 {
 	t_env	*tmp;
 	int		i;
@@ -32,7 +28,7 @@ static void export_expansion(t_bigshell *data, t_env *e, char *name)
 	tmp = data->env;
 	i = 0;
 	j = 0;
-	// dprintf(2, " e name = %s / e value = %s / name = %s\n",e->name, e->value, name);
+	// dprintf(2, " env name = %s / env value = %s / name = %s\n",env->name, env->value, name);
 	while (tmp)
 	{
 		// dprintf(2, "   Comparing name -%s- with tmp -%s-\n", name, tmp->name);
@@ -43,9 +39,10 @@ static void export_expansion(t_bigshell *data, t_env *e, char *name)
 			// dprintf(2, "    tmp value = %s\n", tmp->value);
 			while (tmp->value[i] && tmp->value[i] != '$')
 				i++;
-			while (e->value[j])
+			// replace_free_str(tmp->value, env->value, i, (ft_strlen(tmp->value) - ft_strlen(env->name) + 1));
+			while (env->value[j])
 			{
-				tmp->value[i++] = e->value[j++];
+				tmp->value[i++] = env->value[j++];
 				// dprintf(2, "tmp value devient -%s-\n", tmp->value);
 			}
 			break ;
@@ -82,13 +79,23 @@ char	*take_after_dollar(char *str)
 
 	i = 0;
 	j = 0;
-	res = malloc(sizeof(char) * ft_strlen(str));
+	while (str[i])
+	{
+		if (str[i] == '$')
+			break ;
+		i++;
+	}
+	res = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!res)
 		return (NULL);
 	while (str[i] && str[i] != '$')
 		i++;
-	while (str[++i])
+	i += (str[i] != '\0');
+	while (str[i])
+	{
 		res[j++] = str[i];
+		++i;		
+	}
 	return (res);
 }
 
