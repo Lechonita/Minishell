@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:39:47 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/15 15:20:17 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/18 15:00:27 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int		change_directory(char **args, t_bigshell *data);
 int		get_export_value(t_bigshell *data, char *name);
 int		exit_shell(char **args, t_bigshell *data);
 int		update_pwd(t_bigshell *data);
+
+int		name_exists(t_env *env, char *name);
 
 #endif

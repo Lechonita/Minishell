@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebigel <bebigel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrouillo <jrouillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:44:51 by Bea               #+#    #+#             */
-/*   Updated: 2023/09/18 10:03:30 by bebigel          ###   ########.fr       */
+/*   Updated: 2023/09/18 15:09:39 by jrouillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,28 @@ static char	*join_to_export(char *name, char *value)
 
 // "\'\"\\$ ,.:/[{]}+=-?&*^%#@!~"
 
+static void	add_variables_in_env(t_bigshell *data, char **args)
+{
+	t_env	*var;
+	char	*name;
+	char	*value;
+	size_t	i;
+
+	i = 0;
+	while (args[i] != NULL)
+	{
+		name = find_name(args[i]);
+		if (name_exists(data->env, name) == TRUE)
+			unset_var(name, &args[i], data);
+		value = find_value(args[i]);
+		var = init_var(data, name, value);
+		env_addback(&data->env, var);
+		free(value);
+		free(name);
+		++i;
+	}
+}
+
 int	export_var(char **args, t_bigshell *data, int fd_out)
 {
 	t_env	*el;
@@ -87,5 +109,7 @@ int	export_var(char **args, t_bigshell *data, int fd_out)
 			el = el->next;
 		}
 	}
+	else
+		add_variables_in_env(data, args + 1);
 	return (EXIT_SUCCESS);
 }
